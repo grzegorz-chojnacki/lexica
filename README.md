@@ -1,15 +1,15 @@
-# Projekt zespołowy - Lexika
-
-## Skład grupy:
-- Grzegorz Chojnacki
-- Natalia Wojtania
-
-Wyrażamy chęci na udział w programie mentoringowym.
-
-<br>
+# Lexika
 
 Aplikacja webowa umożliwiająca tworzenie i wypełnianie krótkich i przystępnych
 zadań, pomagających przy nauce obcych języków.
+
+<br>
+
+### Skład grupy:
+- Grzegorz Chojnacki
+- Natalia Wojtania
+
+*Wyrażamy chęci na udział w programie mentoringowym.*
 
 <br>
 
