@@ -1,15 +1,26 @@
-# Lexika
+# Projekt zespołowy - Lexika
+
+## Skład grupy:
+- Grzegorz Chojnacki
+- Natalia Wojtania
+
+Wyrażamy chęci na udział w programie mentoringowym.
+
+<br>
 
 Aplikacja webowa umożliwiająca tworzenie i wypełnianie krótkich i przystępnych
 zadań, pomagających przy nauce obcych języków.
 
+<br>
+
 ## Role użytkowników:
 - Gość - niezalogowany użytkownik, który może korzystać z podstawowych funkcji
   aplikacji i zapisywać postęp lokalnie.
-- Prowadzący - zalogowany zarządca jednego lub więcej zespołów, posiada
-  przywileje administratorskie w obrębie danego zespołu.
 - Uczeń - zalogowany członek jednego lub więcej zespołów, ma dostęp do zleconych
   zadań.
+- Prowadzący - zalogowany zarządca jednego lub więcej zespołów, posiada
+  przywileje administratorskie w obrębie danego zespołu.
+
 
 ## Zakres funkcjonalności:
 
@@ -19,27 +30,27 @@ zadań, pomagających przy nauce obcych języków.
 - Panel postępu dla lokalnych zadań
 
 ### ***Użytkownik zalogowany***:
-- *(To samo co Gość)*
+- *(To samo co **Gość**)*
 - Panel wyboru zespołów
 - Panel postępu dla wszystkich zadań
 - Panel ustawień konta
 
-  ### **Prowadzący**:
-  - Panel główny zespołu z informacjami i skrótami
-  - Panel kreatora/edytora zadań zespołu
-  - Możliwość eksportu/importu zdalnych zadań z/do pliku
-  - Panel aktywowania zadań
-  - Panel zarządzania zespołem i jego członkami
-  - Panel postępu dla całego zespołu
-  - Panel postępu dla danego członka
+### **Uczeń**:
+- *(To samo co **Użytkownik zalogowany**)*
+- Panel główny zespołu z informacjami i skrótami
+- Panel postępu w przynależnych zespołach
+- Panel aktywnych zadań
 
-  ### **Uczeń**:
-  - Panel główny zespołu z informacjami i skrótami
-  - Panel postępu w przynależnych zespołach
-  - Panel aktywnych zadań
+### **Prowadzący**:
+- *(To samo co **Uczeń**)*
+- Panel główny zespołu z informacjami i skrótami
+- Panel kreatora/edytora zadań zespołu
+- Możliwość eksportu/importu zdalnych zadań z/do pliku
+- Panel aktywowania zadań
+- Panel zarządzania zespołem i jego członkami
+- Panel postępu dla całego zespołu
+- Panel postępu dla danego członka
 
-  > ***Użytkownik zalogowany*** będąc **prowadzącym** jest jednocześnie
-  > **uczniem**, ale nie na odwrót.
 
 ## Wymagania funkcjonalne:
 - Bezpieczne przechowywanie danych zarejestrowanych użytkowników na serwerze.
@@ -50,16 +61,18 @@ zadań, pomagających przy nauce obcych języków.
 - Podstawowy typ zadań - tłumaczenie słówek między ojczystym i obcym językiem.
 - Prosty i semantyczny format zapisu zadań w plikach tekstowych.
 
+
 ## Technologie:
 
 ### Frontend:
 - Angular
+- Material components
 
 ### Backend:
-- PostgreSQL
 - Java + Spring
+- PostgreSQL
 
----
+<!--
 
 ## Dodatkowe funkcje:
 - Generowanie kodu dołączającego do zespołu, który pozwoli na automatyczne
@@ -69,3 +82,5 @@ zadań, pomagających przy nauce obcych języków.
   przy tworzeniu zespołu).
 - Wypełnianie luk w przygotowanych zdaniach.
 - Możliwość dołączania plików graficznych jako url, lub string base64.
+
+-->
