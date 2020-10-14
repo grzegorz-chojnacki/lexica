@@ -14,11 +14,11 @@ zadań, pomagających przy nauce obcych języków.
 <br>
 
 ## Role użytkowników:
-- Gość - niezalogowany użytkownik, który może korzystać z podstawowych funkcji
+- **Gość** - niezalogowany użytkownik, który może korzystać z podstawowych funkcji
   aplikacji i zapisywać postęp lokalnie.
-- Uczeń - zalogowany członek jednego lub więcej zespołów, ma dostęp do zleconych
+- **Uczeń** - zalogowany członek jednego lub więcej zespołów, ma dostęp do zleconych
   zadań.
-- Prowadzący - zalogowany zarządca jednego lub więcej zespołów, posiada
+- **Prowadzący** - zalogowany zarządca jednego lub więcej zespołów, posiada
   przywileje administratorskie w obrębie danego zespołu.
 
 
