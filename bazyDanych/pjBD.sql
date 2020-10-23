@@ -1,5 +1,5 @@
 create database applicationdb;
-
+\c applicationdb;
 create table AppUser (
 id bigserial not null primary key,
 first_name VARCHAR(50) not null,
@@ -62,7 +62,7 @@ insert into Tasks (id, id_type_of_task, id_Team, Name, Description, activityStat
 
 create table Example (
 	id bigserial not null primary key,
-	id_Task INT,
+	id_Task INT references Tasks(id),
 	contents VARCHAR(50)
 );
 insert into Example (id,  id_Task, contents) values (1,  2, 'Soup - Campbells Chili');
@@ -80,8 +80,8 @@ insert into Example (id,  id_Task, contents) values (10, 1, 'Smoked Paprika');
 create table ProgressOfUser (
 	id bigserial not null primary key,
 	score INT,
-	id_type_of_task INT,
-	idUser INT
+	id_type_of_task INT references typeOfTask(id_type_of_task),
+	idUser INT references AppUser(id)
 );
 insert into ProgressOfUser (score, id_type_of_task,  idUser) values (64, 2, 1);
 insert into ProgressOfUser (score, id_type_of_task,  idUser) values (8, 3, 2);
