@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { ArrayDataSource } from '@angular/cdk/collections'
+import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-team-container',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./team-container.component.scss']
 })
 export class TeamContainerComponent implements OnInit {
+  @Input() title: String = ''
+  @Input() description: String = ''
+  @Input() teams: any[] = []
 
   public constructor() { }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
 
 }
