@@ -9,11 +9,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
+import { AccountComponent } from './components/account/account.component';
+import { LocalComponent } from './components/local/local.component';
+import { TeamComponent } from './components/team/team.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WorkspaceComponent,
+    AccountComponent,
+    LocalComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
