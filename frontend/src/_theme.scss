@@ -1,18 +1,77 @@
 @import '~@angular/material/theming';
 
-$custom-color: (
-    warning :  #FFC116,
-    success :  #0a630f,
-    danger:    #c00000,
+
+// Generated with http://mcg.mbitson.com/#!?mcgpalette0=%23012169
+$great-blue: (
+    50 : #e1e4ed,
+   100 : #b3bcd2,
+   200 : #8090b4,
+   300 : #4d6496,
+   400 : #274280,
+   500 : #012169,
+   600 : #011d61,
+   700 : #011856,
+   800 : #01144c,
+   900 : #000b3b,
+  A100 : #717eff,
+  A200 : #3e50ff,
+  A400 : #0b22ff,
+  A700 : #0016f1,
+  contrast: (
+      50 : #000000,
+     100 : #000000,
+     200 : #000000,
+     300 : #ffffff,
+     400 : #ffffff,
+     500 : #ffffff,
+     600 : #ffffff,
+     700 : #ffffff,
+     800 : #ffffff,
+     900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+// Generated with http://mcg.mbitson.com/#!?mcgpalette0=%23c8102e
+$great-red: (
+    50 : #f8e2e6,
+    100 : #efb7c0,
+    200 : #e48897,
+    300 : #d9586d,
+    400 : #d0344d,
+    500 : #c8102e,
+    600 : #c20e29,
+    700 : #bb0c23,
+    800 : #b4091d,
+    900 : #a70512,
+    A100 : #ffd2d4,
+    A200 : #ff9fa3,
+    A400 : #ff6c73,
+    A700 : #ff535a,
     contrast: (
-        warning :  #000000,
-        success :  #FFFFFF,
-        danger:    #FFFFFF,
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
     )
 );
 
+
 $primary: mat-palette($mat-blue-gray, 900);
-$accent: mat-palette($custom-color);
-$warn: mat-palette($mat-amber, 600);
+$accent: mat-palette($great-blue, 500);
+$warn: mat-palette($great-red, 500);
 
 $theme: mat-light-theme($primary, $accent, $warn);
