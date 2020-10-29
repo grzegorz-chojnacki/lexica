@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+
+$custom-color: (
+    warning :  #FFC116,
+    success :  #0a630f,
+    danger:    #c00000,
+    contrast: (
+        warning :  #000000,
+        success :  #FFFFFF,
+        danger:    #FFFFFF,
+    )
+);
+
+$primary: mat-palette($mat-blue-gray, 900);
+$accent: mat-palette($custom-color);
+$warn: mat-palette($mat-amber, 600);
+
+$theme: mat-light-theme($primary, $accent, $warn);

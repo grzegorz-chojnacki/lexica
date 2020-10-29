@@ -1,0 +1,4 @@
+@import './src/theme';
+
+@include mat-core();
+@include angular-material-theme($theme);

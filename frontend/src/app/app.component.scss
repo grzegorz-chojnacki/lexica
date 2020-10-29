@@ -1,8 +1,21 @@
+@import '../theme';
+
+$foreground-map: map-get($theme, "foreground");
+
 .spacer {
   flex: 1 1 auto;
 }
 
+a.homepage,
+a.homepage:visited,
+a.homepage:active {
+  color: white;
+  text-decoration: none;
+}
+
 .avatar {
-  margin: 0 0.5em;
+  width: 32px;
+  height: 32px;
+  margin-left: 0.5em;
   border-radius: 50%;
 }
