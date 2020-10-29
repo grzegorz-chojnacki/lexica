@@ -1,6 +1,4 @@
-.spacer {
-  flex: 1 1 auto;
-}
+.spacer { flex: 1 1 auto }
 
 a.homepage,
 a.homepage:visited,
@@ -14,4 +12,13 @@ a.homepage:active {
   height: 32px;
   margin-left: 0.5em;
   border-radius: 50%;
+}
+
+mat-sidenav {
+  width: 304px;
+  padding: 1em;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
 }

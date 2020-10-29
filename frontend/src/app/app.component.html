@@ -1,19 +1,21 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a href="/" class="homepage">Lexica</a>
+  <span class="spacer"></span>
+  <span class="user-name">Nazwa użytkownika</span>
+  <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+       class="avatar"
+       alt="account"/>
+  <button #userMenu mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+
 <mat-sidenav-container>
-  <mat-sidenav #sidenav>Start</mat-sidenav>
+  <mat-sidenav #sidenav>Sidenav</mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <a href="/" class="homepage">Lexica</a>
-      <span class="spacer"></span>
-      <span class="user-name">Nazwa użytkownika</span>
-      <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-           class="avatar"
-           alt="account"/>
-      <button #userMenu mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-toolbar>
+    <router-outlet>Content</router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
