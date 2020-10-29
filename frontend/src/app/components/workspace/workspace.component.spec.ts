@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatButtonModule } from '@angular/material/button'
 
 import { WorkspaceComponent } from './workspace.component'
 
@@ -8,6 +9,7 @@ describe('WorkspaceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatButtonModule ],
       declarations: [ WorkspaceComponent ]
     })
     .compileComponents()

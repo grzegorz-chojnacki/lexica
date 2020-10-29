@@ -9,7 +9,8 @@ export class WorkspaceComponent implements OnInit {
 
   public constructor() { }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
+
+  public createTeam(): void { }
 
 }
