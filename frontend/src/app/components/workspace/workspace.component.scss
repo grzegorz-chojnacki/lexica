@@ -1,5 +1,11 @@
 header {
-  max-width: 1200px;
   margin: 4em auto;
-  text-align: center;
+  text-align: justify;
+  text-align-last: center;
+}
+
+header, section { max-width: 1000px }
+
+section {
+  margin: 0 auto;
 }
