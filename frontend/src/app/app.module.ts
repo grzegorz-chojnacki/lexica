@@ -11,16 +11,15 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
-import { LocalComponent } from './components/local/local.component'
+import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { TeamComponent } from './components/team/team.component'
-
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkspaceComponent,
     AccountComponent,
-    LocalComponent,
+    LocalWorkspaceComponent,
     TeamComponent
   ],
   imports: [

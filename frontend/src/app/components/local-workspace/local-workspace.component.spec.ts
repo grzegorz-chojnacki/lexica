@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { LocalComponent } from './local.component'
+import { LocalWorkspaceComponent } from './local-workspace.component'
 
 describe('LocalComponent', () => {
-  let component: LocalComponent
-  let fixture: ComponentFixture<LocalComponent>
+  let component: LocalWorkspaceComponent
+  let fixture: ComponentFixture<LocalWorkspaceComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocalComponent ]
+      declarations: [ LocalWorkspaceComponent ]
     })
     .compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocalComponent)
+    fixture = TestBed.createComponent(LocalWorkspaceComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
