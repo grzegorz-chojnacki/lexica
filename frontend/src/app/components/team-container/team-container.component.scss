@@ -1,0 +1,10 @@
+.heading-fix { margin: 0 }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-container > div {
+  padding: 4em;
+}

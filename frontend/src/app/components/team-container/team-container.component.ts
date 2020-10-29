@@ -1,4 +1,3 @@
-import { ArrayDataSource } from '@angular/cdk/collections'
 import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
@@ -8,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core'
 })
 export class TeamContainerComponent implements OnInit {
   @Input() title: String = ''
-  @Input() description: String = ''
   @Input() teams: any[] = []
 
   public constructor() { }

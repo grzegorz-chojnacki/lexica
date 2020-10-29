@@ -1,9 +1,10 @@
 <mat-expansion-panel class="mat-elevation-z0" expanded>
-  <mat-expansion-panel-header>
-    <mat-panel-title>{{ title }}</mat-panel-title>
-    <mat-panel-description>{{ description }}</mat-panel-description>
+  <mat-expansion-panel-header class="centered">
+    <h2 class="heading-fix">{{ title }}</h2>
   </mat-expansion-panel-header>
-  <h4 *ngFor="let team of teams">
-    {{ team }}
-  </h4>
+  <div class="flex-container">
+    <div *ngFor="let team of teams">
+      {{ team }}
+    </div>
+  </div>
 </mat-expansion-panel>
