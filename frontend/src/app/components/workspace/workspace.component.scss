@@ -6,6 +6,11 @@ header {
 
 header, section { max-width: 1000px }
 
-section {
-  margin: 2em auto;
+section { margin: 2em auto }
+
+.search-box {
+  display: block;
+  width: 350px;
+  margin: 0 auto;
+  border-bottom: 0;
 }
