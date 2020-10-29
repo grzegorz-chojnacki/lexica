@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { Team } from 'src/app/classes/team';
 
 @Component({
   selector: 'app-team-card',
@@ -6,10 +7,7 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./team-card.component.scss']
 })
 export class TeamCardComponent implements OnInit {
-
-  public name = 'Zespół'
-  public description = 'Krótki opis zespołu'
-  public image: ImageBitmap = new ImageBitmap()
+  @Input() team!: Team;
 
   public constructor() { }
 

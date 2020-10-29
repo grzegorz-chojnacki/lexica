@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Team } from 'src/app/classes/team'
 
 @Component({
   selector: 'app-workspace',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent implements OnInit {
-  // ToDo: change to ...: Team[] = `...getTeams...`
-  public teams: any[] = Array(4).fill('Zespół')
+  public teams: Team[] = Array(4).fill(new Team('Zespół'))
   public search: string = ''
 
   public constructor() { }
