@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatCardModule } from '@angular/material/card'
 
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
@@ -45,6 +46,7 @@ import { TeamContainerComponent } from './components/team-container/team-contain
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

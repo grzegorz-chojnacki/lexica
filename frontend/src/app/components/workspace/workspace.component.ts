@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core'
 })
 export class WorkspaceComponent implements OnInit {
   // ToDo: change to ...: Team[] = `...getTeams...`
-  public teams: any[] = 'Zespół,'.repeat(10).split(',')
+  public teams: any[] = Array(4).fill('Zespół')
   public search: string = ''
 
   public constructor() { }
