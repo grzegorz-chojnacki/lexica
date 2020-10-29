@@ -13,7 +13,9 @@ import { MatDividerModule } from '@angular/material/divider'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
-import { TeamComponent } from './components/team/team.component';
+import { TeamComponent } from './components/team/team.component'
+import { TeamCardComponent } from './components/team-card/team-card.component'
+import { TeamContainerComponent } from './components/team-container/team-container.component'
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { TeamComponent } from './components/team/team.component';
     AccountComponent,
     LocalWorkspaceComponent,
     TeamComponent,
+    TeamCardComponent,
+    TeamContainerComponent,
   ],
   imports: [
     BrowserModule,
