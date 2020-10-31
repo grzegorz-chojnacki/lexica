@@ -1,0 +1,55 @@
+.userInfo{
+    width: 70%;
+    margin: auto;
+    background-color: rgb(180, 206, 206);
+    font-family: Arial, Helvetica, sans-serif;
+}
+img{
+    float: left;
+    height: 100px;;
+    width: 100px;
+}
+#shortInfo{
+    float: left;
+    font-size: 20px;
+    margin-left: 10px;
+    
+}
+#fnameNsname{
+font-weight: bold;
+padding-top: 20px;
+}
+
+#email{
+font-size: 16px;
+margin-top: -30px;
+}
+form{
+    margin-left: 30px;
+    margin-right: 30px;
+    clear: both;
+    background-color: rgb(180, 206, 206);
+}
+
+p{
+    display: inline-block;
+    margin-right: 40px;
+    width: 90px;
+}
+button{
+    float: right;
+    margin-top: 13px;
+    cursor: pointer;
+}
+input{
+margin-top: 13px;
+    width: 80%;
+}
+input[type="file"]{
+width:85%;
+}
+
+.bt{
+    float: left;
+    color: rgb(6, 6, 105);   
+}
