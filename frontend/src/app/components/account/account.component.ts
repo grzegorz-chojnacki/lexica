@@ -14,11 +14,11 @@ export class AccountComponent implements OnInit {
   public passwordDisabled = true
   public pictureDisabled = true
 
-  public user: User = new User('Imię','Nazwisko','adres@email.uzytkownika');
+  public user: User = new User('Imię', 'Nazwisko', 'adres@email.uzytkownika')
 
-  //public fname = 'Użytkownik'
-  //public sname = 'Użytkowski'
-  //public email = 'adres@email.uzytkownika'
+  // public fname = 'Użytkownik'
+  // public sname = 'Użytkowski'
+  // public email = 'adres@email.uzytkownika'
 
   public constructor() { }
 

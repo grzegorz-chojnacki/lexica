@@ -1,4 +1,4 @@
-import { User } from '../classes/user';
+import { User } from '../classes/user'
 import { FullNamePipe } from './full-name.pipe'
 
 describe('FullNamePipe', () => {
@@ -13,4 +13,4 @@ describe('FullNamePipe', () => {
 
     expect(pipe.transform(leader)).toBe('Firstname Surname')
   })
-});
+})
