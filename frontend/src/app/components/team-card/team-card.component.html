@@ -1,3 +1,24 @@
 <mat-card>
-  {{ team.name }}
+  <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+       class="team-image"/>
+
+  <header>
+    <div class="overline">
+      {{ team.leader?.firstname }}
+      {{ team.leader?.surname }}
+    </div>
+    <mat-card-title>{{ team.name }}</mat-card-title>
+    <mat-card-subtitle>{{ team.description }}</mat-card-subtitle>
+  </header>
+
+  <div class="spacer"></div>
+
+  <div class="actions">
+    <button mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <button mat-mini-fab>
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
 </mat-card>

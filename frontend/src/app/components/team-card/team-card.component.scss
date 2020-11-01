@@ -3,5 +3,27 @@
 }
 
 mat-card {
-  padding: 3em 9em;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+}
+
+$card-height: 100px;
+
+.team-image {
+  object-fit: cover;
+  height: $card-height;
+  width: $card-height;
+}
+
+header { margin: 0.5em 1em 0 }
+mat-card-title { padding: 0.2em 0 }
+
+.spacer { flex-grow: 1 }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 0.5em 0.5em 0;
 }
