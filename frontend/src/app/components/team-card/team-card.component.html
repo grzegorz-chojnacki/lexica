@@ -12,9 +12,21 @@
   <div class="spacer"></div>
 
   <div class="actions">
-    <button mat-icon-button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Ustawienia</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Usuń</span>
+      </button>
+    </mat-menu>
+
     <button mat-mini-fab>
       <mat-icon>chevron_right</mat-icon>
     </button>
