@@ -5,7 +5,9 @@ import { User } from 'src/app/classes/user'
 
 const tempUser = new User('John', 'Doe', 'jdoe@email.com')
 const tempUsers = Array<User>(10).fill(tempUser)
-const tempTeams = Array<Team>(8).fill(new Team('Zespół', tempUser, tempUsers))
+
+const tempTeam = new Team('Zespół', tempUser, tempUsers, 'Krótki opis zespołu')
+const tempTeams = Array<Team>(5).fill(tempTeam)
 
 @Injectable({
   providedIn: 'root',
