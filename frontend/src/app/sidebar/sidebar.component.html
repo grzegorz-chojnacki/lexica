@@ -1,17 +1,26 @@
 <div class="sidebar">
     <header>
-        <img src={{userAccount.avatarURL}} alt="avatar">
-            <div id="nazwaUzytkownika">
+        
+         <img src={{userAccount.avatarURL}} alt="avatar">
+         <a href='/account' id="nazwaUzytkownika">
                 {{userAccount.user.firstname}} {{userAccount.user.surname}}
-            </div>
+        </a>
         <img src={{userAccount.avatarURL}} alt="second image">
     </header>
-    <a href="/local">
-        <!-- <img [src]="av" alt="img"> -->
-        Zadania lokalne
-    </a>
+    <div class="localTaskContainer">
+      <a href="/local">
+         <img src={{userAccount.avatarURL}} alt="pictureOfLocalTask">
+         <p id="napisZadaniaLokalne">Zadania lokalne<br/></p>
+        <p>Zadania zapisane lokalnie</p> 
+      </a>
+    </div>
     <div>
-        Ostatnie zespoły
-    <app-team></app-team>
+        <app-team-container [teams]="teams" [title]="'Ostatnie zespoły'">
+            <div class="grid-container">
+                <app-team-card *ngFor="let team of teams" [team]="team">
+                </app-team-card>
+              </div>
+        </app-team-container>
+  
     </div>
 </div>

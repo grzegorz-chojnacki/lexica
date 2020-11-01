@@ -4,9 +4,17 @@
 }
 header{
   margin: 10px;
+  //float: left;
+}
+.localTaskContainer{
+   display: inline;
+   margin-bottom: 20px;
+}
+a{
+    color: unset;
+    text-decoration: none;
 }
 #nazwaUzytkownika{
-    color:red;
     display: inline-block;
     padding: 10px;
     font-size: 20px;
@@ -17,6 +25,8 @@ header{
 img{
     width: 40px;
     height: 40px;
+}
+img[alt="avatar"]{
     border-radius: 50%;
 }
 img[alt="second image"]{
@@ -24,4 +34,14 @@ img[alt="second image"]{
     height: 20px;
     float: right;
     margin-top: 17px;
+    border-radius: 50%;
+}
+p{
+    font-size: 12px;
+    margin-left: 44px;
+    margin-top: -7px;
+}
+#napisZadaniaLokalne{
+    margin-top: -44px;
+    font-size: 16px;
 }
