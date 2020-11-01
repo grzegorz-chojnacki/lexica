@@ -21,7 +21,8 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
 import { TeamComponent } from './components/team/team.component'
 import { TeamCardComponent } from './components/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team-container/team-container.component'
-import { SidebarComponent } from './sidebar/sidebar.component'
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { TeamLeaderOverlinePipe } from './pipes/team-leader-overline.pipe'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SidebarComponent } from './sidebar/sidebar.component'
     TeamCardComponent,
     TeamContainerComponent,
     SidebarComponent,
+    TeamLeaderOverlinePipe,
   ],
   imports: [
     BrowserModule,
