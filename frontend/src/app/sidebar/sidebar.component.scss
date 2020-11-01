@@ -1,0 +1,27 @@
+.sidebar{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+header{
+  margin: 10px;
+}
+#nazwaUzytkownika{
+    color:red;
+    display: inline-block;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    max-width: 100px;
+
+}
+img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+img[alt="second image"]{
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-top: 17px;
+}

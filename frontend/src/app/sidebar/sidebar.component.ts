@@ -10,6 +10,7 @@ import { AccountComponent } from '../components/account/account.component'
 
 export class SidebarComponent implements OnInit {
   // @Input('av') av: any;
+  public userAccount: AccountComponent = new AccountComponent()
   public constructor() { }
   public ngOnInit(): void { }
 

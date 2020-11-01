@@ -1,9 +1,17 @@
-<header>Nazwa użytkownika</header>
-<a href="/local">
-    <!-- <img [src]="av" alt="img"> -->
-    Zadania lokalne
-</a>
-<div>
-    Ostatnie zespoły
-<app-team></app-team>
+<div class="sidebar">
+    <header>
+        <img src={{userAccount.avatarURL}} alt="avatar">
+            <div id="nazwaUzytkownika">
+                {{userAccount.user.firstname}} {{userAccount.user.surname}}
+            </div>
+        <img src={{userAccount.avatarURL}} alt="second image">
+    </header>
+    <a href="/local">
+        <!-- <img [src]="av" alt="img"> -->
+        Zadania lokalne
+    </a>
+    <div>
+        Ostatnie zespoły
+    <app-team></app-team>
+    </div>
 </div>
