@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-
+import { User } from 'src/app/classes/user'
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -14,24 +14,26 @@ export class AccountComponent implements OnInit {
   public passwordDisabled = true
   public pictureDisabled = true
 
-  public fname = 'Użytkownik'
-  public sname = 'Użytkowski'
-  public email = 'adres@email.uzytkownika'
+  public user: User = new User('Imię','Nazwisko','adres@email.uzytkownika');
+
+  //public fname = 'Użytkownik'
+  //public sname = 'Użytkowski'
+  //public email = 'adres@email.uzytkownika'
 
   public constructor() { }
 
   public ngOnInit(): void { }
 
   public saveFName(event: any) {
-    this.fname = event.target.value
+    this.user.firstname = event.target.value
   }
 
   public saveSName(event: any) {
-    this.sname = event.target.value
+    this.user.surname = event.target.value
   }
 
   public saveEmail(event: any) {
-    this.email = event.target.value
+    this.user.email = event.target.value
   }
 
   public onFileChanged(event: any) {
