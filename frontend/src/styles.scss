@@ -3,4 +3,8 @@
 html, body { height: 100vh }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.uppercase { text-transform: uppercase }
+.overline {
+  text-transform: uppercase;
+  letter-spacing: 1.5;
+  font-size: 10px;
+}
