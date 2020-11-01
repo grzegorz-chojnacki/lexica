@@ -1,10 +1,11 @@
+$card-height: 100px;
+
 mat-card {
   display: flex;
   overflow: hidden;
+  height: $card-height;
   padding: 0;
 }
-
-$card-height: 100px;
 
 .team-image {
   object-fit: cover;
@@ -12,7 +13,12 @@ $card-height: 100px;
   width: $card-height;
 }
 
-header { margin: 0.5em 1em 0 }
+header {
+  box-sizing: border-box;
+  padding: 0.2em 1em;
+  overflow: hidden;
+}
+
 mat-card-title { padding: 0.2em 0 }
 
 .spacer { flex-grow: 1 }
