@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit {
 
   public onFileChanged(event: any) {
     if (event.target.files && event.target.files[0]) {
-      let reader = new FileReader()
+      const reader = new FileReader()
 
       reader.readAsDataURL(event.target.files[0]) // read file as data url
 
