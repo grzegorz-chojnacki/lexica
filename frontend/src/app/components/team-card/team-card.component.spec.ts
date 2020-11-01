@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TeamCardComponent } from './team-card.component'
+import { TeamLeaderOverlinePipe } from 'src/app/pipes/team-leader-overline.pipe'
+import { testTeam } from 'src/app/services/team.service'
 
 describe('TeamCardComponent', () => {
   let component: TeamCardComponent
@@ -8,7 +10,10 @@ describe('TeamCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamCardComponent ]
+      declarations: [
+        TeamCardComponent,
+        TeamLeaderOverlinePipe
+      ]
     })
     .compileComponents()
   })
@@ -16,6 +21,9 @@ describe('TeamCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TeamCardComponent)
     component = fixture.componentInstance
+
+    component.team = testTeam
+
     fixture.detectChanges()
   })
 

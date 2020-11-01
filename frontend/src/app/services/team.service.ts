@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
+
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 
-const tempUser = new User('John', 'Doe', 'jdoe@email.com')
-const tempUsers = Array<User>(10).fill(tempUser)
+export const testUser = new User('John', 'Doe', 'jdoe@email.com')
+export const testUsers = Array<User>(10).fill(testUser)
 
-const tempTeam = new Team('Zespół', tempUser, tempUsers, 'Krótki opis zespołu')
-const tempTeams = Array<Team>(5).fill(tempTeam)
+export const testTeam = new Team('Zespół', testUser, testUsers, 'Krótki opis zespołu')
+export const testTeams = Array<Team>(5).fill(testTeam)
 
 @Injectable({
-  providedIn: 'root',
-  useFactory: () => new TeamService(localStorage)
+  providedIn: 'root'
 })
 export class TeamService {
-  private readonly teamSource = new BehaviorSubject(tempTeams)
+  private readonly teamSource = new BehaviorSubject(testTeams)
 
   public get teams(): Observable<Team[]> {
     return this.teamSource.asObservable()
   }
 
-  public constructor(private readonly storage: Storage) { }
+  public constructor() { }
 }
