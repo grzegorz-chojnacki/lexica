@@ -20,7 +20,7 @@ import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { TeamComponent } from './components/team/team.component'
 import { TeamCardComponent } from './components/team-card/team-card.component'
-import { TeamContainerComponent } from './components/team-container/team-container.component';
+import { TeamContainerComponent } from './components/team-container/team-container.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 
 @NgModule({

@@ -8,7 +8,7 @@ import { Team } from 'src/app/classes/team'
 })
 export class WorkspaceComponent implements OnInit {
   public teams: Team[] = Array(4).fill(new Team('Zespół'))
-  public search: string = ''
+  public search = ''
 
   public constructor() { }
 

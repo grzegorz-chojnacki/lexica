@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Team } from 'src/app/classes/team';
+import { Team } from 'src/app/classes/team'
 
 @Component({
   selector: 'app-team-card',
@@ -7,7 +7,7 @@ import { Team } from 'src/app/classes/team';
   styleUrls: ['./team-card.component.scss']
 })
 export class TeamCardComponent implements OnInit {
-  @Input() team!: Team;
+  @Input() public team!: Team
 
   public constructor() { }
 

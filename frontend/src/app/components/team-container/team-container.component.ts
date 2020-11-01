@@ -7,8 +7,8 @@ import { Team } from 'src/app/classes/team'
   styleUrls: ['./team-container.component.scss']
 })
 export class TeamContainerComponent implements OnInit {
-  @Input() title!: String
-  @Input() teams!: Team[]
+  @Input() public title!: String
+  @Input() public teams!: Team[]
 
   public constructor() { }
 

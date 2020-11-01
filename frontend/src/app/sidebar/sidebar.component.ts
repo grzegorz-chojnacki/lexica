@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
-import { AccountComponent } from '../components/account/account.component';
+import { HttpClient } from '@angular/common/http'
+import { Component, OnInit, Input } from '@angular/core'
+import { AccountComponent } from '../components/account/account.component'
 
 @Component({
   selector: 'app-sidebar',
@@ -10,9 +10,9 @@ import { AccountComponent } from '../components/account/account.component';
 
 export class SidebarComponent implements OnInit {
   // @Input('av') av: any;
-  constructor() {}
-  ngOnInit(): void { }
+  public constructor() { }
+  public ngOnInit(): void { }
 
-  //console.log(this.av);
+  // console.log(this.av);
 
 }
