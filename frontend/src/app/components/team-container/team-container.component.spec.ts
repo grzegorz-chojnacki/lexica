@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatExpansionModule } from '@angular/material/expansion'
 
 import { TeamContainerComponent } from './team-container.component'
+import { TeamCardComponent } from 'src/app/components/team-card/team-card.component'
 
 describe('TeamContainerComponent', () => {
   let component: TeamContainerComponent
@@ -8,7 +11,14 @@ describe('TeamContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamContainerComponent ]
+      imports: [
+        BrowserAnimationsModule,
+        MatExpansionModule,
+      ],
+      declarations: [
+        TeamContainerComponent,
+        TeamCardComponent,
+      ]
     })
     .compileComponents()
   })
