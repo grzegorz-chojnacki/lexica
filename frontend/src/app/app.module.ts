@@ -23,7 +23,7 @@ import { TeamComponent } from './components/team/team.component'
 import { TeamCardComponent } from './components/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team-container/team-container.component'
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { TeamLeaderOverlinePipe } from './pipes/team-leader-overline.pipe'
+import { FullNamePipe } from './pipes/full-name.pipe'
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { TeamLeaderOverlinePipe } from './pipes/team-leader-overline.pipe'
     TeamCardComponent,
     TeamContainerComponent,
     SidebarComponent,
-    TeamLeaderOverlinePipe,
+    FullNamePipe,
   ],
   imports: [
     BrowserModule,

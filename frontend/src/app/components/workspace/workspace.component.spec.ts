@@ -13,7 +13,7 @@ import { WorkspaceComponent } from './workspace.component'
 import { TeamComponent } from 'src/app/components/team/team.component'
 import { TeamContainerComponent } from 'src/app/components/team-container/team-container.component'
 import { TeamCardComponent } from 'src/app/components/team-card/team-card.component'
-import { TeamLeaderOverlinePipe } from 'src/app/pipes/team-leader-overline.pipe'
+import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 
 
 describe('WorkspaceComponent', () => {
@@ -38,7 +38,7 @@ describe('WorkspaceComponent', () => {
         TeamComponent,
         TeamContainerComponent,
         TeamCardComponent,
-        TeamLeaderOverlinePipe
+        FullNamePipe
       ]
     }).compileComponents()
   })

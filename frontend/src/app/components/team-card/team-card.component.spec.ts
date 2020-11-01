@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
 
 import { TeamCardComponent } from './team-card.component'
-import { TeamLeaderOverlinePipe } from 'src/app/pipes/team-leader-overline.pipe'
+import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 import { testTeam } from 'src/app/services/team.service'
 
 describe('TeamCardComponent', () => {
@@ -22,7 +22,7 @@ describe('TeamCardComponent', () => {
       ],
       declarations: [
         TeamCardComponent,
-        TeamLeaderOverlinePipe
+        FullNamePipe
       ]
     })
     .compileComponents()
