@@ -17,17 +17,17 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/team">
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="removeItself()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
       </button>
     </mat-menu>
 
-    <button mat-mini-fab>
+    <button mat-mini-fab routerLink="/team">
       <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
