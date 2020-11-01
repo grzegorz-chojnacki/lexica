@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { FormsModule } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
+import { MatMenuModule } from '@angular/material/menu'
 
 import { WorkspaceComponent } from './workspace.component'
 import { TeamComponent } from 'src/app/components/team/team.component'
@@ -32,6 +33,7 @@ describe('WorkspaceComponent', () => {
         FormsModule,
         MatInputModule,
         MatCardModule,
+        MatMenuModule
       ],
       declarations: [
         WorkspaceComponent,

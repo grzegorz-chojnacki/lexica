@@ -6,7 +6,7 @@ import { MatMenuModule } from '@angular/material/menu'
 
 import { TeamCardComponent } from './team-card.component'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
-import { testTeam } from 'src/app/services/team.service'
+import { testTeams } from 'src/app/services/team.service'
 
 describe('TeamCardComponent', () => {
   let component: TeamCardComponent
@@ -32,7 +32,7 @@ describe('TeamCardComponent', () => {
     fixture = TestBed.createComponent(TeamCardComponent)
     component = fixture.componentInstance
 
-    component.team = testTeam
+    component.team = testTeams[0]
 
     fixture.detectChanges()
   })

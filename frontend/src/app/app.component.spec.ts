@@ -5,6 +5,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { MatMenuModule } from '@angular/material/menu'
 
 import { AppComponent } from './app.component'
 import { SidebarComponent } from 'src/app/sidebar/sidebar.component'
@@ -21,6 +22,7 @@ describe('AppComponent', () => {
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
+        MatMenuModule,
       ],
       declarations: [
         SidebarComponent,
