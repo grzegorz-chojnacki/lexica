@@ -1,21 +1,4 @@
-/*import { Component, OnInit } from '@angular/core'
-@Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
-})
-export class AccountComponent implements OnInit {
-
-  public constructor() { }
-
-  public ngOnInit(): void {
-  }
-
-}
-*/
 import { Component, OnInit } from '@angular/core';
-import { element } from 'protractor';
-
 
 @Component({
   selector: 'app-account',
@@ -36,27 +19,31 @@ export class AccountComponent implements OnInit {
   email = 'adres@email.uzytkownika';
 
   constructor() { }
-  ngOnInit(): void {
-  }
-  saveFName(event){
+
+  public ngOnInit(): void { }
+
+  public saveFName(event: any) {
     this.fname = event.target.value;
   }
-  saveSName(event){
+
+  public saveSName(event: any) {
     this.sname = event.target.value;
   }
-  saveEmail(event){
+
+  public saveEmail(event: any) {
     this.email = event.target.value;
   }
-  onFileChanged(event) {
+
+  public onFileChanged(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
         this.avatarURL = event.target.result;
-  }
-}
+      }
+    }
   }
 
 }

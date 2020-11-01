@@ -9,11 +9,10 @@ import { AccountComponent } from '../components/account/account.component';
 })
 
 export class SidebarComponent implements OnInit {
- // @Input('av') av: any;
+  // @Input('av') av: any;
   constructor() {}
-  ngOnInit(): void {
-  }
- 
+  ngOnInit(): void { }
+
   //console.log(this.av);
- 
+
 }

@@ -1,32 +1,32 @@
 <div class="userInfo">
-    
-    <img [src]="avatarURL">
-   <!-- <app-sidebar [av]='avatarURL'></app-sidebar>-->
 
-<div id="shortInfo">    
-    
+    <img [src]="avatarURL">
+   <!-- <app-sidebar [av]='avatarURL'></app-sidebar> -->
+
+<div id="shortInfo">
+
           <div id="fnameNsname">  {{fname}} {{sname}} </div><br/><br/>
-            <div id="email">{{email}}</div> 
+            <div id="email">{{email}}</div>
 </div><br/>
-      
+
 <form>
     <label for="fname"><p>IMIĘ</p>
         <button *ngIf="fnameDisabled" (click)="fnameDisabled = false">&#187;</button>
         <button *ngIf="!fnameDisabled" (click)="fnameDisabled = true">&#x2714;</button>
      <input [disabled]="fnameDisabled" value="{{fname}}" (input)="saveFName($event)"><br/>
-      
+
     </label>
     <label for="sname"><p>NAZWISKO</p>
         <button *ngIf="snameDisabled" (click)="snameDisabled = false">&#187;</button>
         <button *ngIf="!snameDisabled" (click)="snameDisabled = true">&#x2714;</button>
         <input [disabled]="snameDisabled" value="{{sname}}" (input)="saveSName($event)"> <br/>
-         
+
        </label>
        <label for="email"><p>EMAIL</p>
         <button *ngIf="emailDisabled" (click)="emailDisabled = false">&#187;</button>
         <button *ngIf="!emailDisabled" (click)="emailDisabled = true">&#x2714;</button>
         <input [disabled]="emailDisabled" value="{{email}}" (input)="saveEmail($event)"><br/>
-        
+
        </label>
        <label for="password"><p>HASŁO</p>
         <button (click)="passwordDisabled = false">&#187;</button>
@@ -37,7 +37,7 @@
         <input type="file" accept=".jpg,.jpeg,.png" (change)="onFileChanged($event)">
          <br/>
        </label>
-     
+
     </form>
     <div>
         <a href="/" class="homepage">
