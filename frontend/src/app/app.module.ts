@@ -23,7 +23,8 @@ import { TeamComponent } from './components/team/team.component'
 import { TeamCardComponent } from './components/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team-container/team-container.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
-import { FullNamePipe } from './pipes/full-name.pipe'
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { SimpleCardComponent } from './components/simple-card/simple-card.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FullNamePipe } from './pipes/full-name.pipe'
     TeamContainerComponent,
     SidebarComponent,
     FullNamePipe,
+    SimpleCardComponent,
   ],
   imports: [
     BrowserModule,

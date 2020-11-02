@@ -5,8 +5,12 @@
          <a href='/account' id="nazwaUzytkownika">
                 {{userAccount.user.firstname}} {{userAccount.user.surname}}
         </a>
-        <img src={{userAccount.avatarURL}} alt="second image">
+        <!--<img src={{userAccount.avatarURL}} alt="second image">-->
+        
+          <mat-icon>account_circle</mat-icon>
+        
     </header>
+    <header>
     <div class="localTaskContainer">
       <a href="/local">
          <img src={{userAccount.avatarURL}} alt="pictureOfLocalTask">
@@ -14,6 +18,7 @@
         <p>Zadania zapisane lokalnie</p> 
       </a>
     </div>
+  </header>
     <div>
         <app-team-container [teams]="teams" [title]="'Ostatnie zespoły'">
             <div class="grid-container">

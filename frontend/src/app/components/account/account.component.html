@@ -13,7 +13,7 @@
     <label for="fname"><p>IMIĘ</p>
         <button *ngIf="fnameDisabled" (click)="fnameDisabled = false">&#187;</button>
         <button *ngIf="!fnameDisabled" (click)="fnameDisabled = true">&#x2714;</button>
-     <input [disabled]="fnameDisabled" value="{{user.firstname}}" (input)="saveFName($event)"><br/>
+        <input [disabled]="fnameDisabled" value="{{user.firstname}}" (input)="saveFName($event)" required><br/>
 
     </label>
     <label for="sname"><p>NAZWISKO</p>

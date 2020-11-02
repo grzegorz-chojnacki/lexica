@@ -25,15 +25,18 @@ export class AccountComponent implements OnInit {
   public ngOnInit(): void { }
 
   public saveFName(event: any) {
-    this.user.firstname = event.target.value
+    if(event.target.value.length>0){
+    this.user.firstname = event.target.value}
   }
 
   public saveSName(event: any) {
-    this.user.surname = event.target.value
+    if(event.target.value.length>0){
+    this.user.surname = event.target.value}
   }
 
   public saveEmail(event: any) {
-    this.user.email = event.target.value
+    if(event.target.value.length>0){
+    this.user.email = event.target.value}
   }
 
   public onFileChanged(event: any) {
