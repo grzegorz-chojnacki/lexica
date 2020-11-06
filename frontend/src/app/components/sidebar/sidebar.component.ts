@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Component, OnInit, Input } from '@angular/core'
 import { from } from 'rxjs'
-import { AccountComponent } from '../components/account/account.component'
+import { AccountComponent } from '../account/account.component'
 import { TeamService } from 'src/app/services/team.service'
 import { Team } from 'src/app/classes/team'
 
