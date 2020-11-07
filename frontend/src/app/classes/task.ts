@@ -1,17 +1,18 @@
 abstract class TaskType {
   public abstract readonly name: string
   public abstract readonly description: string
-  public abstract readonly image?: ImageBitmap
+  public abstract readonly exampleImage?: ImageBitmap
 }
 
 export class SimpleCard extends TaskType {
   public readonly name = 'Fiszka prosta'
   public readonly description = 'Opis fiszki prostej'
-  public readonly image?: ImageBitmap
+  public readonly exampleImage?: ImageBitmap
 
   public constructor(
     public readonly nativeWord: string,
     public readonly foreignWord: string,
+    public readonly image?: ImageBitmap,
   ) { super() }
 }
 
