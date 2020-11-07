@@ -46,7 +46,7 @@ export class TeamService {
   }
 
   // ToDo: try to find team with this hash in cached teams (teamSource)
-  //       or query server with it and check permissions (server side)
+  //       or query server with it
   public getTeam(hash: string | null): Promise<Team> {
     return new Promise((resolve, reject) => {
       const foundTeam = this.teamSource.getValue()

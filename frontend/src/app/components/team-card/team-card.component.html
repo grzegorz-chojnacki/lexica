@@ -26,8 +26,14 @@
       </button>
     </mat-menu>
 
-    <button mat-mini-fab routerLink="/team/{{ team?.hash }}">
+    <button *ngIf="context === 'TeamContainer'"
+        mat-mini-fab routerLink="/team/{{ team?.hash }}">
       <mat-icon>chevron_right</mat-icon>
+    </button>
+
+    <button *ngIf="context === 'Team'"
+        mat-flat-button color="accent">
+      Kod zespołu
     </button>
   </div>
 </mat-card>

@@ -9,6 +9,7 @@ import { TeamService } from 'src/app/services/team.service'
 })
 export class TeamCardComponent implements OnInit {
   @Input() public team!: Team
+  @Input() public context!: 'TeamContainer' | 'Team'
 
   public constructor(private readonly teamService: TeamService) { }
 
