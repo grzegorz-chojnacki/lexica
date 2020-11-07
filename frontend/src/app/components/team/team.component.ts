@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
 import { Team } from 'src/app/classes/team'
-import { TeamService, testTeams } from 'src/app/services/team.service'
+import { TeamService } from 'src/app/services/team.service'
 
 @Component({
   selector: 'app-team',
@@ -8,11 +9,20 @@ import { TeamService, testTeams } from 'src/app/services/team.service'
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
+  public team!: Team
 
-  public readonly team: Team = testTeams[0]
+  public constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private teamService: TeamService) { }
 
-  public constructor(private teamService: TeamService) { }
+  public ngOnInit(): void {
+    const teamHash = this.route.snapshot.paramMap.get('hash')
 
-  public ngOnInit(): void { }
+    this.teamService
+      .getTeam(teamHash)
+      .then(team => this.team = team)
+      .catch(err => this.router.navigate(['/']))
+  }
 
 }
