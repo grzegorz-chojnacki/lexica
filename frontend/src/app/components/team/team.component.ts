@@ -9,7 +9,6 @@ export class TeamComponent implements OnInit {
 
   public constructor() { }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
 
 }
