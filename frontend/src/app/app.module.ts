@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
@@ -57,6 +58,7 @@ import { TaskAddingComponent } from './components/task-adding/task-adding.compon
     MatExpansionModule,
     MatCardModule,
     MatMenuModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

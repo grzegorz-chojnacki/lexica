@@ -4,6 +4,9 @@
   </mat-expansion-panel-header>
 
   <div class="grid-container">
-    <app-team-card *ngFor="let team of teams" [team]="team"></app-team-card>
+    <app-team-card *ngFor="let team of teams"
+      [team]="team"
+      context="TeamContainer">
+    </app-team-card>
   </div>
 </mat-expansion-panel>
