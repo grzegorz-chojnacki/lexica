@@ -3,9 +3,9 @@
        class="team-image"/>
 
   <header>
-    <div class="overline">{{ team.leader | fullNamePipe }}</div>
-    <mat-card-title>{{ team.name }}</mat-card-title>
-    <mat-card-subtitle>{{ team.description }}</mat-card-subtitle>
+    <div class="overline">{{ (team) ? (team.leader | fullNamePipe) : '' }}</div>
+    <mat-card-title>{{ team?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ team?.description }}</mat-card-subtitle>
   </header>
 
   <div class="spacer"></div>
@@ -26,7 +26,7 @@
       </button>
     </mat-menu>
 
-    <button mat-mini-fab routerLink="/team/{{ team.hash }}">
+    <button mat-mini-fab routerLink="/team/{{ team?.hash }}">
       <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
