@@ -39,8 +39,21 @@ export const testTeams: Team[] = [
 export class TeamService {
   private readonly teamSource = new BehaviorSubject<Team[]>(testTeams)
 
+  public constructor() { }
+
   public get teams(): Observable<Team[]> {
     return this.teamSource.asObservable()
+  }
+
+  // ToDo: try to find team with this hash in cached teams (teamSource)
+  //       or query server with it and check permissions (server side)
+  public getTeam(hash: string | null): Promise<Team> {
+    return new Promise((resolve, reject) => {
+      const foundTeam = this.teamSource.getValue()
+        .find(team => team.hash === hash)
+
+      return (foundTeam) ? resolve(foundTeam) : reject('Team not found')
+    })
   }
 
   // ToDo: Api request
@@ -50,6 +63,4 @@ export class TeamService {
 
     this.teamSource.next(withoutRemovedTeam)
   }
-
-  public constructor() { }
 }
