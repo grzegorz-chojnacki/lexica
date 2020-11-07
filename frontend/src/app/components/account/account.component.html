@@ -9,14 +9,44 @@
             <div id="email">{{user.email}}</div>
 </div><br/>
 
-<form>
-    <label for="fname"><p>IMIĘ</p>
+<form class="example-form">
+   <!-- <label for="fname"><p>IMIĘ</p>
         <button *ngIf="fnameDisabled" (click)="fnameDisabled = false">&#187;</button>
         <button *ngIf="!fnameDisabled" (click)="fnameDisabled = true">&#x2714;</button>
         <input [disabled]="fnameDisabled" value="{{user.firstname}}" (input)="saveFName($event)" required><br/>
 
-    </label>
-    <label for="sname"><p>NAZWISKO</p>
+    </label>-->
+    <mat-form-field class="example-full-width">
+      <mat-label>IMIĘ</mat-label>
+      <button *ngIf="fnameDisabled" (click)="fnameDisabled = false">&#187;</button>
+      <button *ngIf="!fnameDisabled" (click)="fnameDisabled = true">&#x2714;</button>
+      <input matInput [disabled]="fnameDisabled" value="{{user.firstname}}" (input)="saveFName($event)" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>NAZWISKO</mat-label>
+      <button *ngIf="snameDisabled" (click)="snameDisabled = false">&#187;</button>
+      <button *ngIf="!snameDisabled" (click)="snameDisabled = true">&#x2714;</button>
+      <input matInput [disabled]="snameDisabled" value="{{user.surname}}" (input)="saveSName($event)" required>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>EMAIL</mat-label>
+      <button *ngIf="emailDisabled" (click)="emailDisabled = false">&#187;</button>
+      <button *ngIf="!emailDisabled" (click)="emailDisabled = true">&#x2714;</button>
+      <input matInput [disabled]="emailDisabled" value="{{user.email}}" (input)="saveEmail($event)" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>HASŁO</mat-label>
+      <button (click)="passwordDisabled = false">&#187;</button>
+      <input matInput [disabled]="passwordDisabled" value="*****" type="password" required>
+    </mat-form-field>
+    <form class="s">
+      <label>ZDJĘCIE</label>
+      <input accept=".jpg,.jpeg,.png" (change)="onFileChanged($event)" type="file">
+    </form>
+
+   <!-- <label for="sname"><p>NAZWISKO</p>
         <button *ngIf="snameDisabled" (click)="snameDisabled = false">&#187;</button>
         <button *ngIf="!snameDisabled" (click)="snameDisabled = true">&#x2714;</button>
         <input [disabled]="snameDisabled" value="{{user.surname}}" (input)="saveSName($event)"> <br/>
@@ -36,7 +66,7 @@
        <label for="picture"><p>ZDJĘCIE</p>
         <input type="file" accept=".jpg,.jpeg,.png" (change)="onFileChanged($event)">
          <br/>
-       </label>
+       </label>-->
 
     </form>
     <div>

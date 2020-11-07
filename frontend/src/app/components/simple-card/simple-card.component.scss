@@ -1,6 +1,6 @@
 mat-card{
-    width: 20%;
-    height: 35%;
+    min-height: 38%;
+    max-width: 18%;
     margin-top: 100px;
     margin-left: 40%;
     text-align: center;
@@ -14,9 +14,11 @@ mat-card-actions{
   }
   p{
       font-size: 20px;
+      font-weight: bold;
   }
   
   img{
-      width: 150px;
-      height: 100px;
+      
+      width: 30%;
+      height: 30%;
   }
