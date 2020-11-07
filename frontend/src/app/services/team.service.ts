@@ -18,13 +18,19 @@ export const testUsers: User[] = [
 ]
 
 export const testTeams: Team[] = [
-  new Team('Khaki',      testUsers[0], [], 'Milt op involving oth dest arcrft, civilian, sequela'),
-  new Team('Aquamarine', testUsers[1], [], 'Contracture, unspecified hip'),
-  new Team('Fuscia',     testUsers[2], [], 'Smith\'s fx r radius, subs for opn fx type I/2 w nonunion'),
-  new Team('Orange',     testUsers[3], [], 'Stress fracture, right femur, initial encounter for fracture'),
-  new Team('Mauv',       testUsers[4], [], ''),
-  new Team('Aquamarine', testUsers[5], [], 'Left sided colitis'),
-  new Team('Crimson',    testUsers[6], [], 'Pulsating exophthalmos, left eye'),
+  new Team('Khaki',      'BQMah7Ixwx9v', testUsers[0], [],
+  'Milt op involving oth dest arcrft, civilian, sequela'),
+  new Team('Aquamarine', 'HjWY3JkRPaxE', testUsers[1], [],
+  'Contracture, unspecified hip'),
+  new Team('Fuscia',     'tf75eN8ZF1fV', testUsers[2], [],
+  'Smith\'s fx r radius, subs for opn fx type I/2 w nonunion'),
+  new Team('Orange',     'QxOJhUAE5sjc', testUsers[3], [],
+  'Stress fracture, right femur, initial encounter for fracture'),
+  new Team('Aquamarine', 'JFF7Z2AUuyqf', testUsers[5], [],
+  'Left sided colitis'),
+  new Team('Crimson',    'SYBHczTK8MjJ', testUsers[6], [],
+  'Pulsating exophthalmos, left eye'),
+  new Team('Mauv',       'FcRgvcxAo39D', testUsers[4], []),
 ]
 
 @Injectable({

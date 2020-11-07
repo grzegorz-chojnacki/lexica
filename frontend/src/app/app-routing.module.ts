@@ -7,15 +7,16 @@ import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { SimpleCardComponent } from './components/simple-card/simple-card.component'
 
 const routes: Routes = [
-  { path: 'team',      component: TeamComponent },
-  { path: 'workspace', component: WorkspaceComponent },
-  { path: 'account',   component: AccountComponent },
-  { path: 'local',     component: LocalWorkspaceComponent },
-  { path: 'simpleCard', component: SimpleCardComponent },
+  { path: 'team/:hash',       component: TeamComponent },
+  { path: 'team/:hash/:view', component: TeamComponent }, // Members & Tasks
+  { path: 'workspace',        component: WorkspaceComponent },
+  { path: 'account',          component: AccountComponent },
+  { path: 'local',            component: LocalWorkspaceComponent },
+  { path: 'simpleCard',       component: SimpleCardComponent },
   // Will add main page later
-  { path: '',          redirectTo: 'workspace', pathMatch: 'full' },
+  { path: '',   redirectTo: 'workspace', pathMatch: 'full' },
   // Will add error page later
-  { path: '**',        redirectTo: 'workspace' },
+  { path: '**', redirectTo: 'workspace' },
 ]
 
 @NgModule({
