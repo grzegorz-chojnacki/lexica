@@ -27,12 +27,14 @@
     </mat-menu>
 
     <button *ngIf="context === 'TeamContainer'"
-        mat-mini-fab routerLink="/team/{{ team?.hash }}">
+        mat-mini-fab
+        routerLink="/team/{{ team?.hash }}">
       <mat-icon>chevron_right</mat-icon>
     </button>
 
     <button *ngIf="context === 'Team'"
-        mat-flat-button color="accent">
+        mat-flat-button color="accent"
+        (click)="copyToClipboard()">
       Kod zespołu
     </button>
   </div>
