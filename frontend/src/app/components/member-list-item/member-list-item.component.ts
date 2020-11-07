@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-member-list-item',
@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberListItemComponent implements OnInit {
 
-  constructor() { }
+  public constructor() { }
 
-  ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
 
 }

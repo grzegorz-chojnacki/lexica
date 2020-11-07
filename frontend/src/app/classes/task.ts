@@ -4,7 +4,6 @@ abstract class TaskType {
   public abstract readonly image?: ImageBitmap
 }
 
-
 export class SimpleCard extends TaskType {
   public readonly name = 'Fiszka prosta'
   public readonly description = 'Opis fiszki prostej'

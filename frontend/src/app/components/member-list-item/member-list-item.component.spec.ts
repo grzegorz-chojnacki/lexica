@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { MemberListItemComponent } from './member-list-item.component';
+import { MemberListItemComponent } from './member-list-item.component'
 
 describe('MemberListItemComponent', () => {
-  let component: MemberListItemComponent;
-  let fixture: ComponentFixture<MemberListItemComponent>;
+  let component: MemberListItemComponent
+  let fixture: ComponentFixture<MemberListItemComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MemberListItemComponent ]
     })
-    .compileComponents();
-  });
+    .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MemberListItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MemberListItemComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

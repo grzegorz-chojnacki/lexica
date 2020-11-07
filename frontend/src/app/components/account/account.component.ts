@@ -25,17 +25,17 @@ export class AccountComponent implements OnInit {
   public ngOnInit(): void { }
 
   public saveFName(event: any) {
-    if(event.target.value.length>0){
+    if (event.target.value.length > 0) {
     this.user.firstname = event.target.value}
   }
 
   public saveSName(event: any) {
-    if(event.target.value.length>0){
+    if (event.target.value.length > 0) {
     this.user.surname = event.target.value}
   }
 
   public saveEmail(event: any) {
-    if(event.target.value.length>0){
+    if (event.target.value.length > 0) {
     this.user.email = event.target.value}
   }
 

@@ -9,9 +9,9 @@ export class SimpleCardComponent implements OnInit {
 
   public constructor() { }
 
-  public ngOnInit(): void {   
-  }
+  public ngOnInit(): void { }
+
   public nextCard() {
-//go to another card, count progress
+    // go to another card, count progress
   }
 }
