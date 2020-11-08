@@ -47,6 +47,12 @@ form{
     background-color: white;
     font-family: "Helvetica Neue", sans-serif;
 }
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    padding-bottom: 10px;
+}
 
 p{
     display: inline-block;
@@ -55,7 +61,6 @@ p{
 }
 button{
     float: right;
-    margin-top: 13px;
     cursor: pointer;
 }
 input{
