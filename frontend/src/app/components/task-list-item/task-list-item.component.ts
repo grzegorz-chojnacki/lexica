@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { Task, TaskType } from 'src/app/classes/task'
 
 @Component({
   selector: 'app-task-list-item',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./task-list-item.component.scss']
 })
 export class TaskListItemComponent implements OnInit {
+  @Input() public task!: Task<TaskType>
 
   public constructor() { }
+
+  public launchTask(event: Event): void { event.stopPropagation() }
 
   public ngOnInit(): void { }
 

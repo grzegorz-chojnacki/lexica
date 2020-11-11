@@ -11,12 +11,20 @@
 
   <section>
     <mat-card>
-      <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+      <mat-tab-group mat-stretch-tabs mat-align-tabs="center" color="accent"
+          animationDuration="0">
         <mat-tab label="Zadania">
-          <app-task-list-item></app-task-list-item>
+          <mat-action-list>
+            <app-task-list-item *ngFor="let task of team?.tasks" [task]="task">
+            </app-task-list-item>
+          </mat-action-list>
         </mat-tab>
-        <mat-tab label="Uczestnicy">
-          <app-member-list-item></app-member-list-item>
+        <mat-tab label="Uczestnicy" [disabled]="team?.members?.length === 0">
+          <mat-list>
+            <app-member-list-item *ngFor="let member of team?.members"
+              [member]="member">
+            </app-member-list-item>
+          </mat-list>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

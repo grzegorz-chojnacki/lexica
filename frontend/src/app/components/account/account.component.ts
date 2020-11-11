@@ -59,7 +59,12 @@ export class AccountComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   public iconMethod(){
+=======
+  public iconMethod() {
+
+>>>>>>> f6c1fc0e1f4549ee60f0f33cc535d5e12ececd22
   }
 
 }

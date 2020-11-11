@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatListModule } from '@angular/material/list'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
@@ -64,7 +66,9 @@ import { TaskAddingComponent } from './components/task-adding/task-adding.compon
     MatCardModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

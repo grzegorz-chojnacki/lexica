@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
+import { SimpleCard, Task } from '../classes/task'
 
 export const testUsers: User[] = [
   new User('Lyn',       'Tommaseo',    'ltommaseo@example.com'),
@@ -18,19 +19,29 @@ export const testUsers: User[] = [
 ]
 
 export const testTeams: Team[] = [
-  new Team('Khaki',      'BQMah7Ixwx9v', testUsers[0], [],
-  'Milt op involving oth dest arcrft, civilian, sequela'),
-  new Team('Aquamarine', 'HjWY3JkRPaxE', testUsers[1], [],
+  new Team('Khaki',      'BQMah7Ixwx9v', testUsers[0], [
+    testUsers[1],
+    testUsers[2],
+    testUsers[3],
+    testUsers[4],
+    testUsers[5],
+    testUsers[6],
+  ], [
+    new Task('e6SqZ', 'Zadanie z fiszkami 1', [new SimpleCard('a', 'b')],  true, 'Opis zadania z fiszkami 1'),
+    new Task('A1WSD', 'Zadanie z fiszkami 2', [new SimpleCard('c', 'd')],  true),
+    new Task('4Fr6v', 'Zadanie z fiszkami 3', [new SimpleCard('e', 'f')], false, 'Opis zadania z fiszkami 3'),
+  ], 'Milt op involving oth dest arcrft, civilian, sequela'),
+  new Team('Aquamarine', 'HjWY3JkRPaxE', testUsers[1], [], [],
   'Contracture, unspecified hip'),
-  new Team('Fuscia',     'tf75eN8ZF1fV', testUsers[2], [],
+  new Team('Fuscia',     'tf75eN8ZF1fV', testUsers[2], [], [],
   'Smith\'s fx r radius, subs for opn fx type I/2 w nonunion'),
-  new Team('Orange',     'QxOJhUAE5sjc', testUsers[3], [],
+  new Team('Orange',     'QxOJhUAE5sjc', testUsers[3], [], [],
   'Stress fracture, right femur, initial encounter for fracture'),
-  new Team('Aquamarine', 'JFF7Z2AUuyqf', testUsers[5], [],
+  new Team('Aquamarine', 'JFF7Z2AUuyqf', testUsers[5], [], [],
   'Left sided colitis'),
-  new Team('Crimson',    'SYBHczTK8MjJ', testUsers[6], [],
+  new Team('Crimson',    'SYBHczTK8MjJ', testUsers[6], [], [],
   'Pulsating exophthalmos, left eye'),
-  new Team('Mauv',       'FcRgvcxAo39D', testUsers[4], []),
+  new Team('Mauv',       'FcRgvcxAo39D', testUsers[4], [], []),
 ]
 
 @Injectable({
