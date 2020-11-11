@@ -1,4 +1,4 @@
-abstract class TaskType {
+export abstract class TaskType {
   public abstract readonly name: string
   public abstract readonly description: string
   public abstract readonly exampleImage?: ImageBitmap
@@ -25,5 +25,5 @@ export class Task<T extends TaskType> {
     public readonly description?: string,
   ) { }
 
-  public get type(): TaskType { return this.content[0] }
+  public get type(): TaskType { return this.content[0] as TaskType }
 }
