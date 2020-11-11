@@ -15,7 +15,9 @@
           animationDuration="0">
         <mat-tab label="Zadania">
           <mat-action-list>
-            <app-task-list-item *ngFor="let task of team?.tasks" [task]="task">
+            <app-task-list-item *ngFor="let task of team?.tasks"
+              [task]="task"
+              [completion]="taskSummary(task)">
             </app-task-list-item>
           </mat-action-list>
         </mat-tab>

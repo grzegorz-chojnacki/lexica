@@ -8,6 +8,7 @@ import { Task, TaskType } from 'src/app/classes/task'
 })
 export class TaskListItemComponent implements OnInit {
   @Input() public task!: Task<TaskType>
+  @Input() public completion!: number
 
   public constructor() { }
 

@@ -42,25 +42,33 @@ const testTasks = [
     'Opis zadania z dłuższym tytułem'),
 ]
 
-const testProgress = [
-  new Progress(testTasks[0], 10),
-  new Progress(testTasks[1], 20),
-  new Progress(testTasks[2], 30),
-  new Progress(testTasks[3], 40),
-  new Progress(testTasks[4], 100),
+const testProgress1 = [
+  new Progress(testTasks[0],  0),
+  new Progress(testTasks[1], 30),
+  new Progress(testTasks[2], 34),
+  new Progress(testTasks[3], 56),
+  new Progress(testTasks[4], 28),
+]
+
+const testProgress2 = [
+  new Progress(testTasks[0], 53),
+  new Progress(testTasks[1], 13),
+  new Progress(testTasks[2], 23),
+  new Progress(testTasks[3], 49),
+  new Progress(testTasks[4], 19),
 ]
 
 export const testUsers: User[] = [
-  new User('Lyn',       'Tommaseo',    'ltommaseo@example.com',    testProgress),
-  new User('Amie',      'Acomb',       'aacomb@example.com',       testProgress),
-  new User('Frederich', 'Bastow',      'fbastow@example.com',      testProgress),
-  new User('Hilde',     'Felten',      'hfelten@example.com',      testProgress),
-  new User('Fraser',    'Spaule',      'fspaule@example.com',      testProgress),
-  new User('Erna',      'Yokley',      'eyokley@example.com',      testProgress),
-  new User('Walt',      'Verrick',     'wverrick@example.com',     testProgress),
-  new User('Ossie',     'Capoun',      'ocapoun@example.com',      testProgress),
-  new User('Damita',    'Fransinelli', 'dfransinelli@example.com', testProgress),
-  new User('Peggie',    'Gerrelt',     'pgerrelt@example.com',     testProgress),
+  new User('Lyn',       'Tommaseo',    'ltommaseo@example.com',    testProgress1),
+  new User('Amie',      'Acomb',       'aacomb@example.com',       testProgress2),
+  new User('Frederich', 'Bastow',      'fbastow@example.com',      testProgress1),
+  new User('Hilde',     'Felten',      'hfelten@example.com',      testProgress2),
+  new User('Fraser',    'Spaule',      'fspaule@example.com',      testProgress1),
+  new User('Erna',      'Yokley',      'eyokley@example.com',      testProgress1),
+  new User('Walt',      'Verrick',     'wverrick@example.com',     testProgress2),
+  new User('Ossie',     'Capoun',      'ocapoun@example.com',      testProgress1),
+  new User('Damita',    'Fransinelli', 'dfransinelli@example.com', testProgress2),
+  new User('Peggie',    'Gerrelt',     'pgerrelt@example.com',     testProgress2),
 ]
 
 const testUserGroup = (leader: User) => testUsers.filter(user => user !== leader)
