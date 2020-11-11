@@ -11,6 +11,8 @@ export class TaskListItemComponent implements OnInit {
 
   public constructor() { }
 
+  public launchTask(event: Event): void { event.stopPropagation() }
+
   public ngOnInit(): void { }
 
 }

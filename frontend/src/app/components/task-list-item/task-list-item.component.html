@@ -1,1 +1,13 @@
-<p>{{ task.type.name }} | {{ task.name }} | {{ task.description }}</p>
+<mat-list-item (click)="launchTask($event)" disableRipple>
+  <h4 matLine >
+    {{ task.name }}
+    <span class="overline">{{ task.type.name }}</span>
+  </h4>
+  <!-- <p matLine>{{ task.description }}</p> -->
+
+  <p>Ukończyło 80% uczestników</p>
+  <button mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-list-item>
+<mat-divider></mat-divider>
