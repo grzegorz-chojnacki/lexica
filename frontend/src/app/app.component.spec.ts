@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
 
 import { AppComponent } from './app.component'
-import { SidebarComponent } from 'src/app/sidebar/sidebar.component'
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component'
 import { AccountComponent } from 'src/app/components/account/account.component'
 import { TeamComponent } from 'src/app/components/team/team.component'
 
