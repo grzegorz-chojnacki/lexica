@@ -6,8 +6,27 @@
   <!-- <p matLine>{{ task.description }}</p> -->
 
   <p>Ukończyło 80% uczestników</p>
-  <button mat-icon-button>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
 </mat-list-item>
 <mat-divider></mat-divider>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>info_outline</mat-icon>
+    <span>Szczegóły</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>edit</mat-icon>
+    <span>Edytuj</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>download</mat-icon>
+    <span>Eksportuj</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>delete</mat-icon>
+    <span>Usuń</span>
+  </button>
+</mat-menu>
