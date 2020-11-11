@@ -31,7 +31,8 @@ import { FullNamePipe } from './pipes/full-name.pipe'
 import { SimpleCardComponent } from './components/simple-card/simple-card.component'
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component'
 import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
-import { TaskAddingComponent } from './components/task-adding/task-adding.component'
+import { TaskAddingComponent } from './components/task-adding/task-adding.component';
+import { PercentagePipe } from './pipes/percentage.pipe'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { TaskAddingComponent } from './components/task-adding/task-adding.compon
     TaskListItemComponent,
     MemberListItemComponent,
     TaskAddingComponent,
+    PercentagePipe,
   ],
   imports: [
     BrowserModule,
