@@ -1,5 +1,6 @@
 import { User } from 'src/app/classes/user'
 import { TaskType, Task } from 'src/app/classes/task'
+import { Progress } from './progress'
 
 export class Team {
   public constructor(
