@@ -1,54 +1,80 @@
-<div class="userInfo">
+<mat-card>
+  <img [src]="avatarURL" />
 
-    <img [src]="avatarURL">
-   <!-- <app-sidebar [av]='avatarURL'></app-sidebar> -->
+  <div id="shortInfo">
+    <div id="fnameNsname">{{ user.firstname }} {{ user.surname }}</div>
+    <br /><br />
+    <div id="email">{{ user.email }}</div>
+  </div>
+  <br />
 
-<div id="shortInfo">
-
-          <div id="fnameNsname">  {{user.firstname}} {{user.surname}} </div><br/><br/>
-            <div id="email">{{user.email}}</div>
-</div><br/>
-
-<form class="example-form">
+  <form class="example-form">
     <!--buttony zamienic na jeden i powiazac zawartosc ze zmienna-->
     <mat-form-field class="example-full-width">
       <mat-label>IMIĘ</mat-label>
-      <button mat-icon-button (click)="fnameDisabled=!fnameDisabled; icon=icons[0]">
-        <mat-icon>{{icon}}</mat-icon>
+      <button
+        mat-icon-button
+        (click)="fnameDisabled = !fnameDisabled; icon = icons[0]"
+      >
+        <mat-icon>{{ icon }}</mat-icon>
       </button>
-      <input matInput [disabled]="fnameDisabled" (input)="saveFName($event)" required>
+
+      <input
+        matInput
+        [disabled]="fnameDisabled"
+        (input)="saveFName($event)"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>NAZWISKO</mat-label>
-      <button mat-icon-button (click)="snameDisabled=!snameDisabled; icon2=icons[0]">
-        <mat-icon>{{icon2}}</mat-icon>
+      <button
+        mat-icon-button
+        (click)="snameDisabled = !snameDisabled; icon2 = icons[0]"
+      >
+        <mat-icon>{{ icon2 }}</mat-icon>
       </button>
-      <input matInput [disabled]="snameDisabled" (input)="saveSName($event)" required>
+      <input
+        matInput
+        [disabled]="snameDisabled"
+        (input)="saveSName($event)"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>EMAIL</mat-label>
-      <button mat-icon-button (click)="emailDisabled=!emailDisabled; icon3=icons[0]">
-        <mat-icon>{{icon3}}</mat-icon>
+      <button
+        mat-icon-button
+        (click)="emailDisabled = !emailDisabled; icon3 = icons[0]"
+      >
+        <mat-icon>{{ icon3 }}</mat-icon>
       </button>
-      <input matInput [disabled]="emailDisabled" (input)="saveEmail($event)" required>
+      <input
+        matInput
+        [disabled]="emailDisabled"
+        (input)="saveEmail($event)"
+        required
+      />
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>HASŁO</mat-label>
       <button (click)="passwordDisabled = false">&#187;</button>
-      <input matInput [disabled]="passwordDisabled"  type="password" required>
+      <input matInput [disabled]="passwordDisabled" type="password" required />
     </mat-form-field>
     <form class="s">
+      <!--poki co zostaje form class=s, bo dziedziczy mi styl po form/pozniej zmienic na matfomr-->
       <label>ZDJĘCIE</label>
-      <input accept=".jpg,.jpeg,.png" (change)="onFileChanged($event)" type="file">
+      <input
+        accept=".jpg,.jpeg,.png"
+        (change)="onFileChanged($event)"
+        type="file"
+      />
     </form>
-
-    </form>
-    <div>
-        
-         <button class="bt" routerLink="/">POWRÓT</button>
-        
-        <button class="bt">USUŃ KONTO</button>
-     </div>
-</div>
+  </form>
+  <mat-card-actions>
+    <button mat-stroked-button color="accent" routerLink="/">POWRÓT</button>
+    <button mat-stroked-button color="accent">USUŃ KONTO</button>
+  </mat-card-actions>
+</mat-card>
