@@ -13,9 +13,10 @@
     <mat-card>
       <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
         <mat-tab label="Zadania">
-          <app-task-list-item></app-task-list-item>
+          <app-task-list-item *ngFor="let task of team?.tasks" [task]="task">
+          </app-task-list-item>
         </mat-tab>
-        <mat-tab label="Uczestnicy">
+        <mat-tab label="Uczestnicy" [disabled]="team?.members?.length === 0">
           <app-member-list-item></app-member-list-item>
         </mat-tab>
       </mat-tab-group>
