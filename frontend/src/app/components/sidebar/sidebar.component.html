@@ -1,11 +1,10 @@
 <div class="sidebar">
     <header>
         
-         <img src={{userAccount.avatarURL}} alt="avatar">
+         <img src={{avatarURL}} alt="avatar">
          <a href='/account' id="nazwaUzytkownika">
-                {{userAccount.user.firstname}} {{userAccount.user.surname}}
+                {{user.firstname}} {{user.surname}}
         </a>
-        <!--<img src={{userAccount.avatarURL}} alt="second image">-->
         
           <mat-icon>account_circle</mat-icon>
         
@@ -13,7 +12,7 @@
     <header id="header2">
     <div class="localTaskContainer">
       <a href="/local">
-         <img src={{userAccount.avatarURL}} alt="pictureOfLocalTask">
+         <img src={{avatarURL}} alt="pictureOfLocalTask">
          <p id="napisZadaniaLokalne">Zadania lokalne<br/></p>
         <p>Zadania zapisane lokalnie</p> 
       </a>
