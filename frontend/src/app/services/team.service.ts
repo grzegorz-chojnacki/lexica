@@ -19,7 +19,14 @@ export const testUsers: User[] = [
 ]
 
 export const testTeams: Team[] = [
-  new Team('Khaki',      'BQMah7Ixwx9v', testUsers[0], [], [
+  new Team('Khaki',      'BQMah7Ixwx9v', testUsers[0], [
+    testUsers[1],
+    testUsers[2],
+    testUsers[3],
+    testUsers[4],
+    testUsers[5],
+    testUsers[6],
+  ], [
     new Task('e6SqZ', 'Zadanie z fiszkami 1', [new SimpleCard('a', 'b')],  true, 'Opis zadania z fiszkami 1'),
     new Task('A1WSD', 'Zadanie z fiszkami 2', [new SimpleCard('c', 'd')],  true),
     new Task('4Fr6v', 'Zadanie z fiszkami 3', [new SimpleCard('e', 'f')], false, 'Opis zadania z fiszkami 3'),

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { User } from 'src/app/classes/user'
 
 @Component({
   selector: 'app-member-list-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./member-list-item.component.scss']
 })
 export class MemberListItemComponent implements OnInit {
+  @Input() public member!: User
 
   public constructor() { }
 
