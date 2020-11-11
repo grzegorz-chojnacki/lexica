@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  public iconMethod(){
+  public iconMethod() {
 
   }
 

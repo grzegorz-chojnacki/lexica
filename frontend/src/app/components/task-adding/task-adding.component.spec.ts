@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TaskAddingComponent } from './task-adding.component';
+import { TaskAddingComponent } from './task-adding.component'
 
 describe('TaskAddingComponent', () => {
-  let component: TaskAddingComponent;
-  let fixture: ComponentFixture<TaskAddingComponent>;
+  let component: TaskAddingComponent
+  let fixture: ComponentFixture<TaskAddingComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskAddingComponent ]
     })
-    .compileComponents();
-  });
+    .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaskAddingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TaskAddingComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
