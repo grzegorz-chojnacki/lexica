@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from 'src/app/classes/user'
+import { UserService } from 'src/app/services/user.service'
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -18,32 +19,31 @@ export class AccountComponent implements OnInit {
   public icon = this.icons[0]
   public icon2 = this.icons[0]
   public icon3 = this.icons[0]
-  public user: User = new User('Imiędługie', 'Nazwiskodługie', 'adres@email.uzytkownika')
+  //public user: User = new User('Imiędługie', 'Nazwiskodługie', 'adres@email.uzytkownika')
 
-  // public fname = 'Użytkownik'
-  // public sname = 'Użytkowski'
-  // public email = 'adres@email.uzytkownika'
-
-  public constructor() { }
+  public constructor(public userService: UserService) { }
 
   public ngOnInit(): void { }
 
   public saveFName(event: any) {
     if (event.target.value.length > 0) {
-    this.user.firstname = event.target.value
+    //this.user.firstname = event.target.value
+    this.userService.LoggedUser.firstname = event.target.value
     this.icon = this.icons[1]
   }
   }
 
   public saveSName(event: any) {
     if (event.target.value.length > 0) {
-    this.user.surname = event.target.value
+    //this.user.surname = event.target.value
+    this.userService.LoggedUser.surname = event.target.value
     this.icon2 = this.icons[1]}
   }
 
   public saveEmail(event: any) {
     if (event.target.value.length > 0) {
-    this.user.email = event.target.value
+    //this.user.email = event.target.value
+    this.userService.LoggedUser.email = event.target.value
     this.icon3 = this.icons[1]}
   }
 
