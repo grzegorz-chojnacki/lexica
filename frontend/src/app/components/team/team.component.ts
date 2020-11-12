@@ -4,6 +4,7 @@ import { Progress } from 'src/app/classes/progress'
 import { Task, TaskType } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
+import { PreviousRouteService } from 'src/app/services/previous-route.service'
 
 @Component({
   selector: 'app-team',
@@ -16,7 +17,8 @@ export class TeamComponent implements OnInit {
   public constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private teamService: TeamService) { }
+    private teamService: TeamService,
+    private previousRouteService: PreviousRouteService ) { }
 
   public taskSummary(task: Task<TaskType>): number {
     const taskProgress = this.team.getTaskProgress(task)
