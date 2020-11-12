@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
+import { PreviousRouteService } from 'src/app/services/previous-route.service'
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -20,11 +21,15 @@ export class AccountComponent implements OnInit {
   public icon2 = this.icons[0]
   public icon3 = this.icons[0]
   public user!: User
+  public url = ''
 
-  public constructor(private userService: UserService) { }
+  public constructor(
+    private userService: UserService,
+    private previousRouteService: PreviousRouteService) { }
 
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(u => this.user = u)
+    this.url = this.previousRouteService.getPreviousUrl()
    }
 
    public saveFName(event: any) {
