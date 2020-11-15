@@ -25,8 +25,8 @@
 
   <mat-accordion multi>
     <app-team-container title="Moje zespoły"
-      [teams]="ownedTeams | search:search"></app-team-container>
+      [teams]="ownedTeams | teamsearch:search"></app-team-container>
     <app-team-container title="Przynależne zespoły"
-      [teams]="otherTeams | search:search"></app-team-container>
+      [teams]="otherTeams | teamsearch:search"></app-team-container>
   </mat-accordion>
 </section>
