@@ -1,1 +1,46 @@
-<p>new-team works!</p>
+<h1 mat-dialog-title>Dodawanie zespołu</h1>
+<p>Dołącz do zespołu, lub utwórz nowy</p>
+
+<mat-dialog-content>
+  <mat-tab-group mat-stretch-tabs dynamicHeight>
+
+    <mat-tab label="DOŁĄCZ">
+      <form>
+        <p>Podaj kod dostarczony przez prowadzącego np. "NDIwNjk="</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Kod zespołu</mat-label>
+          <input matInput type="text">
+        </mat-form-field>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="UTWÓRZ">
+      <form>
+        <p>Utwórz nowy zespół do nauki obcego języka</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Nazwa zespołu</mat-label>
+          <input matInput type="text">
+          <mat-hint>Krótka nazwa, dobrze opisująca zespół</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Krótki opis</mat-label>
+          <textarea matInput type="text"></textarea>
+          <mat-hint>Napisz krótko czego dotyczy ten zespół</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Logo zespołu</mat-label>
+          <input matInput type="text">
+          <mat-hint>Dodaj grafikę rozróżniającą ten zespół</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-tab>
+
+  </mat-tab-group>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="result">OK</button>
+  <button mat-button mat-dialog-close>ANULUJ</button>
+</mat-dialog-actions>
