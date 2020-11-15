@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { Team } from '../classes/team'
 
 @Pipe({
-  name: 'search'
+  name: 'teamsearch'
 })
 export class TeamSearchPipe implements PipeTransform {
 
