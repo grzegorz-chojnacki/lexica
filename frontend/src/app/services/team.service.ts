@@ -38,17 +38,18 @@ export class TeamService {
     })
   }
 
+  // ToDo: Send this data to server and fetch new team list
   public createTeam(form: TeamForm): void {
     const newTeam = new Team(
       form.name,
-      Math.random().toString(),
+      btoa(Math.random().toString()), // Base64 encode
       this.loggedUser, [], [],
       form.description)
 
     this.teamSource.next([ newTeam, ...this.teamSource.getValue() ])
   }
 
-  // ToDo: Api request
+  // ToDo: Send this data to server and fetch new team list
   public remove(removedTeam: Team): void {
     const withoutRemovedTeam = this.teamSource.value
       .filter(team => team !== removedTeam)
