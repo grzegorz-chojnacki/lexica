@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { PreviousRouteService } from './previous-route.service';
+import { PreviousRouteService } from './previous-route.service'
 
 describe('PreviousRouteService', () => {
-  let service: PreviousRouteService;
+  let service: PreviousRouteService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PreviousRouteService);
-  });
+    TestBed.configureTestingModule({ })
+    service = TestBed.inject(PreviousRouteService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

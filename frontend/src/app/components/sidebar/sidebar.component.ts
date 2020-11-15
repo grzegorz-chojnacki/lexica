@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     private readonly teamService: TeamService,
     private userService: UserService) { }
   public ngOnInit(): void {
-    //this.teamService.teams.subscribe(teams => this.teams = teams)
+    // this.teamService.teams.subscribe(teams => this.teams = teams)
     this.userService.loggedUser.subscribe(u => this.user = u)
   }
 

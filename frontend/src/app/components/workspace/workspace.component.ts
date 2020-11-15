@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
+import { NewTeamComponent } from '../new-team/new-team.component'
 
 @Component({
   selector: 'app-workspace',
@@ -17,6 +19,7 @@ export class WorkspaceComponent implements OnInit {
   public otherTeams!: Team[]
 
   public constructor(
+    private readonly dialog: MatDialog,
     private readonly teamService: TeamService,
     private readonly userService: UserService) { }
 
@@ -32,6 +35,8 @@ export class WorkspaceComponent implements OnInit {
     })
   }
 
-  public createTeam(): void { }
+  public createTeam(): void {
+    this.dialog.open(NewTeamComponent).afterClosed().subscribe(console.log)
+  }
 
 }

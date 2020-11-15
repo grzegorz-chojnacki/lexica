@@ -15,7 +15,7 @@
   <mat-form-field appearance="outline" class="search-box">
     <mat-label>Wyszukaj zespoły</mat-label>
     <span matPrefix><mat-icon>search</mat-icon></span>
-    <input matInput type="text" [(ngModel)]="search">
+    <input matInput type="search" [(ngModel)]="search">
     <button matSuffix mat-icon-button aria-label="Clear"
       *ngIf="search"
       (click)="search = ''">
