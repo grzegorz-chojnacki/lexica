@@ -6,7 +6,7 @@ import { MatMenuModule } from '@angular/material/menu'
 
 import { TeamCardComponent } from './team-card.component'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
-import { testTeams } from 'src/app/services/team.service'
+import { testTeams } from 'src/app/testData'
 
 describe('TeamCardComponent', () => {
   let component: TeamCardComponent

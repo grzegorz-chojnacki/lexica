@@ -35,9 +35,8 @@ export class WorkspaceComponent implements OnInit {
     })
   }
 
-  public createTeam(): void {
+  public openDialog(): void {
     this.dialog.open(NewTeamComponent, { width: '500px' })
-      .afterClosed().subscribe(console.log)
   }
 
 }
