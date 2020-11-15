@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatListModule } from '@angular/material/list'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
@@ -31,8 +32,9 @@ import { FullNamePipe } from './pipes/full-name.pipe'
 import { SimpleCardComponent } from './components/simple-card/simple-card.component'
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component'
 import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
-import { TaskAddingComponent } from './components/task-adding/task-adding.component';
+import { TaskAddingComponent } from './components/task-adding/task-adding.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
+import { NewTeamComponent } from './components/new-team/new-team.component'
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { TeamSearchPipe } from './pipes/team-search.pipe'
     MemberListItemComponent,
     TaskAddingComponent,
     TeamSearchPipe,
+    NewTeamComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { TeamSearchPipe } from './pipes/team-search.pipe'
     MatSnackBarModule,
     MatTabsModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

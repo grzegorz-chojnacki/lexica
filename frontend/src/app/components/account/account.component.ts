@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
 
    public saveFName(event: any) {
     if (event.target.value.length > 0) {
-    //this.user.firstname = event.target.value
+    // this.user.firstname = event.target.value
     this.user.firstname = event.target.value
     this.icon = this.icons[1]
   }
@@ -42,14 +42,14 @@ export class AccountComponent implements OnInit {
 
   public saveSName(event: any) {
     if (event.target.value.length > 0) {
-    //this.user.surname = event.target.value
+    // this.user.surname = event.target.value
     this.user.surname = event.target.value
     this.icon2 = this.icons[1]}
   }
 
   public saveEmail(event: any) {
     if (event.target.value.length > 0) {
-    //this.user.email = event.target.value
+    // this.user.email = event.target.value
     this.user.email = event.target.value
     this.icon3 = this.icons[1]}
   }
