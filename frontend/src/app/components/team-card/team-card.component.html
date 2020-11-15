@@ -16,7 +16,7 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/team">
+      <button mat-menu-item>
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
@@ -33,7 +33,7 @@
     </button>
 
     <button *ngIf="context === 'Team'"
-        mat-flat-button color="accent"
+        mat-button color="accent"
         (click)="copyToClipboard()">
       Kod zespołu
     </button>

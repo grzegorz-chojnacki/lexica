@@ -1,8 +1,8 @@
 <header class="limited-width">
   <h1 class="mat-display-2">
- <!-- Chwytliwy nagłówek, który sprawi że każdy będzie
-     chciał skorzystać z tej aplikacji
-  --> become a better version of yourself with Lexica
+  <!-- Chwytliwy nagłówek, który sprawi że każdy będzie
+       chciał skorzystać z tej aplikacji -->
+     become a better version of yourself with Lexica
   </h1>
   <button mat-raised-button color="accent" class="uppercase"
     (click)="createTeam()">Nowy zespół</button>
@@ -18,15 +18,15 @@
     <input matInput type="text" [(ngModel)]="search">
     <button matSuffix mat-icon-button aria-label="Clear"
       *ngIf="search"
-      (click)="search=''">
+      (click)="search = ''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
   <mat-accordion multi>
-    <app-team-container [teams]="teams" [title]="'Moje zespoły'">
+    <app-team-container [teams]="ownedTeams" title="Moje zespoły">
     </app-team-container>
-    <app-team-container [teams]="teams" [title]="'Przynależne zespoły'">
+    <app-team-container [teams]="otherTeams" title="Przynależne zespoły">
     </app-team-container>
   </mat-accordion>
 </section>
