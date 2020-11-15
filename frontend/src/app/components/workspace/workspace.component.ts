@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 
-import { TeamService } from 'src/app/services/team.service'
 import { Team } from 'src/app/classes/team'
-import { PreviousRouteService } from 'src/app/services/previous-route.service'
+import { User } from 'src/app/classes/user'
+import { TeamService } from 'src/app/services/team.service'
+import { UserService } from 'src/app/services/user.service'
 
 @Component({
   selector: 'app-workspace',
@@ -11,15 +12,24 @@ import { PreviousRouteService } from 'src/app/services/previous-route.service'
 })
 export class WorkspaceComponent implements OnInit {
   public search = ''
-  public teams: Team[] = []
+  public loggedUser!: User
+  public ownedTeams!: Team[]
+  public otherTeams!: Team[]
 
   public constructor(
     private readonly teamService: TeamService,
-    private previousRouteService: PreviousRouteService) { }
+    private readonly userService: UserService) { }
 
   public ngOnInit(): void {
-    this.teamService.teams.subscribe(teams => this.teams = teams)
-    console.log(this.previousRouteService.getPreviousUrl())
+    this.userService.loggedUser.subscribe(user => this.loggedUser = user)
+
+    this.teamService.teams.subscribe(teams => {
+      this.ownedTeams = teams
+        .filter((team: Team) => team.leader === this.loggedUser)
+
+      this.otherTeams = teams
+        .filter((team: Team) => team.leader !== this.loggedUser)
+    })
   }
 
   public createTeam(): void { }
