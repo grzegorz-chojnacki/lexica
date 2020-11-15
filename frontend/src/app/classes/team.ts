@@ -9,8 +9,8 @@ export class Team {
     public readonly name: string,
     public readonly hash: string,
     public readonly leader: User,
-    public readonly members: User[],
-    public readonly tasks: Task<TaskType>[],
+    public readonly members: User[] = [],
+    public readonly tasks: Task<TaskType>[] = [],
     public readonly description: string = '',
     public readonly image?: ImageBitmap) { }
 
