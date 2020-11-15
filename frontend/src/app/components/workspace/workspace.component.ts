@@ -5,7 +5,7 @@ import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
-import { NewTeamComponent } from '../new-team/new-team.component'
+import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-team.component'
 
 @Component({
   selector: 'app-workspace',

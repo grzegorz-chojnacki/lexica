@@ -24,9 +24,11 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
+
 import { TeamComponent } from './components/team/team.component'
-import { TeamCardComponent } from './components/team-card/team-card.component'
-import { TeamContainerComponent } from './components/team-container/team-container.component'
+import { TeamCardComponent } from './components/team/team-card/team-card.component'
+import { TeamContainerComponent } from './components/team/team-container/team-container.component'
+
 import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
 import { SimpleCardComponent } from './components/simple-card/simple-card.component'
@@ -34,7 +36,7 @@ import { TaskListItemComponent } from './components/task-list-item/task-list-ite
 import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
 import { TaskAddingComponent } from './components/task-adding/task-adding.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
-import { NewTeamComponent } from './components/new-team/new-team.component'
+import { NewTeamComponent } from './components/team/new-team-dialog/new-team.component'
 
 @NgModule({
   declarations: [
