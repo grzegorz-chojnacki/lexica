@@ -5,11 +5,11 @@
   <mat-tab-group mat-stretch-tabs dynamicHeight>
 
     <mat-tab label="DOŁĄCZ">
-      <form>
+      <form [formGroup]="hashForm">
         <p>Podaj kod dostarczony przez prowadzącego np. "NDIwNjk="</p>
         <mat-form-field appearance="fill">
           <mat-label>Kod zespołu</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" formControlName="hash">
         </mat-form-field>
       </form>
     </mat-tab>

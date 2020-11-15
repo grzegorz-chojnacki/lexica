@@ -46,7 +46,17 @@ export class TeamService {
       this.loggedUser, [], [],
       form.description)
 
-    this.teamSource.next([ newTeam, ...this.teamSource.getValue() ])
+    this.prependTeamSource(newTeam)
+  }
+
+
+  public joinTeam(hash: string): void {
+    const newTeam = new Team(`Zespół ${hash}`, hash, new User('John', 'Doe', 'jdoe@lexica.com'))
+    this.prependTeamSource(newTeam)
+  }
+
+  private prependTeamSource(team: Team): void {
+    this.teamSource.next([team, ...this.teamSource.getValue()])
   }
 
   // ToDo: Send this data to server and fetch new team list
