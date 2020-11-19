@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
 
 
 import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
+import { TaskAddingComponent } from 'src/app/components/task-adding/task-adding.component'
+
 
 @Component({
   selector: 'app-team-card',
@@ -16,7 +19,8 @@ export class TeamCardComponent implements OnInit {
 
   public constructor(
     private readonly snackbarService: MatSnackBar,
-    private readonly teamService: TeamService) { }
+    private readonly teamService: TeamService,
+    private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void { }
 
@@ -26,5 +30,9 @@ export class TeamCardComponent implements OnInit {
     navigator.clipboard.writeText(this.team.hash)
     this.snackbarService.open('Skopiowano do schowka!')
   }
+  public openDialog(): void {
+    this.dialog.open(TaskAddingComponent, { width: '500px' })
+  }
+
 
 }

@@ -21,6 +21,9 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatListModule } from '@angular/material/list'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatSelectModule } from '@angular/material/select'
+//import { MatFileUploadModule } from 'angular-material-fileupload'
+
 
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
@@ -78,7 +81,8 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
     MatTabsModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

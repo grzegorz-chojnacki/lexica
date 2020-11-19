@@ -1,9 +1,8 @@
 <mat-card>
-  <img src="/assets/image_placeholder.jpg"
-       class="team-image"/>
+  <img src="/assets/image_placeholder.jpg" class="team-image" />
 
   <header>
-    <div class="overline">{{ (team) ? (team.leader | fullNamePipe) : '' }}</div>
+    <div class="overline">{{ team ? (team.leader | fullNamePipe) : "" }}</div>
     <mat-card-title>{{ team?.name }}</mat-card-title>
     <mat-card-subtitle>{{ team?.description }}</mat-card-subtitle>
   </header>
@@ -26,16 +25,27 @@
       </button>
     </mat-menu>
 
-    <button *ngIf="context === 'TeamContainer'"
-        mat-mini-fab
-        routerLink="/team/{{ team?.hash }}">
+    <button
+      *ngIf="context === 'TeamContainer'"
+      mat-mini-fab
+      routerLink="/team/{{ team?.hash }}"
+    >
       <mat-icon>chevron_right</mat-icon>
     </button>
 
-    <button *ngIf="context === 'Team'"
-        mat-button color="accent"
-        (click)="copyToClipboard()">
-      Kod zespołu
-    </button>
+    <div>
+      <button mat-raised-button color="accent" (click)="openDialog()">
+        Nowe zadanie
+      </button>
+
+      <button
+        *ngIf="context === 'Team'"
+        mat-button
+        color="accent"
+        (click)="copyToClipboard()"
+      >
+        Kod zespołu
+      </button>
+    </div>
   </div>
 </mat-card>
