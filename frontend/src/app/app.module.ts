@@ -41,6 +41,7 @@ import { MemberListItemComponent } from './components/member-list-item/member-li
 import { TaskAddingComponent } from './components/task-adding/task-adding.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 import { NewTeamComponent } from './components/team/new-team-dialog/new-team.component'
+import { TaskSummaryComponent } from './components/task-summary/task-summary.component'
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
     TaskAddingComponent,
     TeamSearchPipe,
     NewTeamComponent,
+    TaskSummaryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-subtitle>TYP ZADANIA</mat-card-subtitle>
+    <mat-card-title>Zadanie</mat-card-title>
+    <mat-card-subtitle>Krótki opis zadania</mat-card-subtitle>
+<mat-card-header>
+    <mat-card-title>Podsumowanie</mat-card-title>
+    <mat-card-subtitle >Znane słowa - 80%</mat-card-subtitle>
+</mat-card-header>
+
+
+    <mat-card-content>
+       <p class='mat-card-subtitle'> Lista pominiętych słów</p>
+        <mat-list>
+        <mat-list-item *ngFor="let link of [1,2,3,4]">
+            <h4 matLine >SŁOWO</h4>
+            <p>
+             TŁUMACZENIE
+            </p>
+            <mat-divider></mat-divider>
+
+          </mat-list-item>
+
+          </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+
+        <button mat-button>POWRÓT</button>
+
+        <button mat-button>POWTÓRZ</button>
+
+      </mat-card-actions>
+  </mat-card>
