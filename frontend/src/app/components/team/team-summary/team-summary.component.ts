@@ -15,8 +15,10 @@ export class TeamSummaryComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public openDialog(): void {
+  public newTaskDialog(): void {
     this.dialog.open(TaskAddingComponent, { width: '500px' })
   }
+
+  public acceptMembersDialog(): void { }
 
 }

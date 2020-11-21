@@ -1,9 +1,10 @@
 <mat-card>
+  <mat-card-title>Akcje zespołu</mat-card-title>
   <mat-card-actions>
-    <button mat-raised-button color="accent" (click)="openDialog()">
+    <button mat-raised-button color="accent" (click)="newTaskDialog()">
       Nowe zadanie
     </button>
-    <button mat-button color="accent">
+    <button mat-button color="accent" (click)="acceptMembersDialog()">
       Oczekujący uczestnicy
     </button>
   </mat-card-actions>
