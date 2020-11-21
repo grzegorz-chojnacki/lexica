@@ -37,6 +37,7 @@ import { TaskAddingComponent } from './components/task/task-adding/task-adding.c
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
 import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
 import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
+import { TaskMenuComponent } from './components/task/task-menu/task-menu.component'
 
 // Other
 import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
@@ -44,7 +45,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
-import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
+import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
     TaskSummaryComponent,
     TeamSummaryComponent,
     TaskDialogComponent,
+    TaskMenuComponent,
   ],
   imports: [
     BrowserModule,

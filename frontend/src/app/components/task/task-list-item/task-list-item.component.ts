@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Task, TaskType } from 'src/app/classes/task'
-import { TaskSummaryComponent } from 'src/app/components/task/task-summary/task-summary.component'
 import { MatDialog } from '@angular/material/dialog'
-import { TaskDialogComponent } from '../task-dialog/task-dialog.component'
+import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
 
 @Component({
   selector: 'app-task-list-item',
@@ -17,11 +16,6 @@ export class TaskListItemComponent implements OnInit {
 
   public launchTask(): void {
     this.dialog.open(TaskDialogComponent, { width: '500px', data: this.task })
-  }
-
-  public taskDescription(): void {
-    this.dialog.open(TaskSummaryComponent, { width: '500px' })
-    console.log('task summary')
   }
 
   public ngOnInit(): void { }
