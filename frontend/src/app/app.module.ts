@@ -42,7 +42,8 @@ import { SimpleCardComponent } from './components/simple-card/simple-card.compon
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component'
 import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
 import { TaskAddingComponent } from './components/task-adding/task-adding.component'
-import { TaskSummaryComponent } from './components/task-summary/task-summary.component'
+import { TaskSummaryComponent } from './components/task-summary/task-summary.component';
+import { TaskDialogComponent } from './components/task-dialog/task-dialog.component'
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { TaskSummaryComponent } from './components/task-summary/task-summary.com
     NewTeamComponent,
     TaskSummaryComponent,
     TeamSummaryComponent,
+    TaskDialogComponent,
   ],
   imports: [
     BrowserModule,
