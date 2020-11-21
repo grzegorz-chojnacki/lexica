@@ -1,3 +1,6 @@
 p { margin: 0 }
 
-span.overline { margin-left: 1ch }
+span.above {
+  display: block;
+  margin-bottom: -0.8em;
+}

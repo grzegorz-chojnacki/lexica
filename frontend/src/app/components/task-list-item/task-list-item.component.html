@@ -1,7 +1,7 @@
 <mat-list-item (click)="launchTask($event)" disableRipple>
-  <h4 matLine >
+  <h4 matLine>
+    <span class="overline above">{{ task.type.name }}</span>
     {{ task.name }}
-    <span class="overline">{{ task.type.name }}</span>
   </h4>
   <!-- <p matLine>{{ task.description }}</p> -->
 
