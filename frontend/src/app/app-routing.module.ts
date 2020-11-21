@@ -9,18 +9,16 @@ import { SimpleCardComponent } from './components/task/simple-card/simple-card.c
 const routes: Routes = [
   { path: 'team/:teamHash',
     component: TeamViewComponent },
+  { path: 'task/:taskHash',
+    component: SimpleCardComponent }, // TaskViewComponent
   { path: 'team/:teamHash/:view',
-    component: TeamViewComponent }, // Members & Tasks
-  { path: 'team/:teamHash/task/:taskHash',
-    component: TeamViewComponent },
+    component: TeamViewComponent }, // Tasks & Members
   { path: 'workspace',
     component: WorkspaceComponent },
   { path: 'account',
     component: AccountComponent },
   { path: 'local',
     component: LocalWorkspaceComponent },
-  { path: 'simpleCard',
-    component: SimpleCardComponent },
   // Will add main page later
   { path: '',   redirectTo: 'workspace', pathMatch: 'full' },
   // Will add error page later
