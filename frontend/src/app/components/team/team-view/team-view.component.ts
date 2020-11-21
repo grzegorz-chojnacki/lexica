@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
+
 import { Progress } from 'src/app/classes/progress'
 import { Task, TaskType } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
@@ -8,11 +9,11 @@ import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
 
 @Component({
-  selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+  selector: 'app-team-view',
+  templateUrl: './team-view.component.html',
+  styleUrls: ['./team-view.component.scss']
 })
-export class TeamComponent implements OnInit {
+export class TeamViewComponent implements OnInit {
   public team!: Team
   public user!: User
 

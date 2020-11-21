@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
-import { TeamComponent } from './components/team/team.component'
+import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { SimpleCardComponent } from './components/simple-card/simple-card.component'
 
 const routes: Routes = [
-  { path: 'team/:hash',       component: TeamComponent },
-  { path: 'team/:hash/:view', component: TeamComponent }, // Members & Tasks
+  { path: 'team/:hash',       component: TeamViewComponent },
+  { path: 'team/:hash/:view', component: TeamViewComponent }, // Members & Tasks
   { path: 'workspace',        component: WorkspaceComponent },
   { path: 'account',          component: AccountComponent },
   { path: 'local',            component: LocalWorkspaceComponent },

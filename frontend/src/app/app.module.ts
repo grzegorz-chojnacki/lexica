@@ -28,7 +28,7 @@ import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 
-import { TeamComponent } from './components/team/team.component'
+import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { TeamCardComponent } from './components/team/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team/team-container/team-container.component'
 import { TeamSummaryComponent } from './components/team/team-summary/team-summary.component'
@@ -50,7 +50,7 @@ import { TaskDialogComponent } from './components/task-dialog/task-dialog.compon
     WorkspaceComponent,
     AccountComponent,
     LocalWorkspaceComponent,
-    TeamComponent,
+    TeamViewComponent,
     TeamCardComponent,
     TeamContainerComponent,
     SidebarComponent,
