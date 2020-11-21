@@ -25,26 +25,17 @@
       </button>
     </mat-menu>
 
-    <button
-      *ngIf="context === 'TeamContainer'"
-      mat-mini-fab
-      routerLink="/team/{{ team?.hash }}"
-    >
+    <button mat-mini-fab *ngIf="context === 'TeamContainer'"
+        routerLink="/team/{{ team?.hash }}">
       <mat-icon>chevron_right</mat-icon>
     </button>
 
-    <div>
+    <div *ngIf="context === 'Team'">
+      <button mat-button color="accent" (click)="copyToClipboard()">
+        Kod zespołu
+      </button>
       <button mat-raised-button color="accent" (click)="openDialog()">
         Nowe zadanie
-      </button>
-
-      <button
-        *ngIf="context === 'Team'"
-        mat-button
-        color="accent"
-        (click)="copyToClipboard()"
-      >
-        Kod zespołu
       </button>
     </div>
   </div>
