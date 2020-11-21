@@ -33,7 +33,7 @@ export class TeamViewComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(user => this.user = user)
 
-    const teamHash = this.route.snapshot.paramMap.get('hash')
+    const teamHash = this.route.snapshot.paramMap.get('teamHash')
 
     this.teamService
       .getTeam(teamHash)

@@ -7,13 +7,20 @@ import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
 
 const routes: Routes = [
-  { path: 'team/:hash',       component: TeamViewComponent },
-  { path: 'team/:hash/:view', component: TeamViewComponent }, // Members & Tasks
-  { path: 'workspace',        component: WorkspaceComponent },
-  { path: 'account',          component: AccountComponent },
-  { path: 'local',            component: LocalWorkspaceComponent },
-  { path: 'simpleCard',       component: SimpleCardComponent },
-
+  { path: 'team/:teamHash',
+    component: TeamViewComponent },
+  { path: 'team/:teamHash/:view',
+    component: TeamViewComponent }, // Members & Tasks
+  { path: 'team/:teamHash/task/:taskHash',
+    component: TeamViewComponent },
+  { path: 'workspace',
+    component: WorkspaceComponent },
+  { path: 'account',
+    component: AccountComponent },
+  { path: 'local',
+    component: LocalWorkspaceComponent },
+  { path: 'simpleCard',
+    component: SimpleCardComponent },
   // Will add main page later
   { path: '',   redirectTo: 'workspace', pathMatch: 'full' },
   // Will add error page later
