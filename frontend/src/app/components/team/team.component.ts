@@ -24,7 +24,7 @@ export class TeamComponent implements OnInit {
     private userService: UserService,
     private previousRouteService: PreviousRouteService) { }
 
-  public taskSummary(task: Task<TaskType>): number {
+  public taskCompletion(task: Task<TaskType>): number {
     const taskProgress = this.team.getTaskProgress(task)
     const sum = taskProgress.reduce(Progress.sum, 0)
 

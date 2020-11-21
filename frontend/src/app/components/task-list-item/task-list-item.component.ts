@@ -16,7 +16,7 @@ export class TaskListItemComponent implements OnInit {
   public constructor(private readonly dialog: MatDialog) { }
 
   public launchTask(event: Event): void {
-    event.stopPropagation()
+    // event.stopPropagation()
     this.dialog.open(TaskDialogComponent, { data: this.task })
   }
 

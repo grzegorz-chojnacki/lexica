@@ -3,10 +3,10 @@
     <span class="overline above">{{ task.type.name }}</span>
     {{ task.name }}
   </h4>
-  <!-- <p matLine>{{ task.description }}</p> -->
 
   <p>Średni wynik: {{ completion }}% </p>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
+  <button mat-icon-button [matMenuTriggerFor]="menu"
+      (click)="$event.stopPropagation()">
     <mat-icon>more_vert</mat-icon>
   </button>
 </mat-list-item>
