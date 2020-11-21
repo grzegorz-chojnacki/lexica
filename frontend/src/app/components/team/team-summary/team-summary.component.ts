@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Team } from 'src/app/classes/team'
-import { TaskAddingComponent } from '../../task-adding/task-adding.component'
+import { TaskAddingComponent } from 'src/app/components/task/task-adding/task-adding.component'
 
 @Component({
   selector: 'app-team-summary',

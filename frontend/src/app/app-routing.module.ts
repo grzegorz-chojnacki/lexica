@@ -4,7 +4,7 @@ import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
-import { SimpleCardComponent } from './components/simple-card/simple-card.component'
+import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
 
 const routes: Routes = [
   { path: 'team/:hash',       component: TeamViewComponent },

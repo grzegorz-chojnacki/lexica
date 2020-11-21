@@ -22,12 +22,8 @@ import { MatListModule } from '@angular/material/list'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
-// import { MatFileUploadModule } from 'angular-material-fileupload'
 
-import { WorkspaceComponent } from './components/workspace/workspace.component'
-import { AccountComponent } from './components/account/account.component'
-import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
-
+// Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { TeamCardComponent } from './components/team/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team/team-container/team-container.component'
@@ -35,14 +31,20 @@ import { TeamSummaryComponent } from './components/team/team-summary/team-summar
 import { NewTeamComponent } from './components/team/new-team-dialog/new-team.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
+// Task
+import { TaskListItemComponent } from './components/task/task-list-item/task-list-item.component'
+import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
+import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
+import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
+import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
+
+// Other
+import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
 import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
-import { SimpleCardComponent } from './components/simple-card/simple-card.component'
-import { TaskListItemComponent } from './components/task-list-item/task-list-item.component'
-import { MemberListItemComponent } from './components/member-list-item/member-list-item.component'
-import { TaskAddingComponent } from './components/task-adding/task-adding.component'
-import { TaskSummaryComponent } from './components/task-summary/task-summary.component'
-import { TaskDialogComponent } from './components/task-dialog/task-dialog.component'
+import { WorkspaceComponent } from './components/workspace/workspace.component'
+import { AccountComponent } from './components/account/account.component'
+import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 
 @NgModule({
   declarations: [
