@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { PreviousRouteService } from 'src/app/services/previous-route.service'
 
 @Component({
   selector: 'app-local',
@@ -8,9 +7,8 @@ import { PreviousRouteService } from 'src/app/services/previous-route.service'
 })
 export class LocalWorkspaceComponent implements OnInit {
 
-  public constructor(private previousRouteService: PreviousRouteService) { }
+  public constructor() { }
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void { }
 
 }

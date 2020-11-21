@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
+import { Location } from '@angular/common'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
-import { PreviousRouteService } from 'src/app/services/previous-route.service'
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -16,45 +17,45 @@ export class AccountComponent implements OnInit {
   public passwordDisabled = true
   public pictureDisabled = true
 
- public icons = ['arrow_forward_ios' , 'done']
+  public icons = ['arrow_forward_ios', 'done']
   public icon = this.icons[0]
   public icon2 = this.icons[0]
   public icon3 = this.icons[0]
   public user!: User
-  public url = ''
 
   public constructor(
-    private userService: UserService,
-    private previousRouteService: PreviousRouteService) { }
+    private readonly userService: UserService,
+    public readonly location: Location) { }
 
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(u => this.user = u)
-    this.url = this.previousRouteService.getPreviousUrl()
-   }
+  }
 
-   public saveFName(event: any) {
+  public saveFName(event: any): void {
     if (event.target.value.length > 0) {
-    // this.user.firstname = event.target.value
-    this.user.firstname = event.target.value
-    this.icon = this.icons[1]
-  }
+      // this.user.firstname = event.target.value
+      this.user.firstname = event.target.value
+      this.icon = this.icons[1]
+    }
   }
 
-  public saveSName(event: any) {
+  public saveSName(event: any): void {
     if (event.target.value.length > 0) {
-    // this.user.surname = event.target.value
-    this.user.surname = event.target.value
-    this.icon2 = this.icons[1]}
+      // this.user.surname = event.target.value
+      this.user.surname = event.target.value
+      this.icon2 = this.icons[1]
+    }
   }
 
-  public saveEmail(event: any) {
+  public saveEmail(event: any): void {
     if (event.target.value.length > 0) {
-    // this.user.email = event.target.value
-    this.user.email = event.target.value
-    this.icon3 = this.icons[1]}
+      // this.user.email = event.target.value
+      this.user.email = event.target.value
+      this.icon3 = this.icons[1]
+    }
   }
 
-  public onFileChanged(event: any) {
+  public onFileChanged(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader()
 

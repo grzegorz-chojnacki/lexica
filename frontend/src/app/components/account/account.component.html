@@ -1,5 +1,5 @@
 <mat-card>
-  <img [src]="avatarURL" />
+  <img [src]="avatarURL"/>
 
   <div id="shortInfo">
     <div id="fnameNsname">{{ user.firstname }} {{ user.surname }}</div>
@@ -74,7 +74,7 @@
     </form>
   </form>
   <mat-card-actions>
-    <button mat-stroked-button color="accent" routerLink="{{url}}">POWRÓT</button>
-    <button mat-stroked-button color="accent">USUŃ KONTO</button>
+    <button mat-button color="accent" (click)="location.back()">POWRÓT</button>
+    <button mat-button color="accent">USUŃ KONTO</button>
   </mat-card-actions>
 </mat-card>
