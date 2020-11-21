@@ -3,7 +3,11 @@
     <app-team-card [team]="team" context="Team"></app-team-card>
   </header>
 
-  <app-team-summary></app-team-summary>
+  <section *ngIf="team?.leader === user">
+    <app-team-summary
+      [team]="team">
+    </app-team-summary>
+  </section>
 
   <section>
     <mat-card>

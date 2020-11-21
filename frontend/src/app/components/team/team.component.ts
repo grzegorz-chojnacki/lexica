@@ -5,6 +5,8 @@ import { Task, TaskType } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { PreviousRouteService } from 'src/app/services/previous-route.service'
+import { UserService } from 'src/app/services/user.service'
+import { User } from 'src/app/classes/user'
 
 @Component({
   selector: 'app-team',
@@ -13,12 +15,14 @@ import { PreviousRouteService } from 'src/app/services/previous-route.service'
 })
 export class TeamComponent implements OnInit {
   public team!: Team
+  public user!: User
 
   public constructor(
     private router: Router,
     private route: ActivatedRoute,
     private teamService: TeamService,
-    private previousRouteService: PreviousRouteService ) { }
+    private userService: UserService,
+    private previousRouteService: PreviousRouteService) { }
 
   public taskSummary(task: Task<TaskType>): number {
     const taskProgress = this.team.getTaskProgress(task)
@@ -28,6 +32,8 @@ export class TeamComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.userService.loggedUser.subscribe(user => this.user = user)
+
     const teamHash = this.route.snapshot.paramMap.get('hash')
 
     this.teamService
