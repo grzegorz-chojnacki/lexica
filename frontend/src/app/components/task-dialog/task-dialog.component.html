@@ -1,2 +1,24 @@
-<mat-card-title>{{ data.name }}</mat-card-title>
-<mat-card-subtitle>{{ data.description }}</mat-card-subtitle>
+<header>
+  <section>
+    <span class="overline">{{ data.type.name }}</span>
+    <h1 mat-dialog-title>{{ data.name }}</h1>
+  </section>
+  <div class="spacer"></div>
+  <button mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</header>
+
+<mat-dialog-content>
+  <p>{{ data.description }}</p>
+  <p>{{ data.type.description }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <a mat-button color="accent" routerLink="./{{ data.hash }}">
+    Rozpocznij
+  </a>
+  <button mat-button mat-dialog-close>
+    Anuluj
+  </button>
+</mat-dialog-actions>
