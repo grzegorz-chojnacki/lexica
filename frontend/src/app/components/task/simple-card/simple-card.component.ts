@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog'
 export class SimpleCardComponent implements OnInit {
   public simpleCard: SimpleCard = new SimpleCard('Ogień', 'Fire')
   public counter = 1
+  public progress = 1
 
   public constructor(private readonly dialog: MatDialog) { }
 
@@ -19,8 +20,11 @@ export class SimpleCardComponent implements OnInit {
     // Go to another card, count progress
     // this.simpleCard.foreignWord = 'Next word' + this.counter
     this.counter++
-    if (this.counter === 10) {
-    this.dialog.open(TaskSummaryComponent, { width: '500px' })
+    console.log(this.progress)
+    if (this.counter === 11) {
+    let dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
+    let instance = dialogRef.componentInstance
+    instance.progres = this.progress
     }
   }
 }

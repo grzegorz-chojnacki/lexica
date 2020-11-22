@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+//import { SimpleCardComponent } from 'src/app/components/task/simple-card/simple-card.component'
 
 @Component({
   selector: 'app-task-summary',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core'
 })
 export class TaskSummaryComponent implements OnInit {
 
+  public progres = 1
+  public array(n: number): any[] {
+    return Array(n)
+  }
   public constructor() { }
 
   public ngOnInit(): void {
