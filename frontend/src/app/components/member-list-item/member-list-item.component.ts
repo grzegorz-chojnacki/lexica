@@ -7,7 +7,7 @@ import { User } from 'src/app/classes/user'
   styleUrls: ['./member-list-item.component.scss']
 })
 export class MemberListItemComponent implements OnInit {
-  @Input() public member!: User
+  @Input() public user!: User
 
   public constructor() { }
 

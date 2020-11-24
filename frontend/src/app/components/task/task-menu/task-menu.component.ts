@@ -22,7 +22,7 @@ export class TaskMenuComponent implements OnInit {
   public taskDescription(): void {
     this.dialog.closeAll() // Prevent dialog stacking
     this.dialog.open(TaskDetailsComponent, {
-      width: '500px',
+      width: '700px',
       data: {
         task: this.task,
         users: this.users
