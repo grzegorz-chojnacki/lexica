@@ -3,6 +3,7 @@ import { Task, TaskType } from 'src/app/classes/task'
 import { MatDialog } from '@angular/material/dialog'
 import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
 import { User } from 'src/app/classes/user'
+import { Progress } from 'src/app/classes/progress'
 
 @Component({
   selector: 'app-task-list-item',
@@ -19,7 +20,8 @@ export class TaskListItemComponent implements OnInit {
 
   public getTeamProgress(): number {
     const sum = this.users
-      .reduce((acc, user) => user.getTaskProgress(this.task).value + acc, 0)
+      .map(user => user.getTaskProgress(this.task))
+      .reduce(Progress.sum, 0)
     return sum / this.users.length
   }
 

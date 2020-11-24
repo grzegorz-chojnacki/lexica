@@ -24,7 +24,7 @@
         <mat-tab label="Uczestnicy" [disabled]="team?.members?.length === 0">
           <mat-list>
             <app-member-list-item *ngFor="let member of team?.members"
-              [user]="member">
+              [user]="member" [progress]="member.progress">
             </app-member-list-item>
           </mat-list>
         </mat-tab>

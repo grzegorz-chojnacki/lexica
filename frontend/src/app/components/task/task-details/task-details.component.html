@@ -16,12 +16,13 @@
 <p>{{ task.description }}</p>
 <p class="mat-card-subtitle">
   Uczestnicy którzy wykonali zadanie
-  ({{ numberOfUsersWithProgress() }}/{{ users.length }})
+  ({{ getUsersWithProgress().length }}/{{ users.length }})
 </p>
 
 <mat-dialog-content>
   <mat-list>
-    <app-member-list-item *ngFor="let user of users" [user]="user">
+    <app-member-list-item *ngFor="let user of getUsersWithProgress()"
+      [user]="user" [progress]="[ user.getTaskProgress(task) ]">
     </app-member-list-item>
   </mat-list>
 </mat-dialog-content>

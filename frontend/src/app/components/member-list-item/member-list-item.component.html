@@ -2,8 +2,8 @@
   <img matListAvatar src="assets/avatar_placeholder.jpg">
   <h4 matLine >{{ user | fullNamePipe }}</h4>
   <p>
-    80% postępu
-    <mat-progress-spinner color="accent" value="80" diameter="20">
+    {{ getCompletion() }}% postępu
+    <mat-progress-spinner color="accent" value="{{ getCompletion() }}" diameter="20">
     </mat-progress-spinner>
   </p>
 
