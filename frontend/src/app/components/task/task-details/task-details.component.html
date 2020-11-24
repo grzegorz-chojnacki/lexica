@@ -1,31 +1,31 @@
-<mat-card>
-  <mat-card-subtitle>TYP ZADANIA</mat-card-subtitle>
-  <mat-card-title>Zadanie</mat-card-title>
-  <mat-card-subtitle>Krótki opis zadania</mat-card-subtitle>
+<header>
+  <section>
+    <span class="overline">{{ task.type.name }}</span>
+    <h1 mat-dialog-title>{{ task.name }}</h1>
+  </section>
 
-  <mat-card-content>
-    <p class="mat-card-subtitle">Uczestnicy którzy wykonali zadanie (5/8)</p>
+  <div class="spacer"></div>
 
-    <mat-list>
+  <button mat-icon-button [matMenuTriggerFor]="taskMenu.menu"
+      (click)="$event.stopPropagation()">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <app-task-menu #taskMenu [task]="task" [users]="users"></app-task-menu>
+</header>
 
-            <mat-list-item *ngFor="let link of [1,2,3,4,5]">
-                <h4 matLine >Uczestnik</h4>
-                <p>
-                 80%
-                </p>
-                <mat-divider></mat-divider>
+<p>{{ task.description }}</p>
+<p class="mat-card-subtitle">
+  Uczestnicy którzy wykonali zadanie
+  ({{ numberOfUsersWithProgress() }}/{{ users.length }})
+</p>
 
-              </mat-list-item>
+<mat-dialog-content>
+  <mat-list>
+    <app-member-list-item *ngFor="let user of users" [member]="user">
+    </app-member-list-item>
+  </mat-list>
+</mat-dialog-content>
 
-    </mat-list>
-
-
-
-
-
-
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>ZAMKNIJ</button>
-  </mat-card-actions>
-</mat-card>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Zamknij</button>
+</mat-dialog-actions>
