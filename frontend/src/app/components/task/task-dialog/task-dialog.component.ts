@@ -1,6 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Task, TaskType } from 'src/app/classes/task'
+import { User } from 'src/app/classes/user'
+
+interface TaskAndUsersWithProgress {
+  task: Task<TaskType>
+  users: User[]
+}
 
 @Component({
   selector: 'app-task-dialog',
@@ -8,8 +14,13 @@ import { Task, TaskType } from 'src/app/classes/task'
   styleUrls: ['./task-dialog.component.scss']
 })
 export class TaskDialogComponent implements OnInit {
+  public readonly task: Task<TaskType>
+  public readonly users: User[]
 
-  public constructor(@Inject(MAT_DIALOG_DATA) public data: Task<TaskType>) { }
+  public constructor(@Inject(MAT_DIALOG_DATA) data: TaskAndUsersWithProgress) {
+    this.task  = data.task
+    this.users = data.users
+  }
 
   public ngOnInit(): void { }
 

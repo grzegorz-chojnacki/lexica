@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
 import { Task, TaskType } from 'src/app/classes/task'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
+
 @Component({
   selector: 'app-task-menu',
   templateUrl: './task-menu.component.html',
@@ -17,6 +18,6 @@ export class TaskMenuComponent implements OnInit {
   public ngOnInit(): void { }
 
   public taskDescription(): void {
-    this.dialog.open(TaskDetailsComponent, { width: '500px' })
+    this.dialog.open(TaskDetailsComponent, { width: '500px', data: this.task })
   }
 }

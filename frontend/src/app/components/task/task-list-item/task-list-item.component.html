@@ -4,7 +4,7 @@
     {{ task.name }}
   </h4>
 
-  <p>Średni wynik: {{ completion }}% </p>
+  <p>Średni wynik: {{ getCompletion() }}% </p>
   <button mat-icon-button [matMenuTriggerFor]="taskMenu.menu"
       (click)="$event.stopPropagation()">
     <mat-icon>more_vert</mat-icon>

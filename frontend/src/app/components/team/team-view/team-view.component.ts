@@ -23,13 +23,6 @@ export class TeamViewComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService) { }
 
-  public taskCompletion(task: Task<TaskType>): number {
-    const taskProgress = this.team.getTaskProgress(task)
-    const sum = taskProgress.reduce(Progress.sum, 0)
-
-    return sum / this.team.users.length
-  }
-
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(user => this.user = user)
 

@@ -1,7 +1,7 @@
 <header>
   <section>
-    <span class="overline">{{ data.type.name }}</span>
-    <h1 mat-dialog-title>{{ data.name }}</h1>
+    <span class="overline">{{ task.type.name }}</span>
+    <h1 mat-dialog-title>{{ task.name }}</h1>
   </section>
 
   <div class="spacer"></div>
@@ -10,16 +10,16 @@
       (click)="$event.stopPropagation()">
     <mat-icon>more_vert</mat-icon>
   </button>
-  <app-task-menu #taskMenu [task]="data"></app-task-menu>
+  <app-task-menu #taskMenu [task]="task"></app-task-menu>
 </header>
 
 <mat-dialog-content>
-  <p>{{ data.description }}</p>
-  <p>{{ data.type.description }}</p>
+  <p>{{ task.description }}</p>
+  <p>{{ task.type.description }}</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <a mat-button color="accent" routerLink="task/{{ data.hash }}">
+  <a mat-button color="accent" routerLink="task/{{ task.hash }}">
     Rozpocznij
   </a>
   <button mat-button mat-dialog-close>Anuluj</button>
