@@ -17,7 +17,7 @@ export class TaskListItemComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public getCompletion(): number {
+  public getTeamProgress(): number {
     const sum = this.users
       .reduce((acc, user) => user.getTaskProgress(this.task).value + acc, 0)
     return sum / this.users.length
