@@ -1,12 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { Task, TaskType } from 'src/app/classes/task'
+import { Task, TaskType, TaskAndUsersWithProgress } from 'src/app/classes/task'
 import { User } from 'src/app/classes/user'
-
-interface TaskAndUsersWithProgress {
-  task: Task<TaskType>
-  users: User[]
-}
 
 @Component({
   selector: 'app-task-dialog',

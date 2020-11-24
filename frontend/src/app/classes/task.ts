@@ -1,3 +1,10 @@
+import { User } from './user'
+
+export interface TaskAndUsersWithProgress {
+  task: Task<TaskType>
+  users: User[]
+}
+
 export abstract class TaskType {
   public abstract readonly name: string
   public abstract readonly description: string

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
 import { Task, TaskType } from 'src/app/classes/task'
+import { User } from 'src/app/classes/user'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 
 @Component({
@@ -11,6 +12,7 @@ import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-
 })
 export class TaskMenuComponent implements OnInit {
   @Input() public task!: Task<TaskType>
+  @Input() public users!: User[]
   @ViewChild(MatMenu, { static: true }) public readonly menu!: MatMenu
 
   public constructor(private readonly dialog: MatDialog) { }
@@ -18,6 +20,12 @@ export class TaskMenuComponent implements OnInit {
   public ngOnInit(): void { }
 
   public taskDescription(): void {
-    this.dialog.open(TaskDetailsComponent, { width: '500px', data: this.task })
+    this.dialog.open(TaskDetailsComponent, {
+      width: '500px',
+      data: {
+        task: this.task,
+        users: this.users
+      }
+    })
   }
 }
