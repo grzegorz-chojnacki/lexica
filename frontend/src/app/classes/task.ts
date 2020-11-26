@@ -17,8 +17,8 @@ export class SimpleCard extends TaskType {
   public readonly exampleImage?: ImageBitmap
 
   public constructor(
-    public readonly nativeWord: string,
     public readonly foreignWord: string,
+    public readonly nativeWord: string,
     public readonly image?: ImageBitmap,
   ) { super() }
 }
