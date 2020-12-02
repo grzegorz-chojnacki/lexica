@@ -3,8 +3,8 @@ package pl.edu.ug.inf.lexica.domain;
 import lombok.Data;
 
 @Data
-public class SimpleCard {
-    private String id;
+public class SimpleCard extends Identifiable{
+
     private String name;
     private String taskType;
     private String description;

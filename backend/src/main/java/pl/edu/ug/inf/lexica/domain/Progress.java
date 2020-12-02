@@ -1,4 +1,11 @@
 package pl.edu.ug.inf.lexica.domain;
 
-public class Progress {
+import lombok.Data;
+
+@Data
+public class Progress extends Identifiable{
+
+    private String taskId;
+    private String userId;
+    private int completed;
 }
