@@ -5,19 +5,23 @@ import pl.edu.ug.inf.lexica.domain.Identifiable;
 import java.util.*;
 
 public abstract class EntityService<T extends Identifiable<T>> {
-    Base64.Encoder encoder = Base64.getEncoder();
-    List<T> entities = new ArrayList<>();
+    private final Base64.Encoder encoder = Base64.getEncoder();
+    private final List<T> entities = new ArrayList<>();
 
     public void add(T entity) {
         entity.setId(getNewId());
         entities.add(entity);
     }
 
-    public void remove(String id) {
-        get(id).ifPresent(entity -> entities.remove(entity));
+    public void addAll(List<T> entities) {
+        entities.forEach(this::add);
     }
 
-    private String getNewId() {
+    public void remove(String id) {
+        get(id).ifPresent(entities::remove);
+    }
+
+    protected String getNewId() {
         return encoder.encodeToString(UUID.randomUUID().toString().getBytes());
     }
 
@@ -34,6 +38,4 @@ public abstract class EntityService<T extends Identifiable<T>> {
                 .map(originalEntity -> originalEntity.patch(newEntity))
                 .orElse(null);
     }
-
-
 }
