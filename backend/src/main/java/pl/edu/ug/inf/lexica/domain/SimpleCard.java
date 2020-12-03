@@ -1,10 +1,11 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class SimpleCard extends Identifiable{
-
+@EqualsAndHashCode(callSuper = true)
+public class SimpleCard extends Identifiable<SimpleCard> {
     private String name;
     private String taskType;
     private String description;
@@ -13,5 +14,13 @@ public class SimpleCard extends Identifiable{
     private String nativeWord;
     private String foreignWord;
 
-
+    public SimpleCard patch(SimpleCard that) {
+        this.name = that.getName();
+        this.taskType = that.getTaskType();
+        this.description = that.getDescription();
+        this.isActive = that.isActive();
+        this.nativeWord = that.getNativeWord();
+        this.foreignWord = that.getForeignWord();
+        return this;
+    }
 }
