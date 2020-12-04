@@ -1,17 +1,22 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Task<T> extends Identifiable<Task<T>> {
     private String name;
     private List<T> content;
-    private String description;
     private boolean isActive;
+    private String description;
+
 
     @Override
     public Task<T> patch(Task<T> that) {
