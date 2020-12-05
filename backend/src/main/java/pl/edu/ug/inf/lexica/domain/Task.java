@@ -22,6 +22,10 @@ public class Task<T extends Example<T>> extends Entity<Task<T>> {
         Task<T> plainTask = new Task<>();
 
         plainTask.setId(this.getId());
+        plainTask.setName((this.name));
+        plainTask.setActive(this.isActive);
+        plainTask.setDescription(this.description);
+        plainTask.setType(this.type);
 
         return plainTask;
     }

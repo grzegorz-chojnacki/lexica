@@ -36,10 +36,15 @@ public class Team extends Entity<Team> {
                 .map(User::withSomeInfo)
                 .collect(Collectors.toList());
 
+        List<Task<SimpleCard>> someTasks = this.tasks.stream()
+                .map(Task::withPlainInfo)
+                .collect(Collectors.toList());
+
         plainTeam.setId(this.getId());
         plainTeam.setName(name);
         plainTeam.setLeader(leader.withPlainInfo());
         plainTeam.setDescription(description);
+        plainTeam.setTasks(someTasks);
         plainTeam.setMembers(someMembers);
 
         return plainTeam;
