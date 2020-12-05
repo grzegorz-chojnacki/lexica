@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Progress extends Identifiable<Progress> {
+public class Progress extends Entity<Progress> {
     private String taskId;
     private String userId;
     private int completed;

@@ -11,11 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Task<T> extends Identifiable<Task<T>> {
+public class Task<T extends Example<T>> extends Entity<Task<T>> {
     private String name;
     private List<T> content;
     private boolean isActive;
     private String description;
+    private TaskType type;
 
     @Override
     public Task<T> patch(Task<T> that) {
@@ -23,6 +24,7 @@ public class Task<T> extends Identifiable<Task<T>> {
         this.content = that.getContent();
         this.description = that.getDescription();
         this.isActive = that.isActive();
+        this.type = that.getType();
         return this;
     }
 }

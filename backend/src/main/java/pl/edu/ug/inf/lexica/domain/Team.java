@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Team extends Identifiable<Team>{
+public class Team extends Entity<Team> {
     private String name;
     private List<String> memberIds;
     private String leaderId;

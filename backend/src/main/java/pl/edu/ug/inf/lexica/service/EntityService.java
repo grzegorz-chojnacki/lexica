@@ -1,10 +1,10 @@
 package pl.edu.ug.inf.lexica.service;
 
-import pl.edu.ug.inf.lexica.domain.Identifiable;
+import pl.edu.ug.inf.lexica.domain.Entity;
 
 import java.util.*;
 
-public abstract class EntityService<T extends Identifiable<T>> {
+public abstract class EntityService<T extends Entity<T>> {
     private final Base64.Encoder encoder = Base64.getEncoder();
     private final List<T> entities = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public abstract class EntityService<T extends Identifiable<T>> {
         return entities;
     }
 
-    public Optional<T> get(String id){
+    public Optional<T> get(String id) {
         return entities.stream().filter(entity -> entity.getId().equals(id)).findFirst();
     }
 

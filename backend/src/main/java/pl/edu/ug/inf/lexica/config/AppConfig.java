@@ -20,18 +20,25 @@ public class AppConfig {
     @Bean
     @Qualifier("tasks")
     public List<Task<SimpleCard>> createTask() {
-      return  List.of(new Task("Zadanie z fiszkami 1",
-                        testCards, true, "Opis zadania z fiszkami 1"),
-                new Task("Zadanie bez opisu",
-                        testCards, true, ""),
-                new Task("Zadanie z fiszkami 2",
-                        testCards, true, "Jakieś następne zadanie"),
-                new Task("Zadanie z fiszkami 3", testCards, true,
-                        "Opis zadania z bardzo długim opisiem, który najprawdopodobniej powinien zostać ograniczony"),
-                new Task("Zadanie nieaktywne", testCards, false,
-                        "Opis zadania nieaktywnego"),
-                new Task("Zadanie z trochę dłuższym tytułem",
-                        testCards, true, "Opis zadania z dłuższym tytułem")
+        return List.of(
+            new Task<>("Zadanie z fiszkami 1",
+                    testCards, true, "Opis zadania z fiszkami 1",
+                    SimpleCard.type),
+            new Task<>("Zadanie bez opisu",
+                    testCards, true, "",
+                    SimpleCard.type),
+            new Task<>("Zadanie z fiszkami 2",
+                    testCards, true, "Jakieś następne zadanie",
+                    SimpleCard.type),
+            new Task<>("Zadanie z fiszkami 3", testCards, true,
+                    "Opis zadania z bardzo długim opisiem, który najprawdopodobniej powinien zostać ograniczony",
+                    SimpleCard.type),
+            new Task<>("Zadanie nieaktywne", testCards, false,
+                    "Opis zadania nieaktywnego",
+                    SimpleCard.type),
+            new Task<>("Zadanie z trochę dłuższym tytułem",
+                    testCards, true, "Opis zadania z dłuższym tytułem",
+                    SimpleCard.type)
         );
     }
 }

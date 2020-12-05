@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SimpleCard extends TaskType<SimpleCard> {
+public class SimpleCard extends Example<SimpleCard> {
+    public final static TaskType type = new TaskType("Fiszka Prosta", "Opis fiszki prostej");
     private String nativeWord;
     private String foreignWord;
 
+    @Override
     public SimpleCard patch(SimpleCard that) {
         this.nativeWord = that.getNativeWord();
         this.foreignWord = that.getForeignWord();

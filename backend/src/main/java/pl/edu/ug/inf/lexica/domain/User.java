@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class User extends Identifiable<User> {
+public class User extends Entity<User> {
     private String firstname;
     private String surname;
     private String email;

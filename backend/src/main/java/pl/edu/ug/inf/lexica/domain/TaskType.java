@@ -1,11 +1,11 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public abstract class TaskType<T> extends Identifiable<T> {
+@AllArgsConstructor
+public class TaskType {
     private String name;
     private String description;
 }
