@@ -39,20 +39,22 @@ public class AppConfig {
                     SimpleCard.type)
     );
 
-    List<Progress<SimpleCard>> testProgress1 = List.of(
-            new Progress<>(testTasks.get(0), 0),
-            new Progress<>(testTasks.get(1), 30),
-            new Progress<>(testTasks.get(2), 34),
-            new Progress<>(testTasks.get(3), 56),
-            new Progress<>(testTasks.get(4), 28)
+    static List<Progress> testProgress1 = List.of(
+            new Progress("", 0),
+            new Progress("", 30),
+            new Progress("", 34),
+            new Progress("", 56),
+            new Progress("", 28),
+            new Progress("", 45)
     );
 
-    List<Progress<SimpleCard>> testProgress2 = List.of(
-            new Progress<>(testTasks.get(0), 53),
-            new Progress<>(testTasks.get(1), 13),
-            new Progress<>(testTasks.get(2), 23),
-            new Progress<>(testTasks.get(3), 49),
-            new Progress<>(testTasks.get(4), 19)
+    static List<Progress> testProgress2 = List.of(
+            new Progress("", 53),
+            new Progress("", 13),
+            new Progress("", 23),
+            new Progress("", 49),
+            new Progress("", 19),
+            new Progress("", 20)
     );
 
     List<User> testUsers = List.of(
@@ -99,6 +101,13 @@ public class AppConfig {
             )
     );
 
+    public static void updateProgressIds(List<Task<SimpleCard>> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            testProgress1.get(i).setTaskId(tasks.get(i).getId());
+            testProgress2.get(i).setTaskId(tasks.get(i).getId());
+        }
+    }
+
     @Bean
     @Qualifier("tasks")
     public List<Task<SimpleCard>> createTasks() { return testTasks; }
@@ -113,7 +122,7 @@ public class AppConfig {
 
     @Bean
     @Qualifier("progresses")
-    public List<Progress<SimpleCard>> createProgresses() {
+    public List<Progress> createProgresses() {
         return Stream.concat(testProgress1.stream(), testProgress2.stream())
                 .collect(Collectors.toList());
     }

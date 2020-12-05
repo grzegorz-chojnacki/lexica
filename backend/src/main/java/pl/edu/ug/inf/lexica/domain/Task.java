@@ -18,6 +18,14 @@ public class Task<T extends Example<T>> extends Entity<Task<T>> {
     private String description;
     private TaskType type;
 
+    public Task<T> withPlainInfo() {
+        Task<T> plainTask = new Task<>();
+
+        plainTask.setId(this.getId());
+
+        return plainTask;
+    }
+
     @Override
     public Task<T> patch(Task<T> that) {
         this.name = that.getName();

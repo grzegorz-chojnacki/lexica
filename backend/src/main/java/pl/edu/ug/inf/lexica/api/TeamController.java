@@ -6,6 +6,7 @@ import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.service.EntityService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/team")
@@ -19,12 +20,12 @@ public class TeamController {
 
     @GetMapping
     public List<Team> getTeams() {
-        return teamService.getAll();
+        return teamService.getAll().stream().map(Team::withPlainInfo).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable String id) {
-        return teamService.get(id).orElse(null);
+        return teamService.get(id).map(Team::withSomeInfo).orElse(null);
     }
 
     @PostMapping

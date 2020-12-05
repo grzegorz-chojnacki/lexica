@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -17,6 +18,32 @@ public class Team extends Entity<Team> {
     private List<User> members;
     private List<Task<SimpleCard>> tasks;
     private String description;
+
+    public Team withPlainInfo() {
+        Team plainTeam = new Team();
+
+        plainTeam.setId(this.getId());
+        plainTeam.setName(name);
+        plainTeam.setLeader(leader.withPlainInfo());
+        plainTeam.setDescription(description);
+
+        return plainTeam;
+    }
+
+    public Team withSomeInfo() {
+        Team plainTeam = new Team();
+        List<User> someMembers = this.members.stream()
+                .map(User::withSomeInfo)
+                .collect(Collectors.toList());
+
+        plainTeam.setId(this.getId());
+        plainTeam.setName(name);
+        plainTeam.setLeader(leader.withPlainInfo());
+        plainTeam.setDescription(description);
+        plainTeam.setMembers(someMembers);
+
+        return plainTeam;
+    }
 
     @Override
     public Team patch(Team that) {

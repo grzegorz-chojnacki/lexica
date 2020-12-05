@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -17,7 +18,33 @@ public class User extends Entity<User> {
     private String surname;
     private String email;
     private String password;
-    private List<Progress<SimpleCard>> progresses;
+    private List<Progress> progresses;
+
+    public User withPlainInfo() {
+        User plainUser = new User();
+
+        plainUser.setId(this.getId());
+        plainUser.setFirstname(this.firstname);
+        plainUser.setSurname(this.surname);
+        plainUser.setEmail(this.email);
+
+        return plainUser;
+    }
+
+    public User withSomeInfo() {
+        User plainUser = new User();
+        List<Progress> plainProgresses = this.progresses.stream()
+                .map(Progress::withPlainInfo)
+                .collect(Collectors.toList());
+
+        plainUser.setId(this.getId());
+        plainUser.setFirstname(this.firstname);
+        plainUser.setSurname(this.surname);
+        plainUser.setEmail(this.email);
+        plainUser.setProgresses(plainProgresses);
+
+        return plainUser;
+    }
 
     @Override
     public User patch(User that) {
