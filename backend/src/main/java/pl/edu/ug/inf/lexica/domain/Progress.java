@@ -1,19 +1,21 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Progress extends Entity<Progress> {
-    private String taskId;
-    private String userId;
+@AllArgsConstructor
+@NoArgsConstructor
+public class Progress<T extends Example<T>> extends Entity<Progress<T>> {
+    private Task<T> task;
     private int completed;
 
     @Override
-    public Progress patch(Progress that) {
-        this.taskId = that.getTaskId();
-        this.userId = that.getUserId();
+    public Progress<T> patch(Progress<T> that) {
+        this.task = that.getTask();
         this.completed = that.getCompleted();
         return this;
     }

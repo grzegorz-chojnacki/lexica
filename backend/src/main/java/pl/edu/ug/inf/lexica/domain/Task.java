@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Task<T extends Example<T>> extends Entity<Task<T>> {
     private String name;
-    private List<T> content;
+    private List<T> examples;
     private boolean isActive;
     private String description;
     private TaskType type;
@@ -21,7 +21,7 @@ public class Task<T extends Example<T>> extends Entity<Task<T>> {
     @Override
     public Task<T> patch(Task<T> that) {
         this.name = that.getName();
-        this.content = that.getContent();
+        this.examples = that.getExamples();
         this.description = that.getDescription();
         this.isActive = that.isActive();
         this.type = that.getType();
