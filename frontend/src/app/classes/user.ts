@@ -10,7 +10,7 @@ export class User {
     public readonly avatar?: ImageBitmap) { }
 
   public getTaskProgress(task: Task<TaskType>): Progress {
-    return this.progress.find(progress => progress.task === task)
-      || new Progress(task, 0)
+    return this.progress.find(progress => progress.taskId === task.hash)
+      || new Progress(task.hash, 0)
   }
 }

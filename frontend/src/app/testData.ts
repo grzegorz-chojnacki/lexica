@@ -40,19 +40,19 @@ const testTasks = [
 ]
 
 const testProgress1 = [
-  new Progress(testTasks[0], 0),
-  new Progress(testTasks[1], 30),
-  new Progress(testTasks[2], 34),
-  new Progress(testTasks[3], 56),
-  new Progress(testTasks[4], 28),
+  new Progress(testTasks[0].hash,  0),
+  new Progress(testTasks[1].hash, 30),
+  new Progress(testTasks[2].hash, 34),
+  new Progress(testTasks[3].hash, 56),
+  new Progress(testTasks[4].hash, 28),
 ]
 
 const testProgress2 = [
-  new Progress(testTasks[0], 53),
-  new Progress(testTasks[1], 13),
-  new Progress(testTasks[2], 23),
-  new Progress(testTasks[3], 49),
-  new Progress(testTasks[4], 19),
+  new Progress(testTasks[0].hash, 53),
+  new Progress(testTasks[1].hash, 13),
+  new Progress(testTasks[2].hash, 23),
+  new Progress(testTasks[3].hash, 49),
+  new Progress(testTasks[4].hash, 19),
 ]
 
 export const testUsers: User[] = [
