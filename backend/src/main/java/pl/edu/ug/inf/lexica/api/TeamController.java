@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/team")
 public class TeamController {
     private final EntityService<Team> teamService;
 
@@ -16,29 +17,29 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/team")
+    @GetMapping
     public List<Team> getTeams() {
         return teamService.getAll();
     }
 
-    @GetMapping("/team/{id}")
+    @GetMapping("/{id}")
     public Team getTeam(@PathVariable String id) {
         return teamService.get(id).orElse(null);
     }
 
-    @PostMapping("/team")
+    @PostMapping
     public Team addTeam(@RequestBody Team newTeam) {
         Team team = new Team().patch(newTeam);
         teamService.add(team);
         return team;
     }
 
-    @PutMapping("/team/{id}")
+    @PutMapping("/{id}")
     public Team updateTeam(@RequestBody Team newTeam, @PathVariable String id) {
         return teamService.replace(id, newTeam);
     }
 
-    @DeleteMapping("/team/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTeam(@PathVariable String id) {
         teamService.remove(id);
     }

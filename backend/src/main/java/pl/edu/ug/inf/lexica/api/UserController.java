@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private final EntityService<User> userService;
 
@@ -16,29 +17,29 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public List<User> getUsers() {
         return userService.getAll();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public User getUsers(@PathVariable String id) {
         return userService.get(id).orElse(null);
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public User addUser(@RequestBody User newUser) {
         User user = new User().patch(newUser);
         userService.add(user);
         return user;
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@RequestBody User newUser, @PathVariable String id) {
         return userService.replace(id, newUser);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
         userService.remove(id);
     }

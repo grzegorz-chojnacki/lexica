@@ -9,6 +9,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/task")
 public class TaskController {
 
     private final EntityService<Task<SimpleCard>> taskService;
@@ -18,30 +19,30 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/task/{id}")
+    @GetMapping("/{id}")
     public Task<SimpleCard> getTask(@PathVariable String id) {
         return taskService.get(id).orElse(null);
     }
 
-    @GetMapping("/task")
+    @GetMapping
     public List<Task<SimpleCard>> getTasks() {
         return taskService.getAll();
     }
 
 
-    @PostMapping("/task")
+    @PostMapping
     public Task<SimpleCard> addTask(@RequestBody Task<SimpleCard> newTask) {
         Task<SimpleCard> task = new Task<SimpleCard>().patch(newTask);
         taskService.add(task);
         return task;
     }
 
-    @PutMapping("/task/{id}")
+    @PutMapping("/{id}")
     public Task<SimpleCard> updateTask(@RequestBody Task<SimpleCard> newTask, @PathVariable String id) {
         return taskService.replace(id, newTask);
     }
 
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable String id) {
         taskService.remove(id);
     }
