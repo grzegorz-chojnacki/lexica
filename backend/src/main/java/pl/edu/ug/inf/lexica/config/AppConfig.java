@@ -10,16 +10,16 @@ import java.util.List;
 
 @Configuration
 public class AppConfig {
-
     List<SimpleCard> testCards = List.of(
             new SimpleCard("Jabłko", "Apple"),
             new SimpleCard("Banan", "Banana"),
             new SimpleCard("Pomarańcza", "Orange"),
             new SimpleCard("Mango", "Mango")
     );
+
     @Bean
     @Qualifier("tasks")
-    public List<Task<SimpleCard>> createTask(){
+    public List<Task<SimpleCard>> createTask() {
       return  List.of(new Task("Zadanie z fiszkami 1",
                         testCards, true, "Opis zadania z fiszkami 1"),
                 new Task("Zadanie bez opisu",

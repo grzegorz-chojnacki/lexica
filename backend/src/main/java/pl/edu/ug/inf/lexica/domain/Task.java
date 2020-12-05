@@ -17,7 +17,6 @@ public class Task<T> extends Identifiable<Task<T>> {
     private boolean isActive;
     private String description;
 
-
     @Override
     public Task<T> patch(Task<T> that) {
         this.name = that.getName();
