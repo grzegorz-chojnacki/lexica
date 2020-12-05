@@ -26,7 +26,6 @@ public class User extends Entity<User> {
         plainUser.setId(this.getId());
         plainUser.setFirstname(this.firstname);
         plainUser.setSurname(this.surname);
-        plainUser.setEmail(this.email);
 
         return plainUser;
     }
@@ -40,7 +39,6 @@ public class User extends Entity<User> {
         plainUser.setId(this.getId());
         plainUser.setFirstname(this.firstname);
         plainUser.setSurname(this.surname);
-        plainUser.setEmail(this.email);
         plainUser.setProgresses(plainProgresses);
 
         return plainUser;
