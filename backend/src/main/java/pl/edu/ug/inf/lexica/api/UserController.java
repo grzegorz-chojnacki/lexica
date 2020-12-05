@@ -21,6 +21,11 @@ public class UserController {
         return userService.getAll();
     }
 
+    @GetMapping("/user/{id}")
+    public User getUsers(@PathVariable String id) {
+        return userService.get(id).orElse(null);
+    }
+
     @PostMapping("/user")
     public User addUser(@RequestBody User newUser) {
         User user = new User().patch(newUser);

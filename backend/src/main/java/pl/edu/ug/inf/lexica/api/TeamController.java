@@ -21,6 +21,11 @@ public class TeamController {
         return teamService.getAll();
     }
 
+    @GetMapping("/team/{id}")
+    public Team getTeam(@PathVariable String id) {
+        return teamService.get(id).orElse(null);
+    }
+
     @PostMapping("/team")
     public Team addTeam(@RequestBody Team newTeam) {
         Team team = new Team().patch(newTeam);

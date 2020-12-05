@@ -18,10 +18,16 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    @GetMapping("/task/{id}")
+    public Task<SimpleCard> getTask(@PathVariable String id) {
+        return taskService.get(id).orElse(null);
+    }
+
     @GetMapping("/task")
     public List<Task<SimpleCard>> getTasks() {
         return taskService.getAll();
     }
+
 
     @PostMapping("/task")
     public Task<SimpleCard> addTask(@RequestBody Task<SimpleCard> newTask) {
