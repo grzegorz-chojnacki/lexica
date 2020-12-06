@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { MatTabGroup } from '@angular/material/tabs'
 
-import { TeamService, TeamForm } from 'src/app/services/team.service'
+import { TeamListService, TeamForm } from 'src/app/services/team-list.service'
 
 @Component({
   selector: 'app-new-team',
@@ -21,7 +21,7 @@ export class NewTeamComponent implements OnInit {
 
   public constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly teamService: TeamService) { }
+    private readonly teamService: TeamListService) { }
 
   public ngOnInit(): void { }
 

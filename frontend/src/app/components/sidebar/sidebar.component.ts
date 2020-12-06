@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from 'src/app/classes/user'
-import { TeamService } from 'src/app/services/team.service'
+import { TeamListService } from 'src/app/services/team-list.service'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   public user!: User
 
   public constructor(
-    private readonly teamService: TeamService,
+    private readonly teamService: TeamListService,
     private userService: UserService) { }
   public ngOnInit(): void {
     // this.teamService.teams.subscribe(teams => this.teams = teams)

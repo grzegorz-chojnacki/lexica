@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { Team } from 'src/app/classes/team'
-import { TeamService } from 'src/app/services/team.service'
+import { TeamListService } from 'src/app/services/team-list.service'
 
 @Component({
   selector: 'app-team-card',
@@ -15,7 +15,7 @@ export class TeamCardComponent implements OnInit {
 
   public constructor(
     private readonly snackbarService: MatSnackBar,
-    private readonly teamService: TeamService) { }
+    private readonly teamService: TeamListService) { }
 
   public ngOnInit(): void { }
 

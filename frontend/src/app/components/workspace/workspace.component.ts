@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
-import { TeamService } from 'src/app/services/team.service'
+import { TeamListService } from 'src/app/services/team-list.service'
 import { UserService } from 'src/app/services/user.service'
 import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-team.component'
 
@@ -20,7 +20,7 @@ export class WorkspaceComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
-    private readonly teamService: TeamService,
+    private readonly teamService: TeamListService,
     private readonly userService: UserService) { }
 
   public ngOnInit(): void {

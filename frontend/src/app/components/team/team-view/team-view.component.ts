@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { Progress } from 'src/app/classes/progress'
 import { Task, TaskType } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
-import { TeamService } from 'src/app/services/team.service'
+import { TeamListService } from 'src/app/services/team-list.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
 
@@ -20,7 +20,7 @@ export class TeamViewComponent implements OnInit {
   public constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private teamService: TeamService,
+    private teamService: TeamListService,
     private userService: UserService) { }
 
   public ngOnInit(): void {
