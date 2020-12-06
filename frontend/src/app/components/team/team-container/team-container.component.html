@@ -1,4 +1,5 @@
-<mat-expansion-panel class="mat-elevation-z0" [expanded]="teams?.length > 0">
+<mat-expansion-panel class="mat-elevation-z0"
+    [expanded]="(teams?.length || 0) > 0">
   <mat-expansion-panel-header class="centered">
     <h2 class="heading-fix">{{ title }}</h2>
   </mat-expansion-panel-header>
