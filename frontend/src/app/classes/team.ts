@@ -5,6 +5,16 @@ import { Progress } from './progress'
 export class Team {
   public readonly users = [this.leader, ...this.members]
 
+  public static deserialize(team: Team): Team {
+    return new Team(
+      team.name,
+      team.id,
+      User.deserialize(team.leader),
+      team.members.map(User.deserialize),
+      team.tasks,
+      team.description)
+  }
+
   public constructor(
     public readonly name: string,
     public readonly id: string,
@@ -21,4 +31,5 @@ export class Team {
   public getTaskProgress(task: Task<TaskType>): Progress[] {
     return this.users.map(user => user.getTaskProgress(task))
   }
+
 }

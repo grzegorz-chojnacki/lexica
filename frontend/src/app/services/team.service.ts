@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 
 import { lexicaURL } from 'src/app/lexica.properties'
@@ -32,6 +33,7 @@ export class TeamService {
 
   public getTeam(id: string | null): Observable<Team> {
     return this.http.get<Team>(`${lexicaURL}/team/${id}`)
+      .pipe(map(Team.deserialize))
   }
 
   public createTeam(form: TeamForm): void {
