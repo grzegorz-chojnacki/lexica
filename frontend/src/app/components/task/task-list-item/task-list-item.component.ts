@@ -22,7 +22,8 @@ export class TaskListItemComponent implements OnInit {
     const sum = this.users
       .map(user => user.getTaskProgress(this.task))
       .reduce(Progress.sum, 0)
-    return sum / this.users.length
+
+    return Math.round(sum / this.users.length)
   }
 
   public launchTask(): void {

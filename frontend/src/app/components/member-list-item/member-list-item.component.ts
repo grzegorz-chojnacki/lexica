@@ -18,7 +18,8 @@ export class MemberListItemComponent implements OnInit {
   public ngOnInit(): void { }
 
   public getCompletion(): number {
-    return this.progress.reduce(Progress.sum, 0) / this.progress.length
+    const sum = this.progress.reduce(Progress.sum, 0)
+    return Math.round(sum / this.progress.length)
   }
 
 }

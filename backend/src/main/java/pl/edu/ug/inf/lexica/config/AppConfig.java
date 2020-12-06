@@ -121,8 +121,8 @@ public class AppConfig {
     public List<User> createUsers() { return testUsers; }
 
     @Bean
-    @Qualifier("progresses")
-    public List<Progress> createProgresses() {
+    @Qualifier("progress")
+    public List<Progress> createProgress() {
         return Stream.concat(testProgress1.stream(), testProgress2.stream())
                 .collect(Collectors.toList());
     }

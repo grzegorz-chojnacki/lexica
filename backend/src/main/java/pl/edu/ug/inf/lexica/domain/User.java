@@ -18,7 +18,7 @@ public class User extends Entity<User> {
     private String surname;
     private String email;
     private String password;
-    private List<Progress> progresses;
+    private List<Progress> progress;
 
     public User withPlainInfo() {
         User plainUser = new User();
@@ -32,14 +32,14 @@ public class User extends Entity<User> {
 
     public User withSomeInfo() {
         User plainUser = new User();
-        List<Progress> plainProgresses = this.progresses.stream()
+        List<Progress> plainProgress = this.progress.stream()
                 .map(Progress::withPlainInfo)
                 .collect(Collectors.toList());
 
         plainUser.setId(this.getId());
         plainUser.setFirstname(this.firstname);
         plainUser.setSurname(this.surname);
-        plainUser.setProgresses(plainProgresses);
+        plainUser.setProgress(plainProgress);
 
         return plainUser;
     }
@@ -50,7 +50,7 @@ public class User extends Entity<User> {
         this.surname = that.getSurname();
         this.email = that.getEmail();
         this.password = that.getPassword();
-        this.progresses = that.getProgresses();
+        this.progress = that.getProgress();
         return this;
     }
 }

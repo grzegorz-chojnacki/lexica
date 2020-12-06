@@ -2,6 +2,15 @@ import { Progress } from './progress'
 import { Task, TaskType } from './task'
 
 export class User {
+
+  public static deserialize(user: User): User {
+    return new User(
+      user.firstname,
+      user.surname,
+      user.email,
+      user.progress)
+  }
+
   public constructor(
     public firstname: string,
     public surname: string,
@@ -10,7 +19,7 @@ export class User {
     public readonly avatar?: ImageBitmap) { }
 
   public getTaskProgress(task: Task<TaskType>): Progress {
-    return this.progress.find(progress => progress.taskId === task.hash)
-      || new Progress(task.hash, 0)
+    return this.progress.find(progress => progress.taskId === task.id)
+      || new Progress(task.id, 0)
   }
 }
