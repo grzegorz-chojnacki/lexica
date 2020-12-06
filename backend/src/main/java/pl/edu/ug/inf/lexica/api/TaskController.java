@@ -9,6 +9,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/task")
 public class TaskController {
 

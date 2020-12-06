@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
     private final EntityService<User> userService;
