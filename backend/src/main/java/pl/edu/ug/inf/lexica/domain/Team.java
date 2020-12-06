@@ -42,7 +42,7 @@ public class Team extends Entity<Team> {
 
         plainTeam.setId(this.getId());
         plainTeam.setName(name);
-        plainTeam.setLeader(leader.withPlainInfo());
+        plainTeam.setLeader(leader.withSomeInfo());
         plainTeam.setDescription(description);
         plainTeam.setTasks(someTasks);
         plainTeam.setMembers(someMembers);

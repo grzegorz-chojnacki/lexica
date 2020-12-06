@@ -24,12 +24,12 @@ public class LexicaApplication {
 			EntityService<Task<SimpleCard>> taskService, List<Task<SimpleCard>> tasks,
 			EntityService<Team> teamService, List<Team> teams,
 			EntityService<User> userService, List<User> users,
-			EntityService<Progress> progressService, List<Progress> progresses) {
+			EntityService<Progress> progressService, List<Progress> progress) {
 		return (args) -> {
 			taskService.addAll(tasks);
 			teamService.addAll(teams);
 			userService.addAll(users);
-			progressService.addAll(progresses);
+			progressService.addAll(progress);
 			AppConfig.updateProgressIds(taskService.getAll());
 		};
 	}

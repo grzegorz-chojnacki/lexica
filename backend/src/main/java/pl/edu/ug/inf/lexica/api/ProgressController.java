@@ -19,13 +19,8 @@ public class ProgressController {
     }
 
     @GetMapping
-    public List<Progress> getProgresses() {
+    public List<Progress> getProgress() {
         return progressService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public Progress getProgress(@PathVariable String id) {
-        return progressService.get(id).orElse(null);
     }
 
     @PostMapping
