@@ -12,7 +12,7 @@ const testCards = [
 
 const activated = true
 const deactivated = false
-const testTasks = [
+export const testTasks = [
   new Task('e6SqZ',
     'Zadanie z fiszkami 1',
     testCards, activated,

@@ -5,6 +5,7 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
+import { TaskViewComponent } from './components/task/task-view/task-view.component'
 
 const routes: Routes = [
   { path: 'team/:teamHash',

@@ -32,6 +32,7 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
+import { TaskViewComponent } from './components/task/task-view/task-view.component'
 import { TaskListItemComponent } from './components/task/task-list-item/task-list-item.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
@@ -70,6 +71,7 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
     TaskDialogComponent,
     TaskMenuComponent,
     TaskDetailsComponent,
+    TaskViewComponent,
   ],
   imports: [
     BrowserModule,

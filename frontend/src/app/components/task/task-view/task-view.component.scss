@@ -1,0 +1,24 @@
+mat-card{
+    min-height: 38%;
+    max-width: 18%;
+    margin-top: 100px;
+    margin-left: 40%;
+    text-align: center;
+}
+mat-card-header{
+    text-align: left;
+}
+mat-card-actions{
+    color:blue;
+    margin:30px;
+  }
+  p{
+      font-size: 20px;
+      font-weight: bold;
+  }
+
+  img{
+
+      width: 30%;
+      height: 30%;
+  }
