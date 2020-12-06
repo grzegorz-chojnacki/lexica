@@ -7,7 +7,7 @@ export class Team {
 
   public constructor(
     public readonly name: string,
-    public readonly hash: string,
+    public readonly id: string,
     public readonly leader: User,
     public readonly members: User[] = [],
     public readonly tasks: Task<TaskType>[] = [],

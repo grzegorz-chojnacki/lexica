@@ -47,6 +47,7 @@ import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSliderModule,
     MatSidenavModule,
     MatToolbarModule,

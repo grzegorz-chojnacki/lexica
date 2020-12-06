@@ -26,12 +26,9 @@ export class WorkspaceComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(user => this.loggedUser = user)
 
-    this.teamService.teams.subscribe(teams => {
-      this.ownedTeams = teams
-        .filter((team: Team) => team.leader === this.loggedUser)
-
-      this.otherTeams = teams
-        .filter((team: Team) => team.leader !== this.loggedUser)
+    this.teamService.getTeams().subscribe(teams => {
+      this.ownedTeams = teams.filter(team => team.leader === this.loggedUser)
+      this.otherTeams = teams.filter(team => team.leader !== this.loggedUser)
     })
   }
 

@@ -22,7 +22,7 @@ export class TeamCardComponent implements OnInit {
   public removeItself(): void { this.teamService.remove(this.team) }
 
   public copyToClipboard(): void {
-    navigator.clipboard.writeText(this.team.hash)
+    navigator.clipboard.writeText(this.team.id)
     this.snackbarService
       .open('Skopiowano do schowka!', undefined, { duration: 2000 })
   }

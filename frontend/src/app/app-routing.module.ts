@@ -8,11 +8,11 @@ import { SimpleCardComponent } from './components/task/simple-card/simple-card.c
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
 
 const routes: Routes = [
-  { path: 'team/:teamHash',
+  { path: 'team/:teamId',
     component: TeamViewComponent },
-  { path: 'task/:taskHash',
+  { path: 'task/:taskId',
     component: SimpleCardComponent }, // TaskViewComponent
-  { path: 'team/:teamHash/:view',
+  { path: 'team/:teamId/:view',
     component: TeamViewComponent }, // Tasks & Members
   { path: 'workspace',
     component: WorkspaceComponent },

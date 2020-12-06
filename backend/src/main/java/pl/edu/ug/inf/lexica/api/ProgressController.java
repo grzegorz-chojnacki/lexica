@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.service.EntityService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/progress")
 public class ProgressController {
     private final EntityService<Progress> progressService;

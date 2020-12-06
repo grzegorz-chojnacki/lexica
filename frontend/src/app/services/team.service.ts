@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { HttpClient } from '@angular/common/http'
 
+import { lexicaURL } from 'src/app/lexica.properties'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
-import { testTeams } from 'src/app/testData'
 import { UserService } from './user.service'
 
 export interface TeamForm {
@@ -16,29 +17,23 @@ export interface TeamForm {
   providedIn: 'root'
 })
 export class TeamService {
-  private readonly teamSource = new BehaviorSubject<Team[]>(testTeams)
+  private readonly teamSource = new BehaviorSubject<Team[]>([])
   private loggedUser!: User
 
-  public constructor(private readonly userService: UserService) {
+  public constructor(
+      private readonly userService: UserService,
+      private readonly http: HttpClient) {
     this.userService.loggedUser.subscribe(user => this.loggedUser = user)
   }
 
-  public get teams(): Observable<Team[]> {
-    return this.teamSource.asObservable()
+  public getTeams(): Observable<Team[]> {
+    return this.http.get<Team[]>(`${lexicaURL}/team`)
   }
 
-  // ToDo: try to find team with this hash in cached teams (teamSource)
-  //       or query server with it
-  public getTeam(hash: string | null): Promise<Team> {
-    return new Promise((resolve, reject) => {
-      const foundTeam = this.teamSource.getValue()
-        .find(team => team.hash === hash)
-
-      return (foundTeam) ? resolve(foundTeam) : reject('Team not found')
-    })
+  public getTeam(id: string | null): Observable<Team> {
+    return this.http.get<Team>(`${lexicaURL}/team/${id}`)
   }
 
-  // ToDo: Send this data to server and fetch new team list
   public createTeam(form: TeamForm): void {
     const newTeam = new Team(
       form.name,
@@ -49,7 +44,6 @@ export class TeamService {
     this.prependTeamSource(newTeam)
   }
 
-
   public joinTeam(hash: string): void {
     const newTeam = new Team(`Zespół ${hash}`, hash, new User('John', 'Doe', 'jdoe@lexica.com'))
     this.prependTeamSource(newTeam)
@@ -59,7 +53,6 @@ export class TeamService {
     this.teamSource.next([team, ...this.teamSource.getValue()])
   }
 
-  // ToDo: Send this data to server and fetch new team list
   public remove(removedTeam: Team): void {
     const withoutRemovedTeam = this.teamSource.value
       .filter(team => team !== removedTeam)
