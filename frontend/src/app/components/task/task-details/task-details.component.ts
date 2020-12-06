@@ -18,7 +18,7 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   public getUsersWithProgress(): User[] {
-    return this.users.filter(user => user.getTaskProgress(this.task).value !== 0)
+    return this.users.filter(user => user.getTaskProgress(this.task).completed !== 0)
   }
 
   public ngOnInit(): void { }
