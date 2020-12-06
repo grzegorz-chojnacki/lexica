@@ -25,7 +25,7 @@ export class SimpleCard extends TaskType {
 
 export class Task<T extends TaskType> {
   public constructor(
-    public readonly hash: string,
+    public readonly id: string,
     public readonly name: string,
     public readonly content: T[],
     public readonly isActive: boolean = true,

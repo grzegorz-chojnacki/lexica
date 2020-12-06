@@ -12,7 +12,7 @@ import { TeamService, TeamForm } from 'src/app/services/team.service'
 export class NewTeamComponent implements OnInit {
   @ViewChild(MatTabGroup) private tabGroup!: MatTabGroup
 
-  public readonly hashForm = this.formBuilder.group({ hash: '' })
+  public readonly idForm = this.formBuilder.group({ id: '' })
   public readonly teamForm = this.formBuilder.group({
     name: '',
     description: '',
@@ -27,7 +27,7 @@ export class NewTeamComponent implements OnInit {
 
   public submit(): void {
     if (this.tabGroup.selectedIndex === 0) {
-      this.teamService.joinTeam(this.hashForm.value.hash)
+      this.teamService.joinTeam(this.idForm.value.id)
     } else {
       this.teamService.createTeam(this.teamForm.value as TeamForm)
     }
