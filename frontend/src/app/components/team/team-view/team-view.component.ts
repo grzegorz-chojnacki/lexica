@@ -26,12 +26,14 @@ export class TeamViewComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.loggedUser.subscribe(user => this.user = user)
 
-    const teamHash = this.route.snapshot.paramMap.get('teamHash')
+    const teamId = this.route.snapshot.paramMap.get('teamId')
 
     this.teamService
-      .getTeam(teamHash)
-      .then(team => this.team = team)
-      .catch(err => this.router.navigate(['/']))
+      .getTeam(teamId)
+      .subscribe(
+        team => this.team = team,
+        err  => this.router.navigate(['/'])
+      )
   }
 
 }

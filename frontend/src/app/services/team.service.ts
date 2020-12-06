@@ -26,17 +26,12 @@ export class TeamService {
     this.userService.loggedUser.subscribe(user => this.loggedUser = user)
   }
 
-  public get teams(): Observable<Team[]> {
-    return this.http.get<Team[]>(lexicaURL + '/team')
+  public getTeams(): Observable<Team[]> {
+    return this.http.get<Team[]>(`${lexicaURL}/team`)
   }
 
-  public getTeam(hash: string | null): Promise<Team> {
-    return new Promise((resolve, reject) => {
-      const foundTeam = this.teamSource.getValue()
-        .find(team => team.hash === hash)
-
-      return (foundTeam) ? resolve(foundTeam) : reject('Team not found')
-    })
+  public getTeam(id: string | null): Observable<Team> {
+    return this.http.get<Team>(`${lexicaURL}/team/${id}`)
   }
 
   public createTeam(form: TeamForm): void {
