@@ -5,6 +5,7 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
+import { zip } from 'rxjs'
 
 @Component({
   selector: 'app-team-view',
@@ -14,6 +15,7 @@ import { User } from 'src/app/classes/user'
 export class TeamViewComponent implements OnInit {
   public team!: Team
   public user!: User
+  public leaderView = false
 
   public constructor(
     private router: Router,
@@ -23,14 +25,12 @@ export class TeamViewComponent implements OnInit {
 
   public ngOnInit(): void {
     const teamId = this.route.snapshot.paramMap.get('teamId')
-
-    this.userService.user.subscribe(user => this.user = user)
-
-    this.teamService
-      .getTeam(teamId)
-      .subscribe(
-        team => this.team = team,
-        err  => this.router.navigate(['/']))
+    zip(this.userService.user, this.teamService.getTeam(teamId))
+      .subscribe(([user, team]) => {
+        this.user = user
+        this.team = team
+        this.leaderView = team.leader.id === user.id
+      }, err  => this.router.navigate(['/']))
   }
 
 }
