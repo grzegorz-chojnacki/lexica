@@ -77,7 +77,7 @@ public class AppConfig {
     }
 
     List<Team> testTeams = List.of(
-            new Team("haki",
+            new Team("Khaki",
                     testUsers.get(0), testUserGroup(testUsers.get(0)), testTasks,
                     "Milt op involving oth dest arcrft, civilian, sequela"),
             new Team("Aquamarine",
