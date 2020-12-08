@@ -2,7 +2,7 @@
   <header>
     <img src="{{ avatarURL }}" alt="avatar" />
     <a href="/account" id="nazwaUzytkownika">
-      {{ user.firstname }} {{ user.surname }}
+      {{ user | fullNamePipe }}
     </a>
 
     <mat-icon>account_circle</mat-icon>

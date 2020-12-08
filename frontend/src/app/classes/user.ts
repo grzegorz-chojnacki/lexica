@@ -5,6 +5,7 @@ export class User {
 
   public static deserialize(user: User): User {
     return new User(
+      user.id,
       user.firstname,
       user.surname,
       user.email,
@@ -12,6 +13,7 @@ export class User {
   }
 
   public constructor(
+    public readonly id: string,
     public firstname: string,
     public surname: string,
     public email: string,

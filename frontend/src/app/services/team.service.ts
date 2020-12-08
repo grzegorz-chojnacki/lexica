@@ -47,8 +47,8 @@ export class TeamService {
   }
 
   public joinTeam(id: string): void {
-    const newTeam = new Team(`Zespół ${id}`, id, new User('John', 'Doe', 'jdoe@lexica.com'))
-    this.prependTeamSource(newTeam)
+    // const newTeam = new Team(`Zespół ${id}`, id, new User('John', 'Doe', 'jdoe@lexica.com'))
+    // this.prependTeamSource(newTeam)
   }
 
   private prependTeamSource(team: Team): void {

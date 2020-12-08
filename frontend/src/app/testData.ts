@@ -57,16 +57,16 @@ const testProgress2 = [
 ]
 
 export const testUsers: User[] = [
-  new User('Lyn', 'Tommaseo', 'ltommaseo@example.com', testProgress1),
-  new User('Amie', 'Acomb', 'aacomb@example.com', testProgress2),
-  new User('Frederich', 'Bastow', 'fbastow@example.com', testProgress1),
-  new User('Hilde', 'Felten', 'hfelten@example.com', testProgress2),
-  new User('Fraser', 'Spaule', 'fspaule@example.com', testProgress1),
-  new User('Erna', 'Yokley', 'eyokley@example.com', testProgress1),
-  new User('Walt', 'Verrick', 'wverrick@example.com', testProgress2),
-  new User('Ossie', 'Capoun', 'ocapoun@example.com', testProgress1),
-  new User('Damita', 'Fransinelli', 'dfransinelli@example.com', testProgress2),
-  new User('Peggie', 'Gerrelt', 'pgerrelt@example.com', testProgress2),
+  new User('DMkLJ', 'Lyn', 'Tommaseo', 'ltommaseo@example.com', testProgress1),
+  new User('76F6y', 'Amie', 'Acomb', 'aacomb@example.com', testProgress2),
+  new User('gxg2u', 'Frederich', 'Bastow', 'fbastow@example.com', testProgress1),
+  new User('sAVzW', 'Hilde', 'Felten', 'hfelten@example.com', testProgress2),
+  new User('aJLta', 'Fraser', 'Spaule', 'fspaule@example.com', testProgress1),
+  new User('PwN4a', 'Erna', 'Yokley', 'eyokley@example.com', testProgress1),
+  new User('lKUjw', 'Walt', 'Verrick', 'wverrick@example.com', testProgress2),
+  new User('OvnRQ', 'Ossie', 'Capoun', 'ocapoun@example.com', testProgress1),
+  new User('tRCi0', 'Damita', 'Fransinelli', 'dfransinelli@example.com', testProgress2),
+  new User('MMVdA', 'Peggie', 'Gerrelt', 'pgerrelt@example.com', testProgress2),
 ]
 const testUserGroup = (leader: User) => testUsers.filter(user => user !== leader)
 
