@@ -11,6 +11,6 @@ export class AppComponent {
   public user!: User
 
   public constructor(private userService: UserService) {
-    this.userService.loggedUser.subscribe(u => this.user = u)
+    this.userService.user.subscribe(u => this.user = u)
   }
 }

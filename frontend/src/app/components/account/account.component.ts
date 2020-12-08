@@ -28,7 +28,7 @@ export class AccountComponent implements OnInit {
     public readonly location: Location) { }
 
   public ngOnInit(): void {
-    this.userService.loggedUser.subscribe(u => this.user = u)
+    this.userService.user.subscribe(u => this.user = u)
   }
 
   public saveFName(event: any): void {

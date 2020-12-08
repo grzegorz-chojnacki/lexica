@@ -24,7 +24,7 @@ export class TeamViewComponent implements OnInit {
   public ngOnInit(): void {
     const teamId = this.route.snapshot.paramMap.get('teamId')
 
-    this.userService.loggedUser.subscribe(user => this.user = user)
+    this.userService.user.subscribe(user => this.user = user)
 
     this.teamService
       .getTeam(teamId)

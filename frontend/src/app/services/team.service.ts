@@ -24,7 +24,7 @@ export class TeamService {
   public constructor(
       private readonly userService: UserService,
       private readonly http: HttpClient) {
-    this.userService.loggedUser.subscribe(user => this.loggedUser = user)
+    this.userService.user.subscribe(user => this.loggedUser = user)
   }
 
   public getTeams(): Observable<Team[]> {

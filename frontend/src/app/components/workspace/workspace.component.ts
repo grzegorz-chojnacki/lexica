@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { map } from 'rxjs/operators'
+import { zip } from 'rxjs'
 
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
@@ -14,7 +16,7 @@ import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-te
 })
 export class WorkspaceComponent implements OnInit {
   public search = ''
-  public loggedUser!: User
+  public user!: User
   public ownedTeams!: Team[]
   public otherTeams!: Team[]
 
@@ -24,11 +26,12 @@ export class WorkspaceComponent implements OnInit {
     private readonly userService: UserService) { }
 
   public ngOnInit(): void {
-    this.userService.loggedUser.subscribe(user => this.loggedUser = user)
+
+    this.userService.user.subscribe(user => this.user = user)
 
     this.teamService.getTeams().subscribe(teams => {
-      this.ownedTeams = teams.filter(team => team.leader === this.loggedUser)
-      this.otherTeams = teams.filter(team => team.leader !== this.loggedUser)
+      this.ownedTeams = teams.filter(team => team.leader.id === this.user.id)
+      this.otherTeams = teams.filter(team => team.leader.id !== this.user.id)
     })
   }
 

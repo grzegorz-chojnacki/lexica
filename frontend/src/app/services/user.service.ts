@@ -16,7 +16,7 @@ export class UserService {
 
   public setUser(user: User): void { this.userSource.next(user) }
 
-  public get loggedUser(): Observable<User> {
+  public get user(): Observable<User> {
     return this.http.get<User[]>(`${lexicaURL}/user`)
       .pipe(map(users => User.deserialize(users[0])))
   }

@@ -31,7 +31,7 @@ export class TaskViewComponent implements OnInit {
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
-    this.userService.loggedUser.subscribe(user => this.user = user)
+    this.userService.user.subscribe(user => this.user = user)
 
     const taskid = this.route.snapshot.paramMap.get('taskid')
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { User } from 'src/app/classes/user'
-import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 
 @Component({
@@ -16,6 +15,6 @@ export class SidebarComponent implements OnInit {
   public constructor(private userService: UserService) { }
 
   public ngOnInit(): void {
-    this.userService.loggedUser.subscribe(user => this.user = user)
+    this.userService.user.subscribe(user => this.user = user)
   }
 }
