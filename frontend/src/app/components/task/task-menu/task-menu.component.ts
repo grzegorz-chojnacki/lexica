@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
-import { Task, TaskType } from 'src/app/classes/task'
+import { Task, Example } from 'src/app/classes/task'
 import { User } from 'src/app/classes/user'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 
@@ -11,7 +11,7 @@ import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-
   styleUrls: ['./task-menu.component.scss']
 })
 export class TaskMenuComponent implements OnInit {
-  @Input() public task!: Task<TaskType>
+  @Input() public task!: Task<Example>
   @Input() public users!: User[]
   @ViewChild(MatMenu, { static: true }) public readonly menu!: MatMenu
 

@@ -1,5 +1,5 @@
 import { User } from 'src/app/classes/user'
-import { TaskType, Task } from 'src/app/classes/task'
+import { Example, Task } from 'src/app/classes/task'
 import { Progress } from './progress'
 
 export class Team {
@@ -20,7 +20,7 @@ export class Team {
     public readonly id: string,
     public readonly leader: User,
     public readonly members: User[] = [],
-    public readonly tasks: Task<TaskType>[] = [],
+    public readonly tasks: Task<Example>[] = [],
     public readonly description: string = '',
     public readonly image?: ImageBitmap) { }
 
@@ -28,7 +28,7 @@ export class Team {
     return this.tasks.map(task => user.getTaskProgress(task))
   }
 
-  public getTaskProgress(task: Task<TaskType>): Progress[] {
+  public getTaskProgress(task: Task<Example>): Progress[] {
     return this.users.map(user => user.getTaskProgress(task))
   }
 

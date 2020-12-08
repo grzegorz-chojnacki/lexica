@@ -18,7 +18,7 @@ export class TaskAddingComponent implements OnInit {
   public ngOnInit(): void { }
 
   public submit(): void {
-    // this.taskType.create(this.taskForm.value as TaskType
+    // this.Example.create(this.taskForm.value as Example
   }
 
 }

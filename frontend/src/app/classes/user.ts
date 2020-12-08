@@ -1,5 +1,5 @@
 import { Progress } from './progress'
-import { Task, TaskType } from './task'
+import { Task, Example } from './task'
 
 export class User {
 
@@ -18,7 +18,7 @@ export class User {
     public readonly progress: Progress[] = [],
     public readonly avatar?: ImageBitmap) { }
 
-  public getTaskProgress(task: Task<TaskType>): Progress {
+  public getTaskProgress(task: Task<Example>): Progress {
     return this.progress.find(progress => progress.taskId === task.id)
       || new Progress(task.id, 0)
   }

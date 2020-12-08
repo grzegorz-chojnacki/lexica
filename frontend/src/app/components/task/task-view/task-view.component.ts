@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 
 
-import { SimpleCard, Task, TaskType } from 'src/app/classes/task'
+import { SimpleCard, Task, Example } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
@@ -22,8 +22,6 @@ export class TaskViewComponent implements OnInit {
 
   public counter = 1
   public progress = 0
-
-
 
   public constructor(
     private router: Router,
@@ -49,15 +47,14 @@ export class TaskViewComponent implements OnInit {
     // this.simpleCard.foreignWord = 'Next word' + this.counter
 
     console.log('progres' + this.progress)
-    if (this.counter < this.task.content.length) {
+    if (this.counter < this.task.examples.length) {
       this.counter++
     }
     else
-    if (this.counter === this.task.content.length) {
-    let dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
-    let instance = dialogRef.componentInstance
-    instance.progres = this.task.content.length - this.progress
+    if (this.counter === this.task.examples.length) {
+    const dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
+    const instance = dialogRef.componentInstance
+    instance.progres = this.task.examples.length - this.progress
     }
   }
 }
-

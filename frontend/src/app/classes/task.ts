@@ -1,21 +1,14 @@
+import { TaskType } from './task-type'
 import { User } from './user'
 
 export interface TaskAndUsersWithProgress {
-  task: Task<TaskType>
+  task: Task<Example>
   users: User[]
 }
 
-export abstract class TaskType {
-  public abstract readonly name: string
-  public abstract readonly description: string
-  public abstract readonly exampleImage?: ImageBitmap
-}
+export abstract class Example { }
 
-export class SimpleCard extends TaskType {
-  public readonly name = 'Fiszka prosta'
-  public readonly description = 'Opis fiszki prostej'
-  public readonly exampleImage?: ImageBitmap
-
+export class SimpleCard extends Example {
   public constructor(
     public readonly foreignWord: string,
     public readonly nativeWord: string,
@@ -23,14 +16,13 @@ export class SimpleCard extends TaskType {
   ) { super() }
 }
 
-export class Task<T extends TaskType> {
+export class Task<T extends Example> {
   public constructor(
     public readonly id: string,
     public readonly name: string,
-    public readonly content: T[],
+    public readonly examples: T[],
+    public readonly type: TaskType,
     public readonly isActive: boolean = true,
     public readonly description?: string,
   ) { }
-
-  public get type(): TaskType { return this.content[0] as TaskType }
 }

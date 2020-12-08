@@ -2,6 +2,7 @@ import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { Progress } from './classes/progress'
 import { SimpleCard, Task } from './classes/task'
+import { SimpleCardTask } from './classes/task-type'
 
 const testCards = [
   new SimpleCard('Jabłko', 'Apple'),
@@ -15,27 +16,27 @@ const deactivated = false
 export const testTasks = [
   new Task('e6SqZ',
     'Zadanie z fiszkami 1',
-    testCards, activated,
+    testCards, SimpleCardTask, activated,
     'Opis zadania z fiszkami 1'),
   new Task('A1WSD',
     'Zadanie bez opisu',
-    testCards, activated),
+    testCards, SimpleCardTask, activated),
   new Task('4Fr6v',
     'Zadanie z fiszkami 2',
-    testCards, activated,
+    testCards, SimpleCardTask, activated,
     'Jakieś następne zadanie'),
   new Task('dBT1o',
     'Zadanie z fiszkami 3',
-    testCards, activated,
+    testCards, SimpleCardTask, activated,
     `Opis zadania z bardzo długim opisiem, który najprawdopodobniej powinien
      zostać ograniczony`),
   new Task('BlLAj',
     'Zadanie nieaktywne',
-    testCards, deactivated,
+    testCards, SimpleCardTask, deactivated,
     'Opis zadania nieaktywnego'),
   new Task('dLXM7',
     'Zadanie z trochę dłuższym tytułem',
-    testCards, activated,
+    testCards, SimpleCardTask, activated,
     'Opis zadania z dłuższym tytułem'),
 ]
 

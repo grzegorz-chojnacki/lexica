@@ -30,14 +30,11 @@ export class TaskService {
   }
 
   // ToDo: Send this data to server and fetch new task list
-  public createTask(form: TaskForm): void {
-    const newTask = new Task(
-      btoa(Math.random().toString()), // Base64 encode
-      form.name,
-      [])
+  // public createTask(form: TaskForm): void {
+  //   const newTask = new Task(form.name, [])
 
-    this.prependTaskSource(newTask)
-  }
+  //   this.prependTaskSource(newTask)
+  // }
 
   private prependTaskSource(task: Task<SimpleCard>): void {
     this.taskSource.next([task, ...this.taskSource.getValue()])

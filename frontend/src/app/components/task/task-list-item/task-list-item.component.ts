@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Task, TaskType } from 'src/app/classes/task'
+import { Task, Example } from 'src/app/classes/task'
 import { MatDialog } from '@angular/material/dialog'
 import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
 import { User } from 'src/app/classes/user'
@@ -11,7 +11,7 @@ import { Progress } from 'src/app/classes/progress'
   styleUrls: ['./task-list-item.component.scss']
 })
 export class TaskListItemComponent implements OnInit {
-  @Input() public task!: Task<TaskType>
+  @Input() public task!: Task<Example>
   @Input() public users!: User[]
 
   public constructor(private readonly dialog: MatDialog) { }
