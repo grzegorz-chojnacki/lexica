@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-//import { SimpleCardComponent } from 'src/app/components/task/simple-card/simple-card.component'
+// import { SimpleCardComponent } from 'src/app/components/task/simple-card/simple-card.component'
 
 @Component({
   selector: 'app-task-summary',
@@ -10,6 +10,7 @@ export class TaskSummaryComponent implements OnInit {
 
   public progres = 1
   public percentageProgress = 0
+  public notKnownWords: string[] = new Array()
   public array(n: number): any[] {
     return Array(n)
   }

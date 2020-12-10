@@ -11,8 +11,8 @@
     <mat-card-content>
        <p class='mat-card-subtitle'> Lista pominiętych słów</p>
         <mat-list>
-        <mat-list-item  *ngFor="let link of array(progres)">
-            <h4 matLine >SŁOWO</h4>
+        <mat-list-item  *ngFor="let word of notKnownWords">
+            <h4 matLine >{{word}}</h4>
             <p>
              TŁUMACZENIE
             </p>

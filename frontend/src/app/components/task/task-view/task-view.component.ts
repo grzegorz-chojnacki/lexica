@@ -22,6 +22,7 @@ export class TaskViewComponent implements OnInit {
 
   public counter = 1
   public progress = 0
+  public foreignWordsList = new Array()
 
   public constructor(
     private router: Router,
@@ -34,7 +35,6 @@ export class TaskViewComponent implements OnInit {
     this.userService.user.subscribe(user => this.user = user)
 
     const taskid = this.route.snapshot.paramMap.get('taskId')
-    console.log(taskid)
 
     this.taskService
       .getTask(taskid)
@@ -47,7 +47,10 @@ export class TaskViewComponent implements OnInit {
     // Go to another card, count progress
     // this.simpleCard.foreignWord = 'Next word' + this.counter
 
+
     if (this.counter < this.task.examples.length) {
+    //  this.foreignWordsList[this.counter - 1] = this.task.examples[this.counter - 1].foreignWord
+    //  console.log(this.task.examples[this.counter - 1].foreignWord)
       this.counter++
     }
     else
@@ -56,6 +59,14 @@ export class TaskViewComponent implements OnInit {
     const instance = dialogRef.componentInstance
     instance.progres = this.task.examples.length - this.progress
     instance.percentageProgress = this.progress /  this.task.examples.length * 100
+
+    instance.notKnownWords =  this.dontKnowNext().slice(0, -1)
     }
+  }
+
+  public dontKnowNext(): string[] {
+   this.foreignWordsList.push(this.task.examples[this.counter - 1].foreignWord)
+   return this.foreignWordsList
+
   }
 }
