@@ -15,7 +15,8 @@ public class AppConfig {
             new SimpleCard("Jabłko", "Apple"),
             new SimpleCard("Banan", "Banana"),
             new SimpleCard("Pomarańcza", "Orange"),
-            new SimpleCard("Mango", "Mango")
+            new SimpleCard("Mango", "Mango"),
+            new SimpleCard("Cytryna", "Lemon")
     );
 
     List<Task<SimpleCard>> testTasks = List.of(
