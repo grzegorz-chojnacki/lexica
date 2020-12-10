@@ -23,6 +23,7 @@ export class TaskViewComponent implements OnInit {
   public counter = 1
   public progress = 0
   public foreignWordsList = new Array()
+  public nativeWordsList = new Array()
 
   public constructor(
     private router: Router,
@@ -44,13 +45,9 @@ export class TaskViewComponent implements OnInit {
 
 
   public nextCard(): void {
-    // Go to another card, count progress
-    // this.simpleCard.foreignWord = 'Next word' + this.counter
 
 
     if (this.counter < this.task.examples.length) {
-    //  this.foreignWordsList[this.counter - 1] = this.task.examples[this.counter - 1].foreignWord
-    //  console.log(this.task.examples[this.counter - 1].foreignWord)
       this.counter++
     }
     else
@@ -66,7 +63,7 @@ export class TaskViewComponent implements OnInit {
 
   public dontKnowNext(): string[] {
    this.foreignWordsList.push(this.task.examples[this.counter - 1].foreignWord)
+   // this.nativeWordsList.push(this.task.examples[this.counter - 1].nativeWord)
    return this.foreignWordsList
-
   }
 }
