@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core'
 export class TaskSummaryComponent implements OnInit {
 
   public progres = 1
+  public percentageProgress = 0
   public array(n: number): any[] {
     return Array(n)
   }

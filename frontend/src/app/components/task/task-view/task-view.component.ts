@@ -47,7 +47,6 @@ export class TaskViewComponent implements OnInit {
     // Go to another card, count progress
     // this.simpleCard.foreignWord = 'Next word' + this.counter
 
-    console.log('progres' + this.progress)
     if (this.counter < this.task.examples.length) {
       this.counter++
     }
@@ -56,6 +55,7 @@ export class TaskViewComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
     const instance = dialogRef.componentInstance
     instance.progres = this.task.examples.length - this.progress
+    instance.percentageProgress = this.progress /  this.task.examples.length * 100
     }
   }
 }
