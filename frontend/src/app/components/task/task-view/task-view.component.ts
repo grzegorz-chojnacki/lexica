@@ -33,12 +33,13 @@ export class TaskViewComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.user.subscribe(user => this.user = user)
 
-    const taskid = this.route.snapshot.paramMap.get('taskid')
+    const taskid = this.route.snapshot.paramMap.get('taskId')
+    console.log(taskid)
 
     this.taskService
       .getTask(taskid)
-      .then(task => this.task = task)
-      .catch(err => this.router.navigate(['/']))
+      .subscribe(task => this.task = task
+      , err => this.router.navigate(['/']))
   }
 
 

@@ -17,6 +17,17 @@ export class SimpleCard extends Example {
 }
 
 export class Task<T extends Example> {
+  public static deserialize(task: Task<SimpleCard>): Task<SimpleCard> {
+    return new Task(
+      task.id,
+      task.name,
+      task.examples,
+      task.type,
+      task.isActive,
+      task.description)
+  }
+
+
   public constructor(
     public readonly id: string,
     public readonly name: string,
