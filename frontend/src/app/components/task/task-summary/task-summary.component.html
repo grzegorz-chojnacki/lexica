@@ -1,7 +1,7 @@
 <mat-card>
-    <mat-card-subtitle>TYP ZADANIA</mat-card-subtitle>
-    <mat-card-title>Zadanie</mat-card-title>
-    <mat-card-subtitle>Krótki opis zadania</mat-card-subtitle>
+    <mat-card-subtitle>{{task.type.name}}</mat-card-subtitle>
+    <mat-card-title>{{ task.name }}</mat-card-title>
+    <mat-card-subtitle>{{ task.description }}</mat-card-subtitle>
 <mat-card-header>
     <mat-card-title>Podsumowanie</mat-card-title>
     <mat-card-subtitle >Znane słowa - {{percentageProgress}}%</mat-card-subtitle>
@@ -12,10 +12,8 @@
        <p class='mat-card-subtitle'> Lista pominiętych słów</p>
         <mat-list>
         <mat-list-item  *ngFor="let word of notKnownWords">
-            <h4 matLine >{{word}}</h4>
-            <p>
-             TŁUMACZENIE
-            </p>
+            <h4 matLine >{{word.foreignWord}}</h4>
+            <h4 id="matLine"> {{word.nativeWord}}</h4>
             <mat-divider></mat-divider>
 
           </mat-list-item>

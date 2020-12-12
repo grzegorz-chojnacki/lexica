@@ -22,8 +22,7 @@ export class TaskViewComponent implements OnInit {
 
   public counter = 1
   public progress = 0
-  public foreignWordsList = new Array()
-  public nativeWordsList = new Array()
+  public wordsList = new Array()
 
   public constructor(
     private router: Router,
@@ -56,14 +55,14 @@ export class TaskViewComponent implements OnInit {
     const instance = dialogRef.componentInstance
     instance.progres = this.task.examples.length - this.progress
     instance.percentageProgress = this.progress /  this.task.examples.length * 100
+    instance.task = this.task
 
     instance.notKnownWords =  this.dontKnowNext().slice(0, -1)
     }
   }
 
-  public dontKnowNext(): string[] {
-   this.foreignWordsList.push(this.task.examples[this.counter - 1].foreignWord)
-   // this.nativeWordsList.push(this.task.examples[this.counter - 1].nativeWord)
-   return this.foreignWordsList
+  public dontKnowNext(): SimpleCard[] {
+   this.wordsList.push(this.task.examples[this.counter - 1])
+   return this.wordsList
   }
 }
