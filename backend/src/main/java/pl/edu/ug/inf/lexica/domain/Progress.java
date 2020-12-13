@@ -5,14 +5,29 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Progress extends Entity<Progress> {
+@javax.persistence.Entity
+@Table(name="progress")
+public class Progress  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "progress_id")
+    private String id;
+
+    @Column(name = "task_id")
     private String taskId;
+
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "completed")
     private int completed;
 
+    //@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Progress withPlainInfo() {
         Progress plainProgress = new Progress();
 
@@ -23,10 +38,5 @@ public class Progress extends Entity<Progress> {
         return plainProgress;
     }
 
-    @Override
-    public Progress patch(Progress that) {
-        this.taskId = that.getTaskId();
-        this.completed = that.getCompleted();
-        return this;
-    }
+
 }

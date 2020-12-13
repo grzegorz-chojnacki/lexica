@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS billionaires;
+DROP TABLE IF EXISTS progress;
 
-CREATE TABLE billionaires (
-  id INT AUTO_INCREMENT  PRIMARY KEY,
-  first_name VARCHAR(250) NOT NULL,
-  last_name VARCHAR(250) NOT NULL,
-  career VARCHAR(250) DEFAULT NULL
+CREATE TABLE progress (
+  id VARCHAR(30) AUTO_INCREMENT  PRIMARY KEY,
+  task_id VARCHAR(30) NOT NULL,
+  user_id VARCHAR(30) NOT NULL,
+  completed INT DEFAULT NULL
 );
 
-INSERT INTO billionaires (first_name, last_name, career) VALUES
-  ('Aliko', 'Dangote', 'Billionaire Industrialist'),
-  ('Bill', 'Gates', 'Billionaire Tech Entrepreneur'),
+INSERT INTO billionaires (task_id, user_id, completed) VALUES
+  ('Aliko', 'Dangote', 0),
+  ('Bill', 'Gates', 30),
   ('Folrunsho', 'Alakija', 'Billionaire Oil Magnate');
