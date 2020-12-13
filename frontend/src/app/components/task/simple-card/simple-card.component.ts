@@ -29,8 +29,8 @@ export class SimpleCardComponent implements OnInit {
     }
     else
     if (this.counter === this.simpleCards.length) {
-    let dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
-    let instance = dialogRef.componentInstance
+    const dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
+    const instance = dialogRef.componentInstance
     instance.progres = this.simpleCards.length - this.progress
     }
   }

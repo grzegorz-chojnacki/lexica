@@ -20,19 +20,9 @@ export class TaskService {
   private readonly taskSource = new BehaviorSubject<Task<SimpleCard>[]>(testTasks)
   public constructor(private readonly http: HttpClient) { }
 
- /* public get task(): Observable<Task<SimpleCard>[]> {
-    return this.taskSource.asObservable()
-   return this.http.get<Task<SimpleCard>[]>(`${lexicaURL}/task/${id}`)
-   .pipe(map(users => Task.deserialize(users[0])))
-  }*/
 
   public getTask(id: string | null): Observable<Task<SimpleCard>> {
-    /*return new Promise((resolve, reject) => {
-      const foundTask = this.taskSource.getValue()
-        .find(task => task.id === id)
 
-      return (foundTask) ? resolve(foundTask) : reject('Task not found')
-    })*/
     return this.http.get<Task<SimpleCard>>(`${lexicaURL}/task/${id}`)
     .pipe(map(Task.deserialize))
   }
