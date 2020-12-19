@@ -20,7 +20,7 @@ public class LexicaApplication {
 	@Bean
 	@Autowired
 	CommandLineRunner init(
-			TaskService taskService, List<Task<SimpleCard>> tasks,
+			TaskService taskService, List<Task> tasks,
 			TeamService teamService, List<Team> teams,
 			UserService userService, List<User> users,
 			ProgressService progressService, List<Progress> progress) {

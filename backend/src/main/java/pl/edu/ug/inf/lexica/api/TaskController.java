@@ -22,25 +22,25 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task<SimpleCard> getTask(@PathVariable Integer id) {
+    public Task getTask(@PathVariable Integer id) {
         return taskService.get(id).orElse(null);
     }
 
     @GetMapping
-    public List<Task<SimpleCard>> getTasks() {
+    public List<Task> getTasks() {
         return taskService.getAll();
     }
     //
     //
     // @PostMapping
-    // public Task<SimpleCard> addTask(@RequestBody Task<SimpleCard> newTask) {
-    //     Task<SimpleCard> task = new Task<SimpleCard>().patch(newTask);
+    // public Task addTask(@RequestBody Task newTask) {
+    //     Task task = new Task().patch(newTask);
     //     taskService.add(task);
     //     return task;
     // }
     //
     // @PutMapping("/{id}")
-    // public Task<SimpleCard> updateTask(@RequestBody Task<SimpleCard> newTask, @PathVariable String id) {
+    // public Task updateTask(@RequestBody Task newTask, @PathVariable String id) {
     //     return taskService.replace(id, newTask);
     // }
     //

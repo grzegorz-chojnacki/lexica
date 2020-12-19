@@ -26,7 +26,7 @@ public class Team {
     private List<User> members;
 
     @OneToMany(mappedBy = "id")
-    private List<Task<SimpleCard>> tasks;
+    private List<Task> tasks;
 
     private String description;
 

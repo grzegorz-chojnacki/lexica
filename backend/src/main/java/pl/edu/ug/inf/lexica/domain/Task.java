@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Task<T extends Example> {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,7 +19,7 @@ public class Task<T extends Example> {
     private String name;
 
     @OneToMany(mappedBy = "id")
-    private List<T> examples;
+    private List<SimpleCard> examples;
 
     private boolean isActive;
 
@@ -28,8 +28,8 @@ public class Task<T extends Example> {
     @ManyToOne
     private TaskType type;
 
-    public Task<T> withPlainInfo() {
-        Task<T> plainTask = new Task<>();
+    public Task withPlainInfo() {
+        Task plainTask = new Task();
 
         // plainTask.setId(this.getId());
         plainTask.setName((this.name));

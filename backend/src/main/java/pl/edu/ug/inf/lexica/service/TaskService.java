@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskService implements EntityService<Task<SimpleCard>> {
+public class TaskService implements EntityService<Task> {
     TaskRepository taskRepository;
     @Autowired
     public TaskService(TaskRepository taskRepository){
@@ -18,18 +18,18 @@ public class TaskService implements EntityService<Task<SimpleCard>> {
     }
 
     @Override
-    public void add(Task<SimpleCard> entity) { }
+    public void add(Task entity) { }
 
     @Override
-    public void addAll(List<Task<SimpleCard>> entities) { }
+    public void addAll(List<Task> entities) { }
 
     @Override
     public void remove(Integer id) { }
 
     @Override
-    public List<Task<SimpleCard>> getAll() { return taskRepository.findAll(); }
+    public List<Task> getAll() { return taskRepository.findAll(); }
 
-    public Optional<Task<SimpleCard>> get(Integer id) {
+    public Optional<Task> get(Integer id) {
         return taskRepository.findById(id);
     }
 
