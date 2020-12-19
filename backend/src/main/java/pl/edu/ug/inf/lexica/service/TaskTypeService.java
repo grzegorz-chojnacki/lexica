@@ -18,7 +18,9 @@ public class TaskTypeService implements EntityService<TaskType> {
     }
 
     @Override
-    public void add(TaskType entity) { }
+    public void add(TaskType entity) {
+        taskTypeRepository.save(entity);
+    }
 
     @Override
     public void addAll(List<TaskType> entities) {
@@ -26,7 +28,9 @@ public class TaskTypeService implements EntityService<TaskType> {
     }
 
     @Override
-    public void remove(Integer id) { }
+    public void remove(Integer id) {
+        taskTypeRepository.deleteById(id);
+    }
 
     @Override
     public List<TaskType> getAll() { return taskTypeRepository.findAll(); }
@@ -36,5 +40,7 @@ public class TaskTypeService implements EntityService<TaskType> {
     }
 
     @Override
-    public TaskType replace(Integer id, TaskType newEntity) { return null; }
+    public TaskType replace(TaskType newEntity) {
+        return taskTypeRepository.save(newEntity);
+    }
 }

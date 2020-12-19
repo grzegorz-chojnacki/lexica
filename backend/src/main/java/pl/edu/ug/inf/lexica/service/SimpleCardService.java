@@ -18,7 +18,9 @@ public class SimpleCardService implements EntityService<SimpleCard>{
     }
 
     @Override
-    public void add(SimpleCard entity) { }
+    public void add(SimpleCard entity) {
+        simpleCardRepository.save(entity);
+    }
 
     @Override
     public void addAll(List<SimpleCard> entities) {
@@ -26,7 +28,9 @@ public class SimpleCardService implements EntityService<SimpleCard>{
     }
 
     @Override
-    public void remove(Integer id) { }
+    public void remove(Integer id) {
+        simpleCardRepository.deleteById(id);
+    }
 
     @Override
     public List<SimpleCard> getAll() { return simpleCardRepository.findAll(); }
@@ -36,5 +40,7 @@ public class SimpleCardService implements EntityService<SimpleCard>{
     }
 
     @Override
-    public SimpleCard replace(Integer id, SimpleCard newEntity) { return null; }
+    public SimpleCard replace(SimpleCard newEntity) {
+        return simpleCardRepository.save(newEntity);
+    }
 }

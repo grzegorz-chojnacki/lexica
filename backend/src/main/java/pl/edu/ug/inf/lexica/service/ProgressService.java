@@ -18,7 +18,9 @@ public class ProgressService implements EntityService<Progress>{
     }
 
     @Override
-    public void add(Progress entity) { }
+    public void add(Progress entity) {
+        progressRepository.save(entity);
+    }
 
     @Override
     public void addAll(List<Progress> entities) {
@@ -26,7 +28,9 @@ public class ProgressService implements EntityService<Progress>{
     }
 
     @Override
-    public void remove(Integer id) { }
+    public void remove(Integer id) {
+        progressRepository.deleteById(id);
+    }
 
     @Override
     public List<Progress> getAll() { return progressRepository.findAll(); }
@@ -36,5 +40,7 @@ public class ProgressService implements EntityService<Progress>{
     }
 
     @Override
-    public Progress replace(Integer id, Progress newEntity) { return null; }
+    public Progress replace(Progress newEntity) {
+        return progressRepository.save(newEntity);
+    }
 }

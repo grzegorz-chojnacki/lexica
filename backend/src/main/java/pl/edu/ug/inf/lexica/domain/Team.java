@@ -34,7 +34,7 @@ public class Team {
     public Team withPlainInfo() {
         Team plainTeam = new Team();
 
-        // plainTeam.setId(this.getId());
+        plainTeam.setId(this.getId());
         plainTeam.setName(name);
         plainTeam.setLeader(leader.withPlainInfo());
         plainTeam.setDescription(description);

@@ -8,5 +8,5 @@ public interface EntityService<T> {
     void remove(Integer id);
     List<T> getAll();
     Optional<T> get(Integer id);
-    T replace(Integer id, T newEntity);
+    T replace(T newEntity);
 }

@@ -17,7 +17,7 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void add(User entity) { }
+    public void add(User entity) { userRepository.save(entity); }
 
     @Override
     public void addAll(List<User> entities) {
@@ -25,7 +25,7 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void remove(Integer id) { }
+    public void remove(Integer id) { userRepository.deleteById(id); }
 
     @Override
     public List<User> getAll() { return userRepository.findAll(); }
@@ -35,5 +35,7 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public User replace(Integer id, User newEntity) { return null; }
+    public User replace(User newEntity) {
+        return userRepository.save(newEntity);
+    }
 }
