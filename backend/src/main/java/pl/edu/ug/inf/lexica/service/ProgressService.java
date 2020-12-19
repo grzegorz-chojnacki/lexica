@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class ProgressService implements EntityService<Progress>{
     ProgressRepository progressRepository;
+
     @Autowired
     public ProgressService(ProgressRepository progressRepository){
         this.progressRepository = progressRepository;

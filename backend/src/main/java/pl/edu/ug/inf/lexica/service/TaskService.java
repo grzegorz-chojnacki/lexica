@@ -3,7 +3,6 @@ package pl.edu.ug.inf.lexica.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.ug.inf.lexica.domain.Task;
-import pl.edu.ug.inf.lexica.domain.SimpleCard;
 import pl.edu.ug.inf.lexica.repository.TaskRepository;
 
 import java.util.List;

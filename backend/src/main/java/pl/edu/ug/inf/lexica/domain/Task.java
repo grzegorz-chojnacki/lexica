@@ -18,7 +18,7 @@ public class Task {
 
     private String name;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany
     private List<SimpleCard> examples;
 
     private boolean isActive;
