@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    static private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Opis fiszki");
+    private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Opis fiszki");
 
-    static List<SimpleCard> testCards = List.of(
+    List<SimpleCard> testCards = List.of(
             new SimpleCard(1, "Jabłko", "Apple"),
             new SimpleCard(2, "Banan", "Banana"),
             new SimpleCard(3, "Pomarańcza", "Orange"),
@@ -23,7 +23,7 @@ public class AppConfig {
             new SimpleCard(5, "Cytryna", "Lemon")
     );
 
-    static List<Task> testTasks = List.of(
+    List<Task> testTasks = List.of(
             new Task(1, "Zadanie z fiszkami 1", testCards, true, "Opis zadania z fiszkami 1", simpleCardType),
             new Task(2, "Zadanie bez opisu", testCards, true, "", simpleCardType),
             new Task(3, "Zadanie z fiszkami 2", testCards, true, "Jakieś następne zadanie", simpleCardType),
@@ -32,7 +32,7 @@ public class AppConfig {
             new Task(6, "Zadanie z trochę dłuższym tytułem",testCards, true, "Opis zadania z dłuższym tytułem", simpleCardType)
     );
 
-    static List<Progress> testProgress1 = List.of(
+    List<Progress> testProgress1 = List.of(
             new Progress(1, testTasks.get(0), 0),
             new Progress(2, testTasks.get(1), 30),
             new Progress(3, testTasks.get(2), 34),
@@ -41,7 +41,7 @@ public class AppConfig {
             new Progress(6, testTasks.get(5), 45)
     );
 
-    static List<Progress> testProgress2 = List.of(
+    List<Progress> testProgress2 = List.of(
             new Progress(7, testTasks.get(0), 53),
             new Progress(8, testTasks.get(1), 13),
             new Progress(9, testTasks.get(2), 23),
@@ -50,7 +50,7 @@ public class AppConfig {
             new Progress(12, testTasks.get(5), 20)
     );
 
-    static List<User> testUsers = List.of(
+    List<User> testUsers = List.of(
             new User(1, "Lyn", "Tommaseo", "ltommaseo@example.com", "opBUs", testProgress1),
             new User(2, "Amie", "Acomb", "aacomb@example.com", "jxodRBo", testProgress2),
             new User(3, "Frederich", "Bastow", "fbastow@example.com", "Kv474Uw", testProgress1),
@@ -63,7 +63,7 @@ public class AppConfig {
             new User(10, "Peggie", "Gerrelt", "pgerrelt@example.com", "WyAq1CjwM", testProgress2)
     );
 
-    static private List<User> testUserGroup(User leader) {
+    private List<User> testUserGroup(User leader) {
         return testUsers.stream()
                 .filter(user -> user != leader)
                 .collect(Collectors.toList());
@@ -78,6 +78,14 @@ public class AppConfig {
             new Team(6, "Crimson", testUsers.get(6), testUserGroup(testUsers.get(6)), testTasks, "Pulsating exophthalmos, left eye"),
             new Team(7, "Mauv", testUsers.get(4), testUserGroup(testUsers.get(4)), testTasks, "")
     );
+
+    @Bean
+    @Qualifier("taskTypes")
+    public TaskType createTypeTasks() { return simpleCardType; }
+
+    @Bean
+    @Qualifier("simpleCards")
+    public List<SimpleCard> createSimpleCard() { return testCards; }
 
     @Bean
     @Qualifier("tasks")

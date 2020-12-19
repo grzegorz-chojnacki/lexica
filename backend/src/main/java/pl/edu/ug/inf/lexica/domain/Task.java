@@ -18,7 +18,8 @@ public class Task {
 
     private String name;
 
-    @OneToMany
+    // ToDo: @OneToMany
+    @ManyToMany
     private List<SimpleCard> examples;
 
     private boolean isActive;

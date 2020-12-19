@@ -20,7 +20,9 @@ public class TaskService implements EntityService<Task> {
     public void add(Task entity) { }
 
     @Override
-    public void addAll(List<Task> entities) { }
+    public void addAll(List<Task> entities) {
+        taskRepository.saveAll(entities);
+    }
 
     @Override
     public void remove(Integer id) { }

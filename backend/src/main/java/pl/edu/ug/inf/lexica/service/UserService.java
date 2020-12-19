@@ -20,7 +20,9 @@ public class UserService implements EntityService<User> {
     public void add(User entity) { }
 
     @Override
-    public void addAll(List<User> entities) { }
+    public void addAll(List<User> entities) {
+        userRepository.saveAll(entities);
+    }
 
     @Override
     public void remove(Integer id) { }

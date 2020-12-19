@@ -26,7 +26,8 @@ public class User {
 
     private String password;
 
-    @OneToMany
+    // ToDo: @OneToMany
+    @ManyToMany
     private List<Progress> progress;
 
     public User withPlainInfo() {

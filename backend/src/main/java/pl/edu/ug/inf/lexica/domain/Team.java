@@ -25,7 +25,8 @@ public class Team {
     @ManyToMany
     private List<User> members;
 
-    @OneToMany
+    // ToDo: @OneToMany
+    @ManyToMany
     private List<Task> tasks;
 
     private String description;
@@ -51,7 +52,7 @@ public class Team {
         //         .map(Task::withPlainInfo)
         //         .collect(Collectors.toList());
 
-        // plainTeam.setId(this.getId());
+        plainTeam.setId(this.getId());
         plainTeam.setName(name);
         plainTeam.setLeader(leader.withSomeInfo());
         plainTeam.setDescription(description);

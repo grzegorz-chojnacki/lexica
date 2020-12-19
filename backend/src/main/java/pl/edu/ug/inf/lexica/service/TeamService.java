@@ -20,7 +20,9 @@ public class TeamService implements EntityService<Team> {
     public void add(Team entity) { }
 
     @Override
-    public void addAll(List<Team> entities) { }
+    public void addAll(List<Team> entities) {
+        teamRepository.saveAll(entities);
+    }
 
     @Override
     public void remove(Integer id) { }

@@ -20,11 +20,15 @@ public class LexicaApplication {
 	@Bean
 	@Autowired
 	CommandLineRunner init(
+			TaskTypeService taskTypeService, TaskType taskTypes,
+			SimpleCardService simpleCardService, List<SimpleCard> simpleCards,
 			TaskService taskService, List<Task> tasks,
 			TeamService teamService, List<Team> teams,
 			UserService userService, List<User> users,
 			ProgressService progressService, List<Progress> progress) {
 		return (args) -> {
+			taskTypeService.addAll(List.of(taskTypes));
+			simpleCardService.addAll(simpleCards);
 			taskService.addAll(tasks);
 			progressService.addAll(progress);
 			userService.addAll(users);
