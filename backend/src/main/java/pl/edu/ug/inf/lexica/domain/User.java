@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "lexicauser")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
