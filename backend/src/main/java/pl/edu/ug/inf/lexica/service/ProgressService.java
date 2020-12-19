@@ -19,7 +19,7 @@ public class ProgressService implements EntityService<Progress>{
 
     @Override
     public void add(Progress entity) {
-        progressRepository.save(entity);
+        progressRepository.save(entity.getTask().getId(), entity.getCompleted());
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.service.ProgressService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,25 +24,24 @@ public class ProgressController {
         return progressService.get(id);
     }
 
-/*
- @GetMapping
+    @GetMapping
     public List<Progress> getProgress() {
         return progressService.getAll();
     }
+
     @PostMapping
     public Progress addProgress(@RequestBody Progress newProgress) {
-        Progress progress = new Progress().patch(newProgress);
-        progressService.add(progress);
-        return progress;
+        progressService.add(newProgress);
+        return null;
     }
 
-    @PutMapping("/{id}")
-    public Progress updateProgress(@RequestBody Progress newProgress, @PathVariable String id) {
-        return progressService.replace(id, newProgress);
-    }
+    // @PutMapping("/{id}")
+    // public Progress updateProgress(@RequestBody Progress newProgress, @PathVariable String id) {
+    //     return progressService.replace(id, newProgress);
+    // }
 
-    @DeleteMapping("/{id}")
-    public void deleteProgress(@PathVariable String id) {
-        progressService.remove(id);
-    }*/
+    // @DeleteMapping("/{id}")
+    // public void deleteProgress(@PathVariable String id) {
+    //     progressService.remove(id);
+    // }
 }
