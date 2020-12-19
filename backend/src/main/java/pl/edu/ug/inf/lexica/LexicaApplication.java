@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.edu.ug.inf.lexica.config.AppConfig;
 import pl.edu.ug.inf.lexica.domain.*;
 import pl.edu.ug.inf.lexica.service.EntityService;
 
@@ -27,10 +26,9 @@ public class LexicaApplication {
 			EntityService<Progress> progressService, List<Progress> progress) {
 		return (args) -> {
 			taskService.addAll(tasks);
-			teamService.addAll(teams);
-			userService.addAll(users);
 			progressService.addAll(progress);
-			AppConfig.updateProgressIds(taskService.getAll());
+			userService.addAll(users);
+			teamService.addAll(teams);
 		};
 	}
 }

@@ -5,19 +5,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SimpleCard extends Example<SimpleCard> {
-    public final static TaskType type = new TaskType("Fiszka Prosta", "Opis fiszki prostej");
+@Entity
+public class SimpleCard extends Example {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nativeWord;
     private String foreignWord;
-
-    @Override
-    public SimpleCard patch(SimpleCard that) {
-        this.nativeWord = that.getNativeWord();
-        this.foreignWord = that.getForeignWord();
-        return this;
-    }
 }

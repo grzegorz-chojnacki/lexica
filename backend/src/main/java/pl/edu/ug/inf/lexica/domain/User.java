@@ -6,18 +6,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends Entity<User> {
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String firstname;
+
     private String surname;
+
     private String email;
+
     private String password;
+
+    @OneToMany
     private List<Progress> progress;
 
     public User withPlainInfo() {
@@ -44,13 +54,4 @@ public class User extends Entity<User> {
         return plainUser;
     }
 
-    @Override
-    public User patch(User that) {
-        this.firstname = that.getFirstname();
-        this.surname = that.getSurname();
-        this.email = that.getEmail();
-        this.password = that.getPassword();
-        this.progress = that.getProgress();
-        return this;
-    }
 }

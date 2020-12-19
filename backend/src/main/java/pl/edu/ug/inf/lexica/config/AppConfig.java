@@ -11,103 +11,71 @@ import java.util.stream.Stream;
 
 @Configuration
 public class AppConfig {
-    List<SimpleCard> testCards = List.of(
-            new SimpleCard("Jabłko", "Apple"),
-            new SimpleCard("Banan", "Banana"),
-            new SimpleCard("Pomarańcza", "Orange"),
-            new SimpleCard("Mango", "Mango"),
-            new SimpleCard("Cytryna", "Lemon")
+    static private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Opis fiszki");
+
+    static List<SimpleCard> testCards = List.of(
+            new SimpleCard(1, "Jabłko", "Apple"),
+            new SimpleCard(2, "Banan", "Banana"),
+            new SimpleCard(3, "Pomarańcza", "Orange"),
+            new SimpleCard(4, "Mango", "Mango"),
+            new SimpleCard(5, "Cytryna", "Lemon")
     );
 
-    List<Task<SimpleCard>> testTasks = List.of(
-            new Task<>("Zadanie z fiszkami 1",
-                    testCards, true, "Opis zadania z fiszkami 1",
-                    SimpleCard.type),
-            new Task<>("Zadanie bez opisu",
-                    testCards, true, "",
-                    SimpleCard.type),
-            new Task<>("Zadanie z fiszkami 2",
-                    testCards, true, "Jakieś następne zadanie",
-                    SimpleCard.type),
-            new Task<>("Zadanie z fiszkami 3", testCards, true,
-                    "Opis zadania z bardzo długim opisiem, który najprawdopodobniej powinien zostać ograniczony",
-                    SimpleCard.type),
-            new Task<>("Zadanie nieaktywne", testCards, false,
-                    "Opis zadania nieaktywnego",
-                    SimpleCard.type),
-            new Task<>("Zadanie z trochę dłuższym tytułem",
-                    testCards, true, "Opis zadania z dłuższym tytułem",
-                    SimpleCard.type)
+    static List<Task<SimpleCard>> testTasks = List.of(
+            new Task<>(1, "Zadanie z fiszkami 1", testCards, true, "Opis zadania z fiszkami 1", simpleCardType),
+            new Task<>(2, "Zadanie bez opisu", testCards, true, "", simpleCardType),
+            new Task<>(3, "Zadanie z fiszkami 2", testCards, true, "Jakieś następne zadanie", simpleCardType),
+            new Task<>(4, "Zadanie z fiszkami 3", testCards, true, "Opis zadania z bardzo długim opisiem, który najprawdopodobniej powinien zostać ograniczony", simpleCardType),
+            new Task<>(5, "Zadanie nieaktywne", testCards, false, "Opis zadania nieaktywnego", simpleCardType),
+            new Task<>(6, "Zadanie z trochę dłuższym tytułem",testCards, true, "Opis zadania z dłuższym tytułem", simpleCardType)
     );
 
     static List<Progress> testProgress1 = List.of(
-            new Progress("", 0),
-            new Progress("", 30),
-            new Progress("", 34),
-            new Progress("", 56),
-            new Progress("", 28),
-            new Progress("", 45)
+            new Progress(1, testTasks.get(1), 0),
+            new Progress(2, testTasks.get(2), 30),
+            new Progress(3, testTasks.get(3), 34),
+            new Progress(4, testTasks.get(4), 56),
+            new Progress(5, testTasks.get(5), 28),
+            new Progress(6, testTasks.get(6), 45)
     );
 
     static List<Progress> testProgress2 = List.of(
-            new Progress("", 53),
-            new Progress("", 13),
-            new Progress("", 23),
-            new Progress("", 49),
-            new Progress("", 19),
-            new Progress("", 20)
+            new Progress(7, testTasks.get(1), 53),
+            new Progress(8, testTasks.get(2), 13),
+            new Progress(9, testTasks.get(3), 23),
+            new Progress(10, testTasks.get(4), 49),
+            new Progress(11, testTasks.get(5), 19),
+            new Progress(12, testTasks.get(6), 20)
     );
 
-    List<User> testUsers = List.of(
-            new User("Lyn", "Tommaseo", "ltommaseo@example.com", "opBUs", testProgress1),
-            new User("Amie", "Acomb", "aacomb@example.com", "jxodRBo", testProgress2),
-            new User("Frederich", "Bastow", "fbastow@example.com", "Kv474Uw", testProgress1),
-            new User("Hilde", "Felten", "hfelten@example.com", "QF416Kb", testProgress2),
-            new User("Fraser", "Spaule", "fspaule@example.com", "c5IDuMrp2GO0AQw", testProgress1),
-            new User("Erna", "Yokley", "eyokley@example.com", "tcOCnWgAFrpzrg", testProgress1),
-            new User("Walt", "Verrick", "wverrick@example.com", "Q5wzLBetyjNy", testProgress2),
-            new User("Ossie", "Capoun", "ocapoun@example.com", "OPUgvEv0cFkr", testProgress1),
-            new User("Damita", "Fransinelli", "dfransinelli@example.com", "JYtQnNdtNJBaR", testProgress2),
-            new User("Peggie", "Gerrelt", "pgerrelt@example.com", "WyAq1CjwM", testProgress2)
+    static List<User> testUsers = List.of(
+            new User(1, "Lyn", "Tommaseo", "ltommaseo@example.com", "opBUs", testProgress1),
+            new User(2, "Amie", "Acomb", "aacomb@example.com", "jxodRBo", testProgress2),
+            new User(3, "Frederich", "Bastow", "fbastow@example.com", "Kv474Uw", testProgress1),
+            new User(4, "Hilde", "Felten", "hfelten@example.com", "QF416Kb", testProgress2),
+            new User(5, "Fraser", "Spaule", "fspaule@example.com", "c5IDuMrp2GO0AQw", testProgress1),
+            new User(6, "Erna", "Yokley", "eyokley@example.com", "tcOCnWgAFrpzrg", testProgress1),
+            new User(7, "Walt", "Verrick", "wverrick@example.com", "Q5wzLBetyjNy", testProgress2),
+            new User(8, "Ossie", "Capoun", "ocapoun@example.com", "OPUgvEv0cFkr", testProgress1),
+            new User(9, "Damita", "Fransinelli", "dfransinelli@example.com", "JYtQnNdtNJBaR", testProgress2),
+            new User(10, "Peggie", "Gerrelt", "pgerrelt@example.com", "WyAq1CjwM", testProgress2)
     );
 
-    private List<User> testUserGroup(User leader) {
+    static private List<User> testUserGroup(User leader) {
         return testUsers.stream()
                 .filter(user -> user != leader)
                 .collect(Collectors.toList());
     }
 
     List<Team> testTeams = List.of(
-            new Team("Khaki",
-                    testUsers.get(0), testUserGroup(testUsers.get(0)), testTasks,
-                    "Milt op involving oth dest arcrft, civilian, sequela"),
-            new Team("Aquamarine",
-                    testUsers.get(1), testUserGroup(testUsers.get(1)), testTasks,
-                    "Contracture, unspecified hip"),
-            new Team("Fuscia",
-                    testUsers.get(2), testUserGroup(testUsers.get(2)), testTasks,
-                    "Smith\"s fx r radius, subs for opn fx type I/2 w nonunion"),
-            new Team("Orange",
-                    testUsers.get(3), testUserGroup(testUsers.get(3)), testTasks,
-                    "Stress fracture, right femur, initial encounter for fracture"),
-            new Team("Aquamarine",
-                    testUsers.get(5), testUserGroup(testUsers.get(5)), testTasks,
-                    "Left sided colitis"),
-            new Team("Crimson",
-                    testUsers.get(6), testUserGroup(testUsers.get(6)), testTasks,
-                    "Pulsating exophthalmos, left eye"),
-            new Team("Mauv",
-                    testUsers.get(4), testUserGroup(testUsers.get(4)), testTasks,
-                    ""
-            )
+            new Team(1, "Khaki", testUsers.get(0), testUserGroup(testUsers.get(0)), testTasks, "Milt op involving oth dest arcrft, civilian, sequela"),
+            new Team(2, "Aquamarine", testUsers.get(1), testUserGroup(testUsers.get(1)), testTasks, "Contracture, unspecified hip"),
+            new Team(3, "Fuscia", testUsers.get(2), testUserGroup(testUsers.get(2)), testTasks, "Smith\"s fx r radius, subs for opn fx type I/2 w nonunion"),
+            new Team(4, "Orange", testUsers.get(3), testUserGroup(testUsers.get(3)), testTasks, "Stress fracture, right femur, initial encounter for fracture"),
+            new Team(5, "Aquamarine", testUsers.get(5), testUserGroup(testUsers.get(5)), testTasks, "Left sided colitis"),
+            new Team(6, "Crimson", testUsers.get(6), testUserGroup(testUsers.get(6)), testTasks, "Pulsating exophthalmos, left eye"),
+            new Team(7, "Mauv", testUsers.get(4), testUserGroup(testUsers.get(4)), testTasks, "")
     );
-
-    public static void updateProgressIds(List<Task<SimpleCard>> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
-            testProgress1.get(i).setTaskId(tasks.get(i).getId());
-            testProgress2.get(i).setTaskId(tasks.get(i).getId());
-        }
-    }
 
     @Bean
     @Qualifier("tasks")
