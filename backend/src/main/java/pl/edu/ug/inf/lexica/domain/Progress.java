@@ -16,7 +16,7 @@ public class Progress {
     private int id;
 
     @ManyToOne
-    private Task<?> task;
+    private Task<SimpleCard> task;
 
     private int completed;
 

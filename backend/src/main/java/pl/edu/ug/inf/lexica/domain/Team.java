@@ -22,10 +22,10 @@ public class Team {
     @ManyToOne
     private User leader;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "id")
     private List<User> members;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<Task<SimpleCard>> tasks;
 
     private String description;

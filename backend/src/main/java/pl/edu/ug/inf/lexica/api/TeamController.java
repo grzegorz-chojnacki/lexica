@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.service.EntityService;
+import pl.edu.ug.inf.lexica.service.TeamService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,10 +13,10 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 @RequestMapping("/team")
 public class TeamController {
-    private final EntityService<Team> teamService;
+    private final TeamService teamService;
 
     @Autowired
-    public TeamController(EntityService<Team> teamService) {
+    public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
 
@@ -25,24 +26,24 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Team getTeam(@PathVariable String id) {
+    public Team getTeam(@PathVariable Integer id) {
         return teamService.get(id).map(Team::withSomeInfo).orElse(null);
     }
-
-    @PostMapping
-    public Team addTeam(@RequestBody Team newTeam) {
-        Team team = new Team().patch(newTeam);
-        teamService.add(team);
-        return team;
-    }
-
-    @PutMapping("/{id}")
-    public Team updateTeam(@RequestBody Team newTeam, @PathVariable String id) {
-        return teamService.replace(id, newTeam);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteTeam(@PathVariable String id) {
-        teamService.remove(id);
-    }
+    //
+    // @PostMapping
+    // public Team addTeam(@RequestBody Team newTeam) {
+    //     Team team = new Team().patch(newTeam);
+    //     teamService.add(team);
+    //     return team;
+    // }
+    //
+    // @PutMapping("/{id}")
+    // public Team updateTeam(@RequestBody Team newTeam, @PathVariable Integer id) {
+    //     return teamService.replace(id, newTeam);
+    // }
+    //
+    // @DeleteMapping("/{id}")
+    // public void deleteTeam(@PathVariable Integer id) {
+    //     teamService.remove(id);
+    // }
 }

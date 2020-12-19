@@ -3,10 +3,8 @@ package pl.edu.ug.inf.lexica.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
-import pl.edu.ug.inf.lexica.service.EntityService;
 import pl.edu.ug.inf.lexica.service.ProgressService;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +19,7 @@ public class ProgressController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Progress> getProgress(@PathVariable String id) {
+    public Optional<Progress> getProgress(@PathVariable Integer id) {
         return progressService.get(id);
     }
 

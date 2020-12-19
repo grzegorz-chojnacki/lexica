@@ -3,6 +3,7 @@ package pl.edu.ug.inf.lexica.config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pl.edu.ug.inf.lexica.domain.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Configuration
+@EnableJpaRepositories
 public class AppConfig {
     static private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Opis fiszki");
 
@@ -31,21 +33,21 @@ public class AppConfig {
     );
 
     static List<Progress> testProgress1 = List.of(
-            new Progress(1, testTasks.get(1), 0),
-            new Progress(2, testTasks.get(2), 30),
-            new Progress(3, testTasks.get(3), 34),
-            new Progress(4, testTasks.get(4), 56),
-            new Progress(5, testTasks.get(5), 28),
-            new Progress(6, testTasks.get(6), 45)
+            new Progress(1, testTasks.get(0), 0),
+            new Progress(2, testTasks.get(1), 30),
+            new Progress(3, testTasks.get(2), 34),
+            new Progress(4, testTasks.get(3), 56),
+            new Progress(5, testTasks.get(4), 28),
+            new Progress(6, testTasks.get(5), 45)
     );
 
     static List<Progress> testProgress2 = List.of(
-            new Progress(7, testTasks.get(1), 53),
-            new Progress(8, testTasks.get(2), 13),
-            new Progress(9, testTasks.get(3), 23),
-            new Progress(10, testTasks.get(4), 49),
-            new Progress(11, testTasks.get(5), 19),
-            new Progress(12, testTasks.get(6), 20)
+            new Progress(7, testTasks.get(0), 53),
+            new Progress(8, testTasks.get(1), 13),
+            new Progress(9, testTasks.get(2), 23),
+            new Progress(10, testTasks.get(3), 49),
+            new Progress(11, testTasks.get(4), 19),
+            new Progress(12, testTasks.get(5), 20)
     );
 
     static List<User> testUsers = List.of(

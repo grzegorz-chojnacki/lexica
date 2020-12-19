@@ -13,7 +13,7 @@ public class ProgressService implements EntityService<Progress>{
     ProgressRepository progressRepository;
     @Autowired
     public ProgressService(ProgressRepository progressRepository){
-        this.progressRepository=progressRepository;
+        this.progressRepository = progressRepository;
     }
 
     @Override
@@ -23,15 +23,15 @@ public class ProgressService implements EntityService<Progress>{
     public void addAll(List<Progress> entities) { }
 
     @Override
-    public void remove(String id) { }
+    public void remove(Integer id) { }
 
     @Override
-    public List<Progress> getAll() { return null; }
+    public List<Progress> getAll() { return progressRepository.findAll(); }
 
-    public Optional<Progress> get(String id) {
+    public Optional<Progress> get(Integer id) {
         return progressRepository.findById(id);
     }
 
     @Override
-    public Progress replace(String id, Progress newEntity) { return null; }
+    public Progress replace(Integer id, Progress newEntity) { return null; }
 }

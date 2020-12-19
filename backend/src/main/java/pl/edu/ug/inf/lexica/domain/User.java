@@ -27,7 +27,7 @@ public class User {
 
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<Progress> progress;
 
     public User withPlainInfo() {

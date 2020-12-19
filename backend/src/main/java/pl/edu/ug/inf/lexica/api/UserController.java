@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.EntityService;
+import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
 
@@ -11,10 +12,10 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
-    private final EntityService<User> userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(EntityService<User> userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -24,24 +25,24 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
+    public User getUser(@PathVariable Integer id) {
         return userService.get(id).orElse(null);
     }
-
-    @PostMapping
-    public User addUser(@RequestBody User newUser) {
-        User user = new User().patch(newUser);
-        userService.add(user);
-        return user;
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@RequestBody User newUser, @PathVariable String id) {
-        return userService.replace(id, newUser);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id) {
-        userService.remove(id);
-    }
+    //
+    // @PostMapping
+    // public User addUser(@RequestBody User newUser) {
+    //     User user = new User().patch(newUser);
+    //     userService.add(user);
+    //     return user;
+    // }
+    //
+    // @PutMapping("/{id}")
+    // public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
+    //     return userService.replace(id, newUser);
+    // }
+    //
+    // @DeleteMapping("/{id}")
+    // public void deleteUser(@PathVariable Integer id) {
+    //     userService.remove(id);
+    // }
 }

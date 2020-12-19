@@ -18,7 +18,7 @@ public class Task<T extends Example> {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<T> examples;
 
     private boolean isActive;
