@@ -2,6 +2,7 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.SimpleCard;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.service.EntityService;
@@ -29,6 +30,11 @@ public class TaskController {
     @GetMapping
     public List<Task> getTasks() {
         return taskService.getAll();
+    }
+    @PostMapping
+    public Task addProgress(@RequestBody Task newTask) {
+        taskService.add(newTask);
+        return null;
     }
     //
     //

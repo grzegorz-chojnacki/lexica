@@ -18,7 +18,7 @@ public class TaskService implements EntityService<Task> {
 
     @Override
     public void add(Task entity) {
-        taskRepository.save(entity);
+        taskRepository.save(entity.getName(),entity.getDescription(),entity.getType().getId(),entity.isActive());
     }
 
     @Override
