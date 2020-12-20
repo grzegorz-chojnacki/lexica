@@ -2,6 +2,7 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.service.EntityService;
 import pl.edu.ug.inf.lexica.service.TeamService;
@@ -28,6 +29,12 @@ public class TeamController {
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable Integer id) {
         return teamService.get(id).map(Team::withSomeInfo).orElse(null);
+    }
+
+    @PostMapping
+    public Team addProgress(@RequestBody Team newTeam) {
+      teamService.add(newTeam);
+        return null;
     }
     //
     // @PostMapping

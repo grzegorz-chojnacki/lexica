@@ -17,7 +17,7 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void add(Team entity) { teamRepository.save(entity); }
+    public void add(Team entity) { teamRepository.save(entity.getName(),entity.getLeader().getId(),entity.getDescription()); }
 
     @Override
     public void addAll(List<Team> entities) {
