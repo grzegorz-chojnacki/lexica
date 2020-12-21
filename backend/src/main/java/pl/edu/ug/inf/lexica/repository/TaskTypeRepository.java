@@ -4,11 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.edu.ug.inf.lexica.domain.TaskType;
 
-import java.util.List;
-import java.util.Optional;
-
 @Repository
-public interface TaskTypeRepository extends JpaRepository<TaskType, Integer> {
-    Optional<TaskType> findById(Integer id);
-    List<TaskType> findAll();
-}
+public interface TaskTypeRepository extends JpaRepository<TaskType, Integer> { }

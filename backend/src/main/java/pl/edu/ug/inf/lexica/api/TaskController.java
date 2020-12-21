@@ -31,27 +31,19 @@ public class TaskController {
     public List<Task> getTasks() {
         return taskService.getAll();
     }
+
     @PostMapping
-    public Task addProgress(@RequestBody Task newTask) {
+    public void addTask(@RequestBody Task newTask) {
         taskService.add(newTask);
-        return null;
     }
-    //
-    //
-    // @PostMapping
-    // public Task addTask(@RequestBody Task newTask) {
-    //     Task task = new Task().patch(newTask);
-    //     taskService.add(task);
-    //     return task;
-    // }
-    //
-    // @PutMapping("/{id}")
-    // public Task updateTask(@RequestBody Task newTask, @PathVariable String id) {
-    //     return taskService.replace(id, newTask);
-    // }
-    //
-    // @DeleteMapping("/{id}")
-    // public void deleteTask(@PathVariable Integer id) {
-    //     taskService.remove(id);
-    // }
+
+    @PutMapping("/{id}")
+    public void updateTask(@RequestBody Task newTask, @PathVariable String id) {
+        taskService.replace(newTask);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable Integer id) {
+        taskService.remove(id);
+    }
 }

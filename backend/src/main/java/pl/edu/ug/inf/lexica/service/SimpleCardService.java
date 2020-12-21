@@ -40,7 +40,7 @@ public class SimpleCardService implements EntityService<SimpleCard>{
     }
 
     @Override
-    public SimpleCard replace(SimpleCard newEntity) {
-        return simpleCardRepository.save(newEntity);
+    public void replace(SimpleCard newEntity) {
+        simpleCardRepository.save(newEntity);
     }
 }

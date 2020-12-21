@@ -17,7 +17,9 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void add(Team entity) { teamRepository.save(entity.getName(),entity.getLeader().getId(),entity.getDescription()); }
+    public void add(Team entity) {
+        teamRepository.save(entity);
+    }
 
     @Override
     public void addAll(List<Team> entities) {
@@ -25,15 +27,21 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void remove(Integer id) { teamRepository.deleteById(id); }
+    public void remove(Integer id) {
+        teamRepository.deleteById(id);
+    }
 
     @Override
-    public List<Team> getAll() { return teamRepository.findAll(); }
+    public List<Team> getAll() {
+        return teamRepository.findAll();
+    }
 
     public Optional<Team> get(Integer id) {
         return teamRepository.findById(id);
     }
 
     @Override
-    public Team replace(Team newEntity) { return teamRepository.save(newEntity); }
+    public void replace(Team entity) {
+        teamRepository.save(entity.getId(), entity.getName(), entity.getDescription());
+    }
 }

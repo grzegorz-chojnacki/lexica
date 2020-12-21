@@ -2,8 +2,12 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.ug.inf.lexica.domain.Progress;
+import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.User;
+import pl.edu.ug.inf.lexica.repository.ProgressRepository;
 import pl.edu.ug.inf.lexica.service.EntityService;
+import pl.edu.ug.inf.lexica.service.ProgressService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
@@ -26,23 +30,34 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable Integer id) {
-        return userService.get(id).orElse(null);
+        return userService.get(id).orElse(new User());
     }
-    //
-    // @PostMapping
-    // public User addUser(@RequestBody User newUser) {
-    //     User user = new User().patch(newUser);
-    //     userService.add(user);
-    //     return user;
-    // }
-    //
-    // @PutMapping("/{id}")
-    // public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
-    //     return userService.replace(id, newUser);
-    // }
-    //
-    // @DeleteMapping("/{id}")
-    // public void deleteUser(@PathVariable Integer id) {
-    //     userService.remove(id);
-    // }
+
+    @PostMapping("/{id}/progress")
+    public void addProgress(@RequestBody Progress p, @PathVariable Integer id) {
+        userService.get(id).ifPresent(user -> {
+            user.getProgress().add(p);
+            userService.replace(user);
+        });
+    }
+
+    @GetMapping("/{id}/progress")
+    public List<Progress> getProgress(@PathVariable Integer id) {
+        return userService.get(id).orElse(new User()).getProgress();
+    }
+
+    @PostMapping
+    public void addUser(@RequestBody User user) {
+        userService.add(user);
+    }
+
+    @PutMapping("/{id}")
+    public void updateUser(@RequestBody User user, @PathVariable Integer id) {
+        userService.replace(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userService.remove(id);
+    }
 }

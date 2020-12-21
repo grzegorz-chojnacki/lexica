@@ -14,8 +14,9 @@ import java.util.Optional;
 public interface TeamRepository extends JpaRepository<Team, Integer> {
     Optional<Team> findById(Integer id);
     List<Team> findAll();
+
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO team (name, leader_id,description) VALUES (?1, ?2, ?3)", nativeQuery = true)
-    void save(String name, int leaderID, String description);
+    @Query(value = "UPDATE team SET name=?2, description=?3 WHERE id=?1", nativeQuery = true)
+    void save(long id, String name, String description);
 }
