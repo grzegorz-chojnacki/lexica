@@ -34,9 +34,9 @@ public class UserController {
     }
 
     @PostMapping("/{id}/progress")
-    public void addProgress(@RequestBody Progress p, @PathVariable Integer id) {
+    public void addProgress(@RequestBody Progress progress, @PathVariable Integer id) {
         userService.get(id).ifPresent(user -> {
-            user.getProgress().add(p);
+            user.getProgress().add(progress);
             userService.replace(user);
         });
     }

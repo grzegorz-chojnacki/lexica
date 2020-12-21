@@ -19,7 +19,7 @@ public class Task {
     private String name;
 
     // ToDo: @OneToMany
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<SimpleCard> examples;
 
     private boolean isActive;

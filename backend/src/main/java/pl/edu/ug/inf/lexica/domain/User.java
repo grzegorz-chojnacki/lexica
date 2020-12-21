@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     // ToDo: @OneToMany
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Progress> progress;
 
     public User withPlainInfo() {

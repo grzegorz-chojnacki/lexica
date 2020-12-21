@@ -26,7 +26,7 @@ public class Team {
     private List<User> members;
 
     // ToDo: @OneToMany
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     private String description;
@@ -61,14 +61,4 @@ public class Team {
 
         return plainTeam;
     }
-
-    // @Override
-    // public Team patch(Team that) {
-    //     this.name = that.getName();
-    //     this.members = that.getMembers();
-    //     this.leader = that.getLeader();
-    //     this.tasks = that.getTasks();
-    //     this.description = that.getDescription();
-    //     return this;
-    // }
 }

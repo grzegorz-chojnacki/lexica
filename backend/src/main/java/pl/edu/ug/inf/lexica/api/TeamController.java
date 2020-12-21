@@ -28,29 +28,24 @@ public class TeamController {
 
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable Integer id) {
-        return teamService.get(id).map(Team::withSomeInfo).orElse(null);
+        return teamService.get(id).orElse(new Team());
     }
 
     @PostMapping
-    public Team addProgress(@RequestBody Team newTeam) {
-      teamService.add(newTeam);
-        return null;
+    public void addTeam(@RequestBody Team team) {
+        teamService.add(team);
     }
-    //
-    // @PostMapping
-    // public Team addTeam(@RequestBody Team newTeam) {
-    //     Team team = new Team().patch(newTeam);
-    //     teamService.add(team);
-    //     return team;
-    // }
-    //
-    // @PutMapping("/{id}")
-    // public Team updateTeam(@RequestBody Team newTeam, @PathVariable Integer id) {
-    //     return teamService.replace(id, newTeam);
-    // }
-    //
-    // @DeleteMapping("/{id}")
-    // public void deleteTeam(@PathVariable Integer id) {
-    //     teamService.remove(id);
-    // }
+
+    @PostMapping("/{id}/task")
+    public void addTask(@RequestBody Task task, @PathVariable Integer id) {
+        teamService.get(id).ifPresent(team -> {
+            team.getTasks().add(task);
+            teamService.add(team);
+        });
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTeam(@PathVariable Integer id) {
+        teamService.remove(id);
+    }
 }
