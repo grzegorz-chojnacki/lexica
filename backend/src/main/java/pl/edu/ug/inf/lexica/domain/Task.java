@@ -29,15 +29,15 @@ public class Task {
     @ManyToOne
     private TaskType type;
 
-    public Task withPlainInfo() {
-        Task plainTask = new Task();
+    public Task withSomeInfo() {
+        Task task = new Task();
 
-        // plainTask.setId(this.getId());
-        plainTask.setName((this.name));
-        plainTask.setActive(this.isActive);
-        plainTask.setDescription(this.description);
-        plainTask.setType(this.type);
+        task.setId(this.id);
+        task.setName(this.name);
+        task.setActive(this.isActive);
+        task.setDescription(this.description);
+        task.setType(this.type);
 
-        return plainTask;
+        return task;
     }
 }

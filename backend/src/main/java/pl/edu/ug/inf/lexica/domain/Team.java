@@ -31,34 +31,35 @@ public class Team {
 
     private String description;
 
-    public Team withPlainInfo() {
-        Team plainTeam = new Team();
+    public Team withSomeInfo() {
+        Team team = new Team();
 
-        plainTeam.setId(this.getId());
-        plainTeam.setName(name);
-        plainTeam.setLeader(leader.withPlainInfo());
-        plainTeam.setDescription(description);
+        team.setId(this.id);
+        team.setName(this.name);
+        team.setLeader(this.leader.withSomeInfo());
+        team.setDescription(this.description);
 
-        return plainTeam;
+        return team;
     }
 
-    public Team withSomeInfo() {
-        Team plainTeam = new Team();
-        List<User> someMembers = this.members.stream()
-                .map(User::withSomeInfo)
+    public Team withMoreInfo() {
+        Team team = new Team();
+
+        team.setId(this.id);
+        team.setName(this.name);
+        team.setLeader(this.leader.withMoreInfo());
+        team.setDescription(this.description);
+
+        List<Task> tasks = this.tasks.stream()
+                .map(Task::withSomeInfo)
                 .collect(Collectors.toList());
+        team.setTasks(tasks);
 
-        // List<Task<SimpleCard>> someTasks = this.tasks.stream()
-        //         .map(Task::withPlainInfo)
-        //         .collect(Collectors.toList());
+        List<User> members = this.members.stream()
+                .map(User::withMoreInfo)
+                .collect(Collectors.toList());
+        team.setMembers(members);
 
-        plainTeam.setId(this.getId());
-        plainTeam.setName(name);
-        plainTeam.setLeader(leader.withSomeInfo());
-        plainTeam.setDescription(description);
-        // plainTeam.setTasks(someTasks);
-        plainTeam.setMembers(someMembers);
-
-        return plainTeam;
+        return team;
     }
 }

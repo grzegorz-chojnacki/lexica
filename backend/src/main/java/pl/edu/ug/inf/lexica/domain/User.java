@@ -31,28 +31,29 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Progress> progress;
 
-    public User withPlainInfo() {
-        User plainUser = new User();
+    public User withSomeInfo() {
+        User user = new User();
 
-        plainUser.setId(this.getId());
-        plainUser.setFirstname(this.firstname);
-        plainUser.setSurname(this.surname);
+        user.setId(this.id);
+        user.setFirstname(this.firstname);
+        user.setSurname(this.surname);
 
-        return plainUser;
+        return user;
     }
 
-    public User withSomeInfo() {
-        User plainUser = new User();
-        List<Progress> plainProgress = this.progress.stream()
-                .map(Progress::withPlainInfo)
+    public User withMoreInfo() {
+        User user = new User();
+
+        user.setId(this.id);
+        user.setFirstname(this.firstname);
+        user.setSurname(this.surname);
+
+        List<Progress> progress = this.progress.stream()
+                .map(Progress::withSomeInfo)
                 .collect(Collectors.toList());
+        user.setProgress(progress);
 
-        plainUser.setId(this.getId());
-        plainUser.setFirstname(this.firstname);
-        plainUser.setSurname(this.surname);
-        plainUser.setProgress(plainProgress);
-
-        return plainUser;
+        return user;
     }
 
 }

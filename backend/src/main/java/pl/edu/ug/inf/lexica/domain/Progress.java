@@ -20,14 +20,16 @@ public class Progress {
 
     private int completed;
 
-    //@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Progress withPlainInfo() {
-        Progress plainProgress = new Progress();
+    public Progress withSomeInfo() {
+        Progress progress = new Progress();
 
-        plainProgress.setId(this.getId());
-        plainProgress.setCompleted(this.completed);
-        // plainProgress.setTaskId(this.taskId);
+        progress.setId(this.id);
+        progress.setCompleted(this.completed);
 
-        return plainProgress;
+        Task task = new Task();
+        task.setId(this.task.getId());
+        progress.setTask(task);
+
+        return progress;
     }
 }

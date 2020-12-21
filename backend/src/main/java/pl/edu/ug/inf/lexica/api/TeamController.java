@@ -24,12 +24,17 @@ public class TeamController {
 
     @GetMapping
     public List<Team> getTeams() {
-        return teamService.getAll().stream().map(Team::withPlainInfo).collect(Collectors.toList());
+        return teamService.getAll().stream().map(Team::withSomeInfo).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable Integer id) {
-        return teamService.get(id).orElse(new Team());
+        return teamService.get(id).map(Team::withMoreInfo).orElse(new Team());
+    }
+
+    @GetMapping("/{id}/task")
+    public List<Task> getTasks(@PathVariable Integer id) {
+        return teamService.get(id).map(Team::getTasks).orElse(List.of());
     }
 
     @PostMapping

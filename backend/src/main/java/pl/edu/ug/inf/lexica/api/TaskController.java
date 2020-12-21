@@ -21,7 +21,7 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public Task getTask(@PathVariable Integer id) {
-        return taskService.get(id).orElse(null);
+        return taskService.get(id).orElse(new Task());
     }
 
     @GetMapping
@@ -34,9 +34,9 @@ public class TaskController {
         taskService.add(newTask);
     }
 
-    @PutMapping("/{id}")
-    public void updateTask(@RequestBody Task newTask, @PathVariable String id) {
-        taskService.update(newTask);
+    @PutMapping()
+    public void updateTask(@RequestBody Task task) {
+        taskService.update(task);
     }
 
     @DeleteMapping("/{id}")
