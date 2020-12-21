@@ -55,8 +55,14 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable Integer id) {
-        userService.update(user);
+    public void updateUser(@RequestBody User updated, @PathVariable Integer id) {
+        userService.get(id).ifPresent(user -> {
+            user.setFirstname(updated.getFirstname());
+            user.setSurname(updated.getSurname());
+            user.setEmail(updated.getEmail());
+            user.setPassword(updated.getPassword());
+            userService.update(user);
+        });
     }
 
     @DeleteMapping("/{id}")

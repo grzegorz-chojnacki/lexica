@@ -45,6 +45,15 @@ public class TeamController {
         });
     }
 
+    @PutMapping("/{id}")
+    public void updateTeam(@RequestBody Team updated, @PathVariable Integer id) {
+        teamService.get(id).ifPresent(team -> {
+            team.setName(updated.getName());
+            team.setDescription(updated.getDescription());
+            teamService.update(team);
+        });
+    }
+
     @PostMapping("/{id}/join")
     public void joinTeam(@RequestBody User user, @PathVariable Integer id) {
         teamService.get(id).ifPresent(team -> {
