@@ -22,11 +22,6 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping
-    public List<Team> getTeams() {
-        return teamService.getAll().stream().map(Team::withSomeInfo).collect(Collectors.toList());
-    }
-
     @GetMapping("/{id}")
     public Team getTeam(@PathVariable Integer id) {
         return teamService.get(id).map(Team::withMoreInfo).orElse(new Team());
@@ -43,7 +38,7 @@ public class TeamController {
     }
 
     @PostMapping("/{id}/task")
-    public void addTask(@RequestBody Task task, @PathVariable Integer id) {
+    public void saveTask(@RequestBody Task task, @PathVariable Integer id) {
         teamService.get(id).ifPresent(team -> {
             team.getTasks().add(task);
             teamService.update(team);

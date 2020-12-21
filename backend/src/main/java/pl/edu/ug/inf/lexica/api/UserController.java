@@ -3,10 +3,13 @@ package pl.edu.ug.inf.lexica.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
+import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,14 +22,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers() {
-        return userService.getAll();
+    @GetMapping("/{id}/team")
+    public List<Team> getTeams(@PathVariable Integer id) {
+        return userService.get(id).map(user -> Stream
+                .concat(user.getLeading().stream(), user.getTeams().stream())
+                .map(Team::withSomeInfo)
+                .collect(Collectors.toList())
+        ).orElse(List.of());
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable Integer id) {
-        return userService.get(id).orElse(new User());
+        return userService.get(id).map(User::withMoreInfo).orElse(new User());
     }
 
     @PostMapping("/{id}/progress")
