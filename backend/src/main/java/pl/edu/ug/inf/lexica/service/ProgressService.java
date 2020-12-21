@@ -40,7 +40,7 @@ public class ProgressService implements EntityService<Progress>{
     }
 
     @Override
-    public void replace(Progress newEntity) {
-        progressRepository.save(newEntity);
+    public void update(Progress entity) {
+        progressRepository.save(entity);
     }
 }

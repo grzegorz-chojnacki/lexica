@@ -3,11 +3,7 @@ package pl.edu.ug.inf.lexica.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
-import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.User;
-import pl.edu.ug.inf.lexica.repository.ProgressRepository;
-import pl.edu.ug.inf.lexica.service.EntityService;
-import pl.edu.ug.inf.lexica.service.ProgressService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
@@ -37,7 +33,7 @@ public class UserController {
     public void addProgress(@RequestBody Progress progress, @PathVariable Integer id) {
         userService.get(id).ifPresent(user -> {
             user.getProgress().add(progress);
-            userService.replace(user);
+            userService.update(user);
         });
     }
 
@@ -53,7 +49,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public void updateUser(@RequestBody User user, @PathVariable Integer id) {
-        userService.replace(user);
+        userService.update(user);
     }
 
     @DeleteMapping("/{id}")

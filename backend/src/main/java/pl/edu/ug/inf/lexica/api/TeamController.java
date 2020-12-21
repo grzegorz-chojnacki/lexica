@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
+import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.EntityService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 
@@ -40,7 +41,15 @@ public class TeamController {
     public void addTask(@RequestBody Task task, @PathVariable Integer id) {
         teamService.get(id).ifPresent(team -> {
             team.getTasks().add(task);
-            teamService.add(team);
+            teamService.update(team);
+        });
+    }
+
+    @PostMapping("/{id}/join")
+    public void joinTeam(@RequestBody User user, @PathVariable Integer id) {
+        teamService.get(id).ifPresent(team -> {
+            team.getMembers().add(user);
+            teamService.update(team);
         });
     }
 

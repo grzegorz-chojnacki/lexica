@@ -35,7 +35,7 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void replace(User newEntity) {
-        userRepository.save(newEntity);
+    public void update(User entity) {
+        userRepository.save(entity);
     }
 }

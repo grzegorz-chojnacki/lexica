@@ -2,10 +2,7 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.ug.inf.lexica.domain.Progress;
-import pl.edu.ug.inf.lexica.domain.SimpleCard;
 import pl.edu.ug.inf.lexica.domain.Task;
-import pl.edu.ug.inf.lexica.service.EntityService;
 import pl.edu.ug.inf.lexica.service.TaskService;
 
 import java.util.List;
@@ -39,7 +36,7 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public void updateTask(@RequestBody Task newTask, @PathVariable String id) {
-        taskService.replace(newTask);
+        taskService.update(newTask);
     }
 
     @DeleteMapping("/{id}")

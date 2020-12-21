@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class TeamService implements EntityService<Team> {
     TeamRepository teamRepository;
+
     @Autowired
     public TeamService(TeamRepository teamRepository){
         this.teamRepository = teamRepository;
@@ -41,7 +42,7 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void replace(Team entity) {
-        teamRepository.save(entity.getId(), entity.getName(), entity.getDescription());
+    public void update(Team entity) {
+        teamRepository.save(entity);
     }
 }

@@ -40,7 +40,7 @@ public class TaskTypeService implements EntityService<TaskType> {
     }
 
     @Override
-    public void replace(TaskType newEntity) {
-        taskTypeRepository.save(newEntity);
+    public void update(TaskType entity) {
+        taskTypeRepository.save(entity);
     }
 }
