@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { BehaviorSubject, Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 
@@ -7,6 +7,7 @@ import { lexicaURL } from 'src/app/lexica.properties'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { UserService } from './user.service'
+import { testUsers } from '../testData'
 
 export interface TeamForm {
   readonly name: string
@@ -19,7 +20,7 @@ export interface TeamForm {
 })
 export class TeamService {
   private readonly teamSource = new BehaviorSubject<Team[]>([])
-  private loggedUser!: User
+  private loggedUser: User = testUsers[0]
 
   public constructor(
       private readonly userService: UserService,
@@ -28,7 +29,13 @@ export class TeamService {
   }
 
   public getTeams(): Observable<Team[]> {
-    return this.http.get<Team[]>(`${lexicaURL}/team`)
+    this.refreshTeamSource()
+    return this.teamSource.asObservable()
+  }
+
+  private refreshTeamSource(): void {
+    this.http.get<Team[]>(`${lexicaURL}/user/${this.loggedUser.id}/team`)
+      .subscribe(teams => this.teamSource.next(teams))
   }
 
   public getTeam(id: string | null): Observable<Team> {
@@ -37,22 +44,13 @@ export class TeamService {
   }
 
   public createTeam(form: TeamForm): void {
-    const newTeam = new Team(
-      form.name,
-      btoa(Math.random().toString()), // Base64 encode
-      this.loggedUser, [], [],
-      form.description)
-
-    this.prependTeamSource(newTeam)
+    this.http.post(`${lexicaURL}/team`, { ...form, leader: this.loggedUser })
+      .subscribe(() => this.refreshTeamSource())
   }
 
   public joinTeam(id: string): void {
-    // const newTeam = new Team(`Zespół ${id}`, id, new User('John', 'Doe', 'jdoe@lexica.com'))
-    // this.prependTeamSource(newTeam)
-  }
-
-  private prependTeamSource(team: Team): void {
-    this.teamSource.next([team, ...this.teamSource.getValue()])
+    this.http.post(`${lexicaURL}/team/${id}`, this.loggedUser)
+      .subscribe(() => this.refreshTeamSource())
   }
 
   public remove(removedTeam: Team): void {

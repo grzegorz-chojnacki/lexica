@@ -15,7 +15,6 @@ import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-te
 })
 export class WorkspaceComponent implements OnInit {
   public search = ''
-  public user!: User
   public ownedTeams!: Team[]
   public otherTeams!: Team[]
 
@@ -25,12 +24,11 @@ export class WorkspaceComponent implements OnInit {
     private readonly userService: UserService) { }
 
   public ngOnInit(): void {
-    zip(this.userService.user, this.teamService.getTeams())
-      .subscribe(([user, teams]) => {
-        this.user = user
-        this.ownedTeams = teams.filter(team => team.leader.id === this.user.id)
-        this.otherTeams = teams.filter(team => team.leader.id !== this.user.id)
-      })
+    this.userService.user.subscribe(user =>
+      this.teamService.getTeams().subscribe(teams => {
+        this.ownedTeams = teams.filter(team => team.leader.id === user.id)
+        this.otherTeams = teams.filter(team => team.leader.id !== user.id)
+      }))
   }
 
   public openDialog(): void {

@@ -57,7 +57,7 @@ const testProgress2 = [
 ]
 
 export const testUsers: User[] = [
-  new User('DMkLJ', 'Lyn', 'Tommaseo', 'ltommaseo@example.com', testProgress1),
+  new User('1', 'Lyn', 'Tommaseo', 'ltommaseo@example.com', testProgress1),
   new User('76F6y', 'Amie', 'Acomb', 'aacomb@example.com', testProgress2),
   new User('gxg2u', 'Frederich', 'Bastow', 'fbastow@example.com', testProgress1),
   new User('sAVzW', 'Hilde', 'Felten', 'hfelten@example.com', testProgress2),
