@@ -24,19 +24,17 @@ public class TaskController {
         return taskService.get(id).orElse(new Task());
     }
 
-    @GetMapping
-    public List<Task> getTasks() {
-        return taskService.getAll();
-    }
-
-    @PostMapping
-    public void addTask(@RequestBody Task newTask) {
-        taskService.add(newTask);
-    }
-
-    @PutMapping()
-    public void updateTask(@RequestBody Task task) {
-        taskService.update(task);
+    @PutMapping("/{id}")
+    public void updateTask(@RequestBody Task updated, @PathVariable Integer id) {
+        taskService.get(id).ifPresent(task -> {
+            if (task.getType().getId() == updated.getType().getId()) {
+                task.setName(updated.getName());
+                task.setDescription(updated.getDescription());
+                task.setActive(updated.isActive());
+                task.setExamples(updated.getExamples());
+                taskService.update(task);
+            }
+        });
     }
 
     @DeleteMapping("/{id}")
