@@ -48,18 +48,18 @@ export class TeamService {
       .subscribe(() => this.refreshTeamSource())
   }
 
-  public remove(team: Team): void {
-    this.http.delete(`${lexicaURL}/team/${team.id}`)
-      .subscribe(() => this.refreshTeamSource())
-  }
-
   public joinTeam(id: string): void {
     this.http.post(`${lexicaURL}/team/${id}/join`, this.loggedUser)
       .subscribe(() => this.refreshTeamSource())
   }
 
-  public leave(team: Team): void {
-    this.http.post(`${lexicaURL}/team/${team.id}/leave`, this.loggedUser)
-      .subscribe(() => this.refreshTeamSource())
+  public remove(team: Team): void {
+    if (team.leader.id === this.loggedUser.id) {
+      this.http.delete(`${lexicaURL}/team/${team.id}`)
+        .subscribe(() => this.refreshTeamSource())
+    } else {
+      this.http.post(`${lexicaURL}/team/${team.id}/leave`, this.loggedUser)
+        .subscribe(() => this.refreshTeamSource())
+    }
   }
 }

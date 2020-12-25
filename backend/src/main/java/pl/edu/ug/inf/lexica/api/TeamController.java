@@ -62,6 +62,14 @@ public class TeamController {
         });
     }
 
+    @PostMapping("/{id}/leave")
+    public void leaveTeam(@RequestBody User user, @PathVariable Integer id) {
+        teamService.get(id).ifPresent(team -> {
+            team.getMembers().removeIf(u -> u.getId() == user.getId());
+            teamService.update(team);
+        });
+    }
+
     @DeleteMapping("/{id}")
     public void deleteTeam(@PathVariable Integer id) {
         teamService.remove(id);
