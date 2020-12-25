@@ -48,15 +48,18 @@ export class TeamService {
       .subscribe(() => this.refreshTeamSource())
   }
 
-  public joinTeam(id: string): void {
-    this.http.post(`${lexicaURL}/team/${id}`, this.loggedUser)
+  public remove(team: Team): void {
+    this.http.delete(`${lexicaURL}/team/${team.id}`)
       .subscribe(() => this.refreshTeamSource())
   }
 
-  public remove(removedTeam: Team): void {
-    const withoutRemovedTeam = this.teamSource.value
-      .filter(team => team !== removedTeam)
+  public joinTeam(id: string): void {
+    this.http.post(`${lexicaURL}/team/${id}/join`, this.loggedUser)
+      .subscribe(() => this.refreshTeamSource())
+  }
 
-    this.teamSource.next(withoutRemovedTeam)
+  public leave(team: Team): void {
+    this.http.post(`${lexicaURL}/team/${team.id}/leave`, this.loggedUser)
+      .subscribe(() => this.refreshTeamSource())
   }
 }
