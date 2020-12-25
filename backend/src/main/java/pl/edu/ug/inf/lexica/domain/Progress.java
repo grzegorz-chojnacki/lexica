@@ -2,31 +2,34 @@ package pl.edu.ug.inf.lexica.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Progress extends Entity<Progress> {
-    private String taskId;
+@Entity
+public class Progress {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    private Task task;
+
     private int completed;
 
-    public Progress withPlainInfo() {
-        Progress plainProgress = new Progress();
+    public Progress withSomeInfo() {
+        Progress progress = new Progress();
 
-        plainProgress.setId(this.getId());
-        plainProgress.setCompleted(this.completed);
-        plainProgress.setTaskId(this.taskId);
+        progress.setId(this.id);
+        progress.setCompleted(this.completed);
 
-        return plainProgress;
-    }
+        Task task = new Task();
+        task.setId(this.task.getId());
+        progress.setTask(task);
 
-    @Override
-    public Progress patch(Progress that) {
-        this.taskId = that.getTaskId();
-        this.completed = that.getCompleted();
-        return this;
+        return progress;
     }
 }

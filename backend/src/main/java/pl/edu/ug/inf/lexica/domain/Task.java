@@ -2,41 +2,42 @@ package pl.edu.ug.inf.lexica.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Task<T extends Example<T>> extends Entity<Task<T>> {
+@Entity
+public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String name;
-    private List<T> examples;
+
+    // ToDo: @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<SimpleCard> examples;
+
     private boolean isActive;
+
     private String description;
+
+    @ManyToOne
     private TaskType type;
 
-    public Task<T> withPlainInfo() {
-        Task<T> plainTask = new Task<>();
+    public Task withSomeInfo() {
+        Task task = new Task();
 
-        plainTask.setId(this.getId());
-        plainTask.setName((this.name));
-        plainTask.setActive(this.isActive);
-        plainTask.setDescription(this.description);
-        plainTask.setType(this.type);
+        task.setId(this.id);
+        task.setName(this.name);
+        task.setActive(this.isActive);
+        task.setDescription(this.description);
+        task.setType(this.type);
 
-        return plainTask;
-    }
-
-    @Override
-    public Task<T> patch(Task<T> that) {
-        this.name = that.getName();
-        this.examples = that.getExamples();
-        this.description = that.getDescription();
-        this.isActive = that.isActive();
-        this.type = that.getType();
-        return this;
+        return task;
     }
 }

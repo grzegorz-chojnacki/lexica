@@ -2,46 +2,71 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.ug.inf.lexica.domain.Progress;
+import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
-import pl.edu.ug.inf.lexica.service.EntityService;
+import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
-    private final EntityService<User> userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(EntityService<User> userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers() {
-        return userService.getAll();
+    @GetMapping("/{id}/team")
+    public List<Team> getTeams(@PathVariable Integer id) {
+        return userService.get(id).map(user -> Stream
+                .concat(user.getLeading().stream(), user.getTeams().stream())
+                .map(Team::withSomeInfo)
+                .collect(Collectors.toList())
+        ).orElse(List.of());
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return userService.get(id).orElse(null);
+    public User getUser(@PathVariable Integer id) {
+        return userService.get(id).map(User::withMoreInfo).orElse(new User());
+    }
+
+    @PostMapping("/{id}/progress")
+    public void addProgress(@RequestBody Progress progress, @PathVariable Integer id) {
+        userService.get(id).ifPresent(user -> {
+            user.getProgress().add(progress);
+            userService.update(user);
+        });
+    }
+
+    @GetMapping("/{id}/progress")
+    public List<Progress> getProgress(@PathVariable Integer id) {
+        return userService.get(id).orElse(new User()).getProgress();
     }
 
     @PostMapping
-    public User addUser(@RequestBody User newUser) {
-        User user = new User().patch(newUser);
+    public void addUser(@RequestBody User user) {
         userService.add(user);
-        return user;
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@RequestBody User newUser, @PathVariable String id) {
-        return userService.replace(id, newUser);
+    public void updateUser(@RequestBody User updated, @PathVariable Integer id) {
+        userService.get(id).ifPresent(user -> {
+            user.setFirstname(updated.getFirstname());
+            user.setSurname(updated.getSurname());
+            user.setEmail(updated.getEmail());
+            user.setPassword(updated.getPassword());
+            userService.update(user);
+        });
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id) {
+    public void deleteUser(@PathVariable Integer id) {
         userService.remove(id);
     }
 }

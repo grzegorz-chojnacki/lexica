@@ -1,56 +1,71 @@
 package pl.edu.ug.inf.lexica.domain;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
-public class User extends Entity<User> {
+@Entity
+@Table(name = "lexicauser")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String firstname;
+
     private String surname;
+
     private String email;
+
     private String password;
+
+    @ManyToMany(mappedBy = "members")
+    public List<Team> teams;
+
+    @OneToMany(mappedBy = "leader")
+    public List<Team> leading;
+
+    // ToDo: @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Progress> progress;
 
-    public User withPlainInfo() {
-        User plainUser = new User();
-
-        plainUser.setId(this.getId());
-        plainUser.setFirstname(this.firstname);
-        plainUser.setSurname(this.surname);
-
-        return plainUser;
+    public User(int id, String firstname, String surname, String email, String password, List<Progress> progress) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.progress = progress;
     }
+
 
     public User withSomeInfo() {
-        User plainUser = new User();
-        List<Progress> plainProgress = this.progress.stream()
-                .map(Progress::withPlainInfo)
-                .collect(Collectors.toList());
+        User user = new User();
 
-        plainUser.setId(this.getId());
-        plainUser.setFirstname(this.firstname);
-        plainUser.setSurname(this.surname);
-        plainUser.setProgress(plainProgress);
+        user.setId(this.id);
+        user.setFirstname(this.firstname);
+        user.setSurname(this.surname);
 
-        return plainUser;
+        return user;
     }
 
-    @Override
-    public User patch(User that) {
-        this.firstname = that.getFirstname();
-        this.surname = that.getSurname();
-        this.email = that.getEmail();
-        this.password = that.getPassword();
-        this.progress = that.getProgress();
-        return this;
+    public User withMoreInfo() {
+        User user = new User();
+
+        user.setId(this.id);
+        user.setFirstname(this.firstname);
+        user.setSurname(this.surname);
+
+        List<Progress> progress = this.progress.stream()
+                .map(Progress::withSomeInfo)
+                .collect(Collectors.toList());
+        user.setProgress(progress);
+
+        return user;
     }
 }
