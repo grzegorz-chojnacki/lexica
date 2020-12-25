@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProgressRepository extends JpaRepository<Progress, Integer> {
-    Optional<Progress> findById(Integer id);
+public interface ProgressRepository extends JpaRepository<Progress, Long> {
+    Optional<Progress> findById(Long id);
     List<Progress> findAll();
 }

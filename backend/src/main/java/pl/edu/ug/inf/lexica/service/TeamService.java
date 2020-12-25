@@ -28,7 +28,7 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Long id) {
         teamRepository.deleteById(id);
     }
 
@@ -37,7 +37,7 @@ public class TeamService implements EntityService<Team> {
         return teamRepository.findAll();
     }
 
-    public Optional<Team> get(Integer id) {
+    public Optional<Team> get(Long id) {
         return teamRepository.findById(id);
     }
 

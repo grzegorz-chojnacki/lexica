@@ -28,14 +28,14 @@ public class TaskTypeService implements EntityService<TaskType> {
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Long id) {
         taskTypeRepository.deleteById(id);
     }
 
     @Override
     public List<TaskType> getAll() { return taskTypeRepository.findAll(); }
 
-    public Optional<TaskType> get(Integer id) {
+    public Optional<TaskType> get(Long id) {
         return taskTypeRepository.findById(id);
     }
 

@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Progress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne
     private Task task;

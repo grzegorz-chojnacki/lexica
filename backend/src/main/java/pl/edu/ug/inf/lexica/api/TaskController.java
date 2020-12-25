@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.service.TaskService;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/task")
@@ -20,12 +18,12 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getTask(@PathVariable Integer id) {
+    public Task getTask(@PathVariable Long id) {
         return taskService.get(id).orElse(new Task());
     }
 
     @PutMapping("/{id}")
-    public void updateTask(@RequestBody Task updated, @PathVariable Integer id) {
+    public void updateTask(@RequestBody Task updated, @PathVariable Long id) {
         taskService.get(id).ifPresent(task -> {
             if (task.getType().getId() == updated.getType().getId()) {
                 task.setName(updated.getName());
@@ -38,7 +36,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Integer id) {
+    public void deleteTask(@PathVariable Long id) {
         taskService.remove(id);
     }
 }

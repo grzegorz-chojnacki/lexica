@@ -28,14 +28,14 @@ public class SimpleCardService implements EntityService<SimpleCard>{
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Long id) {
         simpleCardRepository.deleteById(id);
     }
 
     @Override
     public List<SimpleCard> getAll() { return simpleCardRepository.findAll(); }
 
-    public Optional<SimpleCard> get(Integer id) {
+    public Optional<SimpleCard> get(Long id) {
         return simpleCardRepository.findById(id);
     }
 

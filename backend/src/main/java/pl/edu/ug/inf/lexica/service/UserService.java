@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class UserService implements EntityService<User> {
     UserRepository userRepository;
+
     @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -25,12 +26,12 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void remove(Integer id) { userRepository.deleteById(id); }
+    public void remove(Long id) { userRepository.deleteById(id); }
 
     @Override
     public List<User> getAll() { return userRepository.findAll(); }
 
-    public Optional<User> get(Integer id) {
+    public Optional<User> get(Long id) {
         return userRepository.findById(id);
     }
 

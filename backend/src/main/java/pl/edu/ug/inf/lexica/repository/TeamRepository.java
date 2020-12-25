@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TeamRepository extends JpaRepository<Team, Integer> {
-    Optional<Team> findById(Integer id);
+public interface TeamRepository extends JpaRepository<Team, Long> {
+    Optional<Team> findById(Long id);
     List<Team> findAll();
 }

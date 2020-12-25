@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String firstname;
 
@@ -34,7 +34,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Progress> progress;
 
-    public User(int id, String firstname, String surname, String email, String password, List<Progress> progress) {
+    public User(long id, String firstname, String surname, String email, String password, List<Progress> progress) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;

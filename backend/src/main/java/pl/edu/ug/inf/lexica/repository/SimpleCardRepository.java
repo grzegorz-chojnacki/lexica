@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SimpleCardRepository extends JpaRepository<SimpleCard, Integer> {
-    Optional<SimpleCard> findById(Integer id);
+public interface SimpleCardRepository extends JpaRepository<SimpleCard, Long> {
+    Optional<SimpleCard> findById(Long id);
     List<SimpleCard> findAll();
 }

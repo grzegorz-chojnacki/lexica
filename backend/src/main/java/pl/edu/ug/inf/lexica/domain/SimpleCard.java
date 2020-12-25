@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class SimpleCard extends Example {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String nativeWord;
     private String foreignWord;
 }

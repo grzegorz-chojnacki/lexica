@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String name;
 

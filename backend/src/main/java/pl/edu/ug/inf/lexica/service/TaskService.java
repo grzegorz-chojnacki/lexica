@@ -11,15 +11,14 @@ import java.util.Optional;
 @Service
 public class TaskService implements EntityService<Task> {
     TaskRepository taskRepository;
+
     @Autowired
     public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
     }
 
     @Override
-    public void add(Task entity) {
-        taskRepository.save(entity.getName(),entity.getDescription(),entity.getType().getId(),entity.isActive());
-    }
+    public void add(Task entity) { taskRepository.save(entity); }
 
     @Override
     public void addAll(List<Task> entities) {
@@ -27,14 +26,14 @@ public class TaskService implements EntityService<Task> {
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Long id) {
         taskRepository.deleteById(id);
     }
 
     @Override
     public List<Task> getAll() { return taskRepository.findAll(); }
 
-    public Optional<Task> get(Integer id) {
+    public Optional<Task> get(Long id) {
         return taskRepository.findById(id);
     }
 

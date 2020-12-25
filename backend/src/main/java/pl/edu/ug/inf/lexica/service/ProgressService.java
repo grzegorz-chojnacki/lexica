@@ -28,14 +28,14 @@ public class ProgressService implements EntityService<Progress>{
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Long id) {
         progressRepository.deleteById(id);
     }
 
     @Override
     public List<Progress> getAll() { return progressRepository.findAll(); }
 
-    public Optional<Progress> get(Integer id) {
+    public Optional<Progress> get(Long id) {
         return progressRepository.findById(id);
     }
 

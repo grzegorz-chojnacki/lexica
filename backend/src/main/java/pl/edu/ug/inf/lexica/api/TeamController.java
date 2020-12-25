@@ -4,13 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
-import pl.edu.ug.inf.lexica.domain.User;
-import pl.edu.ug.inf.lexica.service.EntityService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,7 +21,7 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Team getTeam(@PathVariable Integer id) {
+    public Team getTeam(@PathVariable Long id) {
         return teamService.get(id).map(Team::withMoreInfo).orElse(new Team());
     }
 
@@ -36,7 +31,7 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public void updateTeam(@RequestBody Team updated, @PathVariable Integer id) {
+    public void updateTeam(@RequestBody Team updated, @PathVariable Long id) {
         teamService.get(id).ifPresent(team -> {
             team.setName(updated.getName());
             team.setDescription(updated.getDescription());
@@ -45,12 +40,12 @@ public class TeamController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTeam(@PathVariable Integer id) {
+    public void deleteTeam(@PathVariable Long id) {
         teamService.remove(id);
     }
 
     @PostMapping("/{id}/task")
-    public void addTask(@RequestBody Task task, @PathVariable Integer id) {
+    public void addTask(@RequestBody Task task, @PathVariable Long id) {
         teamService.get(id).ifPresent(team -> {
             team.getTasks().add(task);
             teamService.update(team);
@@ -58,7 +53,7 @@ public class TeamController {
     }
 
     @PutMapping("/{teamId}/user/{userId}")
-    public void joinTeam(@PathVariable Integer teamId, @PathVariable Integer userId) {
+    public void joinTeam(@PathVariable Long teamId, @PathVariable Long userId) {
         teamService.get(teamId).ifPresent(team ->
             userService.get(userId).ifPresent(user -> {
                 team.getMembers().add(user);
@@ -68,7 +63,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/{teamId}/user/{userId}")
-    public void leaveTeam(@PathVariable Integer teamId, @PathVariable Integer userId) {
+    public void leaveTeam(@PathVariable Long teamId, @PathVariable Long userId) {
         teamService.get(teamId).ifPresent(team ->
             userService.get(userId).ifPresent(user -> {
                 team.getMembers().remove(user);
