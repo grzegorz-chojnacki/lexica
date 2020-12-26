@@ -7,6 +7,8 @@ import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
+import java.util.UUID;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/team")
@@ -21,7 +23,7 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Team getTeam(@PathVariable Long id) {
+    public Team getTeam(@PathVariable UUID id) {
         return teamService.get(id).map(Team::withMoreInfo).orElse(new Team());
     }
 
@@ -31,7 +33,7 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public void updateTeam(@RequestBody Team updated, @PathVariable Long id) {
+    public void updateTeam(@RequestBody Team updated, @PathVariable UUID id) {
         teamService.get(id).ifPresent(team -> {
             team.setName(updated.getName());
             team.setDescription(updated.getDescription());
@@ -40,12 +42,12 @@ public class TeamController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTeam(@PathVariable Long id) {
+    public void deleteTeam(@PathVariable UUID id) {
         teamService.remove(id);
     }
 
     @PostMapping("/{id}/task")
-    public void addTask(@RequestBody Task task, @PathVariable Long id) {
+    public void addTask(@RequestBody Task task, @PathVariable UUID id) {
         teamService.get(id).ifPresent(team -> {
             team.getTasks().add(task);
             teamService.update(team);
@@ -53,7 +55,7 @@ public class TeamController {
     }
 
     @PutMapping("/{teamId}/user/{userId}")
-    public void joinTeam(@PathVariable Long teamId, @PathVariable Long userId) {
+    public void joinTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
         teamService.get(teamId).ifPresent(team ->
             userService.get(userId).ifPresent(user -> {
                 team.getMembers().add(user);
@@ -63,7 +65,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/{teamId}/user/{userId}")
-    public void leaveTeam(@PathVariable Long teamId, @PathVariable Long userId) {
+    public void leaveTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
         teamService.get(teamId).ifPresent(team ->
             userService.get(userId).ifPresent(user -> {
                 team.getMembers().remove(user);

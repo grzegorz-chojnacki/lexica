@@ -7,6 +7,7 @@ import pl.edu.ug.inf.lexica.repository.TaskRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TaskService implements EntityService<Task> {
@@ -26,14 +27,14 @@ public class TaskService implements EntityService<Task> {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(UUID id) {
         taskRepository.deleteById(id);
     }
 
     @Override
     public List<Task> getAll() { return taskRepository.findAll(); }
 
-    public Optional<Task> get(Long id) {
+    public Optional<Task> get(UUID id) {
         return taskRepository.findById(id);
     }
 

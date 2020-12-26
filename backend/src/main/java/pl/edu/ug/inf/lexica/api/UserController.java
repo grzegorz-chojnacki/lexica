@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/team")
-    public List<Team> getTeams(@PathVariable Long id) {
+    public List<Team> getTeams(@PathVariable UUID id) {
         return userService.get(id).map(user -> Stream
                 .concat(user.getLeading().stream(), user.getTeams().stream())
                 .map(Team::withSomeInfo)
@@ -31,13 +32,18 @@ public class UserController {
         ).orElse(List.of());
     }
 
+    @GetMapping()
+    public List<User> getUsers() {
+        return userService.getAll().stream().map(User::withMoreInfo).collect(Collectors.toList());
+    }
+
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public User getUser(@PathVariable UUID id) {
         return userService.get(id).map(User::withMoreInfo).orElse(new User());
     }
 
     @PostMapping("/{id}/progress")
-    public void addProgress(@RequestBody Progress progress, @PathVariable Long id) {
+    public void addProgress(@RequestBody Progress progress, @PathVariable UUID id) {
         userService.get(id).ifPresent(user -> {
             user.getProgress().add(progress);
             userService.update(user);
@@ -45,7 +51,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/progress")
-    public List<Progress> getProgress(@PathVariable Long id) {
+    public List<Progress> getProgress(@PathVariable UUID id) {
         return userService.get(id).orElse(new User()).getProgress();
     }
 
@@ -55,7 +61,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody User updated, @PathVariable Long id) {
+    public void updateUser(@RequestBody User updated, @PathVariable UUID id) {
         userService.get(id).ifPresent(user -> {
             user.setFirstname(updated.getFirstname());
             user.setSurname(updated.getSurname());
@@ -66,7 +72,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable UUID id) {
         userService.remove(id);
     }
 }

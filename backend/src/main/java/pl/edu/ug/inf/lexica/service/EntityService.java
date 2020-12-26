@@ -5,8 +5,8 @@ import java.util.*;
 public interface EntityService<T> {
     void add(T entity);
     void addAll(List<T> entities);
-    void remove(Long id);
+    void remove(UUID id);
     List<T> getAll();
-    Optional<T> get(Long id);
+    Optional<T> get(UUID id);
     void update(T entity);
 }

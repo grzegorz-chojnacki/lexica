@@ -7,6 +7,7 @@ import pl.edu.ug.inf.lexica.repository.TeamRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TeamService implements EntityService<Team> {
@@ -28,7 +29,7 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void remove(Long id) {
+    public void remove(UUID id) {
         teamRepository.deleteById(id);
     }
 
@@ -37,7 +38,7 @@ public class TeamService implements EntityService<Team> {
         return teamRepository.findAll();
     }
 
-    public Optional<Team> get(Long id) {
+    public Optional<Team> get(UUID id) {
         return teamRepository.findById(id);
     }
 

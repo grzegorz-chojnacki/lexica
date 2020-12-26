@@ -7,6 +7,7 @@ import pl.edu.ug.inf.lexica.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements EntityService<User> {
@@ -26,12 +27,12 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void remove(Long id) { userRepository.deleteById(id); }
+    public void remove(UUID id) { userRepository.deleteById(id); }
 
     @Override
     public List<User> getAll() { return userRepository.findAll(); }
 
-    public Optional<User> get(Long id) {
+    public Optional<User> get(UUID id) {
         return userRepository.findById(id);
     }
 

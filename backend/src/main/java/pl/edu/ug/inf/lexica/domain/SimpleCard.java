@@ -2,11 +2,12 @@ package pl.edu.ug.inf.lexica.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -14,10 +15,11 @@ import javax.persistence.Id;
 @Entity
 @RequiredArgsConstructor
 public class SimpleCard extends Example {
-    @Id
     @JsonIgnore
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     @NonNull
     private String nativeWord;
