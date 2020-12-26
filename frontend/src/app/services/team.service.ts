@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, of } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 
@@ -20,7 +20,7 @@ export interface TeamForm {
 })
 export class TeamService {
   private readonly teamSource = new BehaviorSubject<Team[]>([])
-  private loggedUser: User = testUsers[0]
+  private loggedUser: User = { } as User
 
   public constructor(
       private readonly userService: UserService,
@@ -44,22 +44,17 @@ export class TeamService {
   }
 
   public createTeam(form: TeamForm): void {
-    this.http.post(`${lexicaURL}/team`, { ...form, leader: this.loggedUser })
+    this.http.post(`${lexicaURL}/team`, { ...form, leader: { id: this.loggedUser.id }})
       .subscribe(() => this.refreshTeamSource())
   }
 
   public joinTeam(id: string): void {
-    this.http.post(`${lexicaURL}/team/${id}/join`, this.loggedUser)
+    this.http.put(`${lexicaURL}/team/${id}/user/${this.loggedUser.id}`, null)
       .subscribe(() => this.refreshTeamSource())
   }
 
   public remove(team: Team): void {
-    if (team.leader.id === this.loggedUser.id) {
-      this.http.delete(`${lexicaURL}/team/${team.id}`)
-        .subscribe(() => this.refreshTeamSource())
-    } else {
-      this.http.post(`${lexicaURL}/team/${team.id}/leave`, this.loggedUser)
-        .subscribe(() => this.refreshTeamSource())
-    }
+    this.http.delete(`${lexicaURL}/team/${team.id}/user/${this.loggedUser.id}`)
+      .subscribe(() => this.refreshTeamSource())
   }
 }

@@ -12,12 +12,21 @@ import { lexicaURL } from '../lexica.properties'
 export class UserService {
 
   private readonly userSource = new BehaviorSubject(testUsers[0])
-  public constructor(private readonly http: HttpClient) { }
+  public constructor(private readonly http: HttpClient) {
+    this.refreshUserSource()
+  }
 
-  public setUser(user: User): void { this.userSource.next(user) }
+  private refreshUserSource(): void {
+    this.http.get<User[]>(`${lexicaURL}/user`)
+      .subscribe(users => this.setUser(users[0]))
+  }
+
+  public setUser(user: User): void {
+    this.userSource.next(user)
+  }
 
   public get user(): Observable<User> {
-    return this.http.get<User>(`${lexicaURL}/user/1`)
-      .pipe(map(User.deserialize))
+    this.refreshUserSource()
+    return this.userSource.asObservable()
   }
 }
