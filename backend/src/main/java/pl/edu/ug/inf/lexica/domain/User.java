@@ -2,13 +2,19 @@ package pl.edu.ug.inf.lexica.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "lexicauser")
 public class User {
@@ -16,33 +22,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
     private String firstname;
 
+    @NonNull
     private String surname;
 
+    @NonNull
     private String email;
 
+    @NonNull
     private String password;
 
     @ManyToMany(mappedBy = "members")
-    public List<Team> teams;
+    public List<Team> teams = new ArrayList<>();
 
     @OneToMany(mappedBy = "leader")
-    public List<Team> leading;
+    public List<Team> leading = new ArrayList<>();
 
     // ToDo: @OneToMany
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Progress> progress;
-
-    public User(long id, String firstname, String surname, String email, String password, List<Progress> progress) {
-        this.id = id;
-        this.firstname = firstname;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.progress = progress;
-    }
-
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Progress> progress = new ArrayList<>();
 
     public User withSomeInfo() {
         User user = new User();
@@ -59,6 +60,7 @@ public class User {
 
         user.setId(this.id);
         user.setFirstname(this.firstname);
+        user.setEmail(this.email);
         user.setSurname(this.surname);
 
         List<Progress> progress = this.progress.stream()

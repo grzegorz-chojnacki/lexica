@@ -1,34 +1,43 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     @ManyToOne
     private User leader;
 
     @ManyToMany
-    private List<User> members;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<User> members = new ArrayList<>();
 
     // ToDo: @OneToMany
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Task> tasks = new ArrayList<>();
 
+    @NonNull
     private String description;
 
     public Team withSomeInfo() {

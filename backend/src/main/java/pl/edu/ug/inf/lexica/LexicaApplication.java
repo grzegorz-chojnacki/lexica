@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.lexica;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import pl.edu.ug.inf.lexica.domain.*;
 import pl.edu.ug.inf.lexica.service.*;
 
 import java.util.List;
+import java.util.function.Function;
 
 @SpringBootApplication
 public class LexicaApplication {
@@ -21,18 +23,14 @@ public class LexicaApplication {
 	@Autowired
 	CommandLineRunner init(
 			TaskTypeService taskTypeService, TaskType taskTypes,
-			SimpleCardService simpleCardService, List<SimpleCard> simpleCards,
-			TaskService taskService, List<Task> tasks,
 			TeamService teamService, List<Team> teams,
-			UserService userService, List<User> users,
-			ProgressService progressService, List<Progress> progress) {
+			UserService userService, List<User> users, Function<List<Team>, List<Team>> progressSetup) {
 		return (args) -> {
 			taskTypeService.addAll(List.of(taskTypes));
-			simpleCardService.addAll(simpleCards);
-			taskService.addAll(tasks);
-			progressService.addAll(progress);
 			userService.addAll(users);
 			teamService.addAll(teams);
+			// TODO: NAPRAWIC
+			progressSetup.apply(teamService.getAll()).forEach(teamService::update);
 		};
 	}
 }

@@ -1,13 +1,11 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Progress {
@@ -15,9 +13,11 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
     @ManyToOne
     private Task task;
 
+    @NonNull
     private int completed;
 
     public Progress withSomeInfo() {

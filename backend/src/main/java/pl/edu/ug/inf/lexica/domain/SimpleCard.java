@@ -1,9 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,14 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@RequiredArgsConstructor
 public class SimpleCard extends Example {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NonNull
     private String nativeWord;
+
+    @NonNull
     private String foreignWord;
 }

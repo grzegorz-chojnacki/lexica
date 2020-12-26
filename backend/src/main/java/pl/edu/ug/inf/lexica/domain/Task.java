@@ -1,31 +1,37 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     // ToDo: @OneToMany
     @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<SimpleCard> examples;
 
+    @NonNull
     private boolean isActive;
 
+    @NonNull
     private String description;
 
+    @NonNull
     @ManyToOne
     private TaskType type;
 

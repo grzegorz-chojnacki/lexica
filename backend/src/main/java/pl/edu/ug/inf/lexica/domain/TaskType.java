@@ -1,8 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 public class TaskType {
@@ -18,7 +16,9 @@ public class TaskType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     private String description;
 }
