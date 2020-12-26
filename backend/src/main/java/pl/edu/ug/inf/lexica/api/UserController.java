@@ -8,6 +8,7 @@ import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,8 +39,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable UUID id) {
-        return userService.get(id).map(User::withMoreInfo).orElse(new User());
+    public Optional<User> getUser(@PathVariable UUID id) {
+        return userService.get(id).map(User::withMoreInfo);
     }
 
     @PostMapping("/{id}/progress")

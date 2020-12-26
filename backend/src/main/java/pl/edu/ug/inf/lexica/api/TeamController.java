@@ -7,6 +7,7 @@ import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -23,8 +24,8 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Team getTeam(@PathVariable UUID id) {
-        return teamService.get(id).map(Team::withMoreInfo).orElse(new Team());
+    public Optional<Team> getTeam(@PathVariable UUID id) {
+        return teamService.get(id).map(Team::withMoreInfo);
     }
 
     @PostMapping

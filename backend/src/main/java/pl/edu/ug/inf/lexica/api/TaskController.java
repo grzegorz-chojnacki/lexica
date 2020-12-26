@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.service.TaskService;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -20,8 +21,8 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getTask(@PathVariable UUID id) {
-        return taskService.get(id).orElse(new Task());
+    public Optional<Task> getTask(@PathVariable UUID id) {
+        return taskService.get(id);
     }
 
     @PutMapping("/{id}")
