@@ -8,10 +8,7 @@ import pl.edu.ug.inf.lexica.service.TaskTypeService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -54,10 +51,10 @@ public class AppConfig {
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
-     private List<Progress> generateProgress(List<Task> tasks) {
+     private Set<Progress> generateProgress(List<Task> tasks) {
         return tasks.stream()
                 .map(task -> new Progress(task, new Random().nextInt(task.getExamples().size() + 1)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     List<User> testUsers = List.of(
@@ -81,10 +78,10 @@ public class AppConfig {
             new Team("Crimson", testUsers.get(6), "Pulsating exophthalmos, left eye"),
             new Team("Mauv", testUsers.get(4), ""));
 
-    List<User> testUserGroup(User leader) {
+    Set<User> testUserGroup(User leader) {
         return testUsers.stream()
                 .filter(user -> user.getId() != leader.getId())
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public void initDataBase() {
@@ -93,7 +90,7 @@ public class AppConfig {
         testTeams.stream().peek(team -> {
                 team.setTasks(generateTasks.get());
                 userService.get(team.getLeader().getId()).ifPresent(leader -> {
-                    List<User> members = testUserGroup(leader);
+                    Set<User> members = testUserGroup(leader);
                     team.setMembers(members);
                 });
             }).forEach(teamService::add);

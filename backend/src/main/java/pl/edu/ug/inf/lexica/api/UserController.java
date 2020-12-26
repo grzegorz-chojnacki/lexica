@@ -7,9 +7,7 @@ import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.UserService;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +27,8 @@ public class UserController {
         return userService.get(id).map(user -> Stream
                 .concat(user.getLeading().stream(), user.getTeams().stream())
                 .map(Team::withSomeInfo)
+                .sorted(Comparator.comparing(Team::getId))
+                .sorted(Comparator.comparing(Team::getName))
                 .collect(Collectors.toList())
         ).orElse(List.of());
     }
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/progress")
-    public List<Progress> getProgress(@PathVariable UUID id) {
+    public Set<Progress> getProgress(@PathVariable UUID id) {
         return userService.get(id).orElse(new User()).getProgress();
     }
 

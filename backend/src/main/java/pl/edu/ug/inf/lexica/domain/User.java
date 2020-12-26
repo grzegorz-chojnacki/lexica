@@ -1,21 +1,19 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude={"teams", "leading"})
 @Entity
 @Table(name = "lexicauser")
 public class User {
@@ -39,14 +37,14 @@ public class User {
 
     @ManyToMany(mappedBy = "members")
     @JsonIgnore
-    public List<Team> teams;
+    public Set<Team> teams;
 
     @OneToMany(mappedBy = "leader")
     @JsonIgnore
-    public List<Team> leading;
+    public Set<Team> leading;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Progress> progress = new ArrayList<>();
+    private Set<Progress> progress = new HashSet<>();
 
     public User withSomeInfo() {
         User user = new User();
@@ -66,9 +64,9 @@ public class User {
         user.setEmail(this.email);
         user.setSurname(this.surname);
 
-        List<Progress> progress = this.progress.stream()
+        Set<Progress> progress = this.progress.stream()
                 .map(Progress::withSomeInfo)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         user.setProgress(progress);
 
         return user;

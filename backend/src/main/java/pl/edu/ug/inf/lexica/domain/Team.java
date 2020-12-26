@@ -1,20 +1,16 @@
 package pl.edu.ug.inf.lexica.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(exclude="members")
 @Entity
 public class Team {
     @Id
@@ -30,7 +26,7 @@ public class Team {
     private User leader;
 
     @ManyToMany
-    private List<User> members = new ArrayList<>();
+    private Set<User> members = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
@@ -66,9 +62,9 @@ public class Team {
                 .collect(Collectors.toList());
         team.setTasks(tasks);
 
-        List<User> members = this.members.stream()
+        Set<User> members = this.members.stream()
                 .map(User::withMoreInfo)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         team.setMembers(members);
 
         return team;
