@@ -48,7 +48,8 @@ import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
-
+import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
+import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 
 @NgModule({
   declarations: [
@@ -62,6 +63,8 @@ import { HttpClientModule } from '@angular/common/http'
     SidebarComponent,
     FullNamePipe,
     SimpleCardComponent,
+    SimpleCardsAddingComponent,
+    SimpleCardAddingComponent,
     TaskListItemComponent,
     MemberListItemComponent,
     TaskAddingComponent,
