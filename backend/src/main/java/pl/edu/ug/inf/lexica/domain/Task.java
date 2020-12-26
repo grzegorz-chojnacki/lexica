@@ -1,8 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import lombok.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,9 +18,7 @@ public class Task {
     private String name;
 
     @NonNull
-    // ToDo: @OneToMany
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<SimpleCard> examples;
 
     @NonNull

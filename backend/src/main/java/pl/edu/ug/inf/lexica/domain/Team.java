@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,12 +27,9 @@ public class Team {
     private User leader;
 
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> members = new ArrayList<>();
 
-    // ToDo: @OneToMany
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
 
     @NonNull

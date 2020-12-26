@@ -1,11 +1,10 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,17 +31,18 @@ public class User {
     private String email;
 
     @NonNull
+    @JsonIgnore
     private String password;
 
     @ManyToMany(mappedBy = "members")
-    public List<Team> teams = new ArrayList<>();
+    @JsonIgnore
+    public List<Team> teams;
 
     @OneToMany(mappedBy = "leader")
-    public List<Team> leading = new ArrayList<>();
+    @JsonIgnore
+    public List<Team> leading;
 
-    // ToDo: @OneToMany
-    @ManyToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Progress> progress = new ArrayList<>();
 
     public User withSomeInfo() {
