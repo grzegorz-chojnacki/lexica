@@ -38,6 +38,10 @@ public class Team {
     @NonNull
     private String description;
 
+    public boolean hasLeaderWithoutMembership(User user) {
+        return leader.equals(user) && !members.contains(user);
+    }
+
     public Team withSomeInfo() {
         Team team = new Team();
 

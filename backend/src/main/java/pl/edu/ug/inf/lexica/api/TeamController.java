@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
+import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
@@ -42,11 +43,6 @@ public class TeamController {
         });
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTeam(@PathVariable UUID id) {
-        teamService.remove(id);
-    }
-
     @PostMapping("/{id}/task")
     public void addTask(@RequestBody Task task, @PathVariable UUID id) {
         teamService.get(id).ifPresent(team -> {
@@ -55,10 +51,10 @@ public class TeamController {
         });
     }
 
-    @PutMapping("/{teamId}/user/{userId}")
-    public void joinTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
-        teamService.get(teamId).ifPresent(team ->
-            userService.get(userId).ifPresent(user -> {
+    @PostMapping("/{id}/user")
+    public void joinTeam(@RequestBody User u, @PathVariable UUID id) {
+        teamService.get(id).ifPresent(team ->
+            userService.get(u.getId()).ifPresent(user -> {
                 team.getMembers().add(user);
                 teamService.update(team);
             })
@@ -69,8 +65,13 @@ public class TeamController {
     public void leaveTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
         teamService.get(teamId).ifPresent(team ->
             userService.get(userId).ifPresent(user -> {
-                team.getMembers().remove(user);
-                teamService.update(team);
+                if (team.hasLeaderWithoutMembership(user)) {
+                    teamService.remove(team.getId());
+                } else {
+                    team.getMembers().remove(user);
+                    teamService.update(team);
+                }
+
             })
         );
     }

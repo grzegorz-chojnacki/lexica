@@ -24,4 +24,6 @@ export class User {
     return this.progress.find(progress => progress.taskId === task.id)
       || new Progress(task.id, 0)
   }
+
+  public asUUID = () => ({ id: this.id })
 }
