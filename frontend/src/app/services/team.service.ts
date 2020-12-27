@@ -20,7 +20,7 @@ export class TeamService {
   public  readonly emptyTeam = new Team('', '', this.userService.emptyUser)
   private loggedUser = this.userService.emptyUser
   private readonly teamListSource = new BehaviorSubject<Team[]>([])
-  private readonly teamSource = new BehaviorSubject<Team>(this.emptyTeam)
+  private teamSource = new BehaviorSubject<Team>(this.emptyTeam)
 
   public constructor(
       private readonly userService: UserService,
@@ -43,7 +43,12 @@ export class TeamService {
   private refreshTeamSource(id: string): void {
     this.http.get<Team>(`${lexicaURL}/team/${id}`)
       .pipe(map(Team.deserialize))
-      .subscribe(team => this.teamSource.next(team))
+      .subscribe(
+        team => this.teamSource.next(team),
+        err => {
+          this.teamSource.error(err) // Reset teamSource after error
+          this.teamSource = new BehaviorSubject<Team>(this.emptyTeam)
+        })
   }
 
   public getTeam(id: string | null): Observable<Team> {

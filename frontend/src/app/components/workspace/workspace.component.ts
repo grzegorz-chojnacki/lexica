@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { zip } from 'rxjs'
 
 import { Team } from 'src/app/classes/team'
-import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-team.component'

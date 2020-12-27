@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { MatTabGroup } from '@angular/material/tabs'
 
-import { TeamService, TeamForm } from 'src/app/services/team.service'
+import { TeamService } from 'src/app/services/team.service'
 
 @Component({
   selector: 'app-new-team',
@@ -29,7 +29,7 @@ export class NewTeamComponent implements OnInit {
     if (this.tabGroup.selectedIndex === 0) {
       this.teamService.joinTeam(this.idForm.value.id)
     } else {
-      this.teamService.createTeam(this.teamForm.value as TeamForm)
+      this.teamService.createTeam(this.teamForm.value)
     }
   }
 

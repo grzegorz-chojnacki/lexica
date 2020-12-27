@@ -35,6 +35,6 @@ export class TeamViewComponent implements OnInit {
     this.teamService.getTeam(teamId).subscribe(team => {
       this.team = team
       this.leaderView = isLeader()
-    }, err  => this.router.navigate(['/']))
+    }, _ => this.router.navigate(['/']))
   }
 }
