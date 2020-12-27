@@ -26,7 +26,7 @@ export class TeamCardComponent implements OnInit {
 
   public teamSettings(): void {
     this.dialog.closeAll()
-    this.dialog.open(TeamSettingsComponent)
+    this.dialog.open(TeamSettingsComponent, { data: this.team })
   }
 
   public copyToClipboard(): void {
