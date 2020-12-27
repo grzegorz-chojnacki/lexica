@@ -49,7 +49,8 @@ import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
-import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
+import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component';
+import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { SimpleCardAddingComponent } from './components/task/simple-card-adding/
     TaskMenuComponent,
     TaskDetailsComponent,
     TaskViewComponent,
+    TeamSettingsComponent,
   ],
   imports: [
     BrowserModule,
