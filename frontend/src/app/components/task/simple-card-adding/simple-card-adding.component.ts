@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SimpleCardsAddingComponent } from 'src/app/components/task/simple-cards-adding/simple-cards-adding.component'
-
+import { SimpleCard } from 'src/app/classes/task'
 export interface DialogData {
   obce: string
   narodowe: string
@@ -23,7 +23,8 @@ export class SimpleCardAddingComponent implements OnInit {
   private readonly dialog: MatDialog,
   @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+   }
 
 
 }
