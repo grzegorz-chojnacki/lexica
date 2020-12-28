@@ -36,12 +36,12 @@ public class UserController {
 
     @GetMapping()
     public List<User> getUsers() {
-        return userService.getAll().stream().map(User::withMoreInfo).collect(Collectors.toList());
+        return userService.getAll().stream().map(User::withSomeInfo).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable UUID id) {
-        return userService.get(id).map(User::withMoreInfo);
+        return userService.get(id).map(User::withProgress);
     }
 
     @PostMapping("/{id}/progress")

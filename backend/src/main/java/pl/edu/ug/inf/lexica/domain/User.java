@@ -54,20 +54,23 @@ public class User {
         user.setId(this.id);
         user.setFirstname(this.firstname);
         user.setSurname(this.surname);
+        user.setEmail(this.email);
 
         return user;
     }
 
-    public User withMoreInfo() {
-        User user = new User();
+    public User withProgress() {
+        User user = this.withSomeInfo();
+        user.setProgress(progress);
 
-        user.setId(this.id);
-        user.setFirstname(this.firstname);
-        user.setEmail(this.email);
-        user.setSurname(this.surname);
+        return user;
+    }
+
+    public User withTeamProgress(Team team) {
+        User user = this.withSomeInfo();
 
         Set<Progress> progress = this.progress.stream()
-                .map(Progress::withSomeInfo)
+                .filter(p -> team.getTasks().contains(p.getTask()))
                 .collect(Collectors.toSet());
         user.setProgress(progress);
 

@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,6 +30,7 @@ public class Team {
     @EqualsAndHashCode.Exclude
     private Set<User> members = new HashSet<>();
 
+    @JsonIgnoreProperties(value = "examples")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
@@ -55,16 +57,12 @@ public class Team {
 
         team.setId(this.id);
         team.setName(this.name);
-        team.setLeader(this.leader.withMoreInfo());
+        team.setLeader(this.leader.withTeamProgress(this));
         team.setDescription(this.description);
-
-        List<Task> tasks = this.tasks.stream()
-                .map(Task::withSomeInfo)
-                .collect(Collectors.toList());
-        team.setTasks(tasks);
+        team.setTasks(this.tasks);
 
         Set<User> members = this.members.stream()
-                .map(User::withMoreInfo)
+                .map(user -> user.withTeamProgress(this))
                 .collect(Collectors.toSet());
         team.setMembers(members);
 

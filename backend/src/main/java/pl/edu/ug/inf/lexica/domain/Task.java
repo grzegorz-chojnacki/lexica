@@ -40,16 +40,4 @@ public class Task {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Progress> progress;
-
-    public Task withSomeInfo() {
-        Task task = new Task();
-
-        task.setId(this.id);
-        task.setName(this.name);
-        task.setActive(this.isActive);
-        task.setDescription(this.description);
-        task.setType(this.type);
-
-        return task;
-    }
 }
