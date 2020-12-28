@@ -74,8 +74,8 @@ public class TeamController {
                     List<Progress> progressInTeam = user.getProgress().stream()
                             .filter(progress -> team.getTasks().contains(progress.getTask()))
                             .collect(Collectors.toList());
-                    user.getProgress().removeAll(progressInTeam);
                     team.getMembers().remove(user);
+                    user.getProgress().removeAll(progressInTeam);
                     teamService.update(team);
                 }
             })
