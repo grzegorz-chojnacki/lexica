@@ -24,6 +24,7 @@ public class Team {
 
     @NonNull
     @ManyToOne
+    @JsonIgnoreProperties(value = "progress")
     private User leader;
 
     @ManyToMany
@@ -46,19 +47,15 @@ public class Team {
 
         team.setId(this.id);
         team.setName(this.name);
-        team.setLeader(this.leader.withSomeInfo());
+        team.setLeader(this.leader);
         team.setDescription(this.description);
 
         return team;
     }
 
     public Team withMoreInfo() {
-        Team team = new Team();
+        Team team = this.withSomeInfo();
 
-        team.setId(this.id);
-        team.setName(this.name);
-        team.setLeader(this.leader.withTeamProgress(this));
-        team.setDescription(this.description);
         team.setTasks(this.tasks);
 
         Set<User> members = this.members.stream()
