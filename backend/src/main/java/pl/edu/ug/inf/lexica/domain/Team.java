@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode(exclude="members")
+@EqualsAndHashCode
 @Entity
 public class Team {
     @Id
@@ -23,12 +24,15 @@ public class Team {
 
     @NonNull
     @ManyToOne
+    @JsonIgnoreProperties(value = "progress")
     private User leader;
 
     @ManyToMany
+    @EqualsAndHashCode.Exclude
     private Set<User> members = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "examples")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
     @NonNull
@@ -43,27 +47,19 @@ public class Team {
 
         team.setId(this.id);
         team.setName(this.name);
-        team.setLeader(this.leader.withSomeInfo());
+        team.setLeader(this.leader);
         team.setDescription(this.description);
 
         return team;
     }
 
     public Team withMoreInfo() {
-        Team team = new Team();
+        Team team = this.withSomeInfo();
 
-        team.setId(this.id);
-        team.setName(this.name);
-        team.setLeader(this.leader.withMoreInfo());
-        team.setDescription(this.description);
-
-        List<Task> tasks = this.tasks.stream()
-                .map(Task::withSomeInfo)
-                .collect(Collectors.toList());
-        team.setTasks(tasks);
+        team.setTasks(this.tasks);
 
         Set<User> members = this.members.stream()
-                .map(User::withMoreInfo)
+                .map(user -> user.withTeamProgress(this))
                 .collect(Collectors.toSet());
         team.setMembers(members);
 

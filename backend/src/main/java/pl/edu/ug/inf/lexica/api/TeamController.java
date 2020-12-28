@@ -2,14 +2,17 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -68,10 +71,13 @@ public class TeamController {
                 if (team.hasLeaderWithoutMembership(user)) {
                     teamService.remove(team.getId());
                 } else {
+                    List<Progress> progressInTeam = user.getProgress().stream()
+                            .filter(progress -> team.getTasks().contains(progress.getTask()))
+                            .collect(Collectors.toList());
                     team.getMembers().remove(user);
+                    user.getProgress().removeAll(progressInTeam);
                     teamService.update(team);
                 }
-
             })
         );
     }

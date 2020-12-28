@@ -8,7 +8,7 @@ import { lexicaURL } from '../lexica.properties'
   providedIn: 'root'
 })
 export class UserService {
-  public readonly emptyUser = new User('', '', '', '')
+  public readonly  emptyUser  = new User('', '', '', '')
   private readonly userSource = new BehaviorSubject(this.emptyUser)
   public constructor(private readonly http: HttpClient) {
     this.refreshUserSource()

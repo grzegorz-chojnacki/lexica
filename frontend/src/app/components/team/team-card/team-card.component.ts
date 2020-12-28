@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
+import { TeamSettingsComponent } from '../team-settings/team-settings.component'
 
 @Component({
   selector: 'app-team-card',
@@ -14,12 +16,18 @@ export class TeamCardComponent implements OnInit {
   @Input() public context!: 'TeamContainer' | 'Team'
 
   public constructor(
+    private readonly dialog: MatDialog,
     private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
 
   public removeItself(): void { this.teamService.remove(this.team) }
+
+  public teamSettings(): void {
+    this.dialog.closeAll()
+    this.dialog.open(TeamSettingsComponent, { data: this.team })
+  }
 
   public copyToClipboard(): void {
     navigator.clipboard.writeText(this.team.id)

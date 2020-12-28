@@ -20,7 +20,7 @@ export class TaskMenuComponent implements OnInit {
   public ngOnInit(): void { }
 
   public taskDescription(): void {
-    this.dialog.closeAll() // Prevent dialog stacking
+    this.dialog.closeAll()
     this.dialog.open(TaskDetailsComponent, {
       width: '700px',
       data: {

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode(exclude={"teams", "leading"})
+@EqualsAndHashCode
 @Entity
 @Table(name = "lexicauser")
 public class User {
@@ -37,13 +37,15 @@ public class User {
 
     @ManyToMany(mappedBy = "members")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     public Set<Team> teams;
 
-    @OneToMany(mappedBy = "leader")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "leader")
     public Set<Team> leading;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Progress> progress = new HashSet<>();
 
     public User withSomeInfo() {
@@ -52,20 +54,23 @@ public class User {
         user.setId(this.id);
         user.setFirstname(this.firstname);
         user.setSurname(this.surname);
+        user.setEmail(this.email);
 
         return user;
     }
 
-    public User withMoreInfo() {
-        User user = new User();
+    public User withProgress() {
+        User user = this.withSomeInfo();
+        user.setProgress(progress);
 
-        user.setId(this.id);
-        user.setFirstname(this.firstname);
-        user.setEmail(this.email);
-        user.setSurname(this.surname);
+        return user;
+    }
+
+    public User withTeamProgress(Team team) {
+        User user = this.withSomeInfo();
 
         Set<Progress> progress = this.progress.stream()
-                .map(Progress::withSomeInfo)
+                .filter(p -> team.getTasks().contains(p.getTask()))
                 .collect(Collectors.toSet());
         user.setProgress(progress);
 

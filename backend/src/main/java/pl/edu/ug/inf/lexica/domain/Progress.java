@@ -1,5 +1,7 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,25 +16,19 @@ public class Progress {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @JsonIgnore
     private UUID id;
 
     @NonNull
     @ManyToOne
+    @JsonIgnoreProperties(value = {"name", "example", "description", "type", "active", "examples"})
     private Task task;
+
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    private User user;
 
     @NonNull
     private int completed;
-
-    public Progress withSomeInfo() {
-        Progress progress = new Progress();
-
-        progress.setId(this.id);
-        progress.setCompleted(this.completed);
-
-        Task task = new Task();
-        task.setId(this.task.getId());
-        progress.setTask(task);
-
-        return progress;
-    }
 }
