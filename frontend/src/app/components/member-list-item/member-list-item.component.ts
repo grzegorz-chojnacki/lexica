@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Progress } from 'src/app/classes/progress'
+import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
+import { TeamService } from 'src/app/services/team.service'
 
 @Component({
   selector: 'app-member-list-item',
@@ -12,10 +14,15 @@ export class MemberListItemComponent implements OnInit {
   // or for specific task (with only one progress in list)
   @Input() public progress!: Progress[]
   @Input() public user!: User
+  @Input() public team!: Team
 
-  public constructor() { }
+  public constructor(private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
+
+  public removeItself(): void {
+    this.teamService.leaveTeam(this.team.id, this.user.id)
+  }
 
   public getCompletion(): number {
     const sum = this.progress.reduce(Progress.sum, 0)

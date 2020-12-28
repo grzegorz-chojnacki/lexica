@@ -74,8 +74,12 @@ export class TeamService {
       .subscribe(() => this.refreshTeamListSource())
   }
 
+  public leaveTeam(teamId: string, userId: string): void {
+    this.http.delete(`${lexicaURL}/team/${teamId}/user/${userId}`)
+      .subscribe(() => this.refreshTeamSource(teamId))
+  }
+
   public remove(team: Team): void {
-    this.http.delete(`${lexicaURL}/team/${team.id}/user/${this.loggedUser.id}`)
-      .subscribe(() => this.refreshTeamListSource())
+    this.leaveTeam(team.id, this.loggedUser.id)
   }
 }
