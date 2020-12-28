@@ -40,12 +40,12 @@ public class User {
     @EqualsAndHashCode.Exclude
     public Set<Team> teams;
 
-    @OneToMany(mappedBy = "leader")
     @JsonIgnore
     @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "leader")
     public Set<Team> leading;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Progress> progress = new HashSet<>();
 
     public User withSomeInfo() {

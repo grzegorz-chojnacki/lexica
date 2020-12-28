@@ -29,7 +29,7 @@ public class Team {
     @EqualsAndHashCode.Exclude
     private Set<User> members = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
     @NonNull

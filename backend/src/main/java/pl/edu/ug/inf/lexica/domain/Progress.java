@@ -1,5 +1,6 @@
 package pl.edu.ug.inf.lexica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +20,11 @@ public class Progress {
     @NonNull
     @ManyToOne
     private Task task;
+
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    private User user;
 
     @NonNull
     private int completed;
