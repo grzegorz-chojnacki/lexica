@@ -5,6 +5,7 @@ import { SimpleCardsAddingComponent } from 'src/app/components/task/simple-cards
 
 export interface DialogData {
   obce: string
+  narodowe: string
 }
 
 @Component({
@@ -16,7 +17,7 @@ export class SimpleCardAddingComponent implements OnInit {
   public readonly taskForm = this.formBuilder.group({
     image: new FormControl({ value: '', disabled: true })
   })
-  public nazwa!: string
+
   public constructor(
   private readonly formBuilder: FormBuilder,
   private readonly dialog: MatDialog,
@@ -24,8 +25,5 @@ export class SimpleCardAddingComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public submit(): void {
-    console.log(this.nazwa)
-  }
 
 }

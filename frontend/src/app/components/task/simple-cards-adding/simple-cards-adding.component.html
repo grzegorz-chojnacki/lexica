@@ -13,10 +13,10 @@
 
       </mat-list>
 <ol> <li *ngIf="obce">
-  You chose: <i>{{obce}}</i>
+  You chose: <i>{{obce}}</i><i>{{narodowe}}</i>
 </li>
-<li >
-  You chose:
+<li *ngIf="narodowe">
+  You chose: <i>{{narodowe}}</i><i>{{obce}}</i>
 </li>
 </ol>
       <div class="example-button-container">

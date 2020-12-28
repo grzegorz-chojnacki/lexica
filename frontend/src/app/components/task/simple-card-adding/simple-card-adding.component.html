@@ -4,12 +4,12 @@
   <form >
     <mat-form-field appearance="fill">
       <mat-label>Słówko obce</mat-label>
-      <input matInput placeholder="Ex. Apple"  [(ngModel)]="nazwa" name="nazwa">
+      <input matInput placeholder="Ex. Apple"  [(ngModel)]="data.obce" name="nazwa">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Słówko przetłumaczone</mat-label>
-      <input matInput placeholder="Np. Jabłko" >
+      <input matInput placeholder="Np. Jabłko" [(ngModel)]="data.narodowe" name="nazwa2">
     </mat-form-field>
   </form>
   <form [formGroup]="taskForm">
@@ -21,7 +21,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="accent" [mat-dialog-close]="nazwa" (click)="submit()">
+  <button mat-button mat-dialog-close color="accent"  [mat-dialog-close]="data">
     UTWÓRZ
   </button>
   <button mat-button mat-dialog-close>ANULUJ</button>

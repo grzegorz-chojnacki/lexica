@@ -10,6 +10,7 @@ import { SimpleCard } from 'src/app/classes/task'
 export class SimpleCardsAddingComponent implements OnInit {
 
   public obce!: string
+  public narodowe!: string
 
   public simpleCards: SimpleCard[] = [new SimpleCard('browser', 'przeglądarka')
   , new SimpleCard('chunk', 'znaczna część'), new SimpleCard('circuit failure', 'uszkodzenie przewodu'),
@@ -24,12 +25,12 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',
-    height: '500px', data: { obce: this.obce }})
+    height: '500px', data: { obce: this.obce, narodowe: this.narodowe }})
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed')
-      this.obce = result
-      console.log(result)
+      this.obce = result.obce
+      this.narodowe = result.narodowe
     })
    }
 }
