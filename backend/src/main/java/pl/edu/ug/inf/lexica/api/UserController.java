@@ -26,6 +26,7 @@ public class UserController {
     public List<Team> getTeams(@PathVariable UUID id) {
         return userService.get(id).map(user -> Stream
                 .concat(user.getLeading().stream(), user.getTeams().stream())
+                .distinct()
                 .map(Team::withSomeInfo)
                 .sorted(Comparator.comparing(Team::getId))
                 .sorted(Comparator.comparing(Team::getName))

@@ -71,7 +71,6 @@ public class TeamController {
                     team.getMembers().remove(user);
                     teamService.update(team);
                 }
-
             })
         );
     }
