@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode(exclude="members")
+@EqualsAndHashCode
 @Entity
 public class Team {
     @Id
@@ -26,6 +26,7 @@ public class Team {
     private User leader;
 
     @ManyToMany
+    @EqualsAndHashCode.Exclude
     private Set<User> members = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)

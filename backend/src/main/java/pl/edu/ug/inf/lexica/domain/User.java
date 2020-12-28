@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode(exclude={"teams", "leading"})
+@EqualsAndHashCode
 @Entity
 @Table(name = "lexicauser")
 public class User {
@@ -37,10 +37,12 @@ public class User {
 
     @ManyToMany(mappedBy = "members")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     public Set<Team> teams;
 
     @OneToMany(mappedBy = "leader")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     public Set<Team> leading;
 
     @OneToMany(cascade = CascadeType.ALL)
