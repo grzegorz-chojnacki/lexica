@@ -1,16 +1,18 @@
 <h1 mat-dialog-title>Nowa fiszka</h1>
 
 <mat-dialog-content>
-  <form [formGroup]="taskForm">
+  <form >
     <mat-form-field appearance="fill">
       <mat-label>Słówko obce</mat-label>
-      <input matInput placeholder="Ex. Apple" >
+      <input matInput placeholder="Ex. Apple"  [(ngModel)]="nazwa" name="nazwa">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Słówko przetłumaczone</mat-label>
       <input matInput placeholder="Np. Jabłko" >
     </mat-form-field>
+  </form>
+  <form [formGroup]="taskForm">
     <mat-form-field appearance="fill">
       <mat-label>Grafika</mat-label>
       <input matInput type="text" formControlName="image">
@@ -19,7 +21,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="accent" (click)="submit()">
+  <button mat-button mat-dialog-close color="accent" [mat-dialog-close]="nazwa" (click)="submit()">
     UTWÓRZ
   </button>
   <button mat-button mat-dialog-close>ANULUJ</button>

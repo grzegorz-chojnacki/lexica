@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { SimpleCardsAddingComponent } from 'src/app/components/task/simple-cards-adding/simple-cards-adding.component'
+
+export interface DialogData {
+  obce: string
+}
 
 @Component({
   selector: 'app-task-adding',
@@ -9,18 +14,18 @@ import { MatDialog } from '@angular/material/dialog'
 })
 export class SimpleCardAddingComponent implements OnInit {
   public readonly taskForm = this.formBuilder.group({
-    name: '',
-    description: '',
     image: new FormControl({ value: '', disabled: true })
   })
-
+  public nazwa!: string
   public constructor(
   private readonly formBuilder: FormBuilder,
-  private readonly dialog: MatDialog) { }
+  private readonly dialog: MatDialog,
+  @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   public ngOnInit(): void { }
 
   public submit(): void {
+    console.log(this.nazwa)
   }
 
 }
