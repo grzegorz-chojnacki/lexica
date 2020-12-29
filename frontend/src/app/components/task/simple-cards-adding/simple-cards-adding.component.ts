@@ -11,9 +11,7 @@ export class SimpleCardsAddingComponent implements OnInit {
 
   public obce!: string
   public narodowe!: string
-  public simpleCards: SimpleCard[] = [new SimpleCard('browser', 'przeglądarka')
-  , new SimpleCard('chunk', 'znaczna część'), new SimpleCard('circuit failure', 'uszkodzenie przewodu'),
-  new SimpleCard('data encapsulation', 'obudowywanie danych'), new SimpleCard('destination', 'miejsce docelowe')]
+  public simpleCards: SimpleCard[] = []
   public constructor(private readonly dialog: MatDialog) { }
 
 
@@ -21,6 +19,8 @@ export class SimpleCardsAddingComponent implements OnInit {
   public ngOnInit(): void { }
 
   public submit(): void {
+  }
+  public delete(): void {
   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',
