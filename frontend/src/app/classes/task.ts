@@ -10,8 +10,8 @@ export abstract class Example { }
 
 export class SimpleCard extends Example {
   public constructor(
-    public readonly foreignWord: string,
-    public readonly nativeWord: string,
+    public  foreignWord: string,
+    public  nativeWord: string,
     public readonly image?: ImageBitmap,
   ) { super() }
 }
