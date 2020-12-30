@@ -15,6 +15,7 @@ export class MemberListItemComponent implements OnInit {
   @Input() public progress!: Progress[]
   @Input() public user!: User
   @Input() public team!: Team
+  @Input() public leaderView = false
 
   public constructor(private readonly teamService: TeamService) { }
 

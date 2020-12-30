@@ -1,6 +1,6 @@
 <main class="limited-width">
   <header>
-    <app-team-card [team]="team" context="Team"></app-team-card>
+    <app-team-card [team]="team" [leaderView]="leaderView" context="Team"></app-team-card>
   </header>
 
   <section *ngIf="leaderView">
@@ -12,12 +12,13 @@
       <mat-tab-group mat-stretch-tabs mat-align-tabs="center" color="accent"
           animationDuration="0">
         <mat-tab label="Zadania">
-          <app-task-list [team]="team"></app-task-list>
+          <app-task-list [team]="team" [leaderView]="leaderView"></app-task-list>
         </mat-tab>
         <mat-tab label="Uczestnicy" [disabled]="team?.members?.length === 0">
           <mat-list>
             <app-member-list-item *ngFor="let member of team?.members"
-              [user]="member" [progress]="member.progress" [team]="team">
+              [user]="member" [progress]="member.progress" [team]="team"
+              [leaderView]="leaderView">
             </app-member-list-item>
           </mat-list>
         </mat-tab>

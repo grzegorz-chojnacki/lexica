@@ -12,6 +12,7 @@ import { Team } from 'src/app/classes/team'
 })
 export class TaskListComponent implements OnInit {
   @Input() public team!: Team
+  @Input() public leaderView!: boolean
 
   public constructor(private readonly dialog: MatDialog) { }
 

@@ -10,7 +10,8 @@
         (click)="$event.stopPropagation()">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <app-task-menu #taskMenu [task]="task" [users]="team.members"></app-task-menu>
+    <app-task-menu #taskMenu [task]="task" [users]="team.members"
+      [leaderView]="leaderView"></app-task-menu>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-action-list>

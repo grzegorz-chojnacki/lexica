@@ -3,11 +3,11 @@
   <h4 matLine >{{ user | fullNamePipe }}</h4>
   <p>
     {{ getCompletion() }}% postępu
-    <mat-progress-spinner color="accent" value="{{ getCompletion() }}" diameter="20">
+    <mat-progress-spinner color="accent" [value]="getCompletion()" diameter="20">
     </mat-progress-spinner>
   </p>
 
-  <button mat-icon-button (click)="removeItself()">
+  <button *ngIf="leaderView" mat-icon-button (click)="removeItself()">
     <mat-icon>close</mat-icon>
   </button>
 </mat-list-item>
