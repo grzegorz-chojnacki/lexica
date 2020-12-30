@@ -12,12 +12,7 @@
       <mat-tab-group mat-stretch-tabs mat-align-tabs="center" color="accent"
           animationDuration="0">
         <mat-tab label="Zadania">
-          <mat-action-list>
-            <app-task-list-item *ngFor="let task of team?.tasks"
-              [task]="task"
-              [users]="team.members">
-            </app-task-list-item>
-          </mat-action-list>
+          <app-task-list [team]="team"></app-task-list>
         </mat-tab>
         <mat-tab label="Uczestnicy" [disabled]="team?.members?.length === 0">
           <mat-list>

@@ -33,7 +33,7 @@ import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
-import { TaskListItemComponent } from './components/task/task-list-item/task-list-item.component'
+import { TaskListComponent } from './components/task/task-list/task-list.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
 import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
@@ -66,7 +66,7 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     SimpleCardComponent,
     SimpleCardsAddingComponent,
     SimpleCardAddingComponent,
-    TaskListItemComponent,
+    TaskListComponent,
     MemberListItemComponent,
     TaskAddingComponent,
     TeamSearchPipe,
