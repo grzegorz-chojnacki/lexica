@@ -21,8 +21,8 @@ export class User {
     public readonly avatar?: ImageBitmap) { }
 
   public getTaskProgress(task: Task<Example>): Progress {
-    return this.progress.find(progress => progress.taskId === task.id)
-      || new Progress(task.id, 0)
+    return this.progress.find(progress => progress.task.id === task.id)
+      || new Progress(task, 0)
   }
 
   public asUUID = () => ({ id: this.id })

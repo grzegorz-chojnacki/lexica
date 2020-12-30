@@ -15,6 +15,7 @@ export class MemberListItemComponent implements OnInit {
   @Input() public progress!: Progress[]
   @Input() public user!: User
   @Input() public team!: Team
+  @Input() public leaderView = false
 
   public constructor(private readonly teamService: TeamService) { }
 
@@ -25,8 +26,12 @@ export class MemberListItemComponent implements OnInit {
   }
 
   public getCompletion(): number {
-    const sum = this.progress.reduce(Progress.sum, 0)
-    return Math.round(sum / this.progress.length)
+    if (this.progress.length > 0) {
+      const sum = this.progress.reduce(Progress.sum, 0)
+      return Math.round(sum / this.progress.length)
+    } else {
+      return 0
+    }
   }
 
 }

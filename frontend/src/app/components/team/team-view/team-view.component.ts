@@ -5,7 +5,6 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
-import { zip } from 'rxjs'
 
 @Component({
   selector: 'app-team-view',

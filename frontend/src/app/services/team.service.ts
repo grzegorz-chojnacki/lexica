@@ -71,12 +71,18 @@ export class TeamService {
 
   public joinTeam(id: string): void {
     this.http.post(`${lexicaURL}/team/${id}/user`, this.loggedUser.asUUID())
-      .subscribe(() => this.refreshTeamListSource())
+      .subscribe(() => {
+        this.refreshTeamListSource()
+        this.refreshTeamSource(id)
+      })
   }
 
   public leaveTeam(teamId: string, userId: string): void {
     this.http.delete(`${lexicaURL}/team/${teamId}/user/${userId}`)
-      .subscribe(() => this.refreshTeamSource(teamId))
+    .subscribe(() => {
+      this.refreshTeamListSource()
+      this.refreshTeamSource(teamId)
+    })
   }
 
   public remove(team: Team): void {

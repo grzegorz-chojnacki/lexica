@@ -4,14 +4,14 @@
     <span>Szczegóły</span>
   </button>
   <button mat-menu-item>
-    <mat-icon>edit</mat-icon>
-    <span>Edytuj</span>
-  </button>
-  <button mat-menu-item>
     <mat-icon>download</mat-icon>
     <span>Eksportuj</span>
   </button>
-  <button mat-menu-item>
+  <button *ngIf="leaderView" mat-menu-item>
+    <mat-icon>edit</mat-icon>
+    <span>Edytuj</span>
+  </button>
+  <button *ngIf="leaderView" mat-menu-item>
     <mat-icon>delete</mat-icon>
     <span>Usuń</span>
   </button>

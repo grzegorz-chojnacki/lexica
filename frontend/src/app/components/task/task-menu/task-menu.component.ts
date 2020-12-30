@@ -13,6 +13,7 @@ import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-
 export class TaskMenuComponent implements OnInit {
   @Input() public task!: Task<Example>
   @Input() public users!: User[]
+  @Input() public leaderView = false
   @ViewChild(MatMenu, { static: true }) public readonly menu!: MatMenu
 
   public constructor(private readonly dialog: MatDialog) { }
