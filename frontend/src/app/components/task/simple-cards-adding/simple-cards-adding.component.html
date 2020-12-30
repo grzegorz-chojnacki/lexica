@@ -2,16 +2,17 @@
   <mat-card class="card1">
     <mat-card-content>
       <mat-card-title>Nazwa kategorii i opis</mat-card-title>
-      <div class="example-container">
+      <form>
         <mat-form-field appearance="fill">
           <mat-label>Kategoria</mat-label>
           <input matInput>
         </mat-form-field>
+        <br/>
         <mat-form-field appearance="fill">
-          <mat-label>Krótki opis</mat-label>
-          <textarea matInput></textarea>
+          <mat-label>Krótki opis (do 50 znaków)</mat-label>
+          <textarea matInput  maxlength="50"></textarea>
         </mat-form-field>
-      </div>
+      </form>
     </mat-card-content>
     </mat-card>
 
