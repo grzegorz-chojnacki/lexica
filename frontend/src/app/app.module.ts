@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 // Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
@@ -102,7 +103,8 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     MatListModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
