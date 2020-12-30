@@ -1,3 +1,20 @@
+<section>
+  <mat-card class="card1">
+    <mat-card-content>
+      <mat-card-title>Nazwa kategorii i opis</mat-card-title>
+      <div class="example-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategoria</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Krótki opis</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    </mat-card>
+
 <mat-card>
   <mat-card-header>
     <mat-card-title>Przykłady w zadaniu </mat-card-title>
@@ -11,7 +28,7 @@
             <mat-icon  class="options">edit</mat-icon>
           </button>
           <button mat-menu-item>
-            <mat-icon class="options"  (click)="delte()">delete</mat-icon>
+            <mat-icon class="options"  (click)="delete()">delete</mat-icon>
           </button>
         <mat-divider></mat-divider>
 
@@ -33,3 +50,4 @@
   <button mat-button mat-dialog-close>ANULUJ</button>
 </mat-card-actions>
 </mat-card>
+</section>
