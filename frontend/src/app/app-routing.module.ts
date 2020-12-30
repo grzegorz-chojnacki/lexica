@@ -4,12 +4,15 @@ import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
-import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
+// import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
+import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 
 const routes: Routes = [
   { path: 'team/:teamId',
     component: TeamViewComponent },
+  { path: 'team/:teamId/new',
+    component: SimpleCardsAddingComponent },
   { path: 'task/:taskId',
    // component: SimpleCardComponent },  TaskViewComponent
     component: TaskViewComponent },
