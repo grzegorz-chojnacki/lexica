@@ -24,7 +24,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',
-    height: '500px', data: { obce: this.obce, narodowe: this.narodowe}})
+    height: '500px', data: { obce: this.obce, narodowe: this.narodowe}, hasBackdrop: false})
 
     dialogRef.afterClosed().subscribe(result => {
       this.simpleCards.push(new SimpleCard(result.obce, result.narodowe))
