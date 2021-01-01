@@ -2,10 +2,10 @@
   <mat-card class="card1">
     <mat-card-content>
       <mat-card-title>Nazwa kategorii i opis</mat-card-title>
-      <form>
+      <form [formGroup]="checkoutForm">
         <mat-form-field appearance="fill">
           <mat-label>Kategoria</mat-label>
-          <input matInput>
+          <input matInput required>
         </mat-form-field>
         <br/>
         <mat-form-field appearance="fill">
