@@ -1,11 +1,16 @@
 <mat-card>
   <mat-card-title>Akcje zespołu</mat-card-title>
+  <mat-slide-toggle
+      [checked]="isLeaderProgressActivated()"
+      (change)="toggleLeaderProgressActivation($event)">
+    Uwzględnij postępy lidera zespołu
+  </mat-slide-toggle>
   <mat-card-actions>
     <button mat-raised-button color="accent" (click)="newTaskDialog()">
       Nowe zadanie
     </button>
-    <button mat-button color="accent" (click)="acceptMembersDialog()">
+    <!-- <button mat-button color="accent" (click)="acceptMembersDialog()">
       Oczekujący uczestnicy
-    </button>
+    </button> -->
   </mat-card-actions>
 </mat-card>

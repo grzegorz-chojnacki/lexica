@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 // Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
@@ -33,7 +34,7 @@ import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
-import { TaskListItemComponent } from './components/task/task-list-item/task-list-item.component'
+import { TaskListComponent } from './components/task/task-list/task-list.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
 import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
@@ -66,7 +67,7 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     SimpleCardComponent,
     SimpleCardsAddingComponent,
     SimpleCardAddingComponent,
-    TaskListItemComponent,
+    TaskListComponent,
     MemberListItemComponent,
     TaskAddingComponent,
     TeamSearchPipe,
@@ -102,7 +103,8 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     MatListModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

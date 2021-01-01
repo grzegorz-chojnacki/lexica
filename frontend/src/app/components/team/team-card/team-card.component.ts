@@ -13,6 +13,7 @@ import { TeamSettingsComponent } from '../team-settings/team-settings.component'
 })
 export class TeamCardComponent implements OnInit {
   @Input() public team!: Team
+  @Input() public leaderView = false
   @Input() public context!: 'TeamContainer' | 'Team'
 
   public constructor(
