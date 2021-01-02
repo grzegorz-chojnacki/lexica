@@ -38,7 +38,6 @@ import { TaskListComponent } from './components/task/task-list/task-list.compone
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
 import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
-import { SimpleCardComponent } from './components/task/simple-card/simple-card.component'
 import { TaskMenuComponent } from './components/task/task-menu/task-menu.component'
 import { TaskDetailsComponent } from './components/task/task-details/task-details.component'
 // Other
@@ -64,7 +63,6 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     TeamContainerComponent,
     SidebarComponent,
     FullNamePipe,
-    SimpleCardComponent,
     SimpleCardsAddingComponent,
     SimpleCardAddingComponent,
     TaskListComponent,
