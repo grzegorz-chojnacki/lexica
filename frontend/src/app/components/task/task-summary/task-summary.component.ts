@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SimpleCard, Task } from 'src/app/classes/task'
-// import { SimpleCardComponent } from 'src/app/components/task/simple-card/simple-card.component'
 
 @Component({
   selector: 'app-task-summary',
@@ -8,18 +8,15 @@ import { SimpleCard, Task } from 'src/app/classes/task'
   styleUrls: ['./task-summary.component.scss']
 })
 export class TaskSummaryComponent implements OnInit {
-
-  public progres = 1
-  public percentageProgress = 0
-  public notKnownWords: SimpleCard[] = new Array()
+  public notKnownWords = new Array<SimpleCard>()
   public task!: Task<SimpleCard>
 
-  public array(n: number): any[] {
-    return Array(n)
+  public constructor(@Inject(MAT_DIALOG_DATA)
+    data: ({ knewList: SimpleCard[], task: Task<SimpleCard> })) {
+    this.notKnownWords = data.task.examples
+      .filter(example => !data.knewList.includes(example))
+    this.task = data.task
   }
-  public constructor() { }
 
-  public ngOnInit(): void {
-  }
-
+  public ngOnInit(): void { }
 }

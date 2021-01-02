@@ -1,24 +1,14 @@
-mat-card{
-    min-height: 38%;
-    max-width: 18%;
-    margin-top: 100px;
-    margin-left: 40%;
-    text-align: center;
+mat-card {
+  max-width: 400px;
+  margin: 100px auto;
 }
-mat-card-header{
-    text-align: left;
+
+span.above { display: block }
+
+mat-card-content { margin: 4em 0 }
+h1 { text-align: center }
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
 }
-mat-card-actions{
-    color:blue;
-    margin:30px;
-  }
-  p{
-      font-size: 20px;
-      font-weight: bold;
-  }
-
-  img{
-
-      width: 30%;
-      height: 30%;
-  }
