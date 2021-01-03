@@ -8,10 +8,11 @@
   <h3>Lista niezaliczonych przykładów</h3>
   <mat-list>
     <mat-list-item *ngFor="let example of notKnownWords">
-      <p matLine>
-        <span>{{ example.foreignWord }}</span> :
+      <div class="flex-container">
+        <span>{{ example.foreignWord }}</span>
+        <span class="spacer"></span>
         <span>{{ example.nativeWord }}</span>
-      </p>
+      </div>
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
