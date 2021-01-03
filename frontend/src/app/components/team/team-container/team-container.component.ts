@@ -9,6 +9,7 @@ import { Team } from 'src/app/classes/team'
 export class TeamContainerComponent implements OnInit {
   @Input() public title!: string
   @Input() public teams!: Team[]
+  @Input() public leaderView = false
 
   public constructor() { }
 

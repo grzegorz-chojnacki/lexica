@@ -7,6 +7,7 @@
   <div class="grid-container">
     <app-team-card *ngFor="let team of teams"
       [team]="team"
+      [leaderView]="leaderView"
       context="TeamContainer">
     </app-team-card>
   </div>

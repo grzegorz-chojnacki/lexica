@@ -23,7 +23,8 @@ export class TeamCardComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public removeItself(): void { this.teamService.remove(this.team) }
+  public removeTeam(): void { this.teamService.remove(this.team) }
+  public leaveTeam(): void  { this.teamService.leaveTeam(this.team) }
 
   public teamSettings(): void {
     this.dialog.closeAll()

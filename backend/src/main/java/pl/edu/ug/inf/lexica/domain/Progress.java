@@ -24,11 +24,6 @@ public class Progress {
     @JsonIgnoreProperties(value = {"name", "example", "description", "type", "active", "examples"})
     private Task task;
 
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude
-    @ManyToOne
-    private User user;
-
     @NonNull
     private int completion;
 }

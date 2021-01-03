@@ -45,7 +45,7 @@ public class User {
     @OneToMany(mappedBy = "leader")
     public Set<Team> leading;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Progress> progress = new HashSet<>();
 
     public User withSomeInfo() {
@@ -75,5 +75,12 @@ public class User {
         user.setProgress(progress);
 
         return user;
+    }
+
+    public Set<Progress> getProgressInTeam(Team team) {
+        Set<UUID> teamTaskIds = team.getTasks().stream().map(Task::getId).collect(Collectors.toSet());
+        return progress.stream()
+                .filter(progress -> teamTaskIds.contains(progress.getTask().getId()))
+                .collect(Collectors.toSet());
     }
 }

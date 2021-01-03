@@ -11,10 +11,10 @@ import java.util.UUID;
 
 @Service
 public class TeamService implements EntityService<Team> {
-    TeamRepository teamRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository){
+    public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
 
@@ -30,7 +30,10 @@ public class TeamService implements EntityService<Team> {
 
     @Override
     public void remove(UUID id) {
-        teamRepository.deleteById(id);
+        teamRepository.findById(id).ifPresent(team -> {
+            team.getTasks().clear();
+            teamRepository.delete(team);
+        });
     }
 
     @Override

@@ -22,7 +22,7 @@ export class TeamSummaryComponent implements OnInit {
   public toggleLeaderProgressActivation(event: MatSlideToggleChange): void {
     event.checked
       ? this.teamService.joinTeam(this.team.id)
-      : this.teamService.remove(this.team)
+      : this.teamService.leaveTeam(this.team)
   }
 
   public isLeaderProgressActivated(): boolean {

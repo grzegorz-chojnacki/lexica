@@ -24,7 +24,7 @@
   </mat-form-field>
 
   <mat-accordion multi>
-    <app-team-container title="Moje zespoły"
+    <app-team-container title="Moje zespoły" [leaderView]="true"
       [teams]="ownedTeams | teamsearch:search"></app-team-container>
     <app-team-container title="Przynależne zespoły"
       [teams]="otherTeams | teamsearch:search"></app-team-container>

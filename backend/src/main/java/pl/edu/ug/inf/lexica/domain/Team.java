@@ -32,15 +32,11 @@ public class Team {
     private Set<User> members = new HashSet<>();
 
     @JsonIgnoreProperties(value = "examples")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = { CascadeType.ALL, CascadeType.REMOVE })
     private List<Task> tasks = new ArrayList<>();
 
     @NonNull
     private String description;
-
-    public boolean hasLeaderWithoutMembership(User user) {
-        return leader.equals(user) && !members.contains(user);
-    }
 
     public Team withSomeInfo() {
         Team team = new Team();
