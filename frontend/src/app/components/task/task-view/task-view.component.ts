@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
+import { Location } from '@angular/common'
 
-
-import { SimpleCard, Task, Example } from 'src/app/classes/task'
+import { Example, SimpleCard, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
@@ -20,49 +20,49 @@ export class TaskViewComponent implements OnInit {
   public user!: User
   public task!: Task<SimpleCard>
 
-  public counter = 1
-  public progress = 0
-  public wordsList = new Array()
+  public counter = 0
+  public readonly knewList = new Array<Example>()
 
   public constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private taskService: TaskService,
-    private userService: UserService,
+    public  readonly location: Location,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly taskService: TaskService,
+    private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
     this.userService.user.subscribe(user => this.user = user)
 
-    const taskid = this.route.snapshot.paramMap.get('taskId')
+    const taskId = this.route.snapshot.paramMap.get('taskId')
 
     this.taskService
-      .getTask(taskid)
-      .subscribe(task => this.task = task
-      , err => this.router.navigate(['/']))
+      .getTask(taskId)
+      .subscribe(task => this.task = task, _ => this.router.navigate(['/']))
   }
 
+  public nextCard(knew: boolean): void {
+    if (knew) { this.knewList.push(this.task.examples[this.counter]) }
 
-  public nextCard(): void {
-
-
-    if (this.counter < this.task.examples.length) {
+    if (this.counter < this.task.examples.length - 1) {
       this.counter++
+    } else {
+      this.dialog.open(TaskSummaryComponent, {
+        disableClose: true,
+        data: {
+          knewList: this.knewList,
+          task: this.task
+        },
+        width: '500px'
+      }).afterClosed().subscribe(progress => {
+          if (progress) {
+            this.userService
+              .addProgress(progress)
+              .subscribe(_ => this.location.back())
+          } else {
+            window.location.reload()
+          }
+      })
     }
-    else
-    if (this.counter === this.task.examples.length) {
-    const dialogRef = this.dialog.open(TaskSummaryComponent, { width: '500px' })
-    const instance = dialogRef.componentInstance
-    instance.progres = this.task.examples.length - this.progress
-    instance.percentageProgress = this.progress /  this.task.examples.length * 100
-    instance.task = this.task
-
-    instance.notKnownWords =  this.dontKnowNext().slice(0, -1)
-    }
-  }
-
-  public dontKnowNext(): SimpleCard[] {
-   this.wordsList.push(this.task.examples[this.counter - 1])
-   return this.wordsList
   }
 }

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { Example, SimpleCard, Task } from 'src/app/classes/task'
-import { testTasks } from 'src/app/testData'
+import { SimpleCard, Task } from 'src/app/classes/task'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
-import { TaskType } from '../classes/task-type'
+import { TaskType, SimpleCardTask } from '../classes/task-type'
+import { Team } from '../classes/team'
 
 export interface TaskForm {
+  readonly team: Team,
   readonly name: string
   readonly description?: string
   readonly examples: SimpleCard[]
@@ -20,24 +21,36 @@ export interface TaskForm {
   providedIn: 'root'
 })
 export class TaskService {
-  private readonly taskSource = new BehaviorSubject<Task<SimpleCard>[]>(testTasks)
+  public  readonly emptyTask = new Task('', '', [], SimpleCardTask)
+  private taskSource = new BehaviorSubject<Task<SimpleCard>>(this.emptyTask)
   public constructor(private readonly http: HttpClient) { }
 
-
   public getTask(id: string | null): Observable<Task<SimpleCard>> {
-
-    return this.http.get<Task<SimpleCard>>(`${lexicaURL}/task/${id}`)
-    .pipe(map(Task.deserialize))
+    if (id) { this.refreshTaskSource(id) }
+    return this.taskSource.asObservable()
   }
 
-  // ToDo: Send this data to server and fetch new task list
-   public createTask(form: TaskForm): void {
-     const newTask = new Task('a', form.name, form.examples, form.taskType, true, form.description)
-     this.prependTaskSource(newTask)
-   }
-
-  private prependTaskSource(task: Task<SimpleCard>): void {
-    this.taskSource.next([task, ...this.taskSource.getValue()])
+  private refreshTaskSource(id: string): void {
+    this.http.get<Task<SimpleCard>>(`${lexicaURL}/task/${id}`)
+      .pipe(map(Task.deserialize))
+      .subscribe(
+        task => this.taskSource.next(task),
+        err => {
+          this.taskSource.error(err) // Reset taskSource after error
+          this.taskSource = new BehaviorSubject<Task<SimpleCard>>(this.emptyTask)
+        })
   }
 
+  public createTask(form: TaskForm): void {
+    this.http.post(`${lexicaURL}/team/${form.team.id}/task`, form).subscribe()
+  }
+
+  public updateTask(form: TaskForm, id: string): void {
+    this.http.put(`${lexicaURL}/team/${form.team.id}/task/${id}`, form)
+      .subscribe()
+  }
+
+  public remove(task: Task<SimpleCard>, teamId: string): void {
+    this.http.delete(`${lexicaURL}/team/${teamId}/task/${task.id}`).subscribe()
+  }
 }

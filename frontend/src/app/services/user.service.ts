@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs'
 import { User } from 'src/app/classes/user'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
+import { Progress } from '../classes/progress'
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,11 @@ export class UserService {
 
   public setUser(user: User): void {
     this.userSource.next(user)
+  }
+
+  public addProgress(progress: Progress): Observable<Progress> {
+    const userId = this.userSource.getValue().id
+    return this.http.put<Progress>(`${lexicaURL}/user/${userId}/progress`, progress)
   }
 
   public get user(): Observable<User> {
