@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-
+import { Location } from '@angular/common'
 
 import { Example, SimpleCard, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
@@ -24,6 +24,7 @@ export class TaskViewComponent implements OnInit {
   public readonly knewList = new Array<Example>()
 
   public constructor(
+    public  readonly location: Location,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly taskService: TaskService,
@@ -53,6 +54,12 @@ export class TaskViewComponent implements OnInit {
           task: this.task
         },
         width: '500px'
+      }).afterClosed().subscribe(progress => {
+          if (progress) {
+            this.location.back()
+          } else {
+            window.location.reload()
+          }
       })
     }
   }
