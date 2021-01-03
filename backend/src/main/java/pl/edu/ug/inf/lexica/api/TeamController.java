@@ -2,17 +2,14 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -57,28 +54,26 @@ public class TeamController {
     @PostMapping("/{id}/user")
     public void joinTeam(@RequestBody User u, @PathVariable UUID id) {
         teamService.get(id).ifPresent(team ->
-            userService.get(u.getId()).ifPresent(user -> {
-                team.getMembers().add(user);
-                teamService.update(team);
-            })
+                userService.get(u.getId()).ifPresent(user -> {
+                    team.getMembers().add(user);
+                    teamService.update(team);
+                })
         );
     }
 
     @DeleteMapping("/{teamId}/user/{userId}")
     public void leaveTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
         teamService.get(teamId).ifPresent(team ->
-            userService.get(userId).ifPresent(user -> {
-                if (team.hasLeaderWithoutMembership(user)) {
-                    teamService.remove(team.getId());
-                } else {
-                    List<Progress> progressInTeam = user.getProgress().stream()
-                            .filter(progress -> team.getTasks().contains(progress.getTask()))
-                            .collect(Collectors.toList());
+                userService.get(userId).ifPresent(user -> {
+                    user.getProgress().removeAll(user.getProgressInTeam(team));
                     team.getMembers().remove(user);
-                    user.getProgress().removeAll(progressInTeam);
                     teamService.update(team);
-                }
-            })
+                })
         );
+    }
+
+    @DeleteMapping("/{teamId}")
+    public void removeTeam(@PathVariable UUID teamId) {
+        teamService.get(teamId).ifPresent(team -> teamService.remove(team.getId()));
     }
 }
