@@ -27,9 +27,9 @@ export class MemberListComponent implements OnInit {
   public getCompletion(user: User): number {
     if (this.task) {
       return user.getTaskProgress(this.task).completion
-    } else {
-      const progress = this.team.tasks.map(t => user.getTaskProgress(t))
+    } else if (this.team.tasks.length > 0) {
+      const progress = this.team.tasks.map(task => user.getTaskProgress(task))
       return Math.round(progress.reduce(Progress.sum, 0) / progress.length)
-    }
+    } else { return 0 }
   }
 }
