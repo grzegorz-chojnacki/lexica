@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let member of team?.members">
+  <mat-list-item *ngFor="let member of team?.members; last as last">
     <img matListAvatar src="assets/avatar_placeholder.jpg" />
     <h4 matLine>{{ member | fullNamePipe }}</h4>
     <p>
@@ -12,6 +12,6 @@
     <button *ngIf="leaderView" mat-icon-button (click)="removeMember(member)">
       <mat-icon>close</mat-icon>
     </button>
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="!last"></mat-divider>
   </mat-list-item>
 </mat-list>
