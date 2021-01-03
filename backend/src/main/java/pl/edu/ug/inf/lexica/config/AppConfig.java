@@ -53,7 +53,7 @@ public class AppConfig {
 
      private Set<Progress> generateProgress(List<Task> tasks) {
         return tasks.stream()
-                .map(task -> new Progress(task, new Random().nextInt(task.getExamples().size() + 1)))
+                .map(task -> new Progress(task, new Random().nextInt(101)))
                 .collect(Collectors.toSet());
     }
 

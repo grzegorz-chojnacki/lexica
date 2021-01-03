@@ -44,10 +44,15 @@ public class UserController {
         return userService.get(id).map(User::withProgress);
     }
 
-    @PostMapping("/{id}/progress")
+    @PutMapping("/{id}/progress")
     public void addProgress(@RequestBody Progress progress, @PathVariable UUID id) {
         userService.get(id).ifPresent(user -> {
-            user.getProgress().add(progress);
+            user.getProgress().stream()
+                    .filter(p -> p.getTask().getId().equals(progress.getTask().getId()))
+                    .findAny()
+                    .ifPresentOrElse( // Keep at most one progress for each task
+                             p -> p.setCompletion(progress.getCompletion()),
+                            () -> user.getProgress().add(progress));
             userService.update(user);
         });
     }

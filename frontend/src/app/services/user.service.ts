@@ -24,10 +24,9 @@ export class UserService {
     this.userSource.next(user)
   }
 
-  public addProgress(progress: Progress): void {
-    console.log(`${lexicaURL}/user/${this.userSource.getValue().id}/progress`)
-    this.http.post(`${lexicaURL}/user/${this.userSource.getValue().id}/progress`,
-      progress).subscribe()
+  public addProgress(progress: Progress): Observable<Progress> {
+    const userId = this.userSource.getValue().id
+    return this.http.put<Progress>(`${lexicaURL}/user/${userId}/progress`, progress)
   }
 
   public get user(): Observable<User> {

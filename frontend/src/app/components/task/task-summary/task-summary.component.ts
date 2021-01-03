@@ -13,18 +13,22 @@ type AttemptSummary = { knewList: SimpleCard[], task: Task<SimpleCard> }
 export class TaskSummaryComponent implements OnInit {
   public readonly notKnownWords = new Array<SimpleCard>()
   public readonly task!: Task<SimpleCard>
-  public readonly completed: number
+  public readonly completion: number
 
   public constructor(@Inject(MAT_DIALOG_DATA) data: AttemptSummary) {
     this.notKnownWords = data.task.examples
       .filter(example => !data.knewList.includes(example))
     this.task = data.task
-    this.completed = data.knewList.length
+    this.completion = this.getCompletion(data.knewList.length, data.task.examples.length)
+  }
+
+  private getCompletion(a: number, b: number): number {
+    return Math.floor(a / b * 100)
   }
 
   public ngOnInit(): void { }
 
   public getProgress(): Progress {
-    return new Progress(this.task, this.completed)
+    return new Progress(this.task, this.completion)
   }
 }

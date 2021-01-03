@@ -30,5 +30,5 @@ public class Progress {
     private User user;
 
     @NonNull
-    private int completed;
+    private int completion;
 }
