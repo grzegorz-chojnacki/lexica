@@ -24,6 +24,14 @@ export class Team {
     public readonly description: string = '',
     public readonly image?: ImageBitmap) { }
 
+  public hasMembers(): boolean {
+    return this.members.length > 0
+  }
+
+  public hasTasks(): boolean {
+    return this.tasks.length > 0
+  }
+
   public getUserProgress(user: User): Progress[] {
     return this.tasks.map(task => user.getTaskProgress(task))
   }

@@ -29,7 +29,7 @@ export class TaskListComponent implements OnInit {
   public launchTask(task: Task<Example>): void {
     this.dialog.open(TaskDialogComponent, {
         width: '500px',
-        data: { task, users: this.team.members }
+        data: { task, team: this.team }
       })
   }
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
 import { Task, Example } from 'src/app/classes/task'
-import { User } from 'src/app/classes/user'
+import { Team } from 'src/app/classes/team'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 
 @Component({
@@ -12,7 +12,7 @@ import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-
 })
 export class TaskMenuComponent implements OnInit {
   @Input() public task!: Task<Example>
-  @Input() public users!: User[]
+  @Input() public team!: Team
   @Input() public leaderView = false
   @ViewChild(MatMenu, { static: true }) public readonly menu!: MatMenu
 
@@ -26,7 +26,7 @@ export class TaskMenuComponent implements OnInit {
       width: '700px',
       data: {
         task: this.task,
-        users: this.users
+        team: this.team
       }
     })
   }

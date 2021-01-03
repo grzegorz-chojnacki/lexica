@@ -1,9 +1,9 @@
 import { TaskType } from './task-type'
-import { User } from './user'
+import { Team } from './team'
 
-export interface TaskAndUsersWithProgress {
+export type TaskAndUsersWithProgress = {
   task: Task<Example>
-  users: User[]
+  team: Team
 }
 
 export abstract class Example { }
