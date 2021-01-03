@@ -56,7 +56,7 @@ export class TaskViewComponent implements OnInit {
         width: '500px'
       }).afterClosed().subscribe(progress => {
           if (progress) {
-            this.location.back()
+            this.userService.addProgress(progress)
           } else {
             window.location.reload()
           }
