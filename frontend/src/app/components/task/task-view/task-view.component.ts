@@ -41,8 +41,9 @@ export class TaskViewComponent implements OnInit {
   }
 
   public nextCard(knew: boolean): void {
+    if (knew) { this.knewList.push(this.task.examples[this.counter]) }
+
     if (this.counter < this.task.examples.length - 1) {
-      if (knew) { this.knewList.push(this.task.examples[this.counter]) }
       this.counter++
     } else {
       this.dialog.open(TaskSummaryComponent, {
