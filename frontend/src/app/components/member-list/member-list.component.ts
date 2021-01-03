@@ -5,13 +5,11 @@ import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
 
 @Component({
-  selector: 'app-member-list-item',
-  templateUrl: './member-list-item.component.html',
-  styleUrls: ['./member-list-item.component.scss']
+  selector: 'app-member-list',
+  templateUrl: './member-list.component.html',
+  styleUrls: ['./member-list.component.scss']
 })
-export class MemberListItemComponent implements OnInit {
-  // Can be used for team progress (with list of every progress in some team)
-  // or for specific task (with only one progress in list)
+export class MemberListComponent implements OnInit {
   @Input() public progress!: Progress[]
   @Input() public user!: User
   @Input() public team!: Team

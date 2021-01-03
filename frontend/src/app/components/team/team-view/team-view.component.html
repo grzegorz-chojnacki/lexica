@@ -25,10 +25,10 @@
           </section>
           <section *ngIf="team?.members!.length > 0">
             <mat-list>
-              <app-member-list-item *ngFor="let member of team?.members"
+              <app-member-list *ngFor="let member of team?.members"
                 [user]="member" [progress]="member.progress" [team]="team"
                 [leaderView]="leaderView">
-              </app-member-list-item>
+              </app-member-list>
             </mat-list>
           </section>
         </mat-tab>

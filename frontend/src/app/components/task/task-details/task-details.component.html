@@ -22,9 +22,9 @@
 
 <mat-dialog-content>
   <mat-list>
-    <app-member-list-item *ngFor="let user of getUsersWithProgress()"
+    <app-member-list *ngFor="let user of getUsersWithProgress()"
       [user]="user" [progress]="[ user.getTaskProgress(task) ]">
-    </app-member-list-item>
+    </app-member-list>
   </mat-list>
 </mat-dialog-content>
 
