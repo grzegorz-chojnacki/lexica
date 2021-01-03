@@ -5,17 +5,22 @@
 
 <mat-dialog-content>
   <p class="mat-card-subtitle">Podsumowanie twojego podejścia</p>
-  <h3>Lista niezaliczonych przykładów</h3>
-  <mat-list>
-    <mat-list-item *ngFor="let example of notKnownWords">
-      <div class="flex-container">
-        <span>{{ example.foreignWord }}</span>
-        <span class="spacer"></span>
-        <span>{{ example.nativeWord }}</span>
-      </div>
-      <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>
+  <section *ngIf="notKnownWords.length === 0">
+    <h3>Gratulacje, wszystkie przykłady zostały zaliczone!</h3>
+  </section>
+  <section *ngIf="notKnownWords.length > 0">
+    <h3>Lista niezaliczonych przykładów</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let example of notKnownWords">
+        <div class="flex-container">
+          <span>{{ example.foreignWord }}</span>
+          <span class="spacer"></span>
+          <span>{{ example.nativeWord }}</span>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </section>
 </mat-dialog-content>
 
 <mat-dialog-actions>
