@@ -1,14 +1,17 @@
-<mat-list-item>
-  <img matListAvatar src="assets/avatar_placeholder.jpg">
-  <h4 matLine >{{ user | fullNamePipe }}</h4>
-  <p>
-    {{ getCompletion() }}% postępu
-    <mat-progress-spinner color="accent" [value]="getCompletion()" diameter="20">
-    </mat-progress-spinner>
-  </p>
+<mat-list>
+  <mat-list-item *ngFor="let member of team?.members">
+    <img matListAvatar src="assets/avatar_placeholder.jpg" />
+    <h4 matLine>{{ member | fullNamePipe }}</h4>
+    <p>
+      {{ getCompletion(member) }}% postępu
+      <mat-progress-spinner color="accent" diameter="20"
+        [value]="getCompletion(member)">
+      </mat-progress-spinner>
+    </p>
 
-  <button *ngIf="leaderView" mat-icon-button (click)="removeItself()">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-list-item>
-<mat-divider></mat-divider>
+    <button *ngIf="leaderView" mat-icon-button (click)="removeMember(member)">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

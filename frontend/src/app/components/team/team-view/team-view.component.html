@@ -15,22 +15,17 @@
           <section class="hint" *ngIf="team?.tasks!.length === 0">
             <h3>Nie ma jeszcze żadnych zadań</h3>
           </section>
-          <section *ngIf="team?.tasks!.length > 0">
-            <app-task-list [team]="team" [leaderView]="leaderView"></app-task-list>
-          </section>
+          <app-task-list *ngIf="team?.tasks!.length > 0"
+            [team]="team" [leaderView]="leaderView">
+          </app-task-list>
         </mat-tab>
         <mat-tab label="Uczestnicy">
           <section class="hint" *ngIf="team?.members!.length === 0">
             <h3>Zaproś nowych członków, wysyłając im kod zespołu</h3>
           </section>
-          <section *ngIf="team?.members!.length > 0">
-            <mat-list>
-              <app-member-list *ngFor="let member of team?.members"
-                [user]="member" [progress]="member.progress" [team]="team"
-                [leaderView]="leaderView">
-              </app-member-list>
-            </mat-list>
-          </section>
+          <app-member-list *ngIf="team?.members!.length > 0"
+            [team]="team" [leaderView]="leaderView">
+          </app-member-list>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

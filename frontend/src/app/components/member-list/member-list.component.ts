@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Progress } from 'src/app/classes/progress'
+import { Example, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
@@ -10,26 +11,25 @@ import { TeamService } from 'src/app/services/team.service'
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
-  @Input() public progress!: Progress[]
-  @Input() public user!: User
   @Input() public team!: Team
   @Input() public leaderView = false
+  // When set, progress is calculated only for this task, or else for every task
+  @Input() public task?: Task<Example>
 
   public constructor(private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
 
-  public removeItself(): void {
-    this.teamService.leaveTeam(this.team.id, this.user.id)
+  public removeMember(member: User): void {
+    this.teamService.leaveTeam(this.team.id, member.id)
   }
 
-  public getCompletion(): number {
-    if (this.progress.length > 0) {
-      const sum = this.progress.reduce(Progress.sum, 0)
-      return Math.round(sum / this.progress.length)
+  public getCompletion(user: User): number {
+    if (this.task) {
+      return user.getTaskProgress(this.task).completion
     } else {
-      return 0
+      const progress = this.team.tasks.map(t => user.getTaskProgress(t))
+      return Math.round(progress.reduce(Progress.sum, 0) / progress.length)
     }
   }
-
 }

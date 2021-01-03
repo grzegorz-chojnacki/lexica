@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Task, Example, TaskAndUsersWithProgress } from 'src/app/classes/task'
-import { User } from 'src/app/classes/user'
+import { Team } from 'src/app/classes/team'
 
 @Component({
   selector: 'app-task-details',
@@ -10,15 +10,18 @@ import { User } from 'src/app/classes/user'
 })
 export class TaskDetailsComponent implements OnInit {
   public readonly task: Task<Example>
-  public readonly users: User[]
+  public readonly team: Team
 
   public constructor(@Inject(MAT_DIALOG_DATA) data: TaskAndUsersWithProgress) {
-    this.task  = data.task
-    this.users = data.users
+    this.task = data.task
+    this.team = data.team
   }
 
-  public getUsersWithProgress(): User[] {
-    return this.users.filter(user => user.getTaskProgress(this.task).completion > 0)
+  public getUsersWithProgress(): string {
+    const usersWithProgress = this.team.members
+      .filter(user => user.getTaskProgress(this.task).completion > 0)
+      .length
+    return `${usersWithProgress}/${this.team.members.length}`
   }
 
   public ngOnInit(): void { }

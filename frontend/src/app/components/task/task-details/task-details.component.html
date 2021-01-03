@@ -10,22 +10,17 @@
       (click)="$event.stopPropagation()">
     <mat-icon>more_vert</mat-icon>
   </button>
-  <app-task-menu #taskMenu [task]="task" [users]="users">
+  <app-task-menu #taskMenu [task]="task" [team]="team">
   </app-task-menu>
 </header>
 
 <p>{{ task.description }}</p>
 <p class="mat-card-subtitle">
-  Uczestnicy którzy wykonali zadanie
-  ({{ getUsersWithProgress().length }}/{{ users.length }})
+  Uczestnicy którzy wykonali zadanie ({{ getUsersWithProgress() }})
 </p>
 
 <mat-dialog-content>
-  <mat-list>
-    <app-member-list *ngFor="let user of getUsersWithProgress()"
-      [user]="user" [progress]="[ user.getTaskProgress(task) ]">
-    </app-member-list>
-  </mat-list>
+    <app-member-list [task]="task" [team]="team"></app-member-list>
 </mat-dialog-content>
 
 <mat-dialog-actions>

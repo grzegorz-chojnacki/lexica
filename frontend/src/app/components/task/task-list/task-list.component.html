@@ -11,7 +11,7 @@
         (click)="$event.stopPropagation()">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <app-task-menu #taskMenu [task]="task" [users]="team.members"
+    <app-task-menu #taskMenu [task]="task" [team]="team"
       [leaderView]="leaderView"></app-task-menu>
     <mat-divider *ngIf="!last"></mat-divider>
   </mat-list-item>
