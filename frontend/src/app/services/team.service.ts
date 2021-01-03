@@ -77,15 +77,19 @@ export class TeamService {
       })
   }
 
-  public leaveTeam(teamId: string, userId: string): void {
-    this.http.delete(`${lexicaURL}/team/${teamId}/user/${userId}`)
-    .subscribe(() => {
-      this.refreshTeamListSource()
-      this.refreshTeamSource(teamId)
-    })
+  public leaveTeam(team: Team, user = this.loggedUser): void {
+    this.http.delete(`${lexicaURL}/team/${team.id}/user/${user.id}`)
+      .subscribe(() => {
+        this.refreshTeamListSource()
+        this.refreshTeamSource(team.id)
+      })
   }
 
   public remove(team: Team): void {
-    this.leaveTeam(team.id, this.loggedUser.id)
+    this.http.delete(`${lexicaURL}/team/${team.id}`)
+      .subscribe(() => {
+        this.refreshTeamListSource()
+        this.refreshTeamSource(team.id)
+      })
   }
 }

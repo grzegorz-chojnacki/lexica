@@ -19,9 +19,13 @@
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
-      <button mat-menu-item (click)="removeItself()">
+      <button *ngIf="leaderView" mat-menu-item (click)="removeTeam()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
+      </button>
+      <button *ngIf="!leaderView" mat-menu-item (click)="leaveTeam()">
+        <mat-icon>logout</mat-icon>
+        <span>Opuść</span>
       </button>
     </mat-menu>
 

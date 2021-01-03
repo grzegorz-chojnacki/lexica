@@ -21,7 +21,7 @@ export class MemberListComponent implements OnInit {
   public ngOnInit(): void { }
 
   public removeMember(member: User): void {
-    this.teamService.leaveTeam(this.team.id, member.id)
+    this.teamService.leaveTeam(this.team, member)
   }
 
   public getCompletion(user: User): number {
