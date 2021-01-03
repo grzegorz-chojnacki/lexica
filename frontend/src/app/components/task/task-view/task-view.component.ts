@@ -47,6 +47,7 @@ export class TaskViewComponent implements OnInit {
       this.counter++
     } else {
       this.dialog.open(TaskSummaryComponent, {
+        disableClose: true,
         data: {
           knewList: this.knewList,
           task: this.task
