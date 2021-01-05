@@ -11,7 +11,7 @@
     <mat-icon>edit</mat-icon>
     <span>Edytuj</span>
   </button>
-  <button *ngIf="leaderView" mat-menu-item>
+  <button *ngIf="leaderView" mat-menu-item (click)="removeItself()">
     <mat-icon>delete</mat-icon>
     <span>Usuń</span>
   </button>

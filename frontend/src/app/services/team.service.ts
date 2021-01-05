@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from 'src/app/lexica.properties'
 import { Team } from 'src/app/classes/team'
 import { UserService } from './user.service'
+import { Example, Task } from '../classes/task'
 
 export interface TeamForm {
   readonly name: string
@@ -91,5 +92,10 @@ export class TeamService {
         this.refreshTeamListSource()
         this.refreshTeamSource(team.id)
       })
+  }
+
+  public removeTask(task: Task<Example>, team: Team): void {
+    this.http.delete(`${lexicaURL}/team/${team.id}/task/${task.id}`)
+      .subscribe(() => this.refreshTeamSource(team.id))
   }
 }
