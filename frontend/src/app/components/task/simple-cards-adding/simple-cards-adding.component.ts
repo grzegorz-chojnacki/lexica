@@ -22,8 +22,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   private taskService: TaskService,
   private formBuilder: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({
-      title: '',
-      description: ''
+      name: '',
     })
    }
 
@@ -33,6 +32,7 @@ export class SimpleCardsAddingComponent implements OnInit {
 
   public submit(): void {
     console.log(this.checkoutForm)
+   // this.taskService.createTask(this.checkoutForm)
   }
   public delete(no: number): void {
     if (this.simpleCards.length > 0) {
@@ -47,8 +47,6 @@ export class SimpleCardsAddingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.obce.length === 0 || result.narodowe.length === 0) { }
       else {
-   //   this.delete(no)
-     // this.simpleCards.push(new SimpleCard(result.obce, result.narodowe))
       this.simpleCards[no].nativeWord = result.narodowe
       this.simpleCards[no].foreignWord = result.obce
       }
