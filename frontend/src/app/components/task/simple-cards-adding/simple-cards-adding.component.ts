@@ -34,7 +34,10 @@ export class SimpleCardsAddingComponent implements OnInit {
   public submit(): void {
     console.log(this.checkoutForm)
   }
-  public delete(): void {
+  public delete(no: number): void {
+    if (this.simpleCards.length > 0) {
+    this.simpleCards.splice(no, 1)
+    }
   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',

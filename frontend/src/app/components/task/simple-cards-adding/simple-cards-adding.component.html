@@ -22,14 +22,15 @@
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-    <mat-list-item  *ngFor="let word of simpleCards">
+    <mat-list-item  *ngFor="let word of simpleCards; let i = index">
         <h4 matLine>{{word.foreignWord}}</h4>
         <h4 id="matLine"> {{word.nativeWord}}</h4>
           <button mat-menu-item>
             <mat-icon  class="options">edit</mat-icon>
           </button>
+
           <button mat-menu-item>
-            <mat-icon class="options"  (click)="delete()">delete</mat-icon>
+            <mat-icon class="options" (click)="delete(i)" >delete</mat-icon>
           </button>
         <mat-divider></mat-divider>
 
