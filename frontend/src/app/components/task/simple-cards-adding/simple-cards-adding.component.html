@@ -26,7 +26,7 @@
         <h4 matLine>{{word.foreignWord}}</h4>
         <h4 id="matLine"> {{word.nativeWord}}</h4>
           <button mat-menu-item>
-            <mat-icon  class="options">edit</mat-icon>
+            <mat-icon  class="options" (click)="edit(i)">edit</mat-icon>
           </button>
 
           <button mat-menu-item>

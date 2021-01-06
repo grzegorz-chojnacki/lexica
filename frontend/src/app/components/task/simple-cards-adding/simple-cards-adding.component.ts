@@ -39,6 +39,21 @@ export class SimpleCardsAddingComponent implements OnInit {
     this.simpleCards.splice(no, 1)
     }
   }
+  public edit(no: number): void {
+    const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',
+    height: '500px', data: { obce: this.simpleCards[no].foreignWord,
+       narodowe: this.simpleCards[no].nativeWord}, hasBackdrop: false})
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.obce.length === 0 || result.narodowe.length === 0) { }
+      else {
+   //   this.delete(no)
+     // this.simpleCards.push(new SimpleCard(result.obce, result.narodowe))
+      this.simpleCards[no].nativeWord = result.narodowe
+      this.simpleCards[no].foreignWord = result.obce
+      }
+    })
+   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, { width: '500px',
     height: '500px', data: { obce: this.obce, narodowe: this.narodowe}, hasBackdrop: false})
