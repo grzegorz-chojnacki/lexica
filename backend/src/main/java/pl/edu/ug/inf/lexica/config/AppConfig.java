@@ -36,47 +36,63 @@ public class AppConfig {
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
+    Supplier<List<SimpleCard>> generateCards1 = () -> Map.ofEntries(
+            Map.entry("liczba", "number"),
+            Map.entry("cyfra", "digit"),
+            Map.entry("liczba pierwsza", "prime number"),
+            Map.entry("liczba dodatnia", "positive number"),
+            Map.entry("liczba ujemna", "negative number"),
+            Map.entry("liczba parzysta", "event number"),
+            Map.entry("liczba nieparzysta", "odd number"),
+            Map.entry("liczba całkowita", "integer"),
+            Map.entry("liczba naturalna", "natural number"),
+            Map.entry("liczba rzeczywista", "real number")).entrySet().stream()
+            .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
+
+
     List<Task> testTasks = new ArrayList<>();
 
     Supplier<List<Task>> generateTasks = () -> List.of(
-            List.of("Zadanie z fiszkami", "Opis zadania z fiszkami"),
-            List.of("Zadanie bez opisu", "Opis zadania bez opisu"),
-            List.of("Następne zadanie z fiszkami", "Opis następnego zadania z fiszkami"),
-            List.of("Zadanie z kolejną porcją fiszk", "Opis zadania z kolejną porcją fiszek"),
-            List.of("Zadanie nieaktywne", "Opis zadania nieaktywnego"),
-            List.of("Zadanie z trochę dłuższym opisem",
-                    "Opis Zadanie z trochę dłuższym opisem, który się ciągnie i ciągnie i ciągnie bez końca")).stream()
-            .map(list -> new Task(list.get(0), generateCards.get(), true, list.get(1), simpleCardType))
+            List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
+            List.of("House", ""),
+            List.of("Music", "Bardzo przyswajalny temat :)."),
+            List.of("Numbers_0", "Basic words."),
+            List.of("Zadanie nieaktywne", ""),
+            List.of("The Internet and WWW",
+                    "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
+            .map(list -> new Task(list.get(0),generateCards.get()  , true, list.get(1), simpleCardType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
-     private Set<Progress> generateProgress(List<Task> tasks) {
+
+
+    private Set<Progress> generateProgress(List<Task> tasks) {
         return tasks.stream()
                 .map(task -> new Progress(task, new Random().nextInt(101)))
                 .collect(Collectors.toSet());
     }
-
     List<User> testUsers = List.of(
-            new User("Lyn", "Tommaseo", "ltommaseo@example.com", "opBUs"),
-            new User("Amie", "Acomb", "aacomb@example.com", "jxodRBo"),
-            new User("Frederich", "Bastow", "fbastow@example.com", "Kv474Uw"),
-            new User("Hilde", "Felten", "hfelten@example.com", "QF416Kb"),
-            new User("Fraser", "Spaule", "fspaule@example.com", "c5IDuMrp2GO0AQw"),
-            new User("Erna", "Yokley", "eyokley@example.com", "tcOCnWgAFrpzrg"),
-            new User("Walt", "Verrick", "wverrick@example.com", "Q5wzLBetyjNy"),
-            new User("Ossie", "Capoun", "ocapoun@example.com", "OPUgvEv0cFkr"),
-            new User("Damita", "Fransinelli", "dfransinelli@example.com", "JYtQnNdtNJBaR"),
-            new User("Peggie", "Gerrelt", "pgerrelt@example.com", "WyAq1CjwM"));
+            new User("Jan", "Kowalski", "jkowalski@example.com", "opBUs"),
+            new User("Anna", "Nowak", "anowak@example.com", "jxodRBo"),
+            new User("Fryderyk", "Bastow", "fbastow@example.com", "Kv474Uw"),
+            new User("Henryk", "Felten", "hfelten@example.com", "QF416Kb"),
+            new User("Franciszek", "Sabkowski", "fsabkowski@example.com", "c5IDuMrp2GO0AQw"),
+            new User("Edyta", "Kamińska", "ekaminska@example.com", "tcOCnWgAFrpzrg"),
+            new User("Waldemar", "Olejnik", "wolejnik@example.com", "Q5wzLBetyjNy"),
+            new User("Oskar", "Chomicki", "ochomicki@example.com", "OPUgvEv0cFkr"),
+            new User("Damgmara", "Fryc", "dfryc@example.com", "JYtQnNdtNJBaR"),
+            new User("Patrycja", "Gajda", "pgajda@example.com", "WyAq1CjwM"));
 
     List<Team> testTeams = List.of(
-            new Team("Khaki", testUsers.get(0), "Milt op involving oth dest arcrft, civilian, sequela"),
-            new Team("Aquamarine", testUsers.get(1), "Contracture, unspecified hip"),
-            new Team("Fuscia", testUsers.get(2), "Smith\"s fx r radius, subs for opn fx type I/2 w nonunion"),
-            new Team("Orange", testUsers.get(3), "Stress fracture, right femur, initial encounter for fracture"),
-            new Team("Aquamarine", testUsers.get(5), "Left sided colitis"),
-            new Team("Crimson", testUsers.get(6), "Pulsating exophthalmos, left eye"),
-            new Team("Mauv", testUsers.get(4), ""));
+            new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę."),
+            new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej."),
+            new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!"),
+            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein."),
+            new Team("angielski gr.1", testUsers.get(5), ""),
+            new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo."),
+            new Team("TDW", testUsers.get(4), ""));
 
     Set<User> testUserGroup(User leader) {
         return testUsers.stream()
