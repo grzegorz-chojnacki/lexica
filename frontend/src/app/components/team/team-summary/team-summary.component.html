@@ -4,13 +4,5 @@
     <button mat-raised-button color="accent" (click)="newTaskDialog()">
       Nowe zadanie
     </button>
-    <mat-slide-toggle
-        [checked]="isLeaderProgressActivated()"
-        (change)="toggleLeaderProgressActivation($event)">
-      Zapisuj postępy lidera zespołu
-    </mat-slide-toggle>
-    <!-- <button mat-button color="accent" (click)="acceptMembersDialog()">
-      Oczekujący uczestnicy
-    </button> -->
   </mat-card-actions>
 </mat-card>
