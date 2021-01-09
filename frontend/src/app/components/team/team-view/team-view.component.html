@@ -7,7 +7,7 @@
     <app-team-actions [team]="team"></app-team-actions>
   </section>
 
-  <section *ngIf="leaderHasProgressView">
+  <section *ngIf="leaderHasProgressView && team.hasTasks()">
     <app-team-progress [user]="loggedUserWithProgress" [tasks]="team.tasks">
     </app-team-progress>
   </section>

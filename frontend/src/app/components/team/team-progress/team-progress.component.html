@@ -1,7 +1,22 @@
 <mat-card>
   <mat-card-title>Twoje postępy w zespole</mat-card-title>
   <mat-card-content>
-    <p>Średni wynik w wykonanych zadaniach: {{ getAverageProgress() }}%</p>
-    <p>(Uwzględniając niewykonanane zadania):  {{ getTeamProgress() }}%</p>
+    <mat-list dense>
+      <mat-list-item>
+        <span>Ilosć wykonanych zadań:</span>
+        <div class="spacer"></div>
+        <span>{{ user.progress.length }}/{{ tasks.length }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span>Średni wynik w wykonanych zadaniach:</span>
+        <div class="spacer"></div>
+        <span>{{ getAverageProgress() }}%</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span>Uwzględniając niewykonanane zadania:</span>
+        <div class="spacer"></div>
+        <span>{{ getTeamProgress() }}%</span>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>

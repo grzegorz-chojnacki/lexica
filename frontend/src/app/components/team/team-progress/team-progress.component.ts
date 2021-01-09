@@ -17,7 +17,9 @@ export class TeamProgressComponent implements OnInit {
   public ngOnInit(): void { }
 
   public getAverageProgress(): number {
-    return Math.floor(this.progressSum() / this.user.progress.length)
+    if (this.user.progress.length > 0) {
+      return Math.floor(this.progressSum() / this.user.progress.length)
+    } else { return 0 }
   }
 
   private progressSum(): number {
