@@ -7,6 +7,10 @@
     <app-team-summary [team]="team"></app-team-summary>
   </section>
 
+  <section *ngIf="leaderHasProgressView">
+    Komponent z postępem użytkownika
+  </section>
+
   <section>
     <mat-card>
       <mat-tab-group mat-stretch-tabs mat-align-tabs="center" color="accent"
