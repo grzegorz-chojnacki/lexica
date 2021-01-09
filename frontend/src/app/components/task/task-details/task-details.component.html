@@ -9,6 +9,9 @@
 <p class="mat-card-subtitle">
   Uczestnicy którzy wykonali zadanie ({{ getUsersWithProgress() }})
 </p>
+<p class="mat-card-subtitle">
+  Średni wynik całego zespołu ({{ getAverageTeamProgress() }}%)
+</p>
 
 <mat-dialog-content>
     <app-member-list [task]="task" [team]="team"></app-member-list>

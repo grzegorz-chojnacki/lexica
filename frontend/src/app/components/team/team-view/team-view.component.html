@@ -21,7 +21,7 @@
             <h3>Nie ma jeszcze żadnych zadań</h3>
           </section>
           <app-task-list *ngIf="team.hasTasks()"
-            [team]="team" [leaderView]="leaderView">
+            [user]="loggedUserWithProgress" [team]="team" [leaderView]="leaderView">
           </app-task-list>
         </mat-tab>
         <mat-tab label="Uczestnicy">

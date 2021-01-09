@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
 import { Progress } from 'src/app/classes/progress'
 import { Team } from 'src/app/classes/team'
+import { User } from 'src/app/classes/user'
 
 @Component({
   selector: 'app-task-list',
@@ -11,6 +12,7 @@ import { Team } from 'src/app/classes/team'
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  @Input() public user!: User
   @Input() public team!: Team
   @Input() public leaderView!: boolean
 
@@ -18,18 +20,17 @@ export class TaskListComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public getTeamProgress(task: Task<Example>): number {
-    const sum = this.team.members
-      .map(user => user.getTaskProgress(task))
-      .reduce(Progress.sum, 0)
-
-    return Math.round(sum / this.team.members.length)
+  public getUserProgress(task: Task<Example>): string {
+    const progress = this.user.getTaskProgress(task).completion
+    if (progress !== 0) {
+      return `${this.user.getTaskProgress(task).completion}% wykonania`
+    } else { return 'Brak wyniku' }
   }
 
   public launchTask(task: Task<Example>): void {
     this.dialog.open(TaskDialogComponent, {
-        width: '500px',
-        data: { task, team: this.team }
-      })
+      width: '500px',
+      data: { task, team: this.team }
+    })
   }
 }

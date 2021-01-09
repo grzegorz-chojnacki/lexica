@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Progress } from 'src/app/classes/progress'
 import { Task, Example, TaskAndUsersWithProgress } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 
@@ -22,6 +23,14 @@ export class TaskDetailsComponent implements OnInit {
       .filter(user => user.getTaskProgress(this.task).completion > 0)
       .length
     return `${usersWithProgress}/${this.team.members.length}`
+  }
+
+  public getAverageTeamProgress(): number {
+    const sum = this.team.members
+      .map(user => user.getTaskProgress(this.task))
+      .reduce(Progress.sum, 0)
+
+    return Math.round(sum / this.team.members.length)
   }
 
   public ngOnInit(): void { }
