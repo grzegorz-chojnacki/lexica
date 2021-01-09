@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
+import pl.edu.ug.inf.lexica.service.TaskService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
@@ -17,11 +18,13 @@ import java.util.UUID;
 public class TeamController {
     private final TeamService teamService;
     private final UserService userService;
+    private final TaskService taskService;
 
     @Autowired
-    public TeamController(TeamService teamService, UserService userService) {
+    public TeamController(TeamService teamService, UserService userService, TaskService taskService) {
         this.teamService = teamService;
         this.userService = userService;
+        this.taskService = taskService;
     }
 
     @GetMapping("/{id}")
@@ -49,6 +52,16 @@ public class TeamController {
             team.getTasks().add(task);
             teamService.update(team);
         });
+    }
+
+    @DeleteMapping("/{teamId}/task/{taskId}")
+    public void removeTask(@PathVariable UUID teamId, @PathVariable UUID taskId) {
+        teamService.get(teamId).ifPresent(team ->
+                taskService.get(taskId).ifPresent(task -> {
+                    team.getTasks().remove(task);
+                    teamService.update(team);
+                })
+        );
     }
 
     @PostMapping("/{id}/user")
