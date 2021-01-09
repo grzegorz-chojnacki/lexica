@@ -20,12 +20,18 @@ public class AppConfig {
     private final TaskTypeService taskTypeService;
     private final TeamService teamService;
 
+    private final List<TaskType> simpleCardsType=List.of(
+            new  TaskType("Fiszka", "Fruit and nothing else"),
+            new  TaskType("Fiszka", "Przykłady do nauki na kartkówę 28.02.2021r."),
+            new  TaskType("Fiszka", "Słówka przydadzą się w następnym zadaniu domowym."),
+            new  TaskType("Fiszka", ""));
     @Autowired
     public AppConfig(UserService userService, TaskTypeService taskTypeService, TeamService teamService) {
         this.userService = userService;
         this.taskTypeService = taskTypeService;
         this.teamService = teamService;
     }
+
 
     Supplier<List<SimpleCard>> generateCards = () -> Map.ofEntries(
             Map.entry("Jabłko", "Apple"),
@@ -46,7 +52,25 @@ public class AppConfig {
             Map.entry("liczba nieparzysta", "odd number"),
             Map.entry("liczba całkowita", "integer"),
             Map.entry("liczba naturalna", "natural number"),
-            Map.entry("liczba rzeczywista", "real number")).entrySet().stream()
+            Map.entry("liczba rzeczywista", "real number"),
+            Map.entry("liczba wymierna", "rational number"),
+            Map.entry("liczba porządkowa", "ordinal number"),
+            Map.entry("liczba niewymierna", "irrational number")).entrySet().stream()
+            .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
+
+    Supplier<List<SimpleCard>> generateCards2 = () -> Map.ofEntries(
+            Map.entry("wąskie gardło", "bottleneck"),
+            Map.entry("przeglądarka", "browser"),
+            Map.entry("znaczna część", "chunk"),
+            Map.entry("uszkodzenie obwodu", "circuit failure"),
+            Map.entry("obudowywanie danych", "data encapsulation"),
+            Map.entry("miejsce docelowe", "destination"),
+            Map.entry("wpis", "entry"),
+            Map.entry("czynnik", "factor"),
+            Map.entry("lista wyników wyszukiwania", "hit list"),
+            Map.entry("wyszukiwanie indeksowe", "indexed search"),
+            Map.entry("słowo kluczowe", "key word")).entrySet().stream()
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
