@@ -2,7 +2,16 @@
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <a href="/" class="homepage">Lexica</a>
+
+  <div class="bread-crumbs">
+      <a class="bread-crumb" *ngFor="let breadCrumb of breadCrumbs; last as last"
+          [routerLink]="breadCrumb.route">
+        <span>{{ breadCrumb.label }}</span>
+        <span *ngIf="!last" class="bread-crumb-slash">/</span>
+      </a>
+  </div>
+
+
   <span class="spacer"></span>
   <span class="user-name">{{ user | fullNamePipe }} </span>
   <img src="/assets/avatar_placeholder.jpg"

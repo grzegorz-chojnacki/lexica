@@ -31,7 +31,10 @@ header:after {
   height: 1em;
 }
 
-mat-card-title { padding: 0.2em 0 }
+mat-card-title {
+  padding: 0.2em 0;
+  font-size: 1.3em;
+}
 
 .actions {
   display: flex;

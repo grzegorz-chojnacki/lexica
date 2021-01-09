@@ -15,15 +15,19 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="teamSettings()">
+      <button *ngIf="leaderView" mat-menu-item (click)="teamSettings()">
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
-      <button *ngIf="leaderView" mat-menu-item (click)="removeTeam()">
+      <button *ngIf="leaderView" mat-menu-item
+          routerLink="/workspace"
+          (click)="removeTeam()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
       </button>
-      <button *ngIf="!leaderView" mat-menu-item (click)="leaveTeam()">
+      <button *ngIf="!leaderView" mat-menu-item
+          routerLink="/workspace"
+          (click)="leaveTeam()">
         <mat-icon>logout</mat-icon>
         <span>Opuść</span>
       </button>

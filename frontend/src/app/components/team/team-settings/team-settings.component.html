@@ -21,6 +21,12 @@
       <input matInput type="text" formControlName="image">
       <mat-hint>Dodaj grafikę rozróżniającą ten zespół</mat-hint>
     </mat-form-field>
+
+    <mat-slide-toggle color="primary"
+        [checked]="isLeaderProgressActivated()"
+        (change)="toggleLeaderProgressActivation($event)">
+      Zapisuj postępy lidera zespołu
+    </mat-slide-toggle>
   </form>
 </mat-dialog-content>
 

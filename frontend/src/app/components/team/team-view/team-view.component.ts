@@ -5,6 +5,7 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
+import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 
 @Component({
   selector: 'app-team-view',
@@ -15,12 +16,15 @@ export class TeamViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public leaderView = false
+  public leaderHasProgressView = false
+  public loggedUserWithProgress = this.userService.emptyUser
 
   public constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private teamService: TeamService,
-    private userService: UserService) { }
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly teamService: TeamService,
+    private readonly userService: UserService,
+    private readonly breadCrumbService: BreadCrumbService) { }
 
   public ngOnInit(): void {
     const isLeader = () => this.team?.leader?.id === this.user?.id
@@ -32,8 +36,12 @@ export class TeamViewComponent implements OnInit {
     })
 
     this.teamService.getTeam(teamId).subscribe(team => {
+      this.breadCrumbService.setWorkspace()
       this.team = team
+      this.leaderHasProgressView = team.isMember(this.user)
       this.leaderView = isLeader()
+      this.loggedUserWithProgress = team.members
+        .find(member => member.id === this.user.id) || this.loggedUserWithProgress
     }, _ => this.router.navigate(['/']))
   }
 }

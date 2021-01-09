@@ -4,6 +4,7 @@ import { MatMenu } from '@angular/material/menu'
 import { Task, Example } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
+import { TeamService } from 'src/app/services/team.service'
 
 @Component({
   selector: 'app-task-menu',
@@ -16,12 +17,14 @@ export class TaskMenuComponent implements OnInit {
   @Input() public leaderView = false
   @ViewChild(MatMenu, { static: true }) public readonly menu!: MatMenu
 
-  public constructor(private readonly dialog: MatDialog) { }
+  public constructor(
+    private readonly dialog: MatDialog,
+    private readonly teamService: TeamService
+    ) { }
 
   public ngOnInit(): void { }
 
   public taskDescription(): void {
-    this.dialog.closeAll()
     this.dialog.open(TaskDetailsComponent, {
       width: '700px',
       data: {
@@ -29,5 +32,9 @@ export class TaskMenuComponent implements OnInit {
         team: this.team
       }
     })
+  }
+
+  public removeItself(): void {
+    this.teamService.removeTask(this.task, this.team)
   }
 }

@@ -49,8 +49,4 @@ export class TaskService {
     this.http.put(`${lexicaURL}/team/${form.team.id}/task/${id}`, form)
       .subscribe()
   }
-
-  public remove(task: Task<SimpleCard>, teamId: string): void {
-    this.http.delete(`${lexicaURL}/team/${teamId}/task/${task.id}`).subscribe()
-  }
 }

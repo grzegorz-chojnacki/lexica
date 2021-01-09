@@ -28,7 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { TeamCardComponent } from './components/team/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team/team-container/team-container.component'
-import { TeamSummaryComponent } from './components/team/team-summary/team-summary.component'
+import { TeamActionsComponent } from './components/team/team-actions/team-actions.component'
 import { NewTeamComponent } from './components/team/new-team-dialog/new-team.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
@@ -49,6 +49,7 @@ import { AccountComponent } from './components/account/account.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
+import { TeamProgressComponent } from './components/team/team-progress/team-progress.component'
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { LoginComponent } from './login/login.component'
@@ -73,12 +74,13 @@ import { StartPageComponent } from './components/startPage/startPage.component'
     TeamSearchPipe,
     NewTeamComponent,
     TaskSummaryComponent,
-    TeamSummaryComponent,
+    TeamActionsComponent,
     TaskDialogComponent,
     TaskMenuComponent,
     TaskDetailsComponent,
     TaskViewComponent,
     TeamSettingsComponent,
+    TeamProgressComponent,
     LoginComponent,
     StartPageComponent
   ],

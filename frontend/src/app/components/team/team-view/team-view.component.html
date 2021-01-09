@@ -4,7 +4,12 @@
   </header>
 
   <section *ngIf="leaderView">
-    <app-team-summary [team]="team"></app-team-summary>
+    <app-team-actions [team]="team"></app-team-actions>
+  </section>
+
+  <section *ngIf="leaderHasProgressView && team.hasTasks()">
+    <app-team-progress [user]="loggedUserWithProgress" [tasks]="team.tasks">
+    </app-team-progress>
   </section>
 
   <section>
@@ -16,7 +21,7 @@
             <h3>Nie ma jeszcze żadnych zadań</h3>
           </section>
           <app-task-list *ngIf="team.hasTasks()"
-            [team]="team" [leaderView]="leaderView">
+            [user]="loggedUserWithProgress" [team]="team" [leaderView]="leaderView">
           </app-task-list>
         </mat-tab>
         <mat-tab label="Uczestnicy">

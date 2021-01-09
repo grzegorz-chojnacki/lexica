@@ -1,8 +1,19 @@
-a.homepage,
-a.homepage:visited,
-a.homepage:active {
+.bread-crumb,
+.bread-crumb:visited,
+.bread-crumb:active {
   color: unset;
   text-decoration: none;
+}
+
+// Every bread-crumb afte first bread-crumb
+.bread-crumb + .bread-crumb, .bread-crumb-slash {
+  font-weight: 300;
+  color: #FFF7;
+}
+
+.bread-crumb-slash {
+  display: inline-block;
+  margin: 0 0.4em;
 }
 
 .avatar {
