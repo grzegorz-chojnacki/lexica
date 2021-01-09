@@ -28,7 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { TeamCardComponent } from './components/team/team-card/team-card.component'
 import { TeamContainerComponent } from './components/team/team-container/team-container.component'
-import { TeamSummaryComponent } from './components/team/team-summary/team-summary.component'
+import { TeamActionsComponent } from './components/team/team-actions/team-actions.component'
 import { NewTeamComponent } from './components/team/new-team-dialog/new-team.component'
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
@@ -71,7 +71,7 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     TeamSearchPipe,
     NewTeamComponent,
     TaskSummaryComponent,
-    TeamSummaryComponent,
+    TeamActionsComponent,
     TaskDialogComponent,
     TaskMenuComponent,
     TaskDetailsComponent,

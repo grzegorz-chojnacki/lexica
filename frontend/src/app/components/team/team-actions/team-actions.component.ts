@@ -4,11 +4,11 @@ import { Team } from 'src/app/classes/team'
 import { TaskAddingComponent } from 'src/app/components/task/task-adding/task-adding.component'
 
 @Component({
-  selector: 'app-team-summary',
-  templateUrl: './team-summary.component.html',
-  styleUrls: ['./team-summary.component.scss']
+  selector: 'app-team-actions',
+  templateUrl: './team-actions.component.html',
+  styleUrls: ['./team-actions.component.scss']
 })
-export class TeamSummaryComponent implements OnInit {
+export class TeamActionsComponent implements OnInit {
   @Input() public team!: Team
 
   public constructor(
