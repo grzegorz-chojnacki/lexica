@@ -9,6 +9,7 @@ import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
 import { TaskSummaryComponent } from '../task-summary/task-summary.component'
 import { MatDialog } from '@angular/material/dialog'
+import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 
 @Component({
   selector: 'app-task-view',
@@ -27,11 +28,13 @@ export class TaskViewComponent implements OnInit {
     public  readonly location: Location,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
+    private readonly breadCrumbService: BreadCrumbService,
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
+    this.breadCrumbService.setTeam({ id: 'test' } as Team)
     this.userService.user.subscribe(user => this.user = user)
 
     const taskId = this.route.snapshot.paramMap.get('taskId')
