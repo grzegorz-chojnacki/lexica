@@ -8,7 +8,8 @@
   </section>
 
   <section *ngIf="leaderHasProgressView">
-    Komponent z postępem użytkownika
+    <app-team-progress [user]="loggedUserWithProgress" [tasks]="team.tasks">
+    </app-team-progress>
   </section>
 
   <section>

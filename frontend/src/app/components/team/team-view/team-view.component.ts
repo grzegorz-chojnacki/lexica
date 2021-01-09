@@ -16,6 +16,7 @@ export class TeamViewComponent implements OnInit {
   public user!: User
   public leaderView = false
   public leaderHasProgressView = false
+  public loggedUserWithProgress = this.userService.emptyUser
 
   public constructor(
     private router: Router,
@@ -36,6 +37,8 @@ export class TeamViewComponent implements OnInit {
       this.team = team
       this.leaderHasProgressView = team.isMember(this.user)
       this.leaderView = isLeader()
+      this.loggedUserWithProgress = team.members
+        .find(member => member.id === this.user.id) || this.loggedUserWithProgress
     }, _ => this.router.navigate(['/']))
   }
 }

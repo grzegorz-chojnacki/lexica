@@ -50,7 +50,8 @@ import { LocalWorkspaceComponent } from './components/local-workspace/local-work
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component';
-import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
+import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component';
+import { TeamProgressComponent } from './components/team/team-progress/team-progress.component'
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
     TaskDetailsComponent,
     TaskViewComponent,
     TeamSettingsComponent,
+    TeamProgressComponent,
   ],
   imports: [
     BrowserModule,
