@@ -1,18 +1,22 @@
-<div class="card">
-  <h4 class="card-header">Logowanie</h4>
-  <div class="card-body">
-    <form>
-      <div class="form-group">
-        <label for="username">email</label>
-        <input type="text" formControlName="username" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for="password">hasło</label>
-        <input
-          type="password"
-          formControlName="password"
-          class="form-control"/>
-      </div>
-    </form>
-  </div>
-</div>
+<mat-card>
+  <mat-card-title>Zaloguj się</mat-card-title>
+
+<mat-dialog-content>
+  <form >
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Email" name="nazwa" required>
+    </mat-form-field>
+<br/>
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Hasło" name="nazwa2" type="password">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <a mat-stroked-button color="accent" href="/workspace">
+    Zaloguj
+  </a>
+</mat-dialog-actions>
+
+</mat-card>
