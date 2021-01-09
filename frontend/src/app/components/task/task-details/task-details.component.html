@@ -3,15 +3,6 @@
     <span class="overline">{{ task.type.name }}</span>
     <h1 mat-dialog-title>{{ task.name }}</h1>
   </section>
-
-  <div class="spacer"></div>
-
-  <button mat-icon-button [matMenuTriggerFor]="taskMenu.menu"
-      (click)="$event.stopPropagation()">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <app-task-menu #taskMenu [task]="task" [team]="team">
-  </app-task-menu>
 </header>
 
 <p>{{ task.description }}</p>
