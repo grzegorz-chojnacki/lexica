@@ -15,16 +15,11 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    private final TaskType simpleCardType = new TaskType("Fiszka", "Opis fiszki");
+    private final TaskType simpleCardType = new TaskType("Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
     private final UserService userService;
     private final TaskTypeService taskTypeService;
     private final TeamService teamService;
 
-    private final List<TaskType> simpleCardsType=List.of(
-            new  TaskType("Fiszka", "Fruit and nothing else"),
-            new  TaskType("Fiszka", "Przykłady do nauki na kartkówę 28.02.2021r."),
-            new  TaskType("Fiszka", "Słówka przydadzą się w następnym zadaniu domowym."),
-            new  TaskType("Fiszka", ""));
     @Autowired
     public AppConfig(UserService userService, TaskTypeService taskTypeService, TeamService teamService) {
         this.userService = userService;

@@ -1,10 +1,10 @@
 <section>
   <mat-card class="card1">
     <mat-card-content>
-      <mat-card-title>Nazwa kategorii i opis</mat-card-title>
+      <mat-card-title>Tytuł i opis</mat-card-title>
       <form [formGroup]="checkoutForm">
         <mat-form-field appearance="fill">
-          <mat-label>Kategoria</mat-label>
+          <mat-label>Tytuł</mat-label>
           <input matInput required formControlName="name">
         </mat-form-field>
         <br/>
@@ -47,9 +47,9 @@
 
   <mat-card-actions>
   <button mat-button mat-dialog-close color="accent" (click)="submit()">
-    UTWÓRZ
+    Zapisz
   </button>
-  <button mat-button mat-dialog-close>ANULUJ</button>
+  <button mat-button mat-dialog-close>Anuluj</button>
 </mat-card-actions>
 </mat-card>
 </section>
