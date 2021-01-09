@@ -15,7 +15,7 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="teamSettings()">
+      <button *ngIf="leaderView" mat-menu-item (click)="teamSettings()">
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
