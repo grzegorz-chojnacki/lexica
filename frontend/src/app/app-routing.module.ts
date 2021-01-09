@@ -6,6 +6,8 @@ import { TeamViewComponent } from './components/team/team-view/team-view.compone
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
+import { LoginComponent } from './login/login.component'
+import { StartPageComponent } from './components/startPage/startPage.component'
 
 const routes: Routes = [
   { path: 'team/:teamId',
@@ -18,12 +20,16 @@ const routes: Routes = [
     component: TeamViewComponent }, // Tasks & Members
   { path: 'workspace',
     component: WorkspaceComponent },
+    { path: 'startpage',
+    component: StartPageComponent },
   { path: 'account',
     component: AccountComponent },
+  { path: 'login',
+    component: LoginComponent },
   { path: 'local',
     component: LocalWorkspaceComponent },
   // Will add main page later
-  { path: '',   redirectTo: 'workspace', pathMatch: 'full' },
+  { path: '',   redirectTo: 'startpage', pathMatch: 'full' },
   // Will add error page later
   { path: '**', redirectTo: 'workspace' },
 ]
