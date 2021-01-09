@@ -1,13 +1,14 @@
 .mat-card{
     text-align: center;
-    width: 60%;
+    max-width: 100%;
+    width: 500px;
     margin: auto;
     margin-top: 5%;
-    background: powderblue;
+    background: rgb(240, 244, 245);
 }
 
-.mat-card-title {padding: 2em;}
+.mat-card-title {padding: 1em; margin-bottom:5%; background-color: rgb(240, 233, 243);}
 
-.mat-form-field{width: 40%;}
+.mat-form-field{width: 80%;}
 
 .mat-stroked-button{font-size: 20px;}
