@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { AccountComponent } from './components/account/account.component'
+import { AccountViewComponent } from './components/account/account-view/account-view.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'startpage',
     component: StartPageComponent },
   { path: 'account',
-    component: AccountComponent },
+    component: AccountViewComponent },
   { path: 'login',
     component: LoginComponent },
   { path: 'local',

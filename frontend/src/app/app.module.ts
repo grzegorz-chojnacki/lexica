@@ -45,7 +45,7 @@ import { MemberListComponent } from './components/member-list/member-list.compon
 import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
-import { AccountComponent } from './components/account/account.component'
+import { AccountViewComponent } from './components/account/account-view/account-view.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
@@ -53,13 +53,16 @@ import { TeamProgressComponent } from './components/team/team-progress/team-prog
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { LoginComponent } from './login/login.component'
-import { StartPageComponent } from './components/startPage/startPage.component'
+import { StartPageComponent } from './components/startPage/startPage.component';
+import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component';
+import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component';
+import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkspaceComponent,
-    AccountComponent,
+    AccountViewComponent,
     LocalWorkspaceComponent,
     TeamViewComponent,
     TeamCardComponent,
@@ -82,7 +85,10 @@ import { StartPageComponent } from './components/startPage/startPage.component'
     TeamSettingsComponent,
     TeamProgressComponent,
     LoginComponent,
-    StartPageComponent
+    StartPageComponent,
+    FullNameDialogComponent,
+    EmailDialogComponent,
+    PasswordDialogComponent
   ],
   imports: [
     BrowserModule,

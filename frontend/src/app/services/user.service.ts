@@ -21,7 +21,9 @@ export class UserService {
   }
 
   public setUser(user: User): void {
-    this.userSource.next(user)
+    if (user) {
+      this.userSource.next(user)
+    }
   }
 
   public addProgress(progress: Progress): Observable<Progress> {

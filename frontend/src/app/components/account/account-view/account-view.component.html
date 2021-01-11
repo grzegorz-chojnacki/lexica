@@ -1,0 +1,35 @@
+<mat-card class="limited-width">
+  <mat-card-header>
+    <mat-card-title>{{ user | fullNamePipe }}</mat-card-title>
+    <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-action-list>
+      <mat-list-item (click)="changeFullName()">
+        <span>Imię</span>
+        <div class="spacer"></div>
+        <span>{{ user.firstname }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="changeFullName()">
+        <span>Nazwisko</span>
+        <div class="spacer"></div>
+        <span>{{ user.surname }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="changeEmail()">
+        <span>Email</span>
+        <div class="spacer"></div>
+        <span>{{ user.email }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="changePassword()">
+        <span>Hasło</span>
+      </mat-list-item>
+      <mat-list-item><span>Zdjęcie</span></mat-list-item>
+    </mat-action-list>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button color="accent" (click)="location.back()">Powrót</button>
+    <button mat-button color="accent" (click)="deleteAccount()">Usuń konto</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Zmień imię i nazwisko</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="fullNameForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Imię</mat-label>
+      <input matInput type="text" formControlName="firstname">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput type="text" formControlName="surname">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="accent"
+      [disabled]="!fullNameForm.valid"
+      [mat-dialog-close]="getValue()">
+    Zapisz
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>
