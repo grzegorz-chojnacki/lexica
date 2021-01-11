@@ -3,13 +3,14 @@ import { Location } from '@angular/common'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { MatDialog } from '@angular/material/dialog'
+import { FullNameDialogComponent } from '../full-name-dialog/full-name-dialog.component'
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  selector: 'app-account-view',
+  templateUrl: './account-view.component.html',
+  styleUrls: ['./account-view.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountViewComponent implements OnInit {
   public user!: User
 
   public constructor(

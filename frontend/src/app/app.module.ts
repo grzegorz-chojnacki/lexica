@@ -45,7 +45,7 @@ import { MemberListComponent } from './components/member-list/member-list.compon
 import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
-import { AccountComponent } from './components/account/account.component'
+import { AccountViewComponent } from './components/account/account-view/account-view.component'
 import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
@@ -59,7 +59,7 @@ import { StartPageComponent } from './components/startPage/startPage.component'
   declarations: [
     AppComponent,
     WorkspaceComponent,
-    AccountComponent,
+    AccountViewComponent,
     LocalWorkspaceComponent,
     TeamViewComponent,
     TeamCardComponent,
