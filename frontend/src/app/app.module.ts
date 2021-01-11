@@ -53,7 +53,8 @@ import { TeamProgressComponent } from './components/team/team-progress/team-prog
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { LoginComponent } from './login/login.component'
-import { StartPageComponent } from './components/startPage/startPage.component'
+import { StartPageComponent } from './components/startPage/startPage.component';
+import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { StartPageComponent } from './components/startPage/startPage.component'
     TeamSettingsComponent,
     TeamProgressComponent,
     LoginComponent,
-    StartPageComponent
+    StartPageComponent,
+    FullNameDialogComponent
   ],
   imports: [
     BrowserModule,

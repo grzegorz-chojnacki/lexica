@@ -22,7 +22,11 @@ export class AccountViewComponent implements OnInit {
     this.userService.user.subscribe(u => this.user = u)
   }
 
-  public changeFirstname(): void { }
+  public changeFirstname(): void {
+    this.dialog.open(FullNameDialogComponent, { data: this.user }).afterClosed()
+      .subscribe(user => this.userService.setUser(user))
+  }
+
   public changeSurname(): void { }
   public changeEmail(): void { }
   public changePassword(): void { }
