@@ -54,7 +54,8 @@ import { SimpleCardAddingComponent } from './components/task/simple-card-adding/
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { LoginComponent } from './login/login.component'
 import { StartPageComponent } from './components/startPage/startPage.component';
-import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
+import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component';
+import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { FullNameDialogComponent } from './components/account/full-name-dialog/f
     TeamProgressComponent,
     LoginComponent,
     StartPageComponent,
-    FullNameDialogComponent
+    FullNameDialogComponent,
+    EmailDialogComponent
   ],
   imports: [
     BrowserModule,

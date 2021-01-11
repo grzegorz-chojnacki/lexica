@@ -4,6 +4,8 @@ import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { MatDialog } from '@angular/material/dialog'
 import { FullNameDialogComponent } from '../full-name-dialog/full-name-dialog.component'
+import { EmailDialogComponent } from '../email-dialog/email-dialog.component'
+import { ComponentType } from '@angular/cdk/portal'
 
 @Component({
   selector: 'app-account-view',
@@ -18,17 +20,17 @@ export class AccountViewComponent implements OnInit {
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
-  public ngOnInit(): void {
-    this.userService.user.subscribe(u => this.user = u)
-  }
+  public ngOnInit(): void { this.userService.user.subscribe(u => this.user = u) }
 
-  public changeFullName(): void {
-    this.dialog.open(FullNameDialogComponent, { data: this.user }).afterClosed()
-      .subscribe(user => this.userService.setUser(user))
-  }
-
-  public changeEmail(): void { }
-  public changePassword(): void { }
+  public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
+  public changeEmail    = () => this.openDialogAndUpdateUser(EmailDialogComponent)
+  public changePassword = () => this.openDialogAndUpdateUser(EmailDialogComponent)
 
   public deleteAccount(): void { }
+
+  private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {
+    this.dialog.open(component, { data: this.user, width: '400px' })
+      .afterClosed()
+      .subscribe(user => this.userService.setUser(user))
+  }
 }
