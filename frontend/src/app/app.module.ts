@@ -53,9 +53,9 @@ import { TeamProgressComponent } from './components/team/team-progress/team-prog
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { LoginComponent } from './login/login.component'
-import { StartPageComponent } from './components/startPage/startPage.component';
-import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component';
-import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component';
+import { StartViewComponent } from './components/start-view/start-view.component'
+import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
+import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
 import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
 
 @NgModule({
@@ -85,7 +85,7 @@ import { PasswordDialogComponent } from './components/account/password-dialog/pa
     TeamSettingsComponent,
     TeamProgressComponent,
     LoginComponent,
-    StartPageComponent,
+    StartViewComponent,
     FullNameDialogComponent,
     EmailDialogComponent,
     PasswordDialogComponent
