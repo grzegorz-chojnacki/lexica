@@ -13,7 +13,7 @@ export class TaskDialogComponent implements OnInit {
   public readonly team: Team
 
   public constructor(@Inject(MAT_DIALOG_DATA) data: TaskAndUsersWithProgress) {
-    this.task  = data.task
+    this.task = data.task
     this.team = data.team
   }
 

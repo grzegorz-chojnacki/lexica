@@ -14,7 +14,7 @@ export class AccountViewComponent implements OnInit {
   public user!: User
 
   public constructor(
-    public readonly location: Location,
+    public  readonly location: Location,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
@@ -22,12 +22,11 @@ export class AccountViewComponent implements OnInit {
     this.userService.user.subscribe(u => this.user = u)
   }
 
-  public changeFirstname(): void {
+  public changeFullName(): void {
     this.dialog.open(FullNameDialogComponent, { data: this.user }).afterClosed()
       .subscribe(user => this.userService.setUser(user))
   }
 
-  public changeSurname(): void { }
   public changeEmail(): void { }
   public changePassword(): void { }
 
