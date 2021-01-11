@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { FullNameDialogComponent } from '../full-name-dialog/full-name-dialog.component'
 import { EmailDialogComponent } from '../email-dialog/email-dialog.component'
 import { ComponentType } from '@angular/cdk/portal'
+import { PasswordDialogComponent } from '../password-dialog/password-dialog.component'
 
 @Component({
   selector: 'app-account-view',
@@ -24,7 +25,7 @@ export class AccountViewComponent implements OnInit {
 
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
   public changeEmail    = () => this.openDialogAndUpdateUser(EmailDialogComponent)
-  public changePassword = () => this.openDialogAndUpdateUser(EmailDialogComponent)
+  public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent)
 
   public deleteAccount(): void { }
 

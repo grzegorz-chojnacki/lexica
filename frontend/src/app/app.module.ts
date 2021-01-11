@@ -55,7 +55,8 @@ import { TeamSettingsComponent } from './components/team/team-settings/team-sett
 import { LoginComponent } from './login/login.component'
 import { StartPageComponent } from './components/startPage/startPage.component';
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component';
-import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
+import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component';
+import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { EmailDialogComponent } from './components/account/email-dialog/email-di
     LoginComponent,
     StartPageComponent,
     FullNameDialogComponent,
-    EmailDialogComponent
+    EmailDialogComponent,
+    PasswordDialogComponent
   ],
   imports: [
     BrowserModule,
