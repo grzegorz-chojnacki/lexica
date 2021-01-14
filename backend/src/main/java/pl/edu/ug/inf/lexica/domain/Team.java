@@ -38,6 +38,9 @@ public class Team {
     @NonNull
     private String description;
 
+    @NonNull
+    private String color;
+
     public Team withSomeInfo() {
         Team team = new Team();
 
@@ -45,6 +48,7 @@ public class Team {
         team.setName(this.name);
         team.setLeader(this.leader);
         team.setDescription(this.description);
+        team.setColor(this.color);
 
         return team;
     }

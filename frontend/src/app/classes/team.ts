@@ -12,7 +12,8 @@ export class Team {
       User.deserialize(team.leader),
       team.members.map(User.deserialize),
       team.tasks,
-      team.description)
+      team.description,
+      team.color)
   }
 
   public constructor(
