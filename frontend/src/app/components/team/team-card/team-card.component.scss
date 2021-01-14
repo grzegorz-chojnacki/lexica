@@ -14,7 +14,11 @@ mat-card {
   font-size: 4em;
   text-align: center;
   line-height: $card-height;
-  color: #0008;
+  background: radial-gradient(transparent, #0002);
+}
+
+.team-image > span {
+  color: #fffa;
 }
 
 header {
