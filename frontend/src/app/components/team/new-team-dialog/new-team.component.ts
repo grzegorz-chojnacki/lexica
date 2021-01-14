@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormControl } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { MatTabGroup } from '@angular/material/tabs'
 
 import { TeamService } from 'src/app/services/team.service'
@@ -16,7 +16,7 @@ export class NewTeamComponent implements OnInit {
   public readonly teamForm = this.formBuilder.group({
     name: '',
     description: '',
-    image: new FormControl({ value: '', disabled: true })
+    color: this.randomColor()
   })
 
   public constructor(
@@ -25,6 +25,11 @@ export class NewTeamComponent implements OnInit {
 
   public ngOnInit(): void { }
 
+  private randomColor(): string {
+    const randomHex = () => '0123456789ACBDEF'[Math.floor(Math.random() * 16)]
+    return '#' + new Array(6).fill(0).map(randomHex).join('')
+  }
+
   public submit(): void {
     if (this.tabGroup.selectedIndex === 0) {
       this.teamService.joinTeam(this.idForm.value.id)
@@ -32,5 +37,4 @@ export class NewTeamComponent implements OnInit {
       this.teamService.createTeam(this.teamForm.value)
     }
   }
-
 }
