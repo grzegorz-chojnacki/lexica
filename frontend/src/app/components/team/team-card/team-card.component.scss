@@ -8,9 +8,17 @@ mat-card {
 }
 
 .team-image {
-  object-fit: cover;
-  height: $card-height;
-  width: $card-height;
+  min-height: $card-height;
+  min-width: $card-height;
+
+  font-size: 4em;
+  text-align: center;
+  line-height: $card-height;
+  background: radial-gradient(transparent, #0002);
+}
+
+.team-image > span {
+  color: #fffa;
 }
 
 header {

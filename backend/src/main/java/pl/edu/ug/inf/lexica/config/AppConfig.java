@@ -105,13 +105,13 @@ public class AppConfig {
             new User("Patrycja", "Gajda", "pgajda@example.com", "WyAq1CjwM"));
 
     List<Team> testTeams = List.of(
-            new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę."),
-            new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej."),
-            new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!"),
-            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein."),
-            new Team("angielski gr.1", testUsers.get(5), ""),
-            new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo."),
-            new Team("TDW", testUsers.get(4), ""));
+            new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),
+            new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej.", "#395E66"),
+            new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!", "#CFB9A5"),
+            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein.", "#E8CCBF"),
+            new Team("angielski gr.1", testUsers.get(5), "", "#846267"),
+            new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo.", "#133C55"),
+            new Team("TDW", testUsers.get(4), "", "#723D46"));
 
     Set<User> testUserGroup(User leader) {
         return testUsers.stream()

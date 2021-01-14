@@ -12,7 +12,8 @@ export class Team {
       User.deserialize(team.leader),
       team.members.map(User.deserialize),
       team.tasks,
-      team.description)
+      team.description,
+      team.color)
   }
 
   public constructor(
@@ -22,7 +23,7 @@ export class Team {
     public readonly members: User[] = [],
     public readonly tasks: Task<Example>[] = [],
     public readonly description: string = '',
-    public readonly image?: ImageBitmap) { }
+    public readonly color?: string) { }
 
   public hasMembers(): boolean {
     return this.members.length > 0

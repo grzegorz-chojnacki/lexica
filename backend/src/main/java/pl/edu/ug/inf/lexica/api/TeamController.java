@@ -42,6 +42,7 @@ public class TeamController {
         teamService.get(id).ifPresent(team -> {
             team.setName(updated.getName());
             team.setDescription(updated.getDescription());
+            team.setColor(updated.getColor());
             teamService.update(team);
         });
     }

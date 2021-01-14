@@ -1,5 +1,7 @@
 <mat-card>
-  <img src="/assets/image_placeholder.jpg" class="team-image" />
+  <div class="team-image color-shader" [style.background-color]="team.color">
+    <span>{{ team.name[0] }}</span>
+  </div>
 
   <header>
     <div class="overline">{{ team ? (team.leader | fullNamePipe) : "" }}</div>
@@ -39,6 +41,9 @@
     </button>
 
     <div *ngIf="context === 'Team'">
+      <button mat-raised-button color="accent" (click)="newTaskDialog()">
+        Nowe zadanie
+      </button>
       <button mat-button color="accent" (click)="copyToClipboard()">
         Kod zespołu
       </button>
