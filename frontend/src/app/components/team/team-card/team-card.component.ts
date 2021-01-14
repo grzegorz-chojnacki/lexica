@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
+import { TaskAddingComponent } from '../../task/task-adding/task-adding.component'
 import { TeamSettingsComponent } from '../team-settings/team-settings.component'
 
 @Component({
@@ -35,5 +36,9 @@ export class TeamCardComponent implements OnInit {
     navigator.clipboard.writeText(this.team.id)
     this.snackbarService
       .open('Skopiowano do schowka!', undefined, { duration: 2000 })
+  }
+
+  public newTaskDialog(): void {
+    this.dialog.open(TaskAddingComponent, { width: '500px' })
   }
 }

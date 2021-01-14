@@ -3,10 +3,6 @@
     <app-team-card [team]="team" [leaderView]="leaderView" context="Team"></app-team-card>
   </header>
 
-  <section *ngIf="leaderView">
-    <app-team-actions [team]="team"></app-team-actions>
-  </section>
-
   <section *ngIf="leaderHasProgressView && team.hasTasks()">
     <app-team-progress [user]="loggedUserWithProgress" [tasks]="team.tasks">
     </app-team-progress>
