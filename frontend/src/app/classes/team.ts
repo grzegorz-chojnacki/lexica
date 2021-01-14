@@ -22,6 +22,7 @@ export class Team {
     public readonly members: User[] = [],
     public readonly tasks: Task<Example>[] = [],
     public readonly description: string = '',
+    public readonly color: string = '#ed70c6',
     public readonly image?: ImageBitmap) { }
 
   public hasMembers(): boolean {

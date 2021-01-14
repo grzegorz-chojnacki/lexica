@@ -1,5 +1,7 @@
 <mat-card>
-  <img src="/assets/image_placeholder.jpg" class="team-image" />
+  <div class="team-image" [style.background-color]="team.color">
+    {{ team.name[0] }}
+  </div>
 
   <header>
     <div class="overline">{{ team ? (team.leader | fullNamePipe) : "" }}</div>

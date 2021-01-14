@@ -8,9 +8,13 @@ mat-card {
 }
 
 .team-image {
-  object-fit: cover;
-  height: $card-height;
-  width: $card-height;
+  min-height: $card-height;
+  min-width: $card-height;
+
+  font-size: 4em;
+  text-align: center;
+  line-height: $card-height;
+  color: #0008;
 }
 
 header {

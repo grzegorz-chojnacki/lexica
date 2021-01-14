@@ -37,6 +37,7 @@ export class TeamService {
   private refreshTeamListSource(): void {
     if (this.loggedUser.id) {
       this.http.get<Team[]>(`${lexicaURL}/user/${this.loggedUser.id}/team`)
+        .pipe(map(teams => teams.map(Team.deserialize)))
         .subscribe(teams => this.teamListSource.next(teams))
     }
   }
