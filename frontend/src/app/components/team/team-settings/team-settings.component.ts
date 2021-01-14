@@ -14,7 +14,7 @@ export class TeamSettingsComponent implements OnInit {
   public readonly teamForm = this.formBuilder.group({
     name: this.team.name,
     description: this.team.description,
-    image: new FormControl({ value: this.team.image, disabled: true })
+    color: this.team.color
   })
 
   public constructor(
