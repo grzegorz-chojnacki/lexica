@@ -85,6 +85,15 @@ public class AppConfig {
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
+    Supplier<List<Task>> generateTasks2 = () -> List.of(
+            List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
+            List.of("The Internet and WWW",
+                    "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
+            .map(list -> new Task(list.get(0),generateCards2.get()  , true, list.get(1), simpleCardType))
+            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .peek(task -> testTasks.add(task))
+            .collect(Collectors.toList());
+
 
 
     private Set<Progress> generateProgress(List<Task> tasks) {
@@ -108,7 +117,9 @@ public class AppConfig {
             new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),
             new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej.", "#395E66"),
             new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!", "#CFB9A5"),
-            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein.", "#E8CCBF"),
+            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein.", "#E8CCBF"));
+
+    List<Team> testTeams2 = List.of(
             new Team("angielski gr.1", testUsers.get(5), "", "#846267"),
             new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo.", "#133C55"),
             new Team("TDW", testUsers.get(4), "", "#723D46"));
@@ -129,6 +140,14 @@ public class AppConfig {
                     team.setMembers(members);
                 });
             }).forEach(teamService::add);
+
+        testTeams2.stream().peek(team -> {
+            team.setTasks(generateTasks2.get());
+            userService.get(team.getLeader().getId()).ifPresent(leader -> {
+                Set<User> members = testUserGroup(leader);
+                team.setMembers(members);
+            });
+        }).forEach(teamService::add);
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);
