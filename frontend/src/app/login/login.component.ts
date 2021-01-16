@@ -11,6 +11,7 @@ styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
     public email!: string
     public password!: string
+    public invalid = false
     public constructor(private router: Router) { }
     public ngOnInit(): void {
         this.email = ''
@@ -19,8 +20,8 @@ export class LoginComponent implements OnInit {
 
     public loginUser(): void {
         console.log(this.password, this.email)
-        if (this.password === 'lexica') {
+        if (this.password === 'lexica' && this.email === 'jkowalski@example.com') {
             this.router.navigateByUrl('/workspace')
-        }
+        } else { this.invalid = true}
     }
 }
