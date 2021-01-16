@@ -80,7 +80,7 @@ public class AppConfig {
             List.of("Zadanie nieaktywne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards.get()  , true, list.get(1), simpleCardType))
+            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1), simpleCardType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
