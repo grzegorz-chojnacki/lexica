@@ -13,7 +13,7 @@
 
 
   <span class="spacer"></span>
-  <div *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
+  <ng-container *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
   <span class="user-name">{{ user | fullNamePipe }} </span>
   <img src="/assets/avatar_placeholder.jpg"
        class="avatar"
@@ -32,7 +32,7 @@
       <span>Wyloguj się</span>
     </button>
   </mat-menu>
-</div>
+</ng-container>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav><app-sidebar></app-sidebar></mat-sidenav>
