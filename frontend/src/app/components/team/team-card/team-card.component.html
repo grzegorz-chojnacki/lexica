@@ -41,7 +41,7 @@
     </button>
 
     <div *ngIf="context === 'Team'">
-      <button mat-raised-button color="accent" (click)="newTaskDialog()">
+      <button *ngIf="leaderView" mat-raised-button color="accent" (click)="newTaskDialog()">
         Nowe zadanie
       </button>
       <button mat-button color="accent" (click)="copyToClipboard()">
