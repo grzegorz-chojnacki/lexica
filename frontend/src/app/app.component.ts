@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
+import { from } from 'rxjs'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { BreadCrumbService, BreadCrumb } from './services/bread-crumb.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,8 @@ export class AppComponent implements OnInit {
 
   public constructor(
     private readonly userService: UserService,
-    private readonly breadCrumbService: BreadCrumbService) { }
+    private readonly breadCrumbService: BreadCrumbService,
+    public router: Router ) { }
 
   public ngOnInit(): void {
     this.userService.user.subscribe(u => this.user = u)

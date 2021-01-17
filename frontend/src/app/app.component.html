@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()">
+  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
     <mat-icon>menu</mat-icon>
   </button>
 
@@ -13,6 +13,7 @@
 
 
   <span class="spacer"></span>
+  <div *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
   <span class="user-name">{{ user | fullNamePipe }} </span>
   <img src="/assets/avatar_placeholder.jpg"
        class="avatar"
@@ -31,6 +32,7 @@
       <span>Wyloguj się</span>
     </button>
   </mat-menu>
+</div>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav><app-sidebar></app-sidebar></mat-sidenav>
