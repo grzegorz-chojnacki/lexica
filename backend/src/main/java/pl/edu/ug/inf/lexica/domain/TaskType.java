@@ -1,12 +1,9 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
@@ -14,9 +11,8 @@ import java.util.UUID;
 @Entity
 public class TaskType {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @NonNull
+    private Integer id;
 
     @NonNull
     private String name;

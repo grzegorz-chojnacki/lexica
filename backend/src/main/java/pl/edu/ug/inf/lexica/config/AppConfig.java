@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pl.edu.ug.inf.lexica.domain.*;
-import pl.edu.ug.inf.lexica.service.TaskTypeService;
+import pl.edu.ug.inf.lexica.repository.TaskTypeRepository;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    private final TaskType simpleCardType = new TaskType("Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
     private final UserService userService;
-    private final TaskTypeService taskTypeService;
+    private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
 
     @Autowired
-    public AppConfig(UserService userService, TaskTypeService taskTypeService, TeamService teamService) {
+    public AppConfig(UserService userService, TaskTypeRepository taskTypeRepository, TeamService teamService) {
         this.userService = userService;
-        this.taskTypeService = taskTypeService;
+        this.taskTypeRepository = taskTypeRepository;
         this.teamService = teamService;
     }
 
@@ -131,7 +131,7 @@ public class AppConfig {
     }
 
     public void initDataBase() {
-        taskTypeService.add(simpleCardType);
+        taskTypeRepository.save(simpleCardType);
         userService.addAll(testUsers);
         testTeams.stream().peek(team -> {
                 team.setTasks(generateTasks.get());

@@ -14,7 +14,7 @@ export interface TaskForm {
   readonly description?: string
   readonly examples: SimpleCard[]
   readonly image?: string
-  readonly taskType: TaskType
+  readonly type: TaskType
 }
 
 @Injectable({

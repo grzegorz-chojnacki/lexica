@@ -1,9 +1,10 @@
 export class TaskType {
   public constructor(
-    public readonly name: string,
-    public readonly description: string,
-    public readonly iamge?: ImageBitmap
+    public readonly id: number,
+    public readonly name?: string,
+    public readonly description?: string,
+    public readonly image?: ImageBitmap
   ) { }
 }
 
-export const SimpleCardTask = new TaskType('Fiszka', 'Prosta fiszka służąca do powtarzania')
+export const SimpleCardTask = new TaskType(1)
