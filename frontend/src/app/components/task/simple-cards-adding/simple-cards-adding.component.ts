@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms'
 import { TaskService } from 'src/app/services/task.service'
 import { TeamService } from 'src/app/services/team.service'
 import { Team } from 'src/app/classes/team'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
 
 @Component({
@@ -33,12 +33,14 @@ export class SimpleCardsAddingComponent implements OnInit {
     private taskService: TaskService,
     private teamService: TeamService,
     private formBuilder: FormBuilder,
-    public router: Router) { }
+    public router: Router,
+    private readonly route: ActivatedRoute) { }
 
 
 
   public ngOnInit(): void {
-    this.teamService.getTeam('8c2ef636-87af-42bf-bc86-d96ce4b1ec7d')
+    const teamId = this.route.snapshot.paramMap.get('teamId')
+    this.teamService.getTeam(teamId)
       .subscribe(team => this.team = team)
   }
 
