@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pl.edu.ug.inf.lexica.domain.*;
-import pl.edu.ug.inf.lexica.service.TaskTypeService;
+import pl.edu.ug.inf.lexica.repository.TaskTypeRepository;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    private final TaskType simpleCardType = new TaskType("Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
     private final UserService userService;
-    private final TaskTypeService taskTypeService;
+    private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
 
     @Autowired
-    public AppConfig(UserService userService, TaskTypeService taskTypeService, TeamService teamService) {
+    public AppConfig(UserService userService, TaskTypeRepository taskTypeRepository, TeamService teamService) {
         this.userService = userService;
-        this.taskTypeService = taskTypeService;
+        this.taskTypeRepository = taskTypeRepository;
         this.teamService = teamService;
     }
 
@@ -80,7 +80,16 @@ public class AppConfig {
             List.of("Zadanie nieaktywne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards.get()  , true, list.get(1), simpleCardType))
+            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1), simpleCardType))
+            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .peek(task -> testTasks.add(task))
+            .collect(Collectors.toList());
+
+    Supplier<List<Task>> generateTasks2 = () -> List.of(
+            List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
+            List.of("The Internet and WWW",
+                    "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
+            .map(list -> new Task(list.get(0),generateCards2.get()  , true, list.get(1), simpleCardType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
@@ -108,7 +117,9 @@ public class AppConfig {
             new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),
             new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej.", "#395E66"),
             new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!", "#CFB9A5"),
-            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein.", "#E8CCBF"),
+            new Team("Deutsche Gruppe 5", testUsers.get(3), "Ich lade Schüler der dritten Klasse ein.", "#E8CCBF"));
+
+    List<Team> testTeams2 = List.of(
             new Team("angielski gr.1", testUsers.get(5), "", "#846267"),
             new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo.", "#133C55"),
             new Team("TDW", testUsers.get(4), "", "#723D46"));
@@ -120,7 +131,7 @@ public class AppConfig {
     }
 
     public void initDataBase() {
-        taskTypeService.add(simpleCardType);
+        taskTypeRepository.save(simpleCardType);
         userService.addAll(testUsers);
         testTeams.stream().peek(team -> {
                 team.setTasks(generateTasks.get());
@@ -129,6 +140,14 @@ public class AppConfig {
                     team.setMembers(members);
                 });
             }).forEach(teamService::add);
+
+        testTeams2.stream().peek(team -> {
+            team.setTasks(generateTasks2.get());
+            userService.get(team.getLeader().getId()).ifPresent(leader -> {
+                Set<User> members = testUserGroup(leader);
+                team.setMembers(members);
+            });
+        }).forEach(teamService::add);
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);

@@ -9,12 +9,12 @@ import { TaskType, SimpleCardTask } from '../classes/task-type'
 import { Team } from '../classes/team'
 
 export interface TaskForm {
-  readonly team: Team,
+  readonly team: Team
   readonly name: string
   readonly description?: string
   readonly examples: SimpleCard[]
   readonly image?: string
-  readonly taskType: TaskType
+  readonly type: TaskType
 }
 
 @Injectable({

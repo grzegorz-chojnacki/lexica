@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()">
+  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
     <mat-icon>menu</mat-icon>
   </button>
 
@@ -13,6 +13,7 @@
 
 
   <span class="spacer"></span>
+  <ng-container *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
   <span class="user-name">{{ user | fullNamePipe }} </span>
   <img src="/assets/avatar_placeholder.jpg"
        class="avatar"
@@ -26,11 +27,12 @@
       <mat-icon>account_circle</mat-icon>
       <span>Konto</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="/start">
       <mat-icon>logout</mat-icon>
       <span>Wyloguj się</span>
     </button>
   </mat-menu>
+</ng-container>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav><app-sidebar></app-sidebar></mat-sidenav>

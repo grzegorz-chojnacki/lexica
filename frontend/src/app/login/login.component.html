@@ -2,9 +2,12 @@
   <mat-card-title>Zaloguj się</mat-card-title>
 
 <mat-dialog-content>
+  <div *ngIf="invalid" id="validation">
+      Podaj prawidłowe email i hasło.
+  </div>
   <form >
     <mat-form-field appearance="fill">
-      <input [(ngModel)]="email" matInput placeholder="Email" name="email" type="text">
+      <input [(ngModel)]="email" matInput placeholder="Email" name="email" type="text" required>
     </mat-form-field>
 <br/>
     <mat-form-field appearance="fill">
