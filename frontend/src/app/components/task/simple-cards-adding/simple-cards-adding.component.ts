@@ -47,6 +47,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
 
   public submit(): void {
+    if (this.simpleCards.length !== 0 ) {
     this.checkoutForm.setValue({
       team: this.team,
       name: this.checkoutForm.get('name')?.value,
@@ -58,8 +59,11 @@ export class SimpleCardsAddingComponent implements OnInit {
     this.taskService.createTask(this.checkoutForm.value)
     this.location.back()
   }
+  }
 
-
+public anuluj(): void {
+  this.location.back()
+}
   public delete(no: number): void {
     if (this.simpleCards.length > 0) {
       this.simpleCards.splice(no, 1)
