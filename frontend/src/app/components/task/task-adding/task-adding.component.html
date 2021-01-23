@@ -13,15 +13,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Importuj zadanie z pliku</mat-label>
       <input matInput type="text" formControlName="image">
-      <!-- <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
-<br>
 
-<mat-file-upload-queue #fileUploadQueue
-    [fileAlias]="'file'"
-    [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
-
-    <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
-</mat-file-upload-queue>-->
       <mat-hint>Typ zadania musi się zgadzać z wybranym powyżej</mat-hint>
     </mat-form-field>
   </form>
