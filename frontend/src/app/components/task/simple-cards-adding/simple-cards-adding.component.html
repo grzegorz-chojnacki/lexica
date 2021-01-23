@@ -46,11 +46,11 @@
   </mat-card-content>
 
   <mat-card-actions>
-   <ng-container *ngIf="invalid">
-  <button mat-button color="accent" (click)="submit()">
+
+  <button mat-button color="accent" (click)="submit()" [disabled]="!invalid">
     Zapisz
   </button>
-</ng-container>
+
   <button mat-button (click)="anuluj()">Anuluj</button>
 </mat-card-actions>
 </mat-card>
