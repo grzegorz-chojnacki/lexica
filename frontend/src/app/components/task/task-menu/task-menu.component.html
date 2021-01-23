@@ -7,7 +7,7 @@
     <mat-icon>download</mat-icon>
     <span>Eksportuj</span>
   </button>
-  <button *ngIf="leaderView" mat-menu-item>
+  <button *ngIf="leaderView" mat-menu-item (click)="editTask()">
     <mat-icon>edit</mat-icon>
     <span>Edytuj</span>
   </button>
