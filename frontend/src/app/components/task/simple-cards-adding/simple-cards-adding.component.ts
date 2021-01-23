@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/services/team.service'
 import { Team } from 'src/app/classes/team'
 import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-simple-card',
@@ -34,7 +35,8 @@ export class SimpleCardsAddingComponent implements OnInit {
     private teamService: TeamService,
     private formBuilder: FormBuilder,
     public router: Router,
-    private readonly route: ActivatedRoute) { }
+    private readonly route: ActivatedRoute,
+    private location: Location) { }
 
 
 
@@ -54,6 +56,7 @@ export class SimpleCardsAddingComponent implements OnInit {
     })
     console.log(this.checkoutForm)
     this.taskService.createTask(this.checkoutForm.value)
+    this.location.back()
   }
 
 
