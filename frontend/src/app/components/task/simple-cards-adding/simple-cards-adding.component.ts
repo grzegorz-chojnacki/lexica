@@ -17,6 +17,7 @@ import { Location } from '@angular/common'
 })
 export class SimpleCardsAddingComponent implements OnInit {
 
+  public invalid = false
   public team!: Team
   public obce!: string
   public narodowe!: string
@@ -58,7 +59,7 @@ export class SimpleCardsAddingComponent implements OnInit {
     console.log(this.checkoutForm)
     this.taskService.createTask(this.checkoutForm.value)
     this.location.back()
-  }
+  } else { this.invalid = true}
   }
 
 public anuluj(): void {
