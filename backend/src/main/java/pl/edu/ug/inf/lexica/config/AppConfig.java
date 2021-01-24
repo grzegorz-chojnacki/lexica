@@ -133,14 +133,15 @@ public class AppConfig {
     public void initDataBase() {
         taskTypeRepository.save(simpleCardType);
         userService.addAll(testUsers);
-        testTeams.stream().peek(team -> {
-                team.setTasks(generateTasks.get());
-                userService.get(team.getLeader().getId()).ifPresent(leader -> {
-                    Set<User> members = testUserGroup(leader);
-                    team.setMembers(members);
-                });
-            }).forEach(teamService::add);
 
+        setTasks(testTeams, generateTasks);
+        setTasks(testTeams2, generateTasks2);
+
+        testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
+        userService.addAll(testUsers);
+    }
+
+    private void setTasks(List<Team> testTeams2, Supplier<List<Task>> generateTasks2) {
         testTeams2.stream().peek(team -> {
             team.setTasks(generateTasks2.get());
             userService.get(team.getLeader().getId()).ifPresent(leader -> {
@@ -148,8 +149,5 @@ public class AppConfig {
                 team.setMembers(members);
             });
         }).forEach(teamService::add);
-
-        testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
-        userService.addAll(testUsers);
     }
 }
