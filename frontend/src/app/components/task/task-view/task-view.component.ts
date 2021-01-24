@@ -37,10 +37,13 @@ export class TaskViewComponent implements OnInit {
     this.breadCrumbService.setTeam({ id: 'test' } as Team)
     this.userService.user.subscribe(user => this.user = user)
 
+
+    const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
+    console.log(teamId, taskId)
 
     this.taskService
-      .getTask(taskId)
+      .getTask(teamId, taskId)
       .subscribe(task => this.task = task, _ => this.router.navigate(['/']))
   }
 

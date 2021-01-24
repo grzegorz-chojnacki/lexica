@@ -25,13 +25,13 @@ export class TaskService {
   private taskSource = new BehaviorSubject<Task<SimpleCard>>(this.emptyTask)
   public constructor(private readonly http: HttpClient) { }
 
-  public getTask(id: string | null): Observable<Task<SimpleCard>> {
-    if (id) { this.refreshTaskSource(id) }
+  public getTask(teamId: string | null, taskId: string | null): Observable<Task<SimpleCard>> {
+    if (teamId && taskId) { this.refreshTaskSource(teamId, taskId) }
     return this.taskSource.asObservable()
   }
 
-  private refreshTaskSource(id: string): void {
-    this.http.get<Task<SimpleCard>>(`${lexicaURL}/task/${id}`)
+  private refreshTaskSource(teamId: string, taskId: string): void {
+    this.http.get<Task<SimpleCard>>(`${lexicaURL}/team/${teamId}/task/${taskId}`)
       .pipe(map(Task.deserialize))
       .subscribe(
         task => this.taskSource.next(task),
@@ -45,8 +45,8 @@ export class TaskService {
     this.http.post(`${lexicaURL}/team/${form.team.id}/task`, form).subscribe()
   }
 
-  public updateTask(form: TaskForm, id: string): void {
-    this.http.put(`${lexicaURL}/team/${form.team.id}/task/${id}`, form)
+  public updateTask(form: TaskForm, taskId: string): void {
+    this.http.put(`${lexicaURL}/team/${form.team.id}/task/${taskId}`, form)
       .subscribe()
   }
 }

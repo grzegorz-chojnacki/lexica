@@ -14,7 +14,7 @@ const routes: Routes = [
     component: TeamViewComponent },
   { path: 'team/:teamId/new',
     component: SimpleCardsAddingComponent },
-  { path: 'task/:taskId',
+  { path: 'team/:teamId/task/:taskId',
     component: TaskViewComponent },
   { path: 'team/:teamId/:view',
     component: TeamViewComponent }, // Tasks & Members
