@@ -90,4 +90,22 @@ public class TeamController {
     public void removeTeam(@PathVariable UUID teamId) {
         teamService.get(teamId).ifPresent(team -> teamService.remove(team.getId()));
     }
+
+    @GetMapping("/{teamId}/task/{taskId}")
+    public Optional<Task> getTask(@PathVariable UUID teamId, @PathVariable UUID taskId) {
+        return teamService.getTask(teamId, taskId);
+    }
+
+    @PutMapping("/{teamId}/task/{taskId}")
+    public void updateTask(@RequestBody Task updated, @PathVariable UUID teamId, @PathVariable UUID taskId) {
+        teamService.getTask(teamId, taskId).ifPresent(task -> {
+            if (task.getType().getId().equals(updated.getType().getId())) {
+                task.setName(updated.getName());
+                task.setDescription(updated.getDescription());
+                task.setActive(updated.isActive());
+                task.setExamples(updated.getExamples());
+                taskService.update(task);
+            }
+        });
+    }
 }
