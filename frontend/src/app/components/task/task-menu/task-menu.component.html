@@ -8,8 +8,7 @@
     <span>Eksportuj</span>
   </button>
   <button *ngIf="leaderView" mat-menu-item
-      routerLink="/team/{{ this.team.id }}/new"
-      [state]="task">
+      routerLink="/team/{{ this.team.id }}/task/{{ this.task.id }}/edit">
     <mat-icon>edit</mat-icon>
     <span>Edytuj</span>
   </button>

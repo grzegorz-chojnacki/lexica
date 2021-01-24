@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { SimpleCard, Task } from 'src/app/classes/task'
+import { Example, SimpleCard, Task } from 'src/app/classes/task'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { TaskType, SimpleCardTask } from '../classes/task-type'
@@ -41,12 +41,12 @@ export class TaskService {
         })
   }
 
-  public createTask(form: TaskForm): void {
-    this.http.post(`${lexicaURL}/team/${form.team.id}/task`, form).subscribe()
+  public createTask(teamId: string, task: Task<Example>): void {
+    this.http.post(`${lexicaURL}/team/${teamId}/task`, task).subscribe()
   }
 
-  public updateTask(form: TaskForm, taskId: string): void {
-    this.http.put(`${lexicaURL}/team/${form.team.id}/task/${taskId}`, form)
+  public updateTask(teamId: string, taskId: string, task: Task<Example>): void {
+    this.http.put(`${lexicaURL}/team/${teamId}/task/${taskId}`, task)
       .subscribe()
   }
 }
