@@ -1,28 +1,25 @@
 <h1 mat-dialog-title>Nowa fiszka</h1>
 
 <mat-dialog-content>
-  <form >
+  <form [formGroup]="simpleCard">
     <mat-form-field appearance="fill">
       <mat-label>Słówko obce</mat-label>
-      <input matInput placeholder="Ex. Apple"  [(ngModel)]="data.obce" name="nazwa" required>
+      <input matInput placeholder="Ex. Apple" formControlName="foreign" />
     </mat-form-field>
-
     <mat-form-field appearance="fill">
       <mat-label>Słówko przetłumaczone</mat-label>
-      <input matInput placeholder="Np. Jabłko" [(ngModel)]="data.narodowe" name="nazwa2" required>
+      <input matInput placeholder="Np. Jabłko" formControlName="native" />
     </mat-form-field>
-  </form>
-  <form [formGroup]="taskForm">
     <mat-form-field appearance="fill">
       <mat-label>Grafika</mat-label>
-      <input matInput type="text" formControlName="image">
+      <input matInput type="text" formControlName="image" />
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="accent"  [mat-dialog-close]="data">
+  <button mat-button color="accent" [mat-dialog-close]="simpleCard.value">
     Zapisz
   </button>
-  <button mat-button mat-dialog-close (click)="onNoClick()">Anuluj</button>
+  <button mat-button mat-dialog-close>Anuluj</button>
 </mat-dialog-actions>
