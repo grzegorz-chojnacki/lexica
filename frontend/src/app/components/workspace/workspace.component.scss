@@ -1,15 +1,15 @@
 header {
-  margin: 4em auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 section { margin: 2em auto }
 
 .search-box {
-  display: block;
   width: 350px;
-  margin: 0 auto;
-  border-bottom: 0;
+  padding-top: 1rem;
+  margin-right: 1em;
 }
 
 h1.mat-display-2{
