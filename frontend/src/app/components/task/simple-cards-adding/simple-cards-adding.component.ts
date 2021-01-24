@@ -69,6 +69,7 @@ public anuluj(): void {
     if (this.simpleCards.length > 0) {
       this.simpleCards.splice(no, 1)
     }
+    if (this.simpleCards.length === 0) { this.invalid = false}
   }
   public edit(no: number): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
@@ -99,5 +100,6 @@ public anuluj(): void {
         this.simpleCards.push(new SimpleCard(result.obce, result.narodowe))
       }
     })
+    this.invalid = true
   }
 }
