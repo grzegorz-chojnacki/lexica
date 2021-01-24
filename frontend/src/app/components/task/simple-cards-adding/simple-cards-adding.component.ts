@@ -16,11 +16,10 @@ import { Location } from '@angular/common'
   styleUrls: ['./simple-cards-adding.component.scss']
 })
 export class SimpleCardsAddingComponent implements OnInit {
-
   public invalid = false
   public team!: Team
-  public obce!: string
-  public narodowe!: string
+  public foreign!: string
+  public native!: string
   public simpleCards: SimpleCard[] = []
   public checkoutForm = this.formBuilder.group({
     team: this.team,
@@ -30,16 +29,15 @@ export class SimpleCardsAddingComponent implements OnInit {
     type: SimpleCardTask
   })
 
+
   public constructor(
     private readonly dialog: MatDialog,
     private taskService: TaskService,
     private teamService: TeamService,
     private formBuilder: FormBuilder,
-    public router: Router,
+    public  router: Router,
     private readonly route: ActivatedRoute,
     private location: Location) { }
-
-
 
   public ngOnInit(): void {
     const teamId = this.route.snapshot.paramMap.get('teamId')
@@ -48,56 +46,57 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.simpleCards.length !== 0 ) {
-    this.checkoutForm.setValue({
-      team: this.team,
-      name: this.checkoutForm.get('name')?.value,
-      description: this.checkoutForm.get('description')?.value,
-      examples: this.simpleCards,
-      type: SimpleCardTask
-    })
-    console.log(this.checkoutForm)
-    this.taskService.createTask(this.checkoutForm.value)
-    this.location.back()
-  } else { this.invalid = true}
+    if (this.simpleCards.length !== 0) {
+      this.checkoutForm.setValue({
+        team: this.team,
+        name: this.checkoutForm.get('name')?.value,
+        description: this.checkoutForm.get('description')?.value,
+        examples: this.simpleCards,
+        type: SimpleCardTask
+      })
+      this.taskService.createTask(this.checkoutForm.value)
+      this.location.back()
+    } else { this.invalid = true }
   }
 
-public anuluj(): void {
-  this.location.back()
-}
+  public anuluj(): void {
+    this.location.back()
+  }
+
   public delete(no: number): void {
     if (this.simpleCards.length > 0) {
       this.simpleCards.splice(no, 1)
     }
-    if (this.simpleCards.length === 0) { this.invalid = false}
+    if (this.simpleCards.length === 0) { this.invalid = false }
   }
+
   public edit(no: number): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
       width: '500px',
       height: '500px', data: {
-        obce: this.simpleCards[no].foreignWord,
-        narodowe: this.simpleCards[no].nativeWord
+        foreign: this.simpleCards[no].foreignWord,
+        native: this.simpleCards[no].nativeWord
       }, hasBackdrop: false
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.obce.length === 0 || result.narodowe.length === 0) { }
+      if (result.foreign.length === 0 || result.native.length === 0) { }
       else {
-        this.simpleCards[no].nativeWord = result.narodowe
-        this.simpleCards[no].foreignWord = result.obce
+        this.simpleCards[no].nativeWord = result.native
+        this.simpleCards[no].foreignWord = result.foreign
       }
     })
   }
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
       width: '500px',
-      height: '500px', data: { obce: this.obce, narodowe: this.narodowe }, hasBackdrop: false
+      height: '500px', data: { foreign: this.foreign, native: this.native }, hasBackdrop: false
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.obce.length === 0 || result.narodowe.length === 0) { }
+      if (result.foreign.length === 0 || result.native.length === 0) { }
       else {
-        this.simpleCards.push(new SimpleCard(result.obce, result.narodowe))
+        this.simpleCards.push(new SimpleCard(result.foreign, result.native))
       }
     })
     this.invalid = true

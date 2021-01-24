@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FullNameDialogComponent } from './full-name-dialog.component';
+import { FullNameDialogComponent } from './full-name-dialog.component'
 
 describe('FullNameDialogComponent', () => {
-  let component: FullNameDialogComponent;
-  let fixture: ComponentFixture<FullNameDialogComponent>;
+  let component: FullNameDialogComponent
+  let fixture: ComponentFixture<FullNameDialogComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FullNameDialogComponent ]
     })
-    .compileComponents();
-  });
+    .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FullNameDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(FullNameDialogComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
