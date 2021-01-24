@@ -97,8 +97,8 @@ export class SimpleCardsAddingComponent implements OnInit {
       if (result.foreign.length === 0 || result.native.length === 0) { }
       else {
         this.simpleCards.push(new SimpleCard(result.foreign, result.native))
+        this.invalid = true
       }
     })
-    this.invalid = true
   }
 }
