@@ -12,7 +12,7 @@ import { StartViewComponent } from './components/start-view/start-view.component
 const routes: Routes = [
   { path: 'team/:teamId',
     component: TeamViewComponent },
-  { path: 'team/:teamId/new',
+  { path: 'team/:teamId/task/new',
     component: SimpleCardsAddingComponent },
   { path: 'team/:teamId/task/:taskId',
     component: TaskViewComponent },
