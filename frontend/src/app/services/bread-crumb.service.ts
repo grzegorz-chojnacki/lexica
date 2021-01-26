@@ -47,5 +47,23 @@ export class BreadCrumbService {
     ])
   }
 
+  public setTeamNewTask(teamId: string): void {
+    this.breadCrumbSource.next([
+      this.default.mainPage,
+      this.default.workspace,
+      { label: 'Zespół',       route: `/team/${teamId}` },
+      { label: 'Nowe zadanie', route: `/team/${teamId}/task/new` }
+    ])
+  }
+
+  public setTeamTaskEditor(teamId: string, taskId: string): void {
+    this.breadCrumbSource.next([
+      this.default.mainPage,
+      this.default.workspace,
+      { label: 'Zespół',  route: `/team/${teamId}` },
+      { label: 'Edytor',  route: `/team/${teamId}/task/${taskId}/edit` }
+    ])
+  }
+
   public constructor() { }
 }

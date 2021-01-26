@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SimpleCardAddingComponent } from 'src/app/components/task/simple-card-adding/simple-card-adding.component'
 import { SimpleCard } from 'src/app/classes/task'
@@ -51,10 +51,12 @@ export class SimpleCardsAddingComponent implements OnInit {
 
     if (taskId) {
       this.taskService.getTask(teamId, taskId).subscribe(task => {
-        this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
+        this.breadCrumbService.setTeamTaskEditor(teamId as string, taskId as string)
         this.taskId = taskId as string
         this.taskForm.patchValue(task)
       }, _ => this.navigateToTeam())
+    } else {
+      setTimeout(() => this.breadCrumbService.setTeamNewTask(teamId as string))
     }
   }
 

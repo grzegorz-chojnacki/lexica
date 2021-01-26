@@ -37,7 +37,7 @@ export class TeamViewComponent implements OnInit {
 
     this.teamService.getTeam(teamId).subscribe(team => {
       this.team = team
-      this.breadCrumbService.setTeam(team)
+      this.breadCrumbService.setTeam(team.id)
       this.leaderHasProgressView = team.isMember(this.user)
       this.leaderView = isLeader()
       this.loggedUserWithProgress = team.members

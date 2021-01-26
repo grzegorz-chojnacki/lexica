@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 
 @Component({
   selector: 'app-start-view',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core'
 })
 export class StartViewComponent implements OnInit {
 
-  public constructor() { }
+  public constructor(private readonly breadCrumbService: BreadCrumbService) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void { this.breadCrumbService.setMainPage() }
 }

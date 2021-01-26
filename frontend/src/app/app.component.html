@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
+  <button mat-icon-button
+      [disabled]="this.router.url === '/start' || this.router.url === '/login'"
+      (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
 
@@ -11,30 +13,30 @@
       </a>
   </div>
 
-
   <span class="spacer"></span>
-  <ng-container *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
-  <span class="user-name">{{ user | fullNamePipe }} </span>
-  <div class="image"></div>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/account">
-      <mat-icon>account_circle</mat-icon>
-      <span>Konto</span>
+  <ng-container *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
+    <span class="user-name">{{ user | fullNamePipe }} </span>
+    <div class="image"></div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button mat-menu-item routerLink="/start">
-      <mat-icon>logout</mat-icon>
-      <span>Wyloguj się</span>
-    </button>
-  </mat-menu>
-</ng-container>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/account">
+        <mat-icon>account_circle</mat-icon>
+        <span>Konto</span>
+      </button>
+      <button mat-menu-item routerLink="/start">
+        <mat-icon>logout</mat-icon>
+        <span>Wyloguj się</span>
+      </button>
+    </mat-menu>
+  </ng-container>
 </mat-toolbar>
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav><app-sidebar></app-sidebar></mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+
+  <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
 </mat-sidenav-container>
