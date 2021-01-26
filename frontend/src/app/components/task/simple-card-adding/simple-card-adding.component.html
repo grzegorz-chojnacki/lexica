@@ -5,16 +5,20 @@
     <mat-form-field appearance="fill">
       <mat-label>Słówko obce</mat-label>
       <input matInput placeholder="Ex. Apple" formControlName="foreignWord" />
+      <mat-error>To pole jest wymagane</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Słówko przetłumaczone</mat-label>
       <input matInput placeholder="Np. Jabłko" formControlName="nativeWord" />
+      <mat-error>To pole jest wymagane</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button color="accent" [mat-dialog-close]="simpleCard.value">
+  <button mat-button color="accent"
+      [disabled]="!simpleCard.valid"
+      [mat-dialog-close]="simpleCard.value">
     Zapisz
   </button>
   <button mat-button mat-dialog-close>Anuluj</button>

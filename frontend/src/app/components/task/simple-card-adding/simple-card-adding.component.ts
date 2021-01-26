@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SimpleCard } from 'src/app/classes/task'
 
@@ -10,8 +10,8 @@ import { SimpleCard } from 'src/app/classes/task'
 })
 export class SimpleCardAddingComponent implements OnInit {
   public readonly simpleCard = this.formBuilder.group({
-    foreignWord: this.card.foreignWord,
-    nativeWord: this.card.nativeWord
+    foreignWord: new FormControl(this.card.foreignWord, [ Validators.required ]),
+    nativeWord:  new FormControl(this.card.nativeWord,  [ Validators.required ])
   })
 
   public constructor(
