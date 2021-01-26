@@ -47,16 +47,12 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button
-        mat-button
-        color="accent"
-        (click)="submit()"
-        routerLink="/team/{{ teamId }}"
-        [disabled]="this.simpleCards.length === 0 || !taskForm.valid"
-      >
+      <button mat-button color="accent"
+          (click)="submit()"
+          routerLink="/team/{{ teamId }}"
+          [disabled]="!taskForm.valid">
         Zapisz
       </button>
-
       <button mat-button (click)="this.location.back()">Anuluj</button>
     </mat-card-actions>
   </mat-card>

@@ -16,15 +16,14 @@ import { Location } from '@angular/common'
 export class SimpleCardsAddingComponent implements OnInit {
   public foreign!: string
   public native!: string
-  public simpleCards: SimpleCard[] = []
+  public teamId!: string
+  public taskId!: string
   public taskForm = this.formBuilder.group({
     name: '',
     description: '',
-    examples: this.simpleCards,
+    examples: [],
     type: SimpleCardTask
   })
-  public teamId!: string
-  public taskId!: string
 
   public constructor(
     private readonly dialog: MatDialog,
@@ -45,20 +44,12 @@ export class SimpleCardsAddingComponent implements OnInit {
       .subscribe(task => {
         this.taskId = taskId as string
         this.taskForm.patchValue(task)
-        this.simpleCards = task.examples
       })
   }
 
 
   public submit(): void {
-    if (this.simpleCards.length !== 0) {
-      this.taskForm.setValue({
-        name: this.taskForm.get('name')?.value,
-        description: this.taskForm.get('description')?.value,
-        examples: this.simpleCards,
-        type: SimpleCardTask
-      })
-
+    if (this.taskForm.value.examples.length > 0) {
       if (this.taskId) {
         this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
       } else {
@@ -68,8 +59,8 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
 
   public delete(no: number): void {
-    if (this.simpleCards.length > 0) {
-      this.simpleCards.splice(no, 1)
+    if (this.taskForm.value.examples.length > 0) {
+      this.taskForm.value.examples.splice(no, 1)
     }
   }
 
@@ -77,19 +68,20 @@ export class SimpleCardsAddingComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
       width: '500px',
       height: '500px', data: {
-        foreign: this.simpleCards[no].foreignWord,
-        native: this.simpleCards[no].nativeWord
+        foreign: this.taskForm.value.examples[no].foreignWord,
+        native: this.taskForm.value.examples[no].nativeWord
       }, hasBackdrop: false
     })
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.foreign.length === 0 || result.native.length === 0) { }
       else {
-        this.simpleCards[no].nativeWord = result.native
-        this.simpleCards[no].foreignWord = result.foreign
+        this.taskForm.value.examples[no].nativeWord = result.native
+        this.taskForm.value.examples[no].foreignWord = result.foreign
       }
     })
   }
+
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
       width: '500px',
@@ -99,7 +91,7 @@ export class SimpleCardsAddingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.foreign.length === 0 || result.native.length === 0) { }
       else {
-        this.simpleCards.push(new SimpleCard(result.foreign, result.native))
+        this.taskForm.value.examples.push(new SimpleCard(result.foreign, result.native))
       }
     })
   }
