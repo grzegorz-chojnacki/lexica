@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { Team } from '../classes/team'
 
 export interface BreadCrumb {
   readonly label: string
@@ -31,11 +30,20 @@ export class BreadCrumbService {
     this.breadCrumbSource.next([ this.default.mainPage, this.default.workspace ])
   }
 
-  public setTeam(team: Team): void {
+  public setTeam(teamId: string): void {
     this.breadCrumbSource.next([
       this.default.mainPage,
       this.default.workspace,
-      { label: 'Zespół', route: `/team/${team.id}` }
+      { label: 'Zespół', route: `/team/${teamId}` }
+    ])
+  }
+
+  public setTeamTask(teamId: string, taskId: string): void {
+    this.breadCrumbSource.next([
+      this.default.mainPage,
+      this.default.workspace,
+      { label: 'Zespół',  route: `/team/${teamId}` },
+      { label: 'Zadanie', route: `/team/${teamId}/task/${taskId}` }
     ])
   }
 

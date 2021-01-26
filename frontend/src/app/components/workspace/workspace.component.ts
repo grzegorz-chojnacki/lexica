@@ -24,7 +24,7 @@ export class WorkspaceComponent implements OnInit {
     private readonly userService: UserService) { }
 
   public ngOnInit(): void {
-    this.breadCrumbService.setMainPage()
+    this.breadCrumbService.setWorkspace()
     this.userService.user.subscribe(user =>
       this.teamService.getTeams().subscribe(teams => {
         this.ownedTeams = teams.filter(team => team.leader.id === user.id)

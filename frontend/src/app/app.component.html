@@ -15,10 +15,7 @@
   <span class="spacer"></span>
   <ng-container *ngIf="this.router.url!=='/start' && this.router.url!=='/login'">
   <span class="user-name">{{ user | fullNamePipe }} </span>
-  <!-- <img src="/assets/avatar_placeholder.jpg"
-       class="avatar"
-       alt="account"/> -->
-       <div class="image"></div>
+  <div class="image"></div>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
