@@ -8,11 +8,11 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
 import { Location } from '@angular/common'
 
-// tslint:disable-next-line: no-any
-const arrayNotEmpty = (c: AbstractControl): any => {
-  console.log(c)
-  return (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
-}
+type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
+
+const arrayNotEmpty = (c: AbstractControl): arrayNotEmptyResult =>
+ (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
+
 
 @Component({
   selector: 'app-simple-card',
