@@ -7,6 +7,7 @@ import { TaskService } from 'src/app/services/task.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
 import { Location } from '@angular/common'
+import { TeamService } from 'src/app/services/team.service'
 
 type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
 
@@ -31,24 +32,26 @@ export class SimpleCardsAddingComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly teamService: TeamService,
     private readonly taskService: TaskService,
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
     public  readonly router: Router,
     public  readonly location: Location) { }
 
-  // ToDo: check if team exists
   public ngOnInit(): void {
     const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
 
-    this.teamId = teamId as string
-
-    this.taskService.getTask(teamId, taskId)
-      .subscribe(task => {
+    this.teamService.getTeam(teamId).subscribe(team => {
+      this.teamId = team.id
+      this.taskService.getTask(teamId, taskId).subscribe(task => {
         this.taskId = taskId as string
         this.taskForm.patchValue(task)
-      })
+      },
+       _ => this.router.navigate([`/team/${team.id}/task/new`]))
+    },
+    _ => this.router.navigate(['/']))
   }
 
   public submit(): void {
