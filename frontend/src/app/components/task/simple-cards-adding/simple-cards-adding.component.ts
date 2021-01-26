@@ -53,13 +53,13 @@ export class SimpleCardsAddingComponent implements OnInit {
     }
   }
 
-  public delete(card: SimpleCard): void {
+  public deleteCard(card: SimpleCard): void {
     this.taskForm.patchValue({
       examples: this.taskForm.value.examples.filter((c: SimpleCard) => c !== card)
     })
   }
 
-  public edit(card: SimpleCard): void {
+  public editCard(card: SimpleCard): void {
     this.dialog
       .open(SimpleCardAddingComponent, { data: card, hasBackdrop: false})
       .afterClosed()
@@ -71,7 +71,7 @@ export class SimpleCardsAddingComponent implements OnInit {
       })
   }
 
-  public addSimpleCard(): void {
+  public addCard(): void {
     this.dialog
       .open(SimpleCardAddingComponent,
         { data: new SimpleCard('', ''), hasBackdrop: false })

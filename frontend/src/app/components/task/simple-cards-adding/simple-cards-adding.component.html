@@ -30,17 +30,17 @@
           <h4 matLine>{{ word.foreignWord }}</h4>
           <h4 class="matLine">{{ word.nativeWord }}</h4>
           <button mat-menu-item>
-            <mat-icon class="options" (click)="edit(word)">edit</mat-icon>
+            <mat-icon class="options" (click)="editCard(word)">edit</mat-icon>
           </button>
 
           <button mat-menu-item>
-            <mat-icon class="options" (click)="delete(word)">delete</mat-icon>
+            <mat-icon class="options" (click)="deleteCard(word)">delete</mat-icon>
           </button>
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
       <div class="example-button-container">
-        <button mat-fab (click)="addSimpleCard()">
+        <button mat-fab (click)="addCard()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
