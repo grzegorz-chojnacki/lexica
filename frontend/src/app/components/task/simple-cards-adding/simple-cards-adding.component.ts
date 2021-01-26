@@ -43,15 +43,14 @@ export class SimpleCardsAddingComponent implements OnInit {
     const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
 
-    this.teamService.getTeam(teamId).subscribe(team => {
-      this.teamId = team.id
-      this.taskService.getTask(teamId, taskId).subscribe(task => {
-        this.taskId = taskId as string
-        this.taskForm.patchValue(task)
-      },
-       _ => this.router.navigate([`/team/${team.id}/task/new`]))
-    },
-    _ => this.router.navigate(['/']))
+    this.teamService.getTeam(teamId).subscribe(
+      team => this.teamId = team.id,
+      _    => this.router.navigate(['/']))
+
+    this.taskService.getTask(teamId, taskId).subscribe(task => {
+      this.taskId = taskId as string
+      this.taskForm.patchValue(task)
+    }, _ => this.navigateToTeam())
   }
 
   public submit(): void {
@@ -93,4 +92,6 @@ export class SimpleCardsAddingComponent implements OnInit {
         }
       })
   }
+
+  public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
 }
