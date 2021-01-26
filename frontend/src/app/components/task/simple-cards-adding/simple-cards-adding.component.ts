@@ -14,8 +14,6 @@ import { Location } from '@angular/common'
   styleUrls: ['./simple-cards-adding.component.scss']
 })
 export class SimpleCardsAddingComponent implements OnInit {
-  public foreign!: string
-  public native!: string
   public teamId!: string
   public taskId!: string
   public taskForm = this.formBuilder.group({
@@ -27,11 +25,11 @@ export class SimpleCardsAddingComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
-    private taskService: TaskService,
-    private formBuilder: FormBuilder,
-    public router: Router,
+    private readonly taskService: TaskService,
+    private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
-    public readonly location: Location) { }
+    public  readonly router: Router,
+    public  readonly location: Location) { }
 
   // ToDo: check if team exists
   public ngOnInit(): void {
@@ -85,7 +83,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   public addSimpleCard(): void {
     const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
       width: '500px',
-      height: '500px', data: { foreign: this.foreign, native: this.native }, hasBackdrop: false
+      height: '500px', data: { foreign: '', native: '' }, hasBackdrop: false
     })
 
     dialogRef.afterClosed().subscribe(result => {
