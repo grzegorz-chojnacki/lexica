@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { from } from 'rxjs'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { BreadCrumbService, BreadCrumb } from './services/bread-crumb.service'
@@ -21,6 +20,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.userService.user.subscribe(u => this.user = u)
-    this.breadCrumbService.breadCrumbs.subscribe(next => this.breadCrumbs = next)
+    this.breadCrumbService.breadCrumbs
+      .subscribe(next => setTimeout(() => this.breadCrumbs = next))
   }
 }
