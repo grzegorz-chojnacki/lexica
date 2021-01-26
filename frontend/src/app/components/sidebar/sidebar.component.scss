@@ -1,57 +1,28 @@
-.sidebar{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-}
-header{
-  margin: 5px;
+header {
+  margin: 8px;
   padding: 10px;
+  max-width: 80%;
 }
-#header2{
-    margin-top: 5px;
-    padding-top: 20px;
-}
-.localTaskContainer{
-    display: inline;
-    margin-bottom: 20px;
- }
-header:hover{
-    background: rgba(46, 56, 47, 0.1);
-}
-a{
-    color: unset;
-    text-decoration: none;
-}
-#nazwaUzytkownika{
-    display: inline-block;
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 10px;
-    max-width: 100px;
 
+a {
+  color: unset;
+  text-decoration: none;
 }
-img{
-    width: 40px;
-    height: 40px;
-    margin-left: 5px;
+#nazwaUzytkownika {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  max-width: 100px;
 }
-img[alt="avatar"]{
-    border-radius: 50%;
+
+.image {
+  display: inline;
+  background: radial-gradient(transparent, rgba(193, 230, 240, 0.781));
+  border-radius: 50%;
 }
-mat-icon{
-    width: 20px;
-    height: 20px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 5px;
-    border-radius: 50%;
-    color: rgba(0, 0, 0, 0.54);
-}
-p{
-    font-size: 12px;
-    margin-left: 60px;
-    margin-top: -7px;
-}
-#napisZadaniaLokalne{
-    margin-top: -44px;
-    font-size: 16px;
+mat-icon {
+  width: 20px;
+  height: 20px;
+  float: right;
+  color: rgba(0, 0, 0, 0.54);
 }

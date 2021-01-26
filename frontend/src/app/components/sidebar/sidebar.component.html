@@ -1,19 +1,12 @@
 <div class="sidebar">
-  <header>
-    <img src="{{ avatarURL }}" alt="avatar" />
+  <header class="row">
+    <!-- <img src="{{ avatarURL }}" alt="avatar" /> -->
+    <div class="image">
     <a href="/account" id="nazwaUzytkownika">
       {{ user | fullNamePipe }}
+      <mat-icon>account_circle</mat-icon>
     </a>
+  </div>
+  </header>
 
-    <mat-icon>account_circle</mat-icon>
-  </header>
-  <header id="header2">
-    <div class="localTaskContainer">
-      <a href="/local">
-        <img src="{{ avatarURL }}" alt="pictureOfLocalTask" />
-        <p id="napisZadaniaLokalne">Zadania lokalne<br /></p>
-        <p>Zadania zapisane lokalnie</p>
-      </a>
-    </div>
-  </header>
 </div>

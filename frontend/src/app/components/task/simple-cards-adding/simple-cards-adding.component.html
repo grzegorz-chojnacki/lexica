@@ -1,57 +1,54 @@
-<section>
-  <mat-card class="card1">
+<form [formGroup]="taskForm">
+  <mat-card>
+    <mat-card-title>Tytuł i opis</mat-card-title>
     <mat-card-content>
-      <mat-card-title>Tytuł i opis</mat-card-title>
-      <form [formGroup]="checkoutForm">
         <mat-form-field appearance="fill">
           <mat-label>Tytuł</mat-label>
-          <input matInput required formControlName="name">
+          <input matInput formControlName="name" />
         </mat-form-field>
-        <br/>
         <mat-form-field appearance="fill">
           <mat-label>Krótki opis (do 50 znaków)</mat-label>
-          <textarea matInput  maxlength="50" formControlName="description"></textarea>
+          <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
-      </form>
-    </mat-card-content>
+      </mat-card-content>
     </mat-card>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Przykłady w zadaniu </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list>
-    <mat-list-item  *ngFor="let word of simpleCards; let i = index">
-        <h4 matLine>{{word.foreignWord}}</h4>
-        <h4 id="matLine"> {{word.nativeWord}}</h4>
-          <button mat-menu-item>
-            <mat-icon  class="options" (click)="edit(i)">edit</mat-icon>
+    <mat-card>
+      <mat-card-title>Przykłady w zadaniu</mat-card-title>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item
+          class="flex-container"
+          *ngFor="let word of taskForm.value.examples; last as last">
+          <span>{{ word.foreignWord }}</span>
+          <div class="spacer"></div>
+          <span>{{ word.nativeWord }}</span>
+
+          <button mat-icon-button>
+            <mat-icon (click)="editCard(word)">edit</mat-icon>
           </button>
 
-          <button mat-menu-item>
-            <mat-icon class="options" (click)="delete(i)" >delete</mat-icon>
+          <button mat-icon-button>
+            <mat-icon (click)="deleteCard(word)">delete</mat-icon>
           </button>
-        <mat-divider></mat-divider>
-
-      </mat-list-item>
-
+          <mat-divider *ngIf="!last"></mat-divider>
+        </mat-list-item>
       </mat-list>
+
       <div class="example-button-container">
-        <button mat-fab (click)="addSimpleCard()">
-          <mat-icon>add</mat-icon>
-        </button>
+        <button mat-mini-fab (click)="addCard()"><mat-icon>add</mat-icon></button>
       </div>
+    </mat-card-content>
 
-  </mat-card-content>
-
-  <mat-card-actions>
-
-  <button mat-button color="accent" (click)="submit()" [disabled]="!invalid">
-    Zapisz
-  </button>
-
-  <button mat-button (click)="anuluj()">Anuluj</button>
-</mat-card-actions>
-</mat-card>
-</section>
+    <mat-card-actions>
+      <button mat-button color="accent"
+      (click)="submit()"
+      routerLink="/team/{{ teamId }}"
+      [disabled]="!taskForm.valid">
+      Zapisz
+    </button>
+    <button mat-button (click)="navigateToTeam()" >Anuluj</button>
+  </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,27 +1,24 @@
-<header class="limited-width">
-  <h1 class="mat-display-2">
-  <!-- Chwytliwy nagłówek, który sprawi że każdy będzie
-       chciał skorzystać z tej aplikacji -->
-     become a better version of yourself with Lexica
-  </h1>
-  <button mat-raised-button color="accent" class="uppercase"
-    (click)="openDialog()">Nowy zespół</button>
-</header>
-
-<mat-divider></mat-divider>
-
 <section class="limited-width">
+  <h1 class="gentle-text">
+    Dołącz do zespołu lub stwórz własny.
+    <img src="https://s-car.pl/wp-content/uploads/2017/11/strzalka.png" alt=" "/>
+  </h1>
 
-  <mat-form-field appearance="outline" class="search-box">
-    <mat-label>Wyszukaj zespoły</mat-label>
-    <span matPrefix><mat-icon>search</mat-icon></span>
-    <input matInput type="search" [(ngModel)]="search">
-    <button matSuffix mat-icon-button aria-label="Clear"
-      *ngIf="search"
-      (click)="search = ''">
-      <mat-icon>close</mat-icon>
+  <header>
+    <mat-form-field appearance="outline" class="search-box">
+      <mat-label>Wyszukaj zespoły</mat-label>
+      <span matPrefix><mat-icon>search</mat-icon></span>
+      <input matInput type="search" [(ngModel)]="search">
+      <button matSuffix mat-icon-button aria-label="Clear"
+        *ngIf="search"
+        (click)="search = ''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="accent" class="uppercase" (click)="openDialog()">
+      Dodaj zespół
     </button>
-  </mat-form-field>
+  </header>
 
   <mat-accordion multi>
     <app-team-container title="Moje zespoły" [leaderView]="true"

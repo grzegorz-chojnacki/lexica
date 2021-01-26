@@ -7,7 +7,8 @@
     <mat-icon>download</mat-icon>
     <span>Eksportuj</span>
   </button>
-  <button *ngIf="leaderView" mat-menu-item (click)="editTask()">
+  <button *ngIf="leaderView" mat-menu-item
+      routerLink="/team/{{ this.team.id }}/task/{{ this.task.id }}/edit">
     <mat-icon>edit</mat-icon>
     <span>Edytuj</span>
   </button>

@@ -55,8 +55,7 @@ import { LoginComponent } from './login/login.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
 import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
-import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component';
-import { TaskEditingComponent } from './components/task/task-editing/task-editing.component'
+import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
 
 @NgModule({
   declarations: [
@@ -88,7 +87,6 @@ import { TaskEditingComponent } from './components/task/task-editing/task-editin
     FullNameDialogComponent,
     EmailDialogComponent,
     PasswordDialogComponent,
-    TaskEditingComponent
   ],
   imports: [
     BrowserModule,

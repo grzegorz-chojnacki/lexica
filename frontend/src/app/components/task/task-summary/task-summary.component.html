@@ -11,13 +11,13 @@
   <section *ngIf="notKnownWords.length > 0">
     <h3>Lista niezaliczonych przykładów</h3>
     <mat-list>
-      <mat-list-item *ngFor="let example of notKnownWords">
+      <mat-list-item *ngFor="let example of notKnownWords; last as last">
         <div class="flex-container">
           <span>{{ example.foreignWord }}</span>
           <span class="spacer"></span>
           <span>{{ example.nativeWord }}</span>
         </div>
-        <mat-divider></mat-divider>
+        <mat-divider *ngIf="!last"></mat-divider>
       </mat-list-item>
     </mat-list>
   </section>

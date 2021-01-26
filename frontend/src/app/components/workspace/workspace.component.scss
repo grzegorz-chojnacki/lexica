@@ -1,18 +1,25 @@
 header {
-  margin: 4em auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 section { margin: 2em auto }
 
 .search-box {
-  display: block;
   width: 350px;
-  margin: 0 auto;
-  border-bottom: 0;
+  padding-top: 1rem;
+  margin-right: 1em;
 }
 
-h1.mat-display-2{
-  font-family: Comic Sans MS, Comic Sans, cursive;
-  font-size: 55px;
+h1.gentle-text{
+  font-size: 22px;
+  font-weight: 300;
+  text-align: center;
+
+}
+h1.gentle-text>img{
+  width: 3em; height: 3em;
+  transform: scaleX(-1);
+  margin-bottom: -40px;
 }

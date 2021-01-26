@@ -1,12 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { FormBuilder, FormControl } from '@angular/forms'
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import { SimpleCardsAddingComponent } from 'src/app/components/task/simple-cards-adding/simple-cards-adding.component'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SimpleCard } from 'src/app/classes/task'
-export interface DialogData {
-  obce: string
-  narodowe: string
-}
 
 @Component({
   selector: 'app-task-adding',
@@ -14,21 +9,14 @@ export interface DialogData {
   styleUrls: ['./simple-card-adding.component.scss']
 })
 export class SimpleCardAddingComponent implements OnInit {
-  public readonly taskForm = this.formBuilder.group({
-    image: new FormControl({ value: '', disabled: true })
+  public readonly simpleCard = this.formBuilder.group({
+    foreignWord: new FormControl(this.card.foreignWord, [ Validators.required ]),
+    nativeWord:  new FormControl(this.card.nativeWord,  [ Validators.required ])
   })
 
   public constructor(
-  private readonly formBuilder: FormBuilder,
-  private readonly dialog: MatDialog,
-  public dialogRef: MatDialogRef<SimpleCardAddingComponent>,
-  @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    private readonly formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) private readonly card: SimpleCard) { }
 
-  public ngOnInit(): void {
-   }
-
-   public onNoClick(): void {
-    this.dialogRef.close()
-  }
-
+  public ngOnInit(): void { }
 }

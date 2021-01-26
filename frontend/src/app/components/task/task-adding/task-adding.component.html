@@ -13,15 +13,15 @@
     <mat-form-field appearance="fill">
       <mat-label>Importuj zadanie z pliku</mat-label>
       <input matInput type="text" formControlName="image">
-
       <mat-hint>Typ zadania musi się zgadzać z wybranym powyżej</mat-hint>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="accent"  routerLink="{{this.router.url}}/new">
-    UTWÓRZ
+  <button mat-button mat-dialog-close color="accent"
+      routerLink="{{ this.router.url }}/task/new">
+    Utwórz
   </button>
-  <button mat-button mat-dialog-close>ANULUJ</button>
+  <button mat-button mat-dialog-close>Anuluj</button>
 </mat-dialog-actions>

@@ -2,6 +2,7 @@ package pl.edu.ug.inf.lexica.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.repository.TeamRepository;
 
@@ -48,5 +49,12 @@ public class TeamService implements EntityService<Team> {
     @Override
     public void update(Team entity) {
         teamRepository.save(entity);
+    }
+
+    public Optional<Task> getTask(UUID teamId, UUID taskId) {
+        return teamRepository.findById(teamId)
+                .flatMap(team -> team.getTasks().stream()
+                        .filter(task -> task.getId().equals(taskId))
+                        .findAny());
     }
 }

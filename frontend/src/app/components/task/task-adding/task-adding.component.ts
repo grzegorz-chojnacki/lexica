@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormControl } from '@angular/forms'
-import { MatDialog } from '@angular/material/dialog'
-import { SimpleCardsAddingComponent } from 'src/app/components/task/simple-cards-adding/simple-cards-adding.component'
 import { Router } from '@angular/router'
+
 @Component({
   selector: 'app-task-adding',
   templateUrl: './task-adding.component.html',
@@ -16,16 +15,8 @@ export class TaskAddingComponent implements OnInit {
   })
 
   public constructor(
-  private readonly formBuilder: FormBuilder,
-  private readonly dialog: MatDialog,
-  public router: Router ) { }
+    private readonly formBuilder: FormBuilder,
+    public router: Router) { }
 
   public ngOnInit(): void { }
-
-  public submit(): void {
-    // this.Example.create(this.taskForm.value as Example
-   // const dialogRef = this.dialog.open(SimpleCardsAddingComponent, { width: '600px',
-  //  height: '600px'})
-  }
-
 }
