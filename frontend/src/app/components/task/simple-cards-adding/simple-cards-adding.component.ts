@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SimpleCardAddingComponent } from 'src/app/components/task/simple-card-adding/simple-card-adding.component'
 import { SimpleCard } from 'src/app/classes/task'
-import { FormBuilder } from '@angular/forms'
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { TaskService } from 'src/app/services/task.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
 import { Location } from '@angular/common'
+
+// tslint:disable-next-line: no-any
+const arrayNotEmpty = (c: AbstractControl): any => {
+  console.log(c)
+  return (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
+}
 
 @Component({
   selector: 'app-simple-card',
@@ -17,10 +23,10 @@ export class SimpleCardsAddingComponent implements OnInit {
   public teamId!: string
   public taskId!: string
   public taskForm = this.formBuilder.group({
-    name: '',
-    description: '',
-    examples: [],
-    type: SimpleCardTask
+    name:        new FormControl('', [ Validators.required ]),
+    description: new FormControl('', [ Validators.required, Validators.maxLength(50) ]),
+    examples:    new FormControl([], [ arrayNotEmpty ]),
+    type:        SimpleCardTask
   })
 
   public constructor(
@@ -57,6 +63,7 @@ export class SimpleCardsAddingComponent implements OnInit {
     this.taskForm.patchValue({
       examples: this.taskForm.value.examples.filter((c: SimpleCard) => c !== card)
     })
+    this.taskForm.controls.examples.updateValueAndValidity()
   }
 
   public editCard(card: SimpleCard): void {
@@ -77,7 +84,10 @@ export class SimpleCardsAddingComponent implements OnInit {
         { data: new SimpleCard('', ''), hasBackdrop: false })
       .afterClosed()
       .subscribe(result => {
-        if (result) { this.taskForm.value.examples.push(result) }
+        if (result) {
+          this.taskForm.value.examples.push(result)
+          this.taskForm.controls.examples.updateValueAndValidity()
+        }
       })
   }
 }
