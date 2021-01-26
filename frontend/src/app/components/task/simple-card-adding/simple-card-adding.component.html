@@ -4,15 +4,11 @@
   <form [formGroup]="simpleCard">
     <mat-form-field appearance="fill">
       <mat-label>Słówko obce</mat-label>
-      <input matInput placeholder="Ex. Apple" formControlName="foreign" />
+      <input matInput placeholder="Ex. Apple" formControlName="foreignWord" />
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Słówko przetłumaczone</mat-label>
-      <input matInput placeholder="Np. Jabłko" formControlName="native" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Grafika</mat-label>
-      <input matInput type="text" formControlName="image" />
+      <input matInput placeholder="Np. Jabłko" formControlName="nativeWord" />
     </mat-form-field>
   </form>
 </mat-dialog-content>

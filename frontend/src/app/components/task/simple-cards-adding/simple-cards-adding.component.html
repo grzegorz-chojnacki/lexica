@@ -26,15 +26,15 @@
     </mat-card-header>
     <mat-card-content>
       <mat-list>
-        <mat-list-item *ngFor="let word of taskForm.value.examples; let i = index">
+        <mat-list-item *ngFor="let word of taskForm.value.examples">
           <h4 matLine>{{ word.foreignWord }}</h4>
           <h4 class="matLine">{{ word.nativeWord }}</h4>
           <button mat-menu-item>
-            <mat-icon class="options" (click)="edit(i)">edit</mat-icon>
+            <mat-icon class="options" (click)="edit(word)">edit</mat-icon>
           </button>
 
           <button mat-menu-item>
-            <mat-icon class="options" (click)="delete(i)">delete</mat-icon>
+            <mat-icon class="options" (click)="delete(word)">delete</mat-icon>
           </button>
           <mat-divider></mat-divider>
         </mat-list-item>

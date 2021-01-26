@@ -1,11 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { FormBuilder, FormControl } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-
-export interface DialogData {
-  foreign: string
-  native: string
-}
+import { SimpleCard } from 'src/app/classes/task'
 
 @Component({
   selector: 'app-task-adding',
@@ -14,14 +10,13 @@ export interface DialogData {
 })
 export class SimpleCardAddingComponent implements OnInit {
   public readonly simpleCard = this.formBuilder.group({
-    foreign: this.data.foreign,
-    native: this.data.native,
-    image: new FormControl({ value: '', disabled: true })
+    foreignWord: this.card.foreignWord,
+    nativeWord: this.card.nativeWord
   })
 
   public constructor(
     private readonly formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private readonly data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) private readonly card: SimpleCard) { }
 
   public ngOnInit(): void { }
 }

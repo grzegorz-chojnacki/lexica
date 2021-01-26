@@ -45,52 +45,39 @@ export class SimpleCardsAddingComponent implements OnInit {
       })
   }
 
-
   public submit(): void {
-    if (this.taskForm.value.examples.length > 0) {
-      if (this.taskId) {
-        this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
-      } else {
-        this.taskService.createTask(this.teamId, this.taskForm.value)
-      }
+    if (this.taskId) {
+      this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
+    } else {
+      this.taskService.createTask(this.teamId, this.taskForm.value)
     }
   }
 
-  public delete(no: number): void {
-    if (this.taskForm.value.examples.length > 0) {
-      this.taskForm.value.examples.splice(no, 1)
-    }
+  public delete(card: SimpleCard): void {
+    this.taskForm.patchValue({
+      examples: this.taskForm.value.examples.filter((c: SimpleCard) => c !== card)
+    })
   }
 
-  public edit(no: number): void {
-    const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
-      width: '500px',
-      height: '500px', data: {
-        foreign: this.taskForm.value.examples[no].foreignWord,
-        native: this.taskForm.value.examples[no].nativeWord
-      }, hasBackdrop: false
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.foreign.length === 0 || result.native.length === 0) { }
-      else {
-        this.taskForm.value.examples[no].nativeWord = result.native
-        this.taskForm.value.examples[no].foreignWord = result.foreign
-      }
-    })
+  public edit(card: SimpleCard): void {
+    this.dialog
+      .open(SimpleCardAddingComponent, { data: card, hasBackdrop: false})
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          card.nativeWord  = result.nativeWord
+          card.foreignWord = result.foreignWord
+        }
+      })
   }
 
   public addSimpleCard(): void {
-    const dialogRef = this.dialog.open(SimpleCardAddingComponent, {
-      width: '500px',
-      height: '500px', data: { foreign: '', native: '' }, hasBackdrop: false
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.foreign.length === 0 || result.native.length === 0) { }
-      else {
-        this.taskForm.value.examples.push(new SimpleCard(result.foreign, result.native))
-      }
-    })
+    this.dialog
+      .open(SimpleCardAddingComponent,
+        { data: new SimpleCard('', ''), hasBackdrop: false })
+      .afterClosed()
+      .subscribe(result => {
+        if (result) { this.taskForm.value.examples.push(result) }
+      })
   }
 }
