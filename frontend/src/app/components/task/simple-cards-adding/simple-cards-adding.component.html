@@ -52,7 +52,7 @@
         color="accent"
         (click)="submit()"
         routerLink="/team/{{ teamId }}"
-        [disabled]="this.simpleCards.length === 0"
+        [disabled]="this.simpleCards.length === 0 || !taskForm.valid"
       >
         Zapisz
       </button>
