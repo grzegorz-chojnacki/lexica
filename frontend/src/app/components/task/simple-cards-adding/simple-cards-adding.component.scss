@@ -3,10 +3,5 @@ mat-card {
   margin: 2em auto;
 }
 
-.flex-container {
-  width: 100%;
-  display: flex;
-}
-
-.example-button-container { text-align: center }
-mat-form-field { width: 100% }
+.example-button-container     { text-align: center }
+mat-form-field, mat-list-item { width: 100% }
