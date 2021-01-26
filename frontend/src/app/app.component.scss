@@ -30,3 +30,11 @@ mat-sidenav {
 
 $toolbar-height: 64px;
 mat-sidenav-container { height: calc(100vh - #{$toolbar-height}) }
+
+.image {
+  background: radial-gradient(transparent, rgba(193, 230, 240, 0.781));
+  width: 32px;
+  height: 32px;
+  margin-left: 0.2em;
+  border-radius: 50%;
+}
