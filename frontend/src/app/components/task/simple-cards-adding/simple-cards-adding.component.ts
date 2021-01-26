@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { SimpleCardTask } from 'src/app/classes/task-type'
 import { Location } from '@angular/common'
 import { TeamService } from 'src/app/services/team.service'
+import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 
 type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
 
@@ -32,6 +33,7 @@ export class SimpleCardsAddingComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly breadCrumbService: BreadCrumbService,
     private readonly teamService: TeamService,
     private readonly taskService: TaskService,
     private readonly formBuilder: FormBuilder,
@@ -48,6 +50,7 @@ export class SimpleCardsAddingComponent implements OnInit {
       _    => this.router.navigate(['/']))
 
     this.taskService.getTask(teamId, taskId).subscribe(task => {
+      this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
       this.taskId = taskId as string
       this.taskForm.patchValue(task)
     }, _ => this.navigateToTeam())

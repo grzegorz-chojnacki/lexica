@@ -34,17 +34,17 @@ export class TaskViewComponent implements OnInit {
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
-    this.breadCrumbService.setTeam({ id: 'test' } as Team)
     this.userService.user.subscribe(user => this.user = user)
-
 
     const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
-    console.log(teamId, taskId)
 
     this.taskService
       .getTask(teamId, taskId)
-      .subscribe(task => this.task = task, _ => this.router.navigate(['/']))
+      .subscribe(task => {
+        this.task = task
+        this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
+      }, _ => this.router.navigate(['/']))
   }
 
   public nextCard(knew: boolean): void {
