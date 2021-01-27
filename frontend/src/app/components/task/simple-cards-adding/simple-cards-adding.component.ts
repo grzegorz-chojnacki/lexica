@@ -26,7 +26,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   public taskId!: string
   public taskForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.required, Validators.maxLength(50) ]),
+    description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        SimpleCardTask
   })
