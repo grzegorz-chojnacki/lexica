@@ -42,6 +42,6 @@ export class TeamViewComponent implements OnInit {
       this.leaderView = isLeader()
       this.loggedUserWithProgress = team.members
         .find(member => member.id === this.user.id) || this.loggedUserWithProgress
-    }, _ => this.router.navigate(['/']))
+    }, _ => this.router.navigate(['/workspace']))
   }
 }
