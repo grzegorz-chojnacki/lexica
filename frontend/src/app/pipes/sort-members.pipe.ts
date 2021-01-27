@@ -9,10 +9,20 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class SortMembersPipe implements PipeTransform {
   public user!: User
+  public members2: User[] | undefined = new Array()
 
   public transform(members: User[] | undefined, loggedUser: User): User[] | undefined {
-    //this.userService.user.subscribe(u => this.user = u)
-    return members?.slice(3, 8)
+    members?.map(u => {
+    if (u.surname === loggedUser.surname && u.firstname === loggedUser.firstname) { this.user = u }
+      })
+    const index = members?.indexOf(this.user)
+    console.log(index)
+    //  members?[index]=members?[0]
+    // members?[0]=this.user
+   // if (index?.valueOf) { }
+ //   members = members?.concat(this.user)
+
+    return members
   }
 
 }
