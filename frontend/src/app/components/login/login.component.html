@@ -1,25 +1,21 @@
 <mat-card>
   <mat-card-title>Zaloguj się</mat-card-title>
 
-<mat-dialog-content>
-  <div *ngIf="invalid" id="validation">
-      Podaj prawidłowe email i hasło.
-  </div>
-  <form >
-    <mat-form-field appearance="fill">
-      <input [(ngModel)]="email" matInput placeholder="Email" name="email" type="text" required>
-    </mat-form-field>
-<br/>
-    <mat-form-field appearance="fill">
-      <input [(ngModel)]="password" matInput placeholder="Hasło" name="password" type="password">
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
+  <mat-dialog-content>
+    <form [formGroup]="loginForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" formControlName="password"/>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <a mat-stroked-button color="accent"  (click)="loginUser()">
-    Zaloguj
-  </a>
-</mat-dialog-actions>
-
+  <mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="loginUser()">Zaloguj</button>
+    <button mat-button routerLink="/start">Anuluj</button>
+  </mat-dialog-actions>
 </mat-card>
