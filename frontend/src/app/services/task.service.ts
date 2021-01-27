@@ -41,12 +41,12 @@ export class TaskService {
         })
   }
 
-  public createTask(teamId: string, task: Task<Example>): void {
-    this.http.post(`${lexicaURL}/team/${teamId}/task`, task).subscribe()
+  // Returns subscription that indicates when you can safely redirect to team page
+  public createTask(teamId: string, task: Task<Example>): Observable<object> {
+    return this.http.post(`${lexicaURL}/team/${teamId}/task`, task)
   }
 
-  public updateTask(teamId: string, taskId: string, task: Task<Example>): void {
-    this.http.put(`${lexicaURL}/team/${teamId}/task/${taskId}`, task)
-      .subscribe()
+  public updateTask(teamId: string, taskId: string, task: Task<Example>): Observable<object> {
+    return this.http.put(`${lexicaURL}/team/${teamId}/task/${taskId}`, task)
   }
 }
