@@ -9,8 +9,8 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class LoginComponent implements OnInit {
   public loginForm = this.formBuilder.group({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    email:    new FormControl('', [ Validators.required, Validators.email ]),
+    password: new FormControl('', [ Validators.required ]),
   })
 
   public constructor(
@@ -24,6 +24,6 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value
     this.userService.login(email, password).subscribe(
       _ => this.router.navigate(['/workspace']),
-      _ => console.log('asdasd'))
+      _ => this.loginForm.controls.password.setErrors({ error: true }))
   }
 }
