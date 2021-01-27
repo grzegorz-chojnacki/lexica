@@ -4,19 +4,19 @@
   <form [formGroup]="fullNameForm">
     <mat-form-field appearance="fill">
       <mat-label>Imię</mat-label>
-      <input matInput type="text" formControlName="firstname" required>
+      <input matInput type="text" formControlName="firstname">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Nazwisko</mat-label>
-      <input matInput type="text" formControlName="surname" required>
+      <input matInput type="text" formControlName="surname">
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button color="accent"
-      [disabled]="!fullNameForm.valid"
+      [disabled]="fullNameForm.invalid"
       [mat-dialog-close]="getValue()">
     Zapisz
   </button>

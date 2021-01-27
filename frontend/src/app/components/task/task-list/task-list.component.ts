@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Task, Example } from 'src/app/classes/task'
 import { MatDialog } from '@angular/material/dialog'
 import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
-import { Progress } from 'src/app/classes/progress'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 
@@ -22,9 +21,9 @@ export class TaskListComponent implements OnInit {
 
   public getUserProgress(task: Task<Example>): string {
     const progress = this.user.getTaskProgress(task).completion
-    if (progress !== 0) {
+    if (progress !== undefined) {
       return `${this.user.getTaskProgress(task).completion}% wykonania`
-    } else { return 'Brak wyniku' }
+    } else { return this.team.hasMember(this.user) ? 'Brak wyniku' : '' }
   }
 
   public launchTask(task: Task<Example>): void {

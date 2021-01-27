@@ -6,10 +6,12 @@
 
     <mat-tab label="DOŁĄCZ">
       <form [formGroup]="idForm">
-        <p>Podaj kod dostarczony przez prowadzącego np. "NDIwNjk="</p>
+        <p>Podaj kod dostarczony przez prowadzącego</p>
         <mat-form-field appearance="fill">
           <mat-label>Kod zespołu</mat-label>
-          <input matInput type="text" formControlName="id">
+          <input matInput type="text" formControlName="id"
+              placeholder="np. 39d2d8d7-8d70-4f2b-b67a-5e22586ca6df">
+          <mat-error>Podany kod jest niepoprawny</mat-error>
         </mat-form-field>
       </form>
     </mat-tab>
@@ -42,6 +44,7 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close color="accent"
+    [disabled]="isInvalidTab()"
     (click)="submit()">OK</button>
   <button mat-button mat-dialog-close>ANULUJ</button>
 </mat-dialog-actions>

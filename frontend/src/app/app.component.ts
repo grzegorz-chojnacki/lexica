@@ -19,7 +19,10 @@ export class AppComponent implements OnInit {
     public router: Router ) { }
 
   public ngOnInit(): void {
-    this.userService.user.subscribe(u => this.user = u)
+    this.userService.login('jkowalski@example.com', 'asd')
+      // Auto-login for debug
+      .subscribe(_ => this.userService.user.subscribe(user => this.user = user))
+
     this.breadCrumbService.breadCrumbs
       .subscribe(next => setTimeout(() => this.breadCrumbs = next))
   }

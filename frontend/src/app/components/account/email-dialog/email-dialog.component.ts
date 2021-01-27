@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { User } from 'src/app/classes/user'
 
@@ -9,7 +9,12 @@ import { User } from 'src/app/classes/user'
   styleUrls: ['./email-dialog.component.scss']
 })
 export class EmailDialogComponent implements OnInit {
-  public readonly emailForm = this.formBuilder.group({ email: this.user.email })
+  public readonly emailForm = this.formBuilder.group({
+    email: new FormControl(this.user.email, [
+      Validators.required,
+      Validators.email
+    ])
+  })
 
   public constructor(
     private readonly formBuilder: FormBuilder,

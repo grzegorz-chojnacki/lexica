@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SimpleCardAddingComponent } from 'src/app/components/task/simple-card-adding/simple-card-adding.component'
 import { SimpleCard } from 'src/app/classes/task'
@@ -26,7 +26,7 @@ export class SimpleCardsAddingComponent implements OnInit {
   public taskId!: string
   public taskForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.required, Validators.maxLength(50) ]),
+    description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        SimpleCardTask
   })
@@ -61,11 +61,10 @@ export class SimpleCardsAddingComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.taskId) {
-      this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
-    } else {
-      this.taskService.createTask(this.teamId, this.taskForm.value)
-    }
+    const request = (this.taskId)
+      ? this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
+      : this.taskService.createTask(this.teamId, this.taskForm.value)
+    request.subscribe(_ => this.navigateToTeam())
   }
 
   public deleteCard(card: SimpleCard): void {

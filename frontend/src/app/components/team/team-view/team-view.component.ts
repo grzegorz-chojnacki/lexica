@@ -6,6 +6,7 @@ import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
+import { combineLatest } from 'rxjs'
 
 @Component({
   selector: 'app-team-view',
@@ -30,18 +31,20 @@ export class TeamViewComponent implements OnInit {
     const isLeader = () => this.team?.leader?.id === this.user?.id
     const teamId = this.route.snapshot.paramMap.get('teamId')
 
-    this.userService.user.subscribe(user => {
-      this.user = user
-      this.leaderView = isLeader()
-    })
+    combineLatest([this.userService.user, this.teamService.getTeam(teamId)])
+      .subscribe(([user, team]) => {
+        this.user = user
+        this.team = team
+        this.leaderView = isLeader()
+        this.breadCrumbService.setTeam(team.id)
+        this.leaderHasProgressView  = team.hasMember(this.user)
+        this.loggedUserWithProgress = this.getLoggedUserFromTeam(team)
+        // console.log(team, this.user, this.leaderHasProgressView, team.isMember(this.user))
+      }, _ => this.router.navigate(['/workspace']))
+  }
 
-    this.teamService.getTeam(teamId).subscribe(team => {
-      this.team = team
-      this.breadCrumbService.setTeam(team.id)
-      this.leaderHasProgressView = team.isMember(this.user)
-      this.leaderView = isLeader()
-      this.loggedUserWithProgress = team.members
-        .find(member => member.id === this.user.id) || this.loggedUserWithProgress
-    }, _ => this.router.navigate(['/']))
+  private getLoggedUserFromTeam(team: Team): User {
+    return team.members.find(member => member.id === this.user.id)
+      || this.loggedUserWithProgress
   }
 }

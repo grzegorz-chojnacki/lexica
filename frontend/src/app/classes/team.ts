@@ -41,7 +41,7 @@ export class Team {
     return this.users.map(user => user.getTaskProgress(task))
   }
 
-  public isMember(user: User): boolean {
+  public hasMember(user: User): boolean {
     return this.members.find(member => member.id === user.id) !== undefined
   }
 }
