@@ -51,11 +51,11 @@ import { SimpleCardsAddingComponent } from './components/task/simple-cards-addin
 import { TeamProgressComponent } from './components/team/team-progress/team-progress.component'
 import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
-import { LoginComponent } from './login/login.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
 import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
 import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
   declarations: [

@@ -5,8 +5,8 @@ import { TeamViewComponent } from './components/team/team-view/team-view.compone
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
-import { LoginComponent } from './login/login.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
+import { LoginComponent } from './components/login/login.component'
 
 const routes: Routes = [
   { path: 'team/:teamId',
