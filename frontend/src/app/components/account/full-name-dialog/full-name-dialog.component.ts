@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { User } from 'src/app/classes/user'
 
@@ -11,8 +11,8 @@ import { User } from 'src/app/classes/user'
 export class FullNameDialogComponent implements OnInit {
 
   public readonly fullNameForm = this.formBuilder.group({
-    firstname: this.user.firstname,
-    surname: this.user.surname,
+    firstname: new FormControl(this.user.firstname, [ Validators.required ]),
+    surname:   new FormControl(this.user.surname,   [ Validators.required ]),
   })
 
   public constructor(

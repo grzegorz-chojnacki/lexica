@@ -4,14 +4,14 @@
   <form [formGroup]="emailForm">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput type="text" formControlName="email" required>
+      <input matInput type="text" formControlName="email">
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button color="accent"
-      [disabled]="!emailForm.valid"
+      [disabled]="emailForm.invalid"
       [mat-dialog-close]="getValue()">
     Zapisz
   </button>

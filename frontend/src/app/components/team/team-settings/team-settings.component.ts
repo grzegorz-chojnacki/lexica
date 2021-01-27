@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormBuilder, FormControl } from '@angular/forms'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSlideToggleChange } from '@angular/material/slide-toggle'
 import { Team } from 'src/app/classes/team'
@@ -12,7 +12,7 @@ import { TeamService } from 'src/app/services/team.service'
 })
 export class TeamSettingsComponent implements OnInit {
   public readonly teamForm = this.formBuilder.group({
-    name: this.team.name,
+    name: new FormControl(this.team.name, [ Validators.required ]),
     description: this.team.description,
     color: this.team.color
   })
