@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MatTabGroup } from '@angular/material/tabs'
 
 import { TeamService } from 'src/app/services/team.service'
@@ -12,9 +12,10 @@ import { TeamService } from 'src/app/services/team.service'
 export class NewTeamComponent implements OnInit {
   @ViewChild(MatTabGroup) private tabGroup!: MatTabGroup
 
-  public readonly idForm = this.formBuilder.group({ id: '' })
+  public readonly idForm = this.formBuilder
+    .group({ id: new FormControl('', [ Validators.required ]) })
   public readonly teamForm = this.formBuilder.group({
-    name: '',
+    name: new FormControl('', [ Validators.required ]),
     description: '',
     color: this.randomColor()
   })
@@ -29,6 +30,10 @@ export class NewTeamComponent implements OnInit {
     const randomHex = () => '0123456789ACBDEF'[Math.floor(Math.random() * 16)]
     return '#' + new Array(6).fill(0).map(randomHex).join('')
   }
+
+  public isInvalidTab = () => (this.tabGroup?.selectedIndex === 0)
+     ? this.idForm.invalid
+     : this.teamForm.invalid
 
   public submit(): void {
     if (this.tabGroup.selectedIndex === 0) {
