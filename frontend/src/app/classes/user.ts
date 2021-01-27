@@ -24,7 +24,7 @@ export class User {
 
   public getTaskProgress(task: Task<Example>): Progress {
     return this.progress.find(progress => progress.task.id === task.id)
-      || new Progress(task, 0)
+      || new Progress(task, undefined)
   }
 
   public asUUID = () => ({ id: this.id })

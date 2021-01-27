@@ -22,9 +22,9 @@ export class TaskListComponent implements OnInit {
 
   public getUserProgress(task: Task<Example>): string {
     const progress = this.user.getTaskProgress(task).completion
-    if (progress !== 0) {
+    if (progress) {
       return `${this.user.getTaskProgress(task).completion}% wykonania`
-    } else { return 'Brak wyniku' }
+    } else { return this.team.isMember(this.user) ? 'Brak wyniku' : '' }
   }
 
   public launchTask(task: Task<Example>): void {

@@ -20,7 +20,7 @@ export class TaskDetailsComponent implements OnInit {
 
   public getUsersWithProgress(): string {
     const usersWithProgress = this.team.members
-      .filter(user => user.getTaskProgress(this.task).completion > 0)
+      .filter(user => (user.getTaskProgress(this.task).completion || 0) > 0)
       .length
     return `${usersWithProgress}/${this.team.members.length}`
   }
