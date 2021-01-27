@@ -55,7 +55,8 @@ import { LoginComponent } from './login/login.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
 import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
-import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
+import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component';
+import { SortMembersPipe } from './pipes/sort-members.pipe'
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { PasswordDialogComponent } from './components/account/password-dialog/pa
     FullNameDialogComponent,
     EmailDialogComponent,
     PasswordDialogComponent,
+    SortMembersPipe,
   ],
   imports: [
     BrowserModule,

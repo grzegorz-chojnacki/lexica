@@ -4,6 +4,7 @@ import { Example, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'
+import { UserService } from 'src/app/services/user.service'
 
 @Component({
   selector: 'app-member-list',
@@ -11,14 +12,19 @@ import { TeamService } from 'src/app/services/team.service'
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
+  public user!: User
   @Input() public team!: Team
   @Input() public leaderView = false
   // When set, progress is calculated only for this task, or else for every task
   @Input() public task?: Task<Example>
 
-  public constructor(private readonly teamService: TeamService) { }
+  public constructor(
+    private readonly teamService: TeamService,
+    private readonly userService: UserService) { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+  this.userService.user.subscribe(u => this.user = u)
+}
 
   public removeMember(member: User): void {
     this.teamService.leaveTeam(this.team, member)
