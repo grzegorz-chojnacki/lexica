@@ -4,34 +4,39 @@ import { User } from 'src/app/classes/user'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { Progress } from '../classes/progress'
-import { map, tap } from 'rxjs/operators'
+import { tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  public  readonly emptyUser  = new User('', '', '', '', '')
-  private userSource          = new BehaviorSubject(this.emptyUser)
+  public  readonly emptyUser = new User('', '', '', '', '')
+  private userSource         = new BehaviorSubject(this.emptyUser)
 
-  public constructor(private readonly http: HttpClient) {
-    this.refreshUserSource()
-  }
+  public constructor(private readonly http: HttpClient) { }
 
-  private refreshUserSource(): void {
-    this.http.get<User>(`${lexicaURL}/user/${this.userSource.value.id}`)
-      .subscribe(user => this.userSource.next(User.deserialize(user)))
+  private refreshUserSource(user: User = this.userSource.value): void {
+    if (user !== this.emptyUser) {
+      this.http.get<User>(`${lexicaURL}/user/${user.id}`)
+        .subscribe(
+          u => this.userSource.next(User.deserialize(u)),
+          err => {
+            this.userSource.error(err) // Reset userSource after error
+            this.userSource = new BehaviorSubject<User>(this.emptyUser)
+          })
+    } else { return }
   }
 
   // ToDo: Implement real login logic (in backend too)
-  public login(email: string, password: string): Observable<User | undefined> {
-    return this.http.get<User[]>(`${lexicaURL}/user`).pipe(
-      map(users => users.find(u => u.email === email && u.password === password)),
-      tap(user => {
-        if (user) { this.userSource.next(user) }
-        else {
-          this.userSource.error('Bad login')
-          this.userSource = new BehaviorSubject(this.emptyUser)
-        }
+  public login(email: string, password: string): Observable<User[]> {
+    const findUserIn = (users: User[]) => users.find(u =>
+      u.email === email /* && u.password === password */)
+
+    return this.http.get<User[]>(`${lexicaURL}/user`)
+      .pipe(tap(users => {
+        const user = findUserIn(users)
+        if (user) { this.refreshUserSource(user) }
+        else { throw new Error() }
       }))
   }
 
