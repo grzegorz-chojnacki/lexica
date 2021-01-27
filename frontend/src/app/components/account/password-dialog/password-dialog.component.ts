@@ -18,8 +18,6 @@ export class PasswordDialogComponent implements OnInit {
   public ngOnInit(): void { }
 
   public getValue(): User {
-    const user = { ...this.user, ...this.passwordForm.value }
-    console.log(user)
-    return user
+    return { ...this.user, ...this.passwordForm.value }
   }
 }

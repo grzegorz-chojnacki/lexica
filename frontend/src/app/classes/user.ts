@@ -9,6 +9,7 @@ export class User {
       user.firstname,
       user.surname,
       user.email,
+      user.password,
       user.progress)
   }
 
@@ -17,6 +18,7 @@ export class User {
     public firstname: string,
     public surname: string,
     public email: string,
+    public password: string,
     public readonly progress: Progress[] = [],
     public readonly avatar?: ImageBitmap) { }
 
