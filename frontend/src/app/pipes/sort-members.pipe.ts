@@ -1,18 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { User } from 'src/app/classes/user'
-import { TeamService } from 'src/app/services/team.service'
-import { UserService } from 'src/app/services/user.service'
-
 
 @Pipe({
   name: 'sortMembers'
 })
 export class SortMembersPipe implements PipeTransform {
-  public user!: User
 
-  public transform(members: User[] | undefined, loggedUser: User): User[] | undefined {
-    //this.userService.user.subscribe(u => this.user = u)
-    return members?.slice(3, 8)
+  public transform(members: User[], loggedUser: User): User[] {
+    const loggedUserInside = members.find(u => u.id === loggedUser.id)
+    const members2 = members.filter(u => u.id !== loggedUser.id)
+    if (loggedUserInside === undefined) { return members }
+    else {
+      members2.unshift(loggedUserInside)
+      return members2
+    }
   }
 
 }
