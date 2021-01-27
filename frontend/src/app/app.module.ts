@@ -45,7 +45,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component'
 import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountViewComponent } from './components/account/account-view/account-view.component'
-import { LocalWorkspaceComponent } from './components/local-workspace/local-workspace.component'
 import { HttpClientModule } from '@angular/common/http'
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 import { TeamProgressComponent } from './components/team/team-progress/team-progress.component'
@@ -62,7 +61,6 @@ import { LoginComponent } from './components/login/login.component'
     AppComponent,
     WorkspaceComponent,
     AccountViewComponent,
-    LocalWorkspaceComponent,
     TeamViewComponent,
     TeamCardComponent,
     TeamContainerComponent,
