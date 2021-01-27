@@ -11,9 +11,14 @@ import { TeamService } from 'src/app/services/team.service'
 })
 export class NewTeamComponent implements OnInit {
   @ViewChild(MatTabGroup) private tabGroup!: MatTabGroup
+  private readonly uuidRegex = /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/
 
-  public readonly idForm = this.formBuilder
-    .group({ id: new FormControl('', [ Validators.required ]) })
+  public readonly idForm = this.formBuilder.group({
+    id: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.uuidRegex)
+    ])
+  })
   public readonly teamForm = this.formBuilder.group({
     name: new FormControl('', [ Validators.required ]),
     description: '',
