@@ -56,7 +56,8 @@ import { EmailDialogComponent } from './components/account/email-dialog/email-di
 import { LoginComponent } from './components/login/login.component'
 import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component';
 import { SortMembersPipe } from './pipes/sort-members.pipe';
-import { AvatarComponent } from './components/account/avatar/avatar.component'
+import { AvatarComponent } from './components/account/avatar/avatar.component';
+import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component'
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { AvatarComponent } from './components/account/avatar/avatar.component'
     PasswordDialogComponent,
     SortMembersPipe,
     AvatarComponent,
+    ColorDialogComponent,
   ],
   imports: [
     BrowserModule,
