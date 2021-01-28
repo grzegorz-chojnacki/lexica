@@ -1,5 +1,11 @@
 div {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 40px;
+  color: #fffa;
   border-radius: 50%;
+  background: radial-gradient(transparent, #0002);
+  box-shadow: 0 0 3px 0 #0004;
 }
