@@ -21,6 +21,10 @@
         <mat-icon>settings</mat-icon>
         <span>Ustawienia</span>
       </button>
+      <button mat-menu-item (click)="copyToClipboard()">
+        <mat-icon>link</mat-icon>
+        <span>Kod zespołu</span>
+      </button>
       <button *ngIf="leaderView" mat-menu-item
           routerLink="/workspace"
           (click)="removeTeam()">
