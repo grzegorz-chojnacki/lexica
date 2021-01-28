@@ -5,13 +5,20 @@ import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { Progress } from '../classes/progress'
 import { tap } from 'rxjs/operators'
+import { runInThisContext } from 'vm'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   public  readonly emptyUser = new User('', '', '', '', '')
-  private userSource         = new BehaviorSubject(this.emptyUser)
+  private readonly storage   = sessionStorage
+  private userSource         = new BehaviorSubject(this.loadSessionUser())
+
+  private loadSessionUser(): User {
+    const sessionUser = this.storage.getItem('user')
+    return sessionUser ? JSON.parse(sessionUser) : this.emptyUser
+  }
 
   public constructor(private readonly http: HttpClient) { }
 
@@ -19,8 +26,12 @@ export class UserService {
     if (user !== this.emptyUser) {
       this.http.get<User>(`${lexicaURL}/user/${user.id}`)
         .subscribe(
-          u => this.userSource.next(User.deserialize(u)),
+          u => {
+            this.storage.setItem('user', JSON.stringify(u))
+            this.userSource.next(User.deserialize(u))
+          },
           err => {
+            this.storage.removeItem('user')
             this.userSource.error(err) // Reset userSource after error
             this.userSource = new BehaviorSubject<User>(this.emptyUser)
           })
@@ -29,8 +40,8 @@ export class UserService {
 
   // ToDo: Implement real login logic (in backend too)
   public login(email: string, password: string): Observable<User[]> {
-    const findUserIn = (users: User[]) => users.find(u =>
-      u.email === email /* && u.password === password */)
+    const findUserIn = (users: User[]) => users
+      .find(u => u.email === email /* && u.password === password */)
 
     return this.http.get<User[]>(`${lexicaURL}/user`)
       .pipe(tap(users => {
@@ -38,6 +49,11 @@ export class UserService {
         if (user) { this.refreshUserSource(user) }
         else { throw new Error() }
       }))
+  }
+
+  public logout(): void {
+    this.storage.removeItem('user')
+    this.userSource = new BehaviorSubject<User>(this.emptyUser)
   }
 
   public setUser(user: User): void {
