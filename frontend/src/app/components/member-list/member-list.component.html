@@ -1,8 +1,7 @@
 <mat-list>
   <mat-list-item *ngFor="let member of team.members | sortMembers: user; last as last; first as first">
-    <!-- <img matListAvatar src="assets/avatar_placeholder.jpg" /> -->
-    <div *ngIf="first" class="image" matListAvatar></div>
-    <div *ngIf="!first" class="image2" matListAvatar></div>
+    <app-avatar *ngIf="first"  matListAvatar></app-avatar>
+    <app-avatar *ngIf="!first" matListAvatar></app-avatar>
     <h4 matLine>{{ member | fullNamePipe }}</h4>
     <p>
       {{ getCompletion(member) }}% postępu

@@ -20,7 +20,7 @@ export class User {
     public email: string,
     public password: string,
     public readonly progress: Progress[] = [],
-    public readonly avatar?: ImageBitmap) { }
+    public readonly color = '#456BC4') { }
 
   public getTaskProgress(task: Task<Example>): Progress {
     return this.progress.find(progress => progress.task.id === task.id)
