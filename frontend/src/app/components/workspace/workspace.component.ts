@@ -6,6 +6,7 @@ import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { NewTeamComponent } from 'src/app/components/team/new-team-dialog/new-team.component'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
+import { combineLatest } from 'rxjs'
 
 @Component({
   selector: 'app-workspace',
@@ -24,12 +25,12 @@ export class WorkspaceComponent implements OnInit {
     private readonly userService: UserService) { }
 
   public ngOnInit(): void {
-    this.breadCrumbService.setWorkspace()
-    this.userService.user.subscribe(user =>
-      this.teamService.getTeams().subscribe(teams => {
+    combineLatest([this.userService.user, this.teamService.getTeams()])
+      .subscribe(([user, teams]) => {
+        this.breadCrumbService.setWorkspace()
         this.ownedTeams = teams.filter(team => team.leader.id === user.id)
         this.otherTeams = teams.filter(team => team.leader.id !== user.id)
-      }))
+      })
   }
 
   public openDialog(): void {
