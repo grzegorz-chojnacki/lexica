@@ -42,17 +42,16 @@ export class SimpleCardsAddingComponent implements OnInit {
     public  readonly location: Location) { }
 
   public ngOnInit(): void {
-    const teamId = this.route.snapshot.paramMap.get('teamId')
-    const taskId = this.route.snapshot.paramMap.get('taskId')
+    this.teamId = this.route.snapshot.paramMap.get('teamId') as string
+    this.taskId = this.route.snapshot.paramMap.get('taskId') as string
 
-    if (taskId) {
-      this.taskService.getTask(teamId, taskId).subscribe(task => {
-        this.breadCrumbService.setTeamTaskEditor(teamId as string, taskId as string)
-        this.taskId = taskId as string
+    if (this.taskId) {
+      this.taskService.getTask(this.teamId, this.taskId).subscribe(task => {
+        this.breadCrumbService.setTeamTaskEditor(this.teamId, this.taskId)
         this.taskForm.patchValue(task)
       }, _ => this.navigateToTeam())
     } else {
-      this.breadCrumbService.setTeamNewTask(teamId as string)
+      this.breadCrumbService.setTeamNewTask(this.teamId)
     }
   }
 
