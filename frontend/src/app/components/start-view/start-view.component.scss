@@ -1,6 +1,15 @@
 section {
-  margin: 6em auto 0;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 6em 0 0;
+  background-image: url('/assets/start-page-splash.jpg');
+  background-size: cover;
+}
+
+header {
+  margin: 0 auto;
   text-align: center;
+  text-shadow: 0 0 10px #0003;
 }
 
 .title {
