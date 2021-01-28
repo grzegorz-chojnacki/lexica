@@ -23,7 +23,7 @@ export class TaskListComponent implements OnInit {
     const progress = this.user.getTaskProgress(task).completion
     if (progress !== undefined) {
       return `${this.user.getTaskProgress(task).completion}% wykonania`
-    } else { return this.team.hasMember(this.user) ? 'Brak wyniku' : '' }
+    } else { return this.team.hasMember(this.user) ? 'Nie wykonano' : '' }
   }
 
   public launchTask(task: Task<Example>): void {
