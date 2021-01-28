@@ -1,23 +1,24 @@
-body{
-  background-color:rgb(240, 244, 245);
-  text-align: center;
-  color: rgb(19, 44, 44);
-}
-a{
-  width: 250px;
-  font-size: 140%;
-  margin-top: 2%;
-}
-h1{
-  font-size: 10em;
-  padding: 15% 0 4%;
-}
-.leftSide{
-  background-image: url("https://t3.ftcdn.net/jpg/01/58/70/60/360_F_158706082_KNz9QvA69Lmw2bKGqQ6ELQzPsE7bBngM.jpg");
-  background-size: 100%;
+section {
   height: 100%;
-  position: absolute;
-  width: 15%;
-  opacity: 0.7;
+  box-sizing: border-box;
+  padding: 6em 0 0;
+  background-image: url('/assets/start-page-splash.jpg');
+  background-size: cover;
 }
-#rightSide{margin-left: 85%;}
+
+header {
+  margin: 0 auto;
+  text-align: center;
+  text-shadow: 0 0 10px #0003;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5rem;
+}
+
+.subtitle {
+  letter-spacing: 0.05rem;
+}
+
+button { margin-top: 1em }

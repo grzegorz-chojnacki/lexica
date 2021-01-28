@@ -1,26 +1,9 @@
-<body>
-  <section>
-    <div class="leftSide">
-    </div>
-  </section>
-  <section>
-    <div class="leftSide" id="rightSide">
-    </div>
-  </section>
-
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">Lexica</h1>
-      <h2 class="subtitle">
-        become a better version of yourself with Lexica
-      </h2>
-    </div>
-  </div>
-  <section>
-    <div class="example-button-row">
-      <a mat-stroked-button href="/login">
-        <span class="material-icons">play_circle</span> <span>Zaczynamy</span></a>
-    </div>
-  </section>
-
-</body>
+<section>
+  <header>
+    <h1 class="mat-display-4 title">Lexica</h1>
+    <h2 class="subtitle">become a better version of yourself</h2>
+    <button mat-fab [routerLink]="redirect()">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </header>
+</section>

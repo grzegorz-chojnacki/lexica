@@ -9,6 +9,7 @@ import { SimpleCardTask } from 'src/app/classes/task-type'
 import { Location } from '@angular/common'
 import { TeamService } from 'src/app/services/team.service'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
+import { combineLatest } from 'rxjs'
 
 type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
 
@@ -34,7 +35,6 @@ export class SimpleCardsAddingComponent implements OnInit {
   public constructor(
     private readonly dialog: MatDialog,
     private readonly breadCrumbService: BreadCrumbService,
-    private readonly teamService: TeamService,
     private readonly taskService: TaskService,
     private readonly formBuilder: FormBuilder,
     private readonly route: ActivatedRoute,
@@ -45,10 +45,6 @@ export class SimpleCardsAddingComponent implements OnInit {
     const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
 
-    this.teamService.getTeam(teamId).subscribe(
-      team => this.teamId = team.id,
-      _    => this.router.navigate(['/']))
-
     if (taskId) {
       this.taskService.getTask(teamId, taskId).subscribe(task => {
         this.breadCrumbService.setTeamTaskEditor(teamId as string, taskId as string)
@@ -56,7 +52,7 @@ export class SimpleCardsAddingComponent implements OnInit {
         this.taskForm.patchValue(task)
       }, _ => this.navigateToTeam())
     } else {
-      setTimeout(() => this.breadCrumbService.setTeamNewTask(teamId as string))
+      this.breadCrumbService.setTeamNewTask(teamId as string)
     }
   }
 

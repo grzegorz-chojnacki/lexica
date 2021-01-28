@@ -102,16 +102,16 @@ public class AppConfig {
                 .collect(Collectors.toSet());
     }
     List<User> testUsers = List.of(
-            new User("Jan", "Kowalski", "jkowalski@example.com", "opBUs"),
-            new User("Anna", "Nowak", "anowak@example.com", "jxodRBo"),
-            new User("Fryderyk", "Bastow", "fbastow@example.com", "Kv474Uw"),
-            new User("Henryk", "Felten", "hfelten@example.com", "QF416Kb"),
-            new User("Franciszek", "Sabkowski", "fsabkowski@example.com", "c5IDuMrp2GO0AQw"),
-            new User("Edyta", "Kamińska", "ekaminska@example.com", "tcOCnWgAFrpzrg"),
-            new User("Waldemar", "Olejnik", "wolejnik@example.com", "Q5wzLBetyjNy"),
-            new User("Oskar", "Chomicki", "ochomicki@example.com", "OPUgvEv0cFkr"),
-            new User("Damgmara", "Fryc", "dfryc@example.com", "JYtQnNdtNJBaR"),
-            new User("Patrycja", "Gajda", "pgajda@example.com", "WyAq1CjwM"));
+            new User("Jan", "Kowalski", "jkowalski@example.com", "opBUs", "#D2326A"),
+            new User("Anna", "Nowak", "anowak@example.com", "jxodRBo", "#8FBE8D"),
+            new User("Fryderyk", "Bastow", "fbastow@example.com", "Kv474Uw", "#946E83"),
+            new User("Henryk", "Felten", "hfelten@example.com", "QF416Kb", "#767EB9"),
+            new User("Franciszek", "Sabkowski", "fsabkowski@example.com", "c5IDuMrp2GO0AQw", "#886778"),
+            new User("Edyta", "Kamińska", "ekaminska@example.com", "tcOCnWgAFrpzrg", "#7B5F6C"),
+            new User("Waldemar", "Olejnik", "wolejnik@example.com", "Q5wzLBetyjNy", "#615055"),
+            new User("Oskar", "Chomicki", "ochomicki@example.com", "OPUgvEv0cFkr", "#5D6FA2"),
+            new User("Damgmara", "Fryc", "dfryc@example.com", "JYtQnNdtNJBaR", "#588DEE"),
+            new User("Patrycja", "Gajda", "pgajda@example.com", "WyAq1CjwM", "#9F865C"));
 
     List<Team> testTeams = List.of(
             new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),

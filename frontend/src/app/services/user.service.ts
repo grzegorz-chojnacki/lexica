@@ -52,7 +52,7 @@ export class UserService {
 
   public logout(): void {
     this.storage.removeItem('user')
-    this.userSource = new BehaviorSubject<User>(this.emptyUser)
+    this.userSource.next(this.emptyUser)
   }
 
   public setUser(user: User): void {

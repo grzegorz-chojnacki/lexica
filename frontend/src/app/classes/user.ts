@@ -10,7 +10,8 @@ export class User {
       user.surname,
       user.email,
       user.password,
-      user.progress)
+      user.progress,
+      user.color)
   }
 
   public constructor(
@@ -20,7 +21,7 @@ export class User {
     public email: string,
     public password: string,
     public readonly progress: Progress[] = [],
-    public readonly avatar?: ImageBitmap) { }
+    public readonly color?: string) { }
 
   public getTaskProgress(task: Task<Example>): Progress {
     return this.progress.find(progress => progress.task.id === task.id)

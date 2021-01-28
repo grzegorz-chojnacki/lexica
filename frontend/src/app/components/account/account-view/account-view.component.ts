@@ -7,6 +7,7 @@ import { FullNameDialogComponent } from '../full-name-dialog/full-name-dialog.co
 import { EmailDialogComponent } from '../email-dialog/email-dialog.component'
 import { ComponentType } from '@angular/cdk/portal'
 import { PasswordDialogComponent } from '../password-dialog/password-dialog.component'
+import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
 
 @Component({
   selector: 'app-account-view',
@@ -26,6 +27,7 @@ export class AccountViewComponent implements OnInit {
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
   public changeEmail    = () => this.openDialogAndUpdateUser(EmailDialogComponent)
   public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent)
+  public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
   public deleteAccount(): void { }
 
