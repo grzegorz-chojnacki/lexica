@@ -35,6 +35,9 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @NonNull
+    private String color;
+
     @ManyToMany(mappedBy = "members")
     @JsonIgnore
     @EqualsAndHashCode.Exclude
@@ -55,6 +58,7 @@ public class User {
         user.setFirstname(this.firstname);
         user.setSurname(this.surname);
         user.setEmail(this.email);
+        user.setColor(this.color);
 
         return user;
     }

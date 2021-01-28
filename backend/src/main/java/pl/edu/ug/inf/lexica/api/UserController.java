@@ -73,6 +73,7 @@ public class UserController {
             user.setFirstname(updated.getFirstname());
             user.setSurname(updated.getSurname());
             user.setEmail(updated.getEmail());
+            user.setColor(updated.getColor());
             if (updated.getPassword() != null) user.setPassword(updated.getPassword());
             userService.update(user);
         });

@@ -10,7 +10,8 @@ export class User {
       user.surname,
       user.email,
       user.password,
-      user.progress)
+      user.progress,
+      user.color)
   }
 
   public constructor(
