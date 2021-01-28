@@ -77,7 +77,7 @@ public class AppConfig {
             List.of("House", ""),
             List.of("Music", "Bardzo przyswajalny temat :)."),
             List.of("Numbers_0", "Basic words."),
-            List.of("Zadanie nieaktywne", ""),
+            List.of("Zadanie nieambitne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
             .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1), simpleCardType))
