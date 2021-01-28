@@ -14,7 +14,7 @@
   <span class="spacer"></span>
 
   <ng-container *ngIf="userIsLogged">
-    <span class="user-name">{{ user | fullNamePipe }} </span>
+    <a class="user-name" routerLink="/account">{{ user | fullNamePipe }} </a>
     <div class="image"></div>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
