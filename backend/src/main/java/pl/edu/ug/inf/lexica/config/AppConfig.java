@@ -43,7 +43,7 @@ public class AppConfig {
             Map.entry("liczba pierwsza", "prime number"),
             Map.entry("liczba dodatnia", "positive number"),
             Map.entry("liczba ujemna", "negative number"),
-            Map.entry("liczba parzysta", "event number"),
+            Map.entry("liczba parzysta", "even number"),
             Map.entry("liczba nieparzysta", "odd number"),
             Map.entry("liczba całkowita", "integer"),
             Map.entry("liczba naturalna", "natural number"),
