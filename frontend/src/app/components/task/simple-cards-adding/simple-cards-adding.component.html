@@ -24,13 +24,13 @@
             *ngFor="let word of taskForm.value.examples; last as last">
           <span>{{ word.foreignWord }}</span>
           <div class="spacer"></div>
-          <span>{{ word.nativeWord }}</span>
+          <span class="right-word">{{ word.nativeWord }}</span>
 
-          <button mat-icon-button>
+          <button mat-icon-button class="action">
             <mat-icon (click)="editCard(word)">edit</mat-icon>
           </button>
 
-          <button mat-icon-button>
+          <button mat-icon-button class="action">
             <mat-icon (click)="deleteCard(word)">delete</mat-icon>
           </button>
           <mat-divider *ngIf="!last"></mat-divider>
