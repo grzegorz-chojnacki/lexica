@@ -14,14 +14,11 @@ export class UserService {
   private readonly storage   = sessionStorage
   private userSource         = new BehaviorSubject(this.loadSessionUser())
 
+  public constructor(private readonly http: HttpClient) { }
+
   private loadSessionUser(): User {
     const sessionUser = this.storage.getItem('user')
     return sessionUser ? JSON.parse(sessionUser) : this.emptyUser
-  }
-
-  public constructor(private readonly http: HttpClient) {
-    // Auto-login for debug
-    this.storage.setItem('user', JSON.stringify({ email: 'jkowalski@example.com' }))
   }
 
   private refreshUserSource(user: User = this.userSource.value): void {
@@ -72,4 +69,6 @@ export class UserService {
     this.refreshUserSource()
     return this.userSource.asObservable()
   }
+
+  public get logged(): boolean { return this.userSource.value !== this.emptyUser }
 }
