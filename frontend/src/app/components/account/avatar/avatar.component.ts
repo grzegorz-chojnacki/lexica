@@ -7,7 +7,7 @@ import { User } from 'src/app/classes/user'
   styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent implements OnInit {
-  @Input() public user = new User('', '', '', '', '')
+  @Input() public user!: User
 
   public constructor() { }
 

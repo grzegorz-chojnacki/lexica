@@ -15,7 +15,7 @@
 
   <ng-container *ngIf="userIsLogged">
     <a class="user-name" routerLink="/account">{{ user | fullNamePipe }} </a>
-    <app-avatar></app-avatar>
+    <app-avatar [user]="user"></app-avatar>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
