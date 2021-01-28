@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { Progress } from '../classes/progress'
 import { tap } from 'rxjs/operators'
-import { runInThisContext } from 'vm'
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,10 @@ export class UserService {
     return sessionUser ? JSON.parse(sessionUser) : this.emptyUser
   }
 
-  public constructor(private readonly http: HttpClient) { }
+  public constructor(private readonly http: HttpClient) {
+    // Auto-login for debug
+    this.storage.setItem('user', JSON.stringify({ email: 'jkowalski@example.com' }))
+  }
 
   private refreshUserSource(user: User = this.userSource.value): void {
     if (user !== this.emptyUser) {
