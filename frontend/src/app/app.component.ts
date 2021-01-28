@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core'
 import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { BreadCrumbService, BreadCrumb } from './services/bread-crumb.service'
 import { Router } from '@angular/router'
+import { Key } from 'protractor'
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,23 @@ export class AppComponent implements OnInit {
     public router: Router ) { }
 
   public ngOnInit(): void {
-    this.userService.login('jkowalski@example.com', 'asd')
-      // Auto-login for debug
-      .subscribe(_ => this.userService.user.subscribe(user => this.user = user))
+    this.userService.user.subscribe(user => this.user = user)
 
     this.breadCrumbService.breadCrumbs
       .subscribe(next => setTimeout(() => this.breadCrumbs = next))
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  public hack(event: KeyboardEvent): void {
+    if (event.key === 'Insert') {
+      this.userService.login('jkowalski@example.com', '').subscribe()
+    }
+  }
+
+  public get userIsLogged(): boolean { return this.userService.logged }
+
+  public logout(): void {
+    this.userService.logout()
+    this.router.navigate(['/'])
   }
 }
