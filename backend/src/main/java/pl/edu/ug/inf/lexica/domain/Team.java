@@ -55,7 +55,7 @@ public class Team {
 
     public Team withMoreInfo() {
         Team team = this.withSomeInfo();
-
+        Collections.reverse(this.tasks);
         team.setTasks(this.tasks);
 
         Set<User> members = this.members.stream()
