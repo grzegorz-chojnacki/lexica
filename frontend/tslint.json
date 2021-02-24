@@ -27,7 +27,6 @@
         "spaces"
       ]
     },
-    "linebreak-style": [true, "LF"],
     "max-classes-per-file": false,
     "max-line-length": [
       true,
