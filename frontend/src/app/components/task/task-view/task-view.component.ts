@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core'
+import { Component,  OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 
-import { Example, SimpleCard, Task, TaskAndUsersWithProgress } from 'src/app/classes/task'
+import { Example, SimpleCard, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
@@ -24,7 +24,6 @@ export class TaskViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public task!: Task<SimpleCard>
-  public version!: string
   public message!: string
   public subscription!: Subscription
 
@@ -43,7 +42,7 @@ export class TaskViewComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
-    this.version = this.message
+
     this.userService.user.subscribe(user => this.user = user)
 
 

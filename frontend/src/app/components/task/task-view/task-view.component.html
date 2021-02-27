@@ -9,12 +9,12 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <ng-container *ngIf="version=='1'">
+  <ng-container *ngIf="message=='1'">
   <mat-card-content>
     <h1>{{ task!.examples[counter]?.foreignWord }}</h1>
   </mat-card-content>
 </ng-container>
-<ng-container *ngIf="version!='1'">
+<ng-container *ngIf="message!='1'">
   <mat-card-content>
     <h1>{{ task!.examples[counter]?.nativeWord }}</h1>
   </mat-card-content>
