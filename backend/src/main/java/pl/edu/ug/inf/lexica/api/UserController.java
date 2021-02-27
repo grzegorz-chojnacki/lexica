@@ -1,6 +1,8 @@
 package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Team;
@@ -16,10 +18,12 @@ import java.util.stream.Stream;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/{id}/team")
@@ -46,7 +50,8 @@ public class UserController {
 
     @PostMapping("/login")
     public Optional<User> login(@RequestBody Map<String, String> user) {
-        return userService.get(user.get("email")).filter(u -> u.getPassword().equals(user.get("password")));
+        return userService.get(user.get("email"))
+                .filter(u -> passwordEncoder.matches(user.get("password"), u.getPassword()));
     }
 
     @PutMapping("/{id}/progress")

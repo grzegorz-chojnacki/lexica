@@ -1,6 +1,7 @@
 package pl.edu.ug.inf.lexica.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import pl.edu.ug.inf.lexica.domain.User;
@@ -9,22 +10,36 @@ import pl.edu.ug.inf.lexica.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements EntityService<User> {
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    private User encodePassword(User user) {
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        return user;
     }
 
     @Override
-    public void add(User entity) { userRepository.save(entity); }
+    public void add(User entity) {
+        userRepository.save(entity);
+    }
 
     @Override
     public void addAll(List<User> entities) {
         userRepository.saveAll(entities);
+    }
+
+    public void registerAll(List<User> entities) {
+        userRepository.saveAll(entities.stream().map(this::encodePassword).collect(Collectors.toList()));
     }
 
     @Override

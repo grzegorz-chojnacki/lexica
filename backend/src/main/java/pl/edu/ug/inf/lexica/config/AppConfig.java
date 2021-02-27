@@ -132,7 +132,7 @@ public class AppConfig {
 
     public void initDataBase() {
         taskTypeRepository.save(simpleCardType);
-        userService.addAll(testUsers);
+        userService.registerAll(testUsers);
 
         setTasks(testTeams, generateTasks);
         setTasks(testTeams2, generateTasks2);
