@@ -32,7 +32,7 @@ export class UserService {
 
   private refreshUserSource(user: User = this.userSource.value): void {
     if (user !== this.emptyUser) {
-      this.http.get<User>(`${lexicaURL}/user/${user.id}`, this.authHeader())
+      this.http.get<User>(`${lexicaURL}/user`, this.authHeader())
         .subscribe(
           u   => { this.saveUserWithPassword(u, user.password) },
           err => {
@@ -63,16 +63,13 @@ export class UserService {
   }
 
   public setUser(user: User): void {
-    this.http.put<Progress>(`${lexicaURL}/user/${user.id}`, user, this.authHeader())
+    this.http.put<Progress>(`${lexicaURL}/user`, user, this.authHeader())
       .subscribe(_ => this.refreshUserSource())
   }
 
   public addProgress(progress: Progress): Observable<Progress> {
-    const userId = this.userSource.getValue().id
     return this.http.put<Progress>(
-      `${lexicaURL}/user/${userId}/progress`,
-      progress,
-      this.authHeader())
+      `${lexicaURL}/user/progress`, progress, this.authHeader())
   }
 
   public get user(): Observable<User> {

@@ -3,10 +3,11 @@ package pl.edu.ug.inf.lexica.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.repository.UserRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,6 +46,8 @@ public class UserService implements EntityService<User> {
     @Override
     public void remove(UUID id) { userRepository.deleteById(id); }
 
+    public void remove(String email) { userRepository.deleteByEmail(email); }
+
     @Override
     public List<User> getAll() { return userRepository.findAll(); }
 
@@ -54,6 +57,10 @@ public class UserService implements EntityService<User> {
 
     public Optional<User> get(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public Optional<User> get(Principal principal) {
+        return get(principal.getName());
     }
 
     @Override

@@ -36,9 +36,7 @@ export class TeamService {
 
   private refreshTeamListSource(): void {
     if (this.loggedUser.id) {
-      this.http.get<Team[]>(
-          `${lexicaURL}/user/${this.loggedUser.id}/team`,
-          this.userService.authHeader())
+      this.http.get<Team[]>(`${lexicaURL}/user/team`, this.userService.authHeader())
         .pipe(map(teams => teams.map(Team.deserialize)))
         .subscribe(teams => this.teamListSource.next(teams))
     }
@@ -61,10 +59,7 @@ export class TeamService {
   }
 
   public createTeam(form: TeamForm): void {
-    this.http.post(
-        `${lexicaURL}/team`,
-         { ...form, leader: this.loggedUser.asUUID() },
-         this.userService.authHeader())
+    this.http.post(`${lexicaURL}/team`, form, this.userService.authHeader())
       .subscribe(() => this.refreshTeamListSource())
   }
 
