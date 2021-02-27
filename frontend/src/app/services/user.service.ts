@@ -37,14 +37,9 @@ export class UserService {
     } else { return }
   }
 
-  // ToDo: Implement real login logic (in backend too)
-  public login(email: string, password: string): Observable<User[]> {
-    const findUserIn = (users: User[]) => users
-      .find(u => u.email === email /* && u.password === password */)
-
-    return this.http.get<User[]>(`${lexicaURL}/user`)
-      .pipe(tap(users => {
-        const user = findUserIn(users)
+  public login(email: string, password: string): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/login`, { email, password })
+      .pipe(tap(user => {
         if (user) { this.refreshUserSource(user) }
         else { throw new Error() }
       }))

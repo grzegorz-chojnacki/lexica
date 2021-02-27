@@ -44,6 +44,11 @@ public class UserController {
         return userService.get(id).map(User::withProgress);
     }
 
+    @PostMapping("/login")
+    public Optional<User> login(@RequestBody Map<String, String> user) {
+        return userService.get(user.get("email")).filter(u -> u.getPassword().equals(user.get("password")));
+    }
+
     @PutMapping("/{id}/progress")
     public void addProgress(@RequestBody Progress progress, @PathVariable UUID id) {
         userService.get(id).ifPresent(user -> {

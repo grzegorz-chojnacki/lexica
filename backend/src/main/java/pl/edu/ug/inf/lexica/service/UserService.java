@@ -2,6 +2,7 @@ package pl.edu.ug.inf.lexica.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.repository.UserRepository;
 
@@ -34,6 +35,10 @@ public class UserService implements EntityService<User> {
 
     public Optional<User> get(UUID id) {
         return userRepository.findById(id);
+    }
+
+    public Optional<User> get(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
