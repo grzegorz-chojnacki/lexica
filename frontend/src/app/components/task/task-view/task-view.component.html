@@ -12,6 +12,10 @@
   <mat-card-content>
     <h1>{{ task!.examples[counter]?.foreignWord }}</h1>
   </mat-card-content>
+{{version}}
+  <mat-card-content>
+    <h1>{{ task!.examples[counter]?.nativeWord }}</h1>
+  </mat-card-content>
 
   <mat-card-actions>
     <button mat-button color="accent" (click)="nextCard(true)">

@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatRadioModule } from '@angular/material/radio'
 
 // Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
@@ -116,7 +117,8 @@ import { ColorDialogComponent } from './components/account/color-dialog/color-di
     MatProgressSpinnerModule,
     MatDialogModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

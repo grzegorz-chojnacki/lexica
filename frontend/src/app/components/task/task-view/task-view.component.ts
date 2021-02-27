@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 
@@ -20,6 +20,7 @@ export class TaskViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public task!: Task<SimpleCard>
+  public version!: string
 
   public counter = 0
   public readonly knewList = new Array<Example>()
