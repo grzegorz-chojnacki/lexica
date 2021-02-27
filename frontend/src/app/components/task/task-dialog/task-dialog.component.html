@@ -5,10 +5,7 @@
   </section>
 
   <div class="spacer"></div>
-  <mat-radio-group >
-    <mat-radio-button value="1" (click)="isForeignVersion(true)" checked="true" >obcy</mat-radio-button>
-    <mat-radio-button value="2" (click)="isForeignVersion(false)" >polski</mat-radio-button>
-  </mat-radio-group>
+
   <button mat-icon-button [matMenuTriggerFor]="taskMenu.menu"
       (click)="$event.stopPropagation()">
     <mat-icon>more_vert</mat-icon>
@@ -27,4 +24,10 @@
     Rozpocznij
   </a>
   <button mat-button mat-dialog-close>Anuluj</button>
+  <div class="spacer"></div>
+  <mat-label>Słówka:</mat-label>
+  <mat-radio-group >
+    <mat-radio-button value="1" (click)="isForeignVersion(true)" checked="true" >obce</mat-radio-button>
+    <mat-radio-button value="2" (click)="isForeignVersion(false)" >tłumaczenie</mat-radio-button>
+  </mat-radio-group>
 </mat-dialog-actions>
