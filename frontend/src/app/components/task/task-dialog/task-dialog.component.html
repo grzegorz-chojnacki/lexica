@@ -8,7 +8,6 @@
   <mat-radio-group >
     <mat-radio-button value="1" (click)="isForeignVersion(true)" checked="true" >obcy</mat-radio-button>
     <mat-radio-button value="2" (click)="isForeignVersion(false)" >polski</mat-radio-button>
-  {{version}}
   </mat-radio-group>
   <button mat-icon-button [matMenuTriggerFor]="taskMenu.menu"
       (click)="$event.stopPropagation()">
