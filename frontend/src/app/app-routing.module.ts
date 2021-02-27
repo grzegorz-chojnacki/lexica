@@ -7,27 +7,50 @@ import { TaskViewComponent } from './components/task/task-view/task-view.compone
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { LoginComponent } from './components/login/login.component'
+import { AuthorizationGuard } from './guards/authorization.guard'
 
 const routes: Routes = [
-  { path: 'team/:teamId',
-    component: TeamViewComponent },
-  { path: 'team/:teamId/task/new',
-    component: SimpleCardsAddingComponent },
-  { path: 'team/:teamId/task/:taskId/edit',
-    component: SimpleCardsAddingComponent },
-  { path: 'team/:teamId/task/:taskId',
-    component: TaskViewComponent },
-  { path: 'workspace',
-    component: WorkspaceComponent },
-  { path: 'start',
-    component: StartViewComponent },
-  { path: 'account',
-    component: AccountViewComponent },
-  { path: 'login',
-    component: LoginComponent },
-  { path: '',   redirectTo: 'start', pathMatch: 'full' },
+  {
+    path: 'team/:teamId',
+    canActivate: [AuthorizationGuard],
+    component: TeamViewComponent
+  },
+  {
+    path: 'team/:teamId/task/new',
+    canActivate: [AuthorizationGuard],
+    component: SimpleCardsAddingComponent
+  },
+  {
+    path: 'team/:teamId/task/:taskId/edit',
+    canActivate: [AuthorizationGuard],
+    component: SimpleCardsAddingComponent
+  },
+  {
+    path: 'team/:teamId/task/:taskId',
+    canActivate: [AuthorizationGuard],
+    component: TaskViewComponent
+  },
+  {
+    path: 'workspace',
+    canActivate: [AuthorizationGuard],
+    component: WorkspaceComponent
+  },
+  {
+    path: 'account',
+    canActivate: [AuthorizationGuard],
+    component: AccountViewComponent
+  },
+  {
+    path: 'start',
+    component: StartViewComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  { path: '', redirectTo: 'start', pathMatch: 'full' },
   // Will add error page later
-  { path: '**', redirectTo: 'workspace' },
+  { path: '**', redirectTo: 'start' },
 ]
 
 @NgModule({
