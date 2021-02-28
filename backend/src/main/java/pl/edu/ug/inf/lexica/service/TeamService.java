@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @Service
 public class TeamService implements EntityService<Team> {
@@ -42,7 +41,7 @@ public class TeamService implements EntityService<Team> {
     }
 
     public Optional<Team> getIfLeader(UUID id, Principal principal) {
-        return teamRepository.findById(id).filter(team -> team.getLeader().getEmail().equals(principal.getName()));
+        return teamRepository.findById(id).filter(team -> team.getLeader().getUsername().equals(principal.getName()));
     }
 
     private Optional<Task> getFrom(UUID teamId, UUID taskId, Principal principal,
@@ -63,8 +62,8 @@ public class TeamService implements EntityService<Team> {
 
     public Optional<Team> getIfMember(UUID id, Principal principal) {
         return teamRepository.findById(id).filter(team -> team.getMembersWithLeader().stream()
-                .map(User::getEmail)
-                .anyMatch(email -> email.equals(principal.getName()))
+                .map(User::getUsername)
+                .anyMatch(username -> username.equals(principal.getName()))
         );
     }
 

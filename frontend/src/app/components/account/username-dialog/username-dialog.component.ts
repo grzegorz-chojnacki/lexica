@@ -4,16 +4,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { User } from 'src/app/classes/user'
 
 @Component({
-  selector: 'app-email-dialog',
-  templateUrl: './email-dialog.component.html',
-  styleUrls: ['./email-dialog.component.scss']
+  selector: 'app-username-dialog',
+  templateUrl: './username-dialog.component.html',
+  styleUrls: ['./username-dialog.component.scss']
 })
-export class EmailDialogComponent implements OnInit {
-  public readonly emailForm = this.formBuilder.group({
-    email: new FormControl(this.user.email, [
-      Validators.required,
-      Validators.email
-    ])
+export class UsernameDialogComponent implements OnInit {
+  public readonly usernameForm = this.formBuilder.group({
+    username: new FormControl(this.user.username, [ Validators.required ])
   })
 
   public constructor(
@@ -22,5 +19,5 @@ export class EmailDialogComponent implements OnInit {
 
   public ngOnInit(): void { }
 
-  public getValue(): User { return { ...this.user, ...this.emailForm.value }}
+  public getValue(): User { return { ...this.user, ...this.usernameForm.value }}
 }

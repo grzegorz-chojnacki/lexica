@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class LoginComponent implements OnInit {
   public loginForm = this.formBuilder.group({
-    email:    new FormControl('', [ Validators.required, Validators.email ]),
+    username: new FormControl('', [ Validators.required,]),
     password: new FormControl('', [ Validators.required ]),
   })
 
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
   public ngOnInit(): void { }
 
   public loginUser(): void {
-    const { email, password } = this.loginForm.value
-    this.userService.login(email, password).subscribe(
+    const { username, password } = this.loginForm.value
+    this.userService.login(username, password).subscribe(
       _ => this.router.navigate(['/workspace']),
       _ => this.loginForm.controls.password.setErrors({ error: true }))
   }

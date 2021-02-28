@@ -45,7 +45,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Optional<User> login(@RequestBody Map<String, String> user) {
-        return userService.get(user.get("email"))
+        return userService.get(user.get("username"))
                 .filter(u -> passwordEncoder.matches(user.get("password"), u.getPassword()));
     }
 
@@ -77,7 +77,7 @@ public class UserController {
         userService.get(principal).ifPresent(user -> {
             user.setFirstname(updated.getFirstname());
             user.setSurname(updated.getSurname());
-            user.setEmail(updated.getEmail());
+            user.setUsername(updated.getUsername());
             user.setColor(updated.getColor());
             if (updated.getPassword() != null) user.setPassword(updated.getPassword());
             userService.update(user);

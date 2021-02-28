@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
@@ -27,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT email as username, password, 1 FROM lexicauser WHERE email = ?;")
-                .authoritiesByUsernameQuery("SELECT email as username, 'USER' FROM lexicauser WHERE email = ?;");
+                .usersByUsernameQuery("SELECT username, password, 1 FROM lexicauser WHERE username = ?;")
+                .authoritiesByUsernameQuery("SELECT username, 'USER' FROM lexicauser WHERE username = ?;");
     }
 
     @Override
@@ -47,4 +46,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
-

@@ -52,7 +52,7 @@ import { SimpleCardAddingComponent } from './components/task/simple-card-adding/
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
-import { EmailDialogComponent } from './components/account/email-dialog/email-dialog.component'
+import { UsernameDialogComponent } from './components/account/username-dialog/username-dialog.component'
 import { LoginComponent } from './components/login/login.component'
 import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component';
 import { SortMembersPipe } from './pipes/sort-members.pipe';
@@ -86,7 +86,7 @@ import { ColorDialogComponent } from './components/account/color-dialog/color-di
     LoginComponent,
     StartViewComponent,
     FullNameDialogComponent,
-    EmailDialogComponent,
+    UsernameDialogComponent,
     PasswordDialogComponent,
     SortMembersPipe,
     AvatarComponent,

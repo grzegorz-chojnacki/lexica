@@ -8,7 +8,7 @@ export class User {
       user.id,
       user.firstname,
       user.surname,
-      user.email,
+      user.username,
       user.password,
       user.progress,
       user.color)
@@ -18,7 +18,7 @@ export class User {
     public readonly id: string,
     public firstname: string,
     public surname: string,
-    public email: string,
+    public username: string,
     public password: string,
     public readonly progress: Progress[] = [],
     public readonly color?: string) { }

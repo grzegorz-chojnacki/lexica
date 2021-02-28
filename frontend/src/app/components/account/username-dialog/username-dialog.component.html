@@ -1,17 +1,17 @@
-<h1 mat-dialog-title>Zmień adres email</h1>
+<h1 mat-dialog-title>Zmień nazwę użytkownika</h1>
 
 <mat-dialog-content>
-  <form [formGroup]="emailForm">
+  <form [formGroup]="usernameForm">
     <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput type="text" formControlName="email">
+      <mat-label>Nazwa użytkownika</mat-label>
+      <input matInput type="text" formControlName="username">
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button color="accent"
-      [disabled]="emailForm.invalid"
+      [disabled]="usernameForm.invalid"
       [mat-dialog-close]="getValue()">
     Zapisz
   </button>

@@ -25,7 +25,7 @@ export class UserService {
     const user = this.loadSessionUser()
     return {
       headers: new HttpHeaders({
-        authorization: 'Basic ' + btoa(`${user.email}:${user.password}`)
+        authorization: 'Basic ' + btoa(`${user.username}:${user.password}`)
       }
     )}
   }
@@ -43,8 +43,8 @@ export class UserService {
     } else { return }
   }
 
-  public login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${lexicaURL}/user/login`, { email, password })
+  public login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/login`, { username, password })
       .pipe(tap(user => {
         if (user) { this.saveUserWithPassword(user, password) }
         else { throw new Error() }

@@ -15,12 +15,12 @@ type activation = Observable<boolean | UrlTree>
 export class AuthorizationGuard implements CanActivate {
   public constructor(
     private readonly userService: UserService,
-    private readonly router: Router) {}
+    private readonly router: Router) { }
 
   public canActivate(): activation {
-      if (!this.userService.logged) {
-        this.router.navigate(['/'])
-        return false
-      } else { return true }
+    if (!this.userService.logged) {
+      this.router.navigate(['/'])
+      return false
+    } else { return true }
   }
 }

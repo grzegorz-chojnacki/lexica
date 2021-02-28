@@ -1,7 +1,7 @@
 <mat-card class="limited-width">
   <mat-card-header>
     <mat-card-title>{{ user | fullNamePipe }}</mat-card-title>
-    <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ user.username }}</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -16,10 +16,10 @@
         <div class="spacer"></div>
         <span>{{ user.surname }}</span>
       </mat-list-item>
-      <mat-list-item (click)="changeEmail()">
-        <span>Email</span>
+      <mat-list-item (click)="changeUsername()">
+        <span>Nazwa użytkownika</span>
         <div class="spacer"></div>
-        <span>{{ user.email }}</span>
+        <span>{{ user.username }}</span>
       </mat-list-item>
       <mat-list-item (click)="changePassword()">
         <span>Hasło</span>
