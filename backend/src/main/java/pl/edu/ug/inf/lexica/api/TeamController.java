@@ -10,6 +10,7 @@ import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -92,7 +93,10 @@ public class TeamController {
 
     @GetMapping("/{teamId}/task/{taskId}")
     public Optional<Task> getTask(@PathVariable UUID teamId, @PathVariable UUID taskId, Principal principal) {
-        return teamService.getIfMember(teamId, taskId, principal);
+        return teamService.getIfMember(teamId, taskId, principal).map(task -> {
+            Collections.shuffle(task.getExamples());
+            return task;
+        });
     }
 
     @PutMapping("/{teamId}/task/{taskId}")

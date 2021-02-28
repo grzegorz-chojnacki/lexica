@@ -10,6 +10,10 @@ import { User } from 'src/app/classes/user'
 import { TaskSummaryComponent } from '../task-summary/task-summary.component'
 import { MatDialog } from '@angular/material/dialog'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
+import { DataService } from 'src/app/services/data.service'
+import { Subscription } from 'rxjs'
+
+
 
 @Component({
   selector: 'app-task-view',
@@ -20,12 +24,15 @@ export class TaskViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public task!: Task<SimpleCard>
+  public message!: string | null
+  public subscription!: Subscription
 
   public counter = 0
   public readonly knewList = new Array<Example>()
 
   public constructor(
-    public  readonly location: Location,
+    private data: DataService,
+    public readonly location: Location,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly breadCrumbService: BreadCrumbService,
@@ -34,6 +41,8 @@ export class TaskViewComponent implements OnInit {
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
+    this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
+
     this.userService.user.subscribe(user => this.user = user)
 
     const teamId = this.route.snapshot.paramMap.get('teamId')
@@ -61,13 +70,13 @@ export class TaskViewComponent implements OnInit {
         },
         width: '500px'
       }).afterClosed().subscribe(progress => {
-          if (progress) {
-            this.userService
-              .addProgress(progress)
-              .subscribe(_ => this.location.back())
-          } else {
-            window.location.reload()
-          }
+        if (progress) {
+          this.userService
+            .addProgress(progress)
+            .subscribe(_ => this.location.back())
+        } else {
+          window.location.reload()
+        }
       })
     }
   }
