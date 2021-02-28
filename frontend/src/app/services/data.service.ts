@@ -19,8 +19,8 @@ export class DataService {
 
   private setOption(): string | null {
     if (this.storage.getItem('mes') !== null)
-      return this.storage.getItem('mes')
+      { return this.storage.getItem('mes')}
     else
-      return 'foreignWord'
+     { return 'foreignWord' }
   }
 }
