@@ -29,8 +29,8 @@ public class TeamService implements EntityService<Team> {
     }
 
     @Override
-    public void add(Team entity) {
-        teamRepository.save(entity);
+    public Optional<Team> add(Team entity) {
+        return Optional.of(teamRepository.save(entity));
     }
 
     @Override

@@ -50,6 +50,17 @@ public class UserController {
                 .filter(u -> passwordEncoder.matches(user.get("password"), u.getPassword()));
     }
 
+    @PostMapping("/register")
+    public Optional<User> register(@RequestBody Map<String, String> registration) {
+        User user = new User();
+        user.setUsername (registration.get("username"));
+        user.setPassword (registration.get("password"));
+        user.setFirstname(registration.get("firstname"));
+        user.setSurname  (registration.get("surname"));
+        user.setColor    (registration.get("color"));
+        return userService.add(user);
+    }
+
     @PutMapping("/progress")
     public void addProgress(@RequestBody Progress progress, Principal principal) {
         userService.get(principal).ifPresent(user -> {
@@ -68,20 +79,15 @@ public class UserController {
         return userService.get(principal).orElse(new User()).getProgress();
     }
 
-    @PostMapping
-    public void addUser(@RequestBody User user) {
-        userService.add(user);
-    }
-
     @PutMapping
-    public void updateUser(@RequestBody User updated, Principal principal) {
+    public void updateUser(@RequestBody Map<String, String> updated, Principal principal) {
         userService.get(principal).ifPresent(user -> {
-            user.setFirstname(updated.getFirstname());
-            user.setSurname(updated.getSurname());
-            user.setUsername(updated.getUsername());
-            user.setColor(updated.getColor());
-            user.setPassword(updated.getPassword());
-            userService.update(user);
+            user.setFirstname(updated.get("firstname"));
+            user.setSurname  (updated.get("surname"));
+            user.setUsername (updated.get("username"));
+            user.setColor    (updated.get("color"));
+            if (updated.get("password") != null) user.setPassword(updated.get("password"));
+            userService.updateWithPassword(user);
         });
     }
 

@@ -36,8 +36,13 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public void add(User entity) {
-        userRepository.save(entity);
+    public Optional<User> add(User entity) {
+        try {
+            return Optional.of(userRepository.save(encodePassword(entity)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -76,5 +81,9 @@ public class UserService implements EntityService<User> {
     @Override
     public void update(User entity) {
         userRepository.save(entity);
+    }
+
+    public void updateWithPassword(User user) {
+        userRepository.save(encodePassword(user));
     }
 }
