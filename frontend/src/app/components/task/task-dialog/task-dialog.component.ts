@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Task, Example, TaskAndUsersWithProgress } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { Subscription } from 'rxjs'
-import { DataService } from 'src/app/classes/data.service'
+import { DataService } from 'src/app/services/data.service'
 
 
 
@@ -15,7 +15,7 @@ import { DataService } from 'src/app/classes/data.service'
 export class TaskDialogComponent implements OnInit {
   public readonly task: Task<Example>
   public readonly team: Team
-  public message = '1'
+  public message: string | null = '1'
   public subscription!: Subscription
 
   public constructor(
@@ -26,6 +26,7 @@ export class TaskDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subscription = this.dataS.currentMessage.subscribe(message => this.message = message)
+    this.dataS.changeMessage('1')
   }
 
   public isForeignVersion(foreign: boolean): void {

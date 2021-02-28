@@ -10,7 +10,7 @@ import { User } from 'src/app/classes/user'
 import { TaskSummaryComponent } from '../task-summary/task-summary.component'
 import { MatDialog } from '@angular/material/dialog'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
-import { DataService } from 'src/app/classes/data.service'
+import { DataService } from 'src/app/services/data.service'
 import { Subscription } from 'rxjs'
 
 
@@ -24,7 +24,7 @@ export class TaskViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public task!: Task<SimpleCard>
-  public message!: string
+  public message!: string | null
   public subscription!: Subscription
 
   public counter = 0
@@ -78,7 +78,7 @@ export class TaskViewComponent implements OnInit {
               .addProgress(progress)
               .subscribe(_ => this.location.back())
           } else {
-            this.data.changeMessage(this.message)
+            //this.data.changeMessage(this.message)
             window.location.reload()
           }
       })
