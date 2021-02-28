@@ -7,38 +7,38 @@ import { TaskViewComponent } from './components/task/task-view/task-view.compone
 import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { LoginComponent } from './components/login/login.component'
-import { AuthorizationGuard } from './guards/authorization.guard'
+import { AuthorizedGuard, UnauthorizedGuard } from './guards/authorization.guard'
 import { RegisterComponent } from './components/register/register.component'
 
 const routes: Routes = [
   {
     path: 'team/:teamId',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: TeamViewComponent
   },
   {
     path: 'team/:teamId/task/new',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: SimpleCardsAddingComponent
   },
   {
     path: 'team/:teamId/task/:taskId/edit',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: SimpleCardsAddingComponent
   },
   {
     path: 'team/:teamId/task/:taskId',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: TaskViewComponent
   },
   {
     path: 'workspace',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: WorkspaceComponent
   },
   {
     path: 'account',
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthorizedGuard],
     component: AccountViewComponent
   },
   {
@@ -47,10 +47,12 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [UnauthorizedGuard],
     component: LoginComponent
   },
   {
     path: 'register',
+    canActivate: [UnauthorizedGuard],
     component: RegisterComponent
   },
   { path: '', redirectTo: 'start', pathMatch: 'full' },

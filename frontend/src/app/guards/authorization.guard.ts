@@ -12,7 +12,7 @@ type activation = Observable<boolean | UrlTree>
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationGuard implements CanActivate {
+export class AuthorizedGuard implements CanActivate {
   public constructor(
     private readonly userService: UserService,
     private readonly router: Router) { }
@@ -20,6 +20,22 @@ export class AuthorizationGuard implements CanActivate {
   public canActivate(): activation {
     if (!this.userService.logged) {
       this.router.navigate(['/'])
+      return false
+    } else { return true }
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UnauthorizedGuard implements CanActivate {
+  public constructor(
+    private readonly userService: UserService,
+    private readonly router: Router) { }
+
+  public canActivate(): activation {
+    if (this.userService.logged) {
+      this.router.navigate(['/workspace'])
       return false
     } else { return true }
   }
