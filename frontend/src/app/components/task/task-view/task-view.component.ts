@@ -41,7 +41,6 @@ export class TaskViewComponent implements OnInit {
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void {
-    // this.data.changeMessage(this.message)
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
 
 
@@ -78,7 +77,6 @@ export class TaskViewComponent implements OnInit {
               .addProgress(progress)
               .subscribe(_ => this.location.back())
           } else {
-            //this.data.changeMessage(this.message)
             window.location.reload()
           }
       })

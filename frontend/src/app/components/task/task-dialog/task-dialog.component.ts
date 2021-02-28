@@ -15,7 +15,7 @@ import { DataService } from 'src/app/services/data.service'
 export class TaskDialogComponent implements OnInit {
   public readonly task: Task<Example>
   public readonly team: Team
-  public message: string | null = '1'
+  public message: string | null = 'foreignWord'
   public subscription!: Subscription
 
   public constructor(
@@ -26,14 +26,14 @@ export class TaskDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subscription = this.dataS.currentMessage.subscribe(message => this.message = message)
-    this.dataS.changeMessage('1')
+    this.dataS.changeMessage('foreignWord')
   }
 
   public isForeignVersion(foreign: boolean): void {
     if (foreign) {
-                   this.dataS.changeMessage('1') }
+                   this.dataS.changeMessage('foreignWord') }
     else {
-           this.dataS.changeMessage('2')}
+           this.dataS.changeMessage('nativeWord')}
   }
 
 }

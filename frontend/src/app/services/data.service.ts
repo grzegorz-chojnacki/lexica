@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
-import { HttpClient } from '@angular/common/http'
 
 
 @Injectable({
@@ -13,7 +12,7 @@ export class DataService {
   private messageSource = new BehaviorSubject(this.opt())
   public currentMessage = this.messageSource.asObservable()
 
-  public constructor(private readonly http: HttpClient) { }
+  public constructor() { }
 
   public changeMessage(message: string): void {
     this.storage.setItem('mes', message)
@@ -24,7 +23,7 @@ export class DataService {
     if( this.storage.getItem('mes')!==null)
     return this.storage.getItem('mes')
     else
-    return '1'
+    return 'foreignWord'
   }
 
 
