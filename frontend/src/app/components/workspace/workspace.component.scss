@@ -13,13 +13,13 @@ section { margin: 2em auto }
 }
 
 h1.gentle-text{
-  font-size: 22px;
-  font-weight: 300;
+  font-weight: lighter;
   text-align: center;
-
+  margin: 0 3.5em 2em 0;
 }
-h1.gentle-text>img{
-  width: 3em; height: 3em;
-  transform: scaleX(-1);
-  margin-bottom: -40px;
+
+h1.gentle-text > img {
+  width: 3em;
+  height: 3em;
+  margin-bottom: -2.3em;
 }
