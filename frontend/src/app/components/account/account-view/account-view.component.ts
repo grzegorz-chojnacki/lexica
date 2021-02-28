@@ -27,8 +27,8 @@ export class AccountViewComponent implements OnInit {
   public ngOnInit(): void { this.userService.user.subscribe(u => this.user = u) }
 
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
-  public changeUsername = () => this.openDialogAndUpdateUser(UsernameDialogComponent)
-  public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent)
+  public changeUsername = () => this.openDialogAndUpdateUser(UsernameDialogComponent, true)
+  public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent, true)
   public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
   public removeAccount(): void {
@@ -36,9 +36,17 @@ export class AccountViewComponent implements OnInit {
     this.router.navigate([''])
   }
 
-  private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {
+  private openDialogAndUpdateUser<T>(component: ComponentType<T>, logout = false): void {
     this.dialog.open(component, { data: this.user, width: '400px' })
       .afterClosed()
-      .subscribe(user => user ? this.userService.updateUser(user) : null)
+      .subscribe(user => {
+        if (user) {
+          this.userService.updateUser(user)
+          if (logout) {
+            this.userService.logout()
+            this.router.navigate([''])
+          }
+        }
+      })
   }
 }
