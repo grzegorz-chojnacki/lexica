@@ -8,6 +8,7 @@ import { UsernameDialogComponent } from '../username-dialog/username-dialog.comp
 import { ComponentType } from '@angular/cdk/portal'
 import { PasswordDialogComponent } from '../password-dialog/password-dialog.component'
 import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-account-view',
@@ -19,6 +20,7 @@ export class AccountViewComponent implements OnInit {
 
   public constructor(
     public  readonly location: Location,
+    private readonly router: Router,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
@@ -31,6 +33,7 @@ export class AccountViewComponent implements OnInit {
 
   public removeAccount(): void {
     this.userService.removeAccount()
+    this.router.navigate([''])
   }
 
   private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {

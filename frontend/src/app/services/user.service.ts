@@ -78,8 +78,8 @@ export class UserService {
   }
 
   public removeAccount(): void {
-    this.http.delete<Progress>(`${lexicaURL}/user`, this.authHeader())
-      .subscribe(_ => this.refreshUserSource())
+    this.http.delete<User>(`${lexicaURL}/user`, this.authHeader()).subscribe()
+    this.logout()
   }
 
   public get logged(): boolean { return this.userSource.value !== this.emptyUser }
