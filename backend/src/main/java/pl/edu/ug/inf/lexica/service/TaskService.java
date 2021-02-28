@@ -31,9 +31,6 @@ public class TaskService implements EntityService<Task> {
         taskRepository.deleteById(id);
     }
 
-    @Override
-    public List<Task> getAll() { return taskRepository.findAll(); }
-
     public Optional<Task> get(UUID id) {
         return taskRepository.findById(id);
     }

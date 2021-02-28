@@ -29,6 +29,7 @@ public class User {
     private String surname;
 
     @NonNull
+    @Column(unique = true)
     private String username;
 
     @NonNull

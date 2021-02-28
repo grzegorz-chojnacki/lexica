@@ -47,9 +47,6 @@ public class UserService implements EntityService<User> {
 
     public void remove(String username) { userRepository.deleteByUsername(username); }
 
-    @Override
-    public List<User> getAll() { return userRepository.findAll(); }
-
     public Optional<User> get(UUID id) {
         return userRepository.findById(id);
     }

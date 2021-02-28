@@ -67,11 +67,6 @@ public class TeamService implements EntityService<Team> {
         );
     }
 
-    @Override
-    public List<Team> getAll() {
-        return teamRepository.findAll();
-    }
-
     public Optional<Team> get(UUID id) {
         return teamRepository.findById(id);
     }
