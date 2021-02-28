@@ -51,6 +51,14 @@ export class UserService {
       }))
   }
 
+  public register(user: User): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/register`, user)
+      .pipe(tap(user => {
+        if (user) { this.saveUserWithPassword(user, user.password) }
+        else { throw new Error() }
+      }))
+  }
+
   private saveUserWithPassword(user: User, password: string): void {
     const userWithPassword = { ...user, password }
     this.storage.setItem('user', JSON.stringify(userWithPassword))
@@ -62,8 +70,9 @@ export class UserService {
     this.userSource.next(this.emptyUser)
   }
 
-  public setUser(user: User): void {
-    this.http.put<Progress>(`${lexicaURL}/user`, user, this.authHeader())
+  public updateUser(user: User): void {
+    const boi = { ...user, progress: null }
+    this.http.put<User>(`${lexicaURL}/user`, boi, this.authHeader())
       .subscribe(_ => this.refreshUserSource())
   }
 

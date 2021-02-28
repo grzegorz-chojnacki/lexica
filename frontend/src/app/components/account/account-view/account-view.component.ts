@@ -39,6 +39,6 @@ export class AccountViewComponent implements OnInit {
   private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {
     this.dialog.open(component, { data: this.user, width: '400px' })
       .afterClosed()
-      .subscribe(user => user ? this.userService.setUser(user) : null)
+      .subscribe(user => user ? this.userService.updateUser(user) : null)
   }
 }

@@ -8,6 +8,7 @@ import { SimpleCardsAddingComponent } from './components/task/simple-cards-addin
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { LoginComponent } from './components/login/login.component'
 import { AuthorizationGuard } from './guards/authorization.guard'
+import { RegisterComponent } from './components/register/register.component'
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   { path: '', redirectTo: 'start', pathMatch: 'full' },
   // Will add error page later
