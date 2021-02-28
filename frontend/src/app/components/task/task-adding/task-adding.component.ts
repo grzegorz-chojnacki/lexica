@@ -13,10 +13,15 @@ export class TaskAddingComponent implements OnInit {
     description: '',
     image: new FormControl({ value: '', disabled: true })
   })
+  public taskOption = 'option1'
 
   public constructor(
     private readonly formBuilder: FormBuilder,
     public router: Router) { }
 
   public ngOnInit(): void { }
+  public onChangeHandler(event: any): void {
+    this.taskOption = event
+  }
+
 }
