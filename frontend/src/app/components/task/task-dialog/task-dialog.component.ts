@@ -15,7 +15,6 @@ import { DataService } from 'src/app/classes/data.service'
 export class TaskDialogComponent implements OnInit {
   public readonly task: Task<Example>
   public readonly team: Team
-  public version = '1'
   public message = '1'
   public subscription!: Subscription
 
@@ -30,9 +29,9 @@ export class TaskDialogComponent implements OnInit {
   }
 
   public isForeignVersion(foreign: boolean): void {
-    if (foreign) { this.version = '1'
+    if (foreign) {
                    this.dataS.changeMessage('1') }
-    else { this.version = '2'
+    else {
            this.dataS.changeMessage('2')}
   }
 
