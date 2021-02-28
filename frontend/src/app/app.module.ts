@@ -60,7 +60,8 @@ import { PasswordDialogComponent } from './components/account/password-dialog/pa
 import { SortMembersPipe } from './pipes/sort-members.pipe';
 import { AvatarComponent } from './components/account/avatar/avatar.component';
 import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component';
-import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
+import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ChoiceTestComponent } from './components/task/choice-test/choice-test.c
     AvatarComponent,
     ColorDialogComponent,
     ChoiceTestComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

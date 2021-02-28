@@ -5,6 +5,7 @@ import { Task, Example } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 import { TeamService } from 'src/app/services/team.service'
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
 
 @Component({
   selector: 'app-task-menu',
@@ -34,4 +35,25 @@ export class TaskMenuComponent implements OnInit {
   public removeItself(): void {
     this.teamService.removeTask(this.task, this.team)
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      data:{
+        message: 'Czy na pewno usunąć?',
+        buttonText: {
+          ok: 'Usuń',
+          cancel: 'Nie'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.removeItself()
+
+      }
+    });
+  }
 }
+
+
