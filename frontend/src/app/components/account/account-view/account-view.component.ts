@@ -29,7 +29,9 @@ export class AccountViewComponent implements OnInit {
   public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent)
   public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
-  public deleteAccount(): void { }
+  public removeAccount(): void {
+    this.userService.removeAccount()
+  }
 
   private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {
     this.dialog.open(component, { data: this.user, width: '400px' })

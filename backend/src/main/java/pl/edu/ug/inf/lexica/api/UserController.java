@@ -2,6 +2,7 @@ package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Team;
@@ -85,6 +86,7 @@ public class UserController {
     }
 
     @DeleteMapping
+    @Transactional
     public void deleteUser(Principal principal) {
         userService.remove(principal.getName());
     }

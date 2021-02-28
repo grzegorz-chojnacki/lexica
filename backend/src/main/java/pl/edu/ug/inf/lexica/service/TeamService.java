@@ -16,10 +16,16 @@ import java.util.function.BiFunction;
 @Service
 public class TeamService implements EntityService<Team> {
     private final TeamRepository teamRepository;
+    private UserService userService;
 
     @Autowired
     public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -65,6 +71,15 @@ public class TeamService implements EntityService<Team> {
                 .map(User::getUsername)
                 .anyMatch(username -> username.equals(principal.getName()))
         );
+    }
+
+    public void leaveTeam(UUID teamId, UUID userId) {
+        teamRepository.findById(teamId).ifPresent(team -> {
+            userService.get(userId).ifPresent(user -> {
+                team.getMembers().remove(user);
+                teamRepository.save(team);
+            });
+        });
     }
 
     public Optional<Team> get(UUID id) {

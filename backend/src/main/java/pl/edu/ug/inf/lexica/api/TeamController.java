@@ -81,12 +81,7 @@ public class TeamController {
 
     @DeleteMapping("/{teamId}/user/{userId}")
     public void leaveTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
-        teamService.get(teamId).ifPresent(team -> {
-            userService.get(userId).ifPresent(user -> {
-                team.getMembers().remove(user);
-                teamService.update(team);
-            });
-        });
+        teamService.leaveTeam(teamId, userId);
     }
 
     @DeleteMapping("/{id}")

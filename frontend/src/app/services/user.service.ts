@@ -77,5 +77,10 @@ export class UserService {
     return this.userSource.asObservable()
   }
 
+  public removeAccount(): void {
+    this.http.delete<Progress>(`${lexicaURL}/user`, this.authHeader())
+      .subscribe(_ => this.refreshUserSource())
+  }
+
   public get logged(): boolean { return this.userSource.value !== this.emptyUser }
 }
