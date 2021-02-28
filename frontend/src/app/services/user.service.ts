@@ -51,10 +51,10 @@ export class UserService {
       }))
   }
 
-  public register(user: User): Observable<User> {
-    return this.http.post<User>(`${lexicaURL}/user/register`, user)
+  public register(registration: User): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/register`, registration)
       .pipe(tap(user => {
-        if (user) { this.saveUserWithPassword(user, user.password) }
+        if (user) { this.saveUserWithPassword(user, registration.password) }
         else { throw new Error() }
       }))
   }

@@ -27,6 +27,6 @@ export class RegisterComponent implements OnInit {
   public registerUser(): void {
     this.userService.register(this.registerForm.value).subscribe(
       _ => this.router.navigate(['/workspace']),
-      _ => this.registerForm.controls.password.setErrors({ error: true }))
+      _ => this.registerForm.controls.username.setErrors({ error: true }))
   }
 }
