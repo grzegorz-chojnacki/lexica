@@ -9,7 +9,7 @@ export class DataService {
 
   private readonly storage   = sessionStorage
 
-  private messageSource = new BehaviorSubject(this.opt())
+  private messageSource = new BehaviorSubject(this.setOption())
   public currentMessage = this.messageSource.asObservable()
 
   public constructor() { }
@@ -19,7 +19,7 @@ export class DataService {
     this.messageSource.next(message)
   }
 
-  private opt(): string | null {
+  private setOption(): string | null {
     if( this.storage.getItem('mes')!==null)
     return this.storage.getItem('mes')
     else
