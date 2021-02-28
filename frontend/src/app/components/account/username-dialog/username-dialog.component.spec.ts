@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { EmailDialogComponent } from './email-dialog.component'
+import { UsernameDialogComponent } from './username-dialog.component'
 
-describe('EmailDialogComponent', () => {
-  let component: EmailDialogComponent
-  let fixture: ComponentFixture<EmailDialogComponent>
+describe('UsernameDialogComponent', () => {
+  let component: UsernameDialogComponent
+  let fixture: ComponentFixture<UsernameDialogComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmailDialogComponent ]
+      declarations: [ UsernameDialogComponent ]
     })
     .compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmailDialogComponent)
+    fixture = TestBed.createComponent(UsernameDialogComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

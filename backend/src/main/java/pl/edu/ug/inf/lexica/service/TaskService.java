@@ -19,7 +19,7 @@ public class TaskService implements EntityService<Task> {
     }
 
     @Override
-    public void add(Task entity) { taskRepository.save(entity); }
+    public Optional<Task> add(Task entity) { return Optional.of(taskRepository.save(entity)); }
 
     @Override
     public void addAll(List<Task> entities) {
@@ -30,9 +30,6 @@ public class TaskService implements EntityService<Task> {
     public void remove(UUID id) {
         taskRepository.deleteById(id);
     }
-
-    @Override
-    public List<Task> getAll() { return taskRepository.findAll(); }
 
     public Optional<Task> get(UUID id) {
         return taskRepository.findById(id);

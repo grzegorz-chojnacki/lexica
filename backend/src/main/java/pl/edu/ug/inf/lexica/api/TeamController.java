@@ -9,6 +9,7 @@ import pl.edu.ug.inf.lexica.service.TaskService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,18 +30,21 @@ public class TeamController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Team> getTeam(@PathVariable UUID id) {
-        return teamService.get(id).map(Team::withMoreInfo);
+    public Optional<Team> getTeam(@PathVariable UUID id, Principal principal) {
+        return teamService.getIfMember(id, principal).map(Team::withMoreInfo);
     }
 
     @PostMapping
-    public void addTeam(@RequestBody Team team) {
-        teamService.add(team);
+    public void addTeam(@RequestBody Team team, Principal principal) {
+        userService.get(principal).ifPresent(user -> {
+            team.setLeader(user);
+            teamService.add(team);
+        });
     }
 
     @PutMapping("/{id}")
-    public void updateTeam(@RequestBody Team updated, @PathVariable UUID id) {
-        teamService.get(id).ifPresent(team -> {
+    public void updateTeam(@RequestBody Team updated, @PathVariable UUID id, Principal principal) {
+        teamService.getIfLeader(id, principal).ifPresent(team -> {
             team.setName(updated.getName());
             team.setDescription(updated.getDescription());
             team.setColor(updated.getColor());
@@ -49,58 +53,55 @@ public class TeamController {
     }
 
     @PostMapping("/{id}/task")
-    public void addTask(@RequestBody Task task, @PathVariable UUID id) {
-        teamService.get(id).ifPresent(team -> {
+    public void addTask(@RequestBody Task task, @PathVariable UUID id, Principal principal) {
+        teamService.getIfLeader(id, principal).ifPresent(team -> {
             team.getTasks().add(task);
             teamService.update(team);
         });
     }
 
     @DeleteMapping("/{teamId}/task/{taskId}")
-    public void removeTask(@PathVariable UUID teamId, @PathVariable UUID taskId) {
-        teamService.get(teamId).ifPresent(team ->
-                taskService.get(taskId).ifPresent(task -> {
-                    team.getTasks().remove(task);
-                    teamService.update(team);
-                })
-        );
+    public void removeTask(@PathVariable UUID teamId, @PathVariable UUID taskId, Principal principal) {
+        teamService.getIfLeader(teamId, principal).ifPresent(team -> {
+            taskService.get(taskId).ifPresent(task -> {
+                team.getTasks().remove(task);
+                teamService.update(team);
+            });
+        });
     }
 
     @PostMapping("/{id}/user")
     public void joinTeam(@RequestBody User u, @PathVariable UUID id) {
-        teamService.get(id).ifPresent(team ->
-                userService.get(u.getId()).ifPresent(user -> {
-                    team.getMembers().add(user);
-                    teamService.update(team);
-                })
-        );
+        teamService.get(id).ifPresent(team -> {
+            userService.get(u.getId()).ifPresent(user -> {
+                team.getMembers().add(user);
+                teamService.update(team);
+            });
+        });
     }
 
     @DeleteMapping("/{teamId}/user/{userId}")
     public void leaveTeam(@PathVariable UUID teamId, @PathVariable UUID userId) {
-        teamService.get(teamId).ifPresent(team ->
-                userService.get(userId).ifPresent(user -> {
-                    user.getProgress().removeAll(user.getProgressInTeam(team));
-                    team.getMembers().remove(user);
-                    teamService.update(team);
-                })
-        );
+        teamService.leaveTeam(teamId, userId);
     }
 
-    @DeleteMapping("/{teamId}")
-    public void removeTeam(@PathVariable UUID teamId) {
-        teamService.get(teamId).ifPresent(team -> teamService.remove(team.getId()));
+    @DeleteMapping("/{id}")
+    public void removeTeam(@PathVariable UUID id, Principal principal) {
+        teamService.getIfLeader(id, principal)
+                .ifPresent(team -> teamService.remove(team.getId()));
     }
 
     @GetMapping("/{teamId}/task/{taskId}")
-    public Optional<Task> getTask(@PathVariable UUID teamId, @PathVariable UUID taskId) {
-        Collections.shuffle(teamService.getTask(teamId, taskId).get().getExamples());
-        return teamService.getTask(teamId, taskId);
+    public Optional<Task> getTask(@PathVariable UUID teamId, @PathVariable UUID taskId, Principal principal) {
+        return teamService.getIfMember(teamId, taskId, principal).map(task -> {
+            Collections.shuffle(task.getExamples());
+            return task;
+        });
     }
 
     @PutMapping("/{teamId}/task/{taskId}")
-    public void updateTask(@RequestBody Task updated, @PathVariable UUID teamId, @PathVariable UUID taskId) {
-        teamService.getTask(teamId, taskId).ifPresent(task -> {
+    public void updateTask(@RequestBody Task updated, @PathVariable UUID teamId, @PathVariable UUID taskId, Principal principal) {
+        teamService.getIfLeader(teamId, taskId, principal).ifPresent(task -> {
             if (task.getType().getId().equals(updated.getType().getId())) {
                 task.setName(updated.getName());
                 task.setDescription(updated.getDescription());

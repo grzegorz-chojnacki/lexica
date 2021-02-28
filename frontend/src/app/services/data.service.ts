@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
-  private readonly storage   = sessionStorage
+  private readonly storage = sessionStorage
 
   private messageSource = new BehaviorSubject(this.setOption())
   public currentMessage = this.messageSource.asObservable()
@@ -20,11 +18,9 @@ export class DataService {
   }
 
   private setOption(): string | null {
-    if( this.storage.getItem('mes')!==null)
-    return this.storage.getItem('mes')
+    if (this.storage.getItem('mes') !== null)
+      return this.storage.getItem('mes')
     else
-    return 'foreignWord'
+      return 'foreignWord'
   }
-
-
 }

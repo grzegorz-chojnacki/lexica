@@ -1,12 +1,15 @@
 package pl.edu.ug.inf.lexica.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Team;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.service.UserService;
 
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,37 +19,51 @@ import java.util.stream.Stream;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/{id}/team")
-    public List<Team> getTeams(@PathVariable UUID id) {
-        return userService.get(id).map(user -> Stream
+    @GetMapping("/team")
+    public List<Team> getTeams(Principal principal) {
+        return userService.get(principal).map(user -> Stream
                 .concat(user.getLeading().stream(), user.getTeams().stream())
-                .distinct()
+                .distinct() // Merge teams where user is both leader and member
                 .map(Team::withSomeInfo)
-                .sorted(Comparator.comparing(Team::getId))
+                .sorted(Comparator.comparing(Team::getId)) // If two teams have the same name their order is stable
                 .sorted(Comparator.comparing(Team::getName))
                 .collect(Collectors.toList())
         ).orElse(List.of());
     }
 
-    @GetMapping()
-    public List<User> getUsers() {
-        return userService.getAll().stream().map(User::withSomeInfo).collect(Collectors.toList());
+    @GetMapping
+    public Optional<User> getUser(Principal principal) {
+        return userService.get(principal).map(User::withProgress);
     }
 
-    @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable UUID id) {
-        return userService.get(id).map(User::withProgress);
+    @PostMapping("/login")
+    public Optional<User> login(@RequestBody Map<String, String> user) {
+        return userService.get(user.get("username"))
+                .filter(u -> passwordEncoder.matches(user.get("password"), u.getPassword()));
     }
 
-    @PutMapping("/{id}/progress")
-    public void addProgress(@RequestBody Progress progress, @PathVariable UUID id) {
-        userService.get(id).ifPresent(user -> {
+    @PostMapping("/register")
+    public Optional<User> register(@RequestBody Map<String, String> registration) {
+        User user = new User();
+        user.setUsername (registration.get("username"));
+        user.setPassword (registration.get("password"));
+        user.setFirstname(registration.get("firstname"));
+        user.setSurname  (registration.get("surname"));
+        user.setColor    (registration.get("color"));
+        return userService.add(user);
+    }
+
+    @PutMapping("/progress")
+    public void addProgress(@RequestBody Progress progress, Principal principal) {
+        userService.get(principal).ifPresent(user -> {
             user.getProgress().stream()
                     .filter(p -> p.getTask().getId().equals(progress.getTask().getId()))
                     .findAny()
@@ -57,30 +74,26 @@ public class UserController {
         });
     }
 
-    @GetMapping("/{id}/progress")
-    public Set<Progress> getProgress(@PathVariable UUID id) {
-        return userService.get(id).orElse(new User()).getProgress();
+    @GetMapping("/progress")
+    public Set<Progress> getProgress(Principal principal) {
+        return userService.get(principal).orElse(new User()).getProgress();
     }
 
-    @PostMapping
-    public void addUser(@RequestBody User user) {
-        userService.add(user);
-    }
-
-    @PutMapping("/{id}")
-    public void updateUser(@RequestBody User updated, @PathVariable UUID id) {
-        userService.get(id).ifPresent(user -> {
-            user.setFirstname(updated.getFirstname());
-            user.setSurname(updated.getSurname());
-            user.setEmail(updated.getEmail());
-            user.setColor(updated.getColor());
-            if (updated.getPassword() != null) user.setPassword(updated.getPassword());
-            userService.update(user);
+    @PutMapping
+    public void updateUser(@RequestBody Map<String, String> updated, Principal principal) {
+        userService.get(principal).ifPresent(user -> {
+            user.setFirstname(updated.get("firstname"));
+            user.setSurname  (updated.get("surname"));
+            user.setUsername (updated.get("username"));
+            user.setColor    (updated.get("color"));
+            if (updated.get("password") != null) user.setPassword(updated.get("password"));
+            userService.updateWithPassword(user);
         });
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable UUID id) {
-        userService.remove(id);
+    @DeleteMapping
+    @Transactional
+    public void deleteUser(Principal principal) {
+        userService.remove(principal.getName());
     }
 }

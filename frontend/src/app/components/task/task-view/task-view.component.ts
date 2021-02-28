@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 
@@ -32,7 +32,7 @@ export class TaskViewComponent implements OnInit {
 
   public constructor(
     private data: DataService,
-    public  readonly location: Location,
+    public readonly location: Location,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly breadCrumbService: BreadCrumbService,
@@ -43,9 +43,7 @@ export class TaskViewComponent implements OnInit {
   public ngOnInit(): void {
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
 
-
     this.userService.user.subscribe(user => this.user = user)
-
 
     const teamId = this.route.snapshot.paramMap.get('teamId')
     const taskId = this.route.snapshot.paramMap.get('taskId')
@@ -72,13 +70,13 @@ export class TaskViewComponent implements OnInit {
         },
         width: '500px'
       }).afterClosed().subscribe(progress => {
-          if (progress) {
-            this.userService
-              .addProgress(progress)
-              .subscribe(_ => this.location.back())
-          } else {
-            window.location.reload()
-          }
+        if (progress) {
+          this.userService
+            .addProgress(progress)
+            .subscribe(_ => this.location.back())
+        } else {
+          window.location.reload()
+        }
       })
     }
   }

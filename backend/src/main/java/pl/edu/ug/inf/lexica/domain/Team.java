@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @NoArgsConstructor
@@ -40,6 +41,10 @@ public class Team {
 
     @NonNull
     private String color;
+
+    public Set<User> getMembersWithLeader() {
+        return Stream.concat(members.stream(), Stream.of(leader)).collect(Collectors.toSet());
+    }
 
     public Team withSomeInfo() {
         Team team = new Team();

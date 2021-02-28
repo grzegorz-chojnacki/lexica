@@ -31,9 +31,11 @@ export class TaskDialogComponent implements OnInit {
 
   public isForeignVersion(foreign: boolean): void {
     if (foreign) {
-                   this.dataS.changeMessage('foreignWord') }
+      this.dataS.changeMessage('foreignWord')
+    }
     else {
-           this.dataS.changeMessage('nativeWord')}
+      this.dataS.changeMessage('nativeWord')
+    }
   }
 
 }

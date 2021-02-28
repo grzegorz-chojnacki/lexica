@@ -29,7 +29,8 @@ public class User {
     private String surname;
 
     @NonNull
-    private String email;
+    @Column(unique = true)
+    private String username;
 
     @NonNull
     @JsonIgnore
@@ -57,7 +58,7 @@ public class User {
         user.setId(this.id);
         user.setFirstname(this.firstname);
         user.setSurname(this.surname);
-        user.setEmail(this.email);
+        user.setUsername(this.username);
         user.setColor(this.color);
 
         return user;

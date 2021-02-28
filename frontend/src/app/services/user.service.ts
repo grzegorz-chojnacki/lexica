@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject } from 'rxjs'
 import { User } from 'src/app/classes/user'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { Progress } from '../classes/progress'
 import { tap } from 'rxjs/operators'
@@ -10,9 +10,9 @@ import { tap } from 'rxjs/operators'
   providedIn: 'root',
 })
 export class UserService {
-  public  readonly emptyUser = new User('', '', '', '', '')
-  private readonly storage   = sessionStorage
-  private userSource         = new BehaviorSubject(this.loadSessionUser())
+  public readonly emptyUser = new User('', '', '', '', '')
+  private readonly storage = sessionStorage
+  private userSource = new BehaviorSubject(this.loadSessionUser())
 
   public constructor(private readonly http: HttpClient) { }
 
@@ -21,14 +21,20 @@ export class UserService {
     return sessionUser ? JSON.parse(sessionUser) : this.emptyUser
   }
 
+  public authHeader(): { headers: HttpHeaders } {
+    const user = this.loadSessionUser()
+    return {
+      headers: new HttpHeaders({
+        authorization: 'Basic ' + btoa(`${user.username}:${user.password}`)
+      }
+    )}
+  }
+
   private refreshUserSource(user: User = this.userSource.value): void {
     if (user !== this.emptyUser) {
-      this.http.get<User>(`${lexicaURL}/user/${user.id}`)
+      this.http.get<User>(`${lexicaURL}/user`, this.authHeader())
         .subscribe(
-          u => {
-            this.storage.setItem('user', JSON.stringify(u))
-            this.userSource.next(User.deserialize(u))
-          },
+          u   => { this.saveUserWithPassword(u, user.password) },
           err => {
             this.storage.removeItem('user')
             this.userSource.error(err) // Reset userSource after error
@@ -37,17 +43,26 @@ export class UserService {
     } else { return }
   }
 
-  // ToDo: Implement real login logic (in backend too)
-  public login(email: string, password: string): Observable<User[]> {
-    const findUserIn = (users: User[]) => users
-      .find(u => u.email === email /* && u.password === password */)
-
-    return this.http.get<User[]>(`${lexicaURL}/user`)
-      .pipe(tap(users => {
-        const user = findUserIn(users)
-        if (user) { this.refreshUserSource(user) }
+  public login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/login`, { username, password })
+      .pipe(tap(user => {
+        if (user) { this.saveUserWithPassword(user, password) }
         else { throw new Error() }
       }))
+  }
+
+  public register(registration: User): Observable<User> {
+    return this.http.post<User>(`${lexicaURL}/user/register`, registration)
+      .pipe(tap(user => {
+        if (user) { this.saveUserWithPassword(user, registration.password) }
+        else { throw new Error() }
+      }))
+  }
+
+  private saveUserWithPassword(user: User, password: string): void {
+    const userWithPassword = { ...user, password }
+    this.storage.setItem('user', JSON.stringify(userWithPassword))
+    this.userSource.next(User.deserialize(userWithPassword as User))
   }
 
   public logout(): void {
@@ -55,19 +70,25 @@ export class UserService {
     this.userSource.next(this.emptyUser)
   }
 
-  public setUser(user: User): void {
-    this.http.put<Progress>(`${lexicaURL}/user/${user.id}`, { ...user, password: '123987dasjk'})
+  public updateUser(user: User): void {
+    const boi = { ...user, progress: null }
+    this.http.put<User>(`${lexicaURL}/user`, boi, this.authHeader())
       .subscribe(_ => this.refreshUserSource())
   }
 
   public addProgress(progress: Progress): Observable<Progress> {
-    const userId = this.userSource.getValue().id
-    return this.http.put<Progress>(`${lexicaURL}/user/${userId}/progress`, progress)
+    return this.http.put<Progress>(
+      `${lexicaURL}/user/progress`, progress, this.authHeader())
   }
 
   public get user(): Observable<User> {
     this.refreshUserSource()
     return this.userSource.asObservable()
+  }
+
+  public removeAccount(): void {
+    this.http.delete<User>(`${lexicaURL}/user`, this.authHeader()).subscribe()
+    this.logout()
   }
 
   public get logged(): boolean { return this.userSource.value !== this.emptyUser }

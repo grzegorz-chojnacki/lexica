@@ -3,7 +3,6 @@ import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { BreadCrumbService, BreadCrumb } from './services/bread-crumb.service'
 import { Router } from '@angular/router'
-import { Key } from 'protractor'
 
 @Component({
   selector: 'app-root',
@@ -29,7 +28,8 @@ export class AppComponent implements OnInit {
   @HostListener('window:keydown', ['$event'])
   public hack(event: KeyboardEvent): void {
     if (event.key === 'Insert') {
-      this.userService.login('jkowalski@example.com', '').subscribe()
+      this.userService.login('jkowalski', 'opBUs')
+        .subscribe(() => this.router.navigate(['/workspace']))
     }
   }
 

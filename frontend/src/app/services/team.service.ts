@@ -36,14 +36,14 @@ export class TeamService {
 
   private refreshTeamListSource(): void {
     if (this.loggedUser.id) {
-      this.http.get<Team[]>(`${lexicaURL}/user/${this.loggedUser.id}/team`)
+      this.http.get<Team[]>(`${lexicaURL}/user/team`, this.userService.authHeader())
         .pipe(map(teams => teams.map(Team.deserialize)))
         .subscribe(teams => this.teamListSource.next(teams))
     }
   }
 
   private refreshTeamSource(id: string): void {
-    this.http.get<Team>(`${lexicaURL}/team/${id}`)
+    this.http.get<Team>(`${lexicaURL}/team/${id}`, this.userService.authHeader())
       .pipe(map(Team.deserialize))
       .subscribe(
         team => this.teamSource.next(team),
@@ -59,12 +59,12 @@ export class TeamService {
   }
 
   public createTeam(form: TeamForm): void {
-    this.http.post(`${lexicaURL}/team`, { ...form, leader: this.loggedUser.asUUID() })
+    this.http.post(`${lexicaURL}/team`, form, this.userService.authHeader())
       .subscribe(() => this.refreshTeamListSource())
   }
 
   public updateTeam(id: string, form: TeamForm): void {
-    this.http.put(`${lexicaURL}/team/${id}`, form)
+    this.http.put(`${lexicaURL}/team/${id}`, form, this.userService.authHeader())
       .subscribe(() => {
         this.refreshTeamListSource()
         this.refreshTeamSource(id)
@@ -72,7 +72,10 @@ export class TeamService {
   }
 
   public joinTeam(id: string): void {
-    this.http.post(`${lexicaURL}/team/${id}/user`, this.loggedUser.asUUID())
+    this.http.post(
+        `${lexicaURL}/team/${id}/user`,
+        this.loggedUser.asUUID(),
+        this.userService.authHeader())
       .subscribe(() => {
         this.refreshTeamListSource()
         this.refreshTeamSource(id)
@@ -80,7 +83,9 @@ export class TeamService {
   }
 
   public leaveTeam(team: Team, user = this.loggedUser): void {
-    this.http.delete(`${lexicaURL}/team/${team.id}/user/${user.id}`)
+    this.http.delete(
+        `${lexicaURL}/team/${team.id}/user/${user.id}`,
+        this.userService.authHeader())
       .subscribe(() => {
         this.refreshTeamListSource()
         this.refreshTeamSource(team.id)
@@ -88,7 +93,9 @@ export class TeamService {
   }
 
   public remove(team: Team): void {
-    this.http.delete(`${lexicaURL}/team/${team.id}`)
+    this.http.delete(
+        `${lexicaURL}/team/${team.id}`,
+        this.userService.authHeader())
       .subscribe(() => {
         this.refreshTeamListSource()
         this.refreshTeamSource(team.id)
@@ -96,7 +103,9 @@ export class TeamService {
   }
 
   public removeTask(task: Task<Example>, team: Team): void {
-    this.http.delete(`${lexicaURL}/team/${team.id}/task/${task.id}`)
+    this.http.delete(
+        `${lexicaURL}/team/${team.id}/task/${task.id}`,
+        this.userService.authHeader())
       .subscribe(() => this.refreshTeamSource(team.id))
   }
 }

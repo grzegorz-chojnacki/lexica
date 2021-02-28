@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MatTabGroup } from '@angular/material/tabs'
-
+import { randomColor } from 'src/app/classes/utils'
 import { TeamService } from 'src/app/services/team.service'
 
 @Component({
@@ -22,7 +22,7 @@ export class NewTeamComponent implements OnInit {
   public readonly teamForm = this.formBuilder.group({
     name: new FormControl('', [ Validators.required ]),
     description: '',
-    color: this.randomColor()
+    color: randomColor()
   })
 
   public constructor(
@@ -30,11 +30,6 @@ export class NewTeamComponent implements OnInit {
     private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
-
-  private randomColor(): string {
-    const randomHex = () => '0123456789ACBDEF'[Math.floor(Math.random() * 16)]
-    return '#' + new Array(6).fill(0).map(randomHex).join('')
-  }
 
   public isInvalidTab = () => (this.tabGroup?.selectedIndex === 0)
      ? this.idForm.invalid

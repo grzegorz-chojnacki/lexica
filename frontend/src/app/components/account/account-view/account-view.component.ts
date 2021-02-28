@@ -4,10 +4,11 @@ import { User } from 'src/app/classes/user'
 import { UserService } from 'src/app/services/user.service'
 import { MatDialog } from '@angular/material/dialog'
 import { FullNameDialogComponent } from '../full-name-dialog/full-name-dialog.component'
-import { EmailDialogComponent } from '../email-dialog/email-dialog.component'
+import { UsernameDialogComponent } from '../username-dialog/username-dialog.component'
 import { ComponentType } from '@angular/cdk/portal'
 import { PasswordDialogComponent } from '../password-dialog/password-dialog.component'
 import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-account-view',
@@ -19,21 +20,33 @@ export class AccountViewComponent implements OnInit {
 
   public constructor(
     public  readonly location: Location,
+    private readonly router: Router,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
 
   public ngOnInit(): void { this.userService.user.subscribe(u => this.user = u) }
 
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
-  public changeEmail    = () => this.openDialogAndUpdateUser(EmailDialogComponent)
-  public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent)
+  public changeUsername = () => this.openDialogAndUpdateUser(UsernameDialogComponent, true)
+  public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent, true)
   public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
-  public deleteAccount(): void { }
+  public removeAccount(): void {
+    this.userService.removeAccount()
+    this.router.navigate([''])
+  }
 
-  private openDialogAndUpdateUser<T>(component: ComponentType<T>): void {
+  private openDialogAndUpdateUser<T>(component: ComponentType<T>, logout = false): void {
     this.dialog.open(component, { data: this.user, width: '400px' })
       .afterClosed()
-      .subscribe(user => user ? this.userService.setUser(user) : null)
+      .subscribe(user => {
+        if (user) {
+          this.userService.updateUser(user)
+          if (logout) {
+            this.userService.logout()
+            this.router.navigate([''])
+          }
+        }
+      })
   }
 }
