@@ -5,8 +5,9 @@
   <form [formGroup]="taskForm">
     <mat-form-field appearance="fill">
       <mat-label>Wybierz typ zadania</mat-label>
-      <mat-select placeholder="Placeholder" value="option1" disabled="true">
-        <mat-option value="option1" >Fiszka prosta</mat-option>
+      <mat-select placeholder="Placeholder" value="option1" (selectionChange)="onChangeHandler($event.value)">
+        <mat-option value="option1">Fiszka prosta</mat-option>
+        <mat-option value="option2" >Test jednokrotnego wyboru</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -19,9 +20,17 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
+  <ng-container *ngIf="taskOption=='option1'">
   <button mat-button mat-dialog-close color="accent"
       routerLink="{{ this.router.url }}/task/new">
     Utwórz
   </button>
+</ng-container>
+<ng-container *ngIf="taskOption=='option2'">
+  <button mat-button mat-dialog-close color="accent"
+      routerLink="{{ this.router.url }}/ccc">
+    Utwórz
+  </button>
+</ng-container>
   <button mat-button mat-dialog-close>Anuluj</button>
 </mat-dialog-actions>
