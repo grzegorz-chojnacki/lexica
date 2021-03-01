@@ -36,23 +36,23 @@ export class TaskMenuComponent implements OnInit {
     this.teamService.removeTask(this.task, this.team)
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data:{
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
         message: 'Czy na pewno usunąć?',
         buttonText: {
           ok: 'Usuń',
           cancel: 'Nie'
         }
       }
-    });
+    })
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.removeItself()
 
       }
-    });
+    })
   }
 }
 

@@ -44,39 +44,39 @@ export class TeamCardComponent implements OnInit {
     this.dialog.open(TaskAddingComponent, { width: '500px' })
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data:{
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
         message: 'Czy na pewno usunąć?',
         buttonText: {
           ok: 'Usuń',
           cancel: 'Nie'
         }
       }
-    });
+    })
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.removeTeam()
       }
-    });
+    })
   }
 
-  openDialogToLeaveTeam() {
+  public openDialogToLeaveTeam(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data:{
+      data: {
         message: 'Czy na pewno opuścić zespół?',
         buttonText: {
           ok: 'Opuść',
           cancel: 'Nie'
         }
       }
-    });
+    })
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.leaveTeam()
       }
-    });
+    })
   }
 }
