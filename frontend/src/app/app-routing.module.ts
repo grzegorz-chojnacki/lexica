@@ -9,6 +9,7 @@ import { StartViewComponent } from './components/start-view/start-view.component
 import { LoginComponent } from './components/login/login.component'
 import { AuthorizedGuard, UnauthorizedGuard } from './guards/authorization.guard'
 import { RegisterComponent } from './components/register/register.component'
+import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
     path: 'register',
     canActivate: [UnauthorizedGuard],
     component: RegisterComponent
+  },
+  {
+    path: 'choicetest',
+    component: ChoiceTestComponent
   },
   { path: '', redirectTo: 'start', pathMatch: 'full' },
   // Will add error page later
