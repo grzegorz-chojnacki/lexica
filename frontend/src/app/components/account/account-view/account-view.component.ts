@@ -9,6 +9,8 @@ import { ComponentType } from '@angular/cdk/portal'
 import { PasswordDialogComponent } from '../password-dialog/password-dialog.component'
 import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
 import { Router } from '@angular/router'
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+
 
 @Component({
   selector: 'app-account-view',
@@ -48,5 +50,24 @@ export class AccountViewComponent implements OnInit {
           }
         }
       })
+  }
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      data:{
+        message: 'Czy na pewno usunąć?',
+        buttonText: {
+          ok: 'Usuń',
+          cancel: 'Nie'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.removeAccount()
+      }
+    });
   }
 }
