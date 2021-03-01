@@ -6,6 +6,8 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { TaskAddingComponent } from '../../task/task-adding/task-adding.component'
 import { TeamSettingsComponent } from '../team-settings/team-settings.component'
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+
 
 @Component({
   selector: 'app-team-card',
@@ -40,5 +42,41 @@ export class TeamCardComponent implements OnInit {
 
   public newTaskDialog(): void {
     this.dialog.open(TaskAddingComponent, { width: '500px' })
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      data:{
+        message: 'Czy na pewno usunąć?',
+        buttonText: {
+          ok: 'Usuń',
+          cancel: 'Nie'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.removeTeam()
+      }
+    });
+  }
+
+  openDialogToLeaveTeam() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+      data:{
+        message: 'Czy na pewno opuścić zespół?',
+        buttonText: {
+          ok: 'Opuść',
+          cancel: 'Nie'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.leaveTeam()
+      }
+    });
   }
 }

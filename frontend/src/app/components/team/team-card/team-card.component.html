@@ -27,13 +27,13 @@
       </button>
       <button *ngIf="leaderView" mat-menu-item
           routerLink="/workspace"
-          (click)="removeTeam()">
+          (click)="openDialog()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
       </button>
       <button *ngIf="!leaderView" mat-menu-item
           routerLink="/workspace"
-          (click)="leaveTeam()">
+          (click)="openDialogToLeaveTeam()">
         <mat-icon>logout</mat-icon>
         <span>Opuść</span>
       </button>
