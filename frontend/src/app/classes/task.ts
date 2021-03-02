@@ -16,6 +16,15 @@ export class SimpleCard extends Example {
   ) { super() }
 }
 
+export class ChoiceTest extends Example {
+  public constructor(
+    public question: string,
+    public answer: string,
+    public decoys: string[],
+    public readonly image?: ImageBitmap,
+  ) { super() }
+}
+
 export class Task<T extends Example> {
   public static deserialize(task: Task<SimpleCard>): Task<SimpleCard> {
     return new Task(

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Example, ChoiceTest, Task } from 'src/app/classes/task'
 
 @Component({
   selector: 'app-choice-test',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./choice-test.component.scss']
 })
 export class ChoiceTestComponent implements OnInit {
+  public task!: Task<ChoiceTest>
+  public ex1: ChoiceTest[] = [new ChoiceTest('Co oznacza słowo Winter?', 'Zima', ['Lato', 'Jesień'])]
   public favoriteSeason!: string
-  public seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
   public constructor() { }
 
   public ngOnInit(): void {
