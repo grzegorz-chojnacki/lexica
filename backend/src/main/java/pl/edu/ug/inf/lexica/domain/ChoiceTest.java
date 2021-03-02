@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -20,12 +21,12 @@ public class ChoiceTest extends Example {
     private UUID id;
 
     @NonNull
-    private String nativeWord;
+    private String question;
 
     @NonNull
-    private String foreignCorrectWord;
+    private String answer;
 
     @NonNull
     @ElementCollection(targetClass=String.class)
-    private List<String> answers;
+    private Set<String> decoys;
 }
