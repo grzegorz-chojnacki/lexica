@@ -23,6 +23,10 @@ export class ChoiceTest extends Example {
     public decoys: string[],
     public readonly image?: ImageBitmap,
   ) { super() }
+
+public addCorrectAnswerToDecoys(): void {
+this.decoys.push(this.answer)
+}
 }
 
 export class Task<T extends Example> {
