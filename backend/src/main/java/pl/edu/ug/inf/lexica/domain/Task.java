@@ -22,7 +22,7 @@ public class Task {
 
     @NonNull
     @OneToMany(cascade = CascadeType.ALL)
-    private List<SimpleCard> examples;
+    private List<SimpleCard> examples; //tu będzie musiało być List<Example>
 
     @NonNull
     private boolean isActive;

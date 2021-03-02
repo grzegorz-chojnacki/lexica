@@ -27,6 +27,11 @@ public class AppConfig {
         this.teamService = teamService;
     }
 
+   List<ChoiceTest> generateChoiceTest =
+          List.of(new ChoiceTest("Pies po angielsku to:", "Dog", Set.of("Cat","Duck")),
+                  new ChoiceTest("Co to jest jajko?", "Egg", Set.of("Eye")),
+                  new ChoiceTest("Co oznacza 'nail'", "Jedno i drugie", Set.of("Gwóźdź","Paznokieć")));
+
 
     Supplier<List<SimpleCard>> generateCards = () -> Map.ofEntries(
             Map.entry("Jabłko", "Apple"),
@@ -93,7 +98,6 @@ public class AppConfig {
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
-
 
 
     private Set<Progress> generateProgress(List<Task> tasks) {
