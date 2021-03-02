@@ -8,3 +8,4 @@ export class TaskType {
 }
 
 export const SimpleCardTask = new TaskType(1)
+export const ChoiceTestTask = new TaskType(2,'Test jednokrotnego wyboru')
