@@ -8,11 +8,11 @@ import { Example, ChoiceTest, Task } from 'src/app/classes/task'
 })
 export class ChoiceTestComponent implements OnInit {
   public task!: Task<ChoiceTest>
-  public ex1: ChoiceTest[] = [new ChoiceTest('Co oznacza słowo Winter?', 'Zima', ['Lato', 'Jesień'])]
-  public favoriteSeason!: string
+  public ex1: ChoiceTest[] = [new ChoiceTest('Co oznacza słowo Winter?', 'Zima', ['Lato', 'Wiosna', 'Jesień'])]
   public constructor() { }
 
   public ngOnInit(): void {
+    this.ex1.forEach(example => example.addCorrectAnswerToDecoys())
   }
 
 }

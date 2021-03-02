@@ -28,8 +28,7 @@
         <label id="example-radio-group-label">{{item.question}}</label>
         <mat-radio-group
           aria-labelledby="example-radio-group-label"
-          class="example-radio-group"
-          [(ngModel)]="favoriteSeason">
+          class="example-radio-group">
 
           <mat-radio-button class="example-radio-button" *ngFor="let ans of item.decoys" [value]="ans">
 
