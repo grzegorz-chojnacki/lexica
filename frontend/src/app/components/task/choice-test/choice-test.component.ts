@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Example, ChoiceTest, Task } from 'src/app/classes/task'
+import { ChoiceTestTask } from 'src/app/classes/task-type'
 
 @Component({
   selector: 'app-choice-test',
@@ -7,8 +8,10 @@ import { Example, ChoiceTest, Task } from 'src/app/classes/task'
   styleUrls: ['./choice-test.component.scss']
 })
 export class ChoiceTestComponent implements OnInit {
-  public task!: Task<ChoiceTest>
   public ex1: ChoiceTest[] = [new ChoiceTest('Co oznacza słowo Winter?', 'Zima', ['Lato', 'Wiosna', 'Jesień'])]
+  public task: Task<ChoiceTest> = new Task('1','Pory roku', this.ex1, ChoiceTestTask, true)
+
+  public counter = 0
   public constructor() { }
 
   public ngOnInit(): void {

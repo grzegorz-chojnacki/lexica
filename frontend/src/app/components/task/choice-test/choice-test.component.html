@@ -1,11 +1,11 @@
 <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span class="overline above"></span>
-
+        <span class="overline above">{{task?.type?.name}}</span>
+        {{task.name}}
       </mat-card-title>
       <mat-card-subtitle>
-        Przykład
+        Przykład {{ counter + 1 }}/{{ task?.examples?.length }}
       </mat-card-subtitle>
     </mat-card-header>
 
