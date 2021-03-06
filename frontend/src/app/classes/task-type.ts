@@ -1,3 +1,4 @@
+import { SimpleCardEditorComponent } from "../components/task/editor/simple-card-editor/simple-card-editor.component"
 import { SimpleCardViewComponent } from "../components/task/task-view/simple-card-view/simple-card-view.component"
 
 export class TaskType {
@@ -13,11 +14,15 @@ export class TaskType {
     public readonly id: number,
     public readonly name: string,
     public readonly view: any,
+    public readonly editor: any,
     public readonly description?: string,
     public readonly image?: ImageBitmap
   ) { }
 }
 
-export const EmptyTask      = new TaskType(0, '', null)
-export const SimpleCardTask = new TaskType(1, 'Fiszka', SimpleCardViewComponent)
-export const ChoiceTestTask = new TaskType(2, 'Test', null)
+export const EmptyTask = new TaskType(0, '', null, null)
+
+export const SimpleCardTask =
+  new TaskType(1, 'Fiszka', SimpleCardViewComponent, SimpleCardEditorComponent)
+export const ChoiceTestTask =
+  new TaskType(2, 'Test', null, null)

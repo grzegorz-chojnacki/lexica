@@ -4,11 +4,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { SimpleCard } from 'src/app/classes/task'
 
 @Component({
-  selector: 'app-task-adding',
-  templateUrl: './simple-card-adding.component.html',
-  styleUrls: ['./simple-card-adding.component.scss']
+  selector: 'app-simple-card-dialog',
+  templateUrl: './simple-card-dialog.component.html',
+  styleUrls: ['./simple-card-dialog.component.scss']
 })
-export class SimpleCardAddingComponent implements OnInit {
+export class SimpleCardDialogComponent implements OnInit {
   public readonly simpleCard = this.formBuilder.group({
     foreignWord: new FormControl(this.card.foreignWord, [ Validators.required ]),
     nativeWord:  new FormControl(this.card.nativeWord,  [ Validators.required ])
