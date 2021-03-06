@@ -1,15 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
 import { SimpleCard } from 'src/app/classes/example'
-
-type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
-
-const arrayNotEmpty = (c: AbstractControl): arrayNotEmptyResult =>
-  (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
+import { arrayNotEmpty } from 'src/app/classes/utils'
 
 @Component({
   selector: 'app-simple-card-editor',
