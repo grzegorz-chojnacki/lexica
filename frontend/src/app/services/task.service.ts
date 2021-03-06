@@ -23,18 +23,18 @@ export interface TaskForm {
 })
 export class TaskService {
   public  readonly emptyTask = new Task('', '', [], SimpleCardTask)
-  private taskSource = new BehaviorSubject<Task<SimpleCard>>(this.emptyTask)
+  private taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
   public constructor(
     private readonly userService: UserService,
     private readonly http: HttpClient) { }
 
-  public getTask(teamId: string | null, taskId: string | null): Observable<Task<SimpleCard>> {
+  public getTask(teamId: string | null, taskId: string | null): Observable<Task<Example>> {
     if (teamId && taskId) { this.refreshTaskSource(teamId, taskId) }
     return this.taskSource.asObservable()
   }
 
   private refreshTaskSource(teamId: string, taskId: string): void {
-    this.http.get<Task<SimpleCard>>(
+    this.http.get<Task<Example>>(
         `${lexicaURL}/team/${teamId}/task/${taskId}`,
         this.userService.authHeader())
       .pipe(map(Task.deserialize))
@@ -42,7 +42,7 @@ export class TaskService {
         task => this.taskSource.next(task),
         err => {
           this.taskSource.error(err) // Reset taskSource after error
-          this.taskSource = new BehaviorSubject<Task<SimpleCard>>(this.emptyTask)
+          this.taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
         })
   }
 

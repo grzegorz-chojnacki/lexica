@@ -1,4 +1,4 @@
-import { TaskType } from './task-type'
+import { TaskType, SimpleCardTask, ChoiceTestTask } from './task-type'
 import { Team } from './team'
 
 export type TaskAndUsersWithProgress = {
@@ -30,7 +30,7 @@ this.decoys.push(this.answer)
 }
 
 export class Task<T extends Example> {
-  public static deserialize(task: Task<SimpleCard>): Task<SimpleCard> {
+  public static deserialize(task: Task<Example>): Task<Example> {
     return new Task(
       task.id,
       task.name,
