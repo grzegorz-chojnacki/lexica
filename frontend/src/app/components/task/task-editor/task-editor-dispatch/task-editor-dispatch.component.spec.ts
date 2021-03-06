@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { EditorViewComponent } from './editor-view.component'
+import { TaskEditorDispatchComponent } from './task-editor-dispatch.component'
 
 describe('EditorViewComponent', () => {
-  let component: EditorViewComponent
-  let fixture: ComponentFixture<EditorViewComponent>
+  let component: TaskEditorDispatchComponent
+  let fixture: ComponentFixture<TaskEditorDispatchComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditorViewComponent ]
+      declarations: [ TaskEditorDispatchComponent ]
     })
     .compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditorViewComponent)
+    fixture = TestBed.createComponent(TaskEditorDispatchComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

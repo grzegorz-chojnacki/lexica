@@ -5,7 +5,7 @@ import { Task } from 'src/app/classes/task'
 import { ChoiceTestTask, NullTask, SimpleCardTask } from 'src/app/classes/task-type'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { TaskService } from 'src/app/services/task.service'
-import { TaskDirective } from '../../task-view/task-view.component'
+import { TaskDirective } from '../../task-view/task-view-dispatch/task-view-dispatch.component'
 import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-editor.component'
 
 const taskTypeEditorMap = new Map([
@@ -19,11 +19,11 @@ const newTaskEditorMap = new Map([
 ])
 
 @Component({
-  selector: 'app-editor-view',
-  templateUrl: './editor-view.component.html',
-  styleUrls: ['./editor-view.component.scss']
+  selector: 'app-task-editor-dispatch',
+  templateUrl: './task-editor-dispatch.component.html',
+  styleUrls: ['./task-editor-dispatch.component.scss']
 })
-export class EditorViewComponent implements OnInit {
+export class TaskEditorDispatchComponent implements OnInit {
   public teamId!: string
   public taskId!: string
 

@@ -9,7 +9,7 @@ import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { ChoiceTestTask, NullTask, SimpleCardTask } from 'src/app/classes/task-type'
 import { Example } from 'src/app/classes/example'
-import { SimpleCardViewComponent } from './simple-card-view/simple-card-view.component'
+import { SimpleCardViewComponent } from '../simple-card-view/simple-card-view.component'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
@@ -22,11 +22,11 @@ const taskTypeViewMap = new Map([
 ])
 
 @Component({
-  selector: 'app-task-view',
-  templateUrl: './task-view.component.html',
-  styleUrls: ['./task-view.component.scss']
+  selector: 'app-task-view-dispatch',
+  templateUrl: './task-view-dispatch.component.html',
+  styleUrls: ['./task-view-dispatch.component.scss']
 })
-export class TaskViewComponent implements OnInit {
+export class TaskViewDispatchComponent implements OnInit {
   public team!: Team
   public user!: User
   public task!: Task<Example>

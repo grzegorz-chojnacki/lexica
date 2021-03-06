@@ -33,7 +33,6 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
-import { TaskDirective, TaskViewComponent } from './components/task/task-view/task-view.component'
 import { TaskListComponent } from './components/task/task-list/task-list.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
@@ -61,9 +60,10 @@ import { ColorDialogComponent } from './components/account/color-dialog/color-di
 import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 import { SimpleCardViewComponent } from './components/task/task-view/simple-card-view/simple-card-view.component'
-import { SimpleCardEditorComponent } from './components/task/editor/simple-card-editor/simple-card-editor.component'
-import { EditorViewComponent } from './components/task/editor/editor-view/editor-view.component'
-import { SimpleCardDialogComponent } from './components/task/editor/simple-card-dialog/simple-card-dialog.component'
+import { SimpleCardEditorComponent } from './components/task/task-editor/simple-card-editor/simple-card-editor.component'
+import { TaskEditorDispatchComponent } from './components/task/task-editor/task-editor-dispatch/task-editor-dispatch.component'
+import { SimpleCardDialogComponent } from './components/task/task-editor/simple-card-dialog/simple-card-dialog.component'
+import { TaskDirective, TaskViewDispatchComponent } from './components/task/task-view/task-view-dispatch/task-view-dispatch.component'
 
 @NgModule({
   declarations: [
@@ -85,7 +85,7 @@ import { SimpleCardDialogComponent } from './components/task/editor/simple-card-
     TaskDialogComponent,
     TaskMenuComponent,
     TaskDetailsComponent,
-    TaskViewComponent,
+    TaskViewDispatchComponent,
     TeamSettingsComponent,
     TeamProgressComponent,
     LoginComponent,
@@ -101,7 +101,7 @@ import { SimpleCardDialogComponent } from './components/task/editor/simple-card-
     ConfirmationDialogComponent,
     SimpleCardViewComponent,
     TaskDirective,
-    EditorViewComponent,
+    TaskEditorDispatchComponent,
     SimpleCardDialogComponent
   ],
   imports: [
