@@ -55,10 +55,12 @@ export class EditorViewComponent implements OnInit {
   }
 
   public submit(task: Task<Example>): void {
-    const request = (this.taskId)
-      ? this.taskService.updateTask(this.teamId, this.taskId, task)
-      : this.taskService.createTask(this.teamId, task)
-    request.subscribe(_ => this.navigateToTeam())
+    if (task) {
+      const request = (this.taskId)
+        ? this.taskService.updateTask(this.teamId, this.taskId, task)
+        : this.taskService.createTask(this.teamId, task)
+      request.subscribe(_ => this.navigateToTeam())
+    } else { this.navigateToTeam() }
   }
 
   private resolveTaskTemplate(task: Task<Example>): void {

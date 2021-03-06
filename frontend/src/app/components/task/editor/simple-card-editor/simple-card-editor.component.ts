@@ -64,4 +64,5 @@ export class SimpleCardEditorComponent implements OnInit {
   }
 
   public submit(): void { this.onSubmit.emit(this.taskForm.value) }
+  public cancel(): void { this.onSubmit.emit(null) }
 }
