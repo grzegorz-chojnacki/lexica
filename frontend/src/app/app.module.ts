@@ -33,7 +33,6 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
-import { TaskViewComponent } from './components/task/task-view/task-view.component'
 import { TaskListComponent } from './components/task/task-list/task-list.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
@@ -47,21 +46,24 @@ import { FullNamePipe } from './pipes/full-name.pipe'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { AccountViewComponent } from './components/account/account-view/account-view.component'
 import { HttpClientModule } from '@angular/common/http'
-import { SimpleCardsAddingComponent } from './components/task/simple-cards-adding/simple-cards-adding.component'
 import { TeamProgressComponent } from './components/team/team-progress/team-progress.component'
-import { SimpleCardAddingComponent } from './components/task/simple-card-adding/simple-card-adding.component'
 import { TeamSettingsComponent } from './components/team/team-settings/team-settings.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { FullNameDialogComponent } from './components/account/full-name-dialog/full-name-dialog.component'
 import { UsernameDialogComponent } from './components/account/username-dialog/username-dialog.component'
 import { LoginComponent } from './components/login/login.component'
 import { RegisterComponent } from './components/register/register.component'
-import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component';
-import { SortMembersPipe } from './pipes/sort-members.pipe';
-import { AvatarComponent } from './components/account/avatar/avatar.component';
-import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component';
-import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component';
+import { PasswordDialogComponent } from './components/account/password-dialog/password-dialog.component'
+import { SortMembersPipe } from './pipes/sort-members.pipe'
+import { AvatarComponent } from './components/account/avatar/avatar.component'
+import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component'
+import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
+import { SimpleCardViewComponent } from './components/task/task-view/simple-card-view/simple-card-view.component'
+import { SimpleCardEditorComponent } from './components/task/task-editor/simple-card-editor/simple-card-editor.component'
+import { TaskEditorDispatchComponent } from './components/task/task-editor/task-editor-dispatch/task-editor-dispatch.component'
+import { SimpleCardDialogComponent } from './components/task/task-editor/simple-card-dialog/simple-card-dialog.component'
+import { TaskDirective, TaskViewDispatchComponent } from './components/task/task-view/task-view-dispatch/task-view-dispatch.component'
 
 @NgModule({
   declarations: [
@@ -73,8 +75,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     TeamContainerComponent,
     SidebarComponent,
     FullNamePipe,
-    SimpleCardsAddingComponent,
-    SimpleCardAddingComponent,
+    SimpleCardEditorComponent,
     TaskListComponent,
     MemberListComponent,
     TaskAddingComponent,
@@ -84,7 +85,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     TaskDialogComponent,
     TaskMenuComponent,
     TaskDetailsComponent,
-    TaskViewComponent,
+    TaskViewDispatchComponent,
     TeamSettingsComponent,
     TeamProgressComponent,
     LoginComponent,
@@ -98,6 +99,10 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     ColorDialogComponent,
     ChoiceTestComponent,
     ConfirmationDialogComponent,
+    SimpleCardViewComponent,
+    TaskDirective,
+    TaskEditorDispatchComponent,
+    SimpleCardDialogComponent
   ],
   imports: [
     BrowserModule,

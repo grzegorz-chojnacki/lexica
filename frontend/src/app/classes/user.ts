@@ -1,5 +1,6 @@
+import { Example } from './example'
 import { Progress } from './progress'
-import { Task, Example } from './task'
+import { Task } from './task'
 
 export class User {
 

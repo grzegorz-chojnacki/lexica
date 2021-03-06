@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { Example } from 'src/app/classes/example'
 import { Progress } from 'src/app/classes/progress'
-import { Example, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
 import { TeamService } from 'src/app/services/team.service'

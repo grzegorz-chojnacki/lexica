@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { Example, ChoiceTest, Task } from 'src/app/classes/task'
+import { ChoiceTest } from 'src/app/classes/example'
+import { Task } from 'src/app/classes/task'
 import { ChoiceTestTask } from 'src/app/classes/task-type'
 
 @Component({
