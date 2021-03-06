@@ -1,4 +1,4 @@
-import { TaskType, SimpleCardTask, ChoiceTestTask } from './task-type'
+import { TaskType } from './task-type'
 import { Team } from './team'
 
 export type TaskAndUsersWithProgress = {
@@ -24,9 +24,9 @@ export class ChoiceTest extends Example {
     public readonly image?: ImageBitmap,
   ) { super() }
 
-public addCorrectAnswerToDecoys(): void {
-this.decoys.push(this.answer)
-}
+  public addCorrectAnswerToDecoys(): void {
+    this.decoys.push(this.answer)
+  }
 }
 
 export class Task<T extends Example> {
@@ -35,7 +35,7 @@ export class Task<T extends Example> {
       task.id,
       task.name,
       task.examples,
-      task.type,
+      TaskType.deserialize(task.type),
       task.isActive,
       task.description)
   }

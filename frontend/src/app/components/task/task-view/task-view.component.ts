@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
-import { SimpleCardViewComponent } from './simple-card-view/simple-card-view.component';
+import { EmptyTask } from 'src/app/classes/task-type'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
@@ -52,13 +52,14 @@ export class TaskViewComponent implements OnInit {
   }
 
   private resolveTaskTemplate(task: Task<Example>): void {
-    const viewContainerRef = this.taskHost.viewContainerRef
-    viewContainerRef.clear()
+    if (task.type !== EmptyTask) {
+      const viewContainerRef = this.taskHost.viewContainerRef
+      viewContainerRef.clear()
 
-    if (task.type.id === 1) {
-      const componentFactory = this.cfr.resolveComponentFactory(SimpleCardViewComponent)
-      const componentRef = viewContainerRef.createComponent<SimpleCardViewComponent>(componentFactory)
-      componentRef.instance.task = task as Task<SimpleCard>
-    } else { console.log('Other') }
+      const componentFactory = this.cfr.resolveComponentFactory(task.type.view)
+      const componentRef = viewContainerRef
+        .createComponent<typeof task.type.view>(componentFactory)
+      componentRef.instance.task = task as Task<typeof task.type>
+    }
   }
 }
