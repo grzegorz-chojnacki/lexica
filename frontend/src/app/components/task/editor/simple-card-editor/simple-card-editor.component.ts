@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { SimpleCard } from 'src/app/classes/task'
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms'
@@ -9,7 +9,7 @@ import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dia
 type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
 
 const arrayNotEmpty = (c: AbstractControl): arrayNotEmptyResult =>
- (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
+  (c.value.length > 0) ? null : { arrayNotEmpty: { valid: false }}
 
 @Component({
   selector: 'app-simple-card-editor',
@@ -17,6 +17,7 @@ const arrayNotEmpty = (c: AbstractControl): arrayNotEmptyResult =>
   styleUrls: ['./simple-card-editor.component.scss']
 })
 export class SimpleCardEditorComponent implements OnInit {
+  @Output() public onSubmit = new EventEmitter()
   public taskForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
     description: new FormControl('', [ Validators.maxLength(50) ]),
@@ -55,7 +56,7 @@ export class SimpleCardEditorComponent implements OnInit {
   public addCard(): void {
     this.dialog
       .open(SimpleCardDialogComponent,
-        { data: new SimpleCard('', ''), hasBackdrop: false })
+        { data: { nativeWord: '', foreignWord: '' }, hasBackdrop: false })
       .afterClosed()
       .subscribe(result => {
         if (result) {
@@ -64,4 +65,6 @@ export class SimpleCardEditorComponent implements OnInit {
         }
       })
   }
+
+  public submit(): void { this.onSubmit.emit(this.taskForm.value) }
 }

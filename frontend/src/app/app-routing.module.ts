@@ -4,12 +4,12 @@ import { AccountViewComponent } from './components/account/account-view/account-
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
 import { WorkspaceComponent } from './components/workspace/workspace.component'
 import { TaskViewComponent } from './components/task/task-view/task-view.component'
-import { SimpleCardEditorComponent } from './components/task/editor/simple-card-editor/simple-card-editor.component'
 import { StartViewComponent } from './components/start-view/start-view.component'
 import { LoginComponent } from './components/login/login.component'
 import { AuthorizedGuard, UnauthorizedGuard } from './guards/authorization.guard'
 import { RegisterComponent } from './components/register/register.component'
 import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
+import { EditorViewComponent } from './components/task/editor/editor-view/editor-view.component'
 
 const routes: Routes = [
   {
@@ -20,12 +20,12 @@ const routes: Routes = [
   {
     path: 'team/:teamId/task/new',
     canActivate: [AuthorizedGuard],
-    component: SimpleCardEditorComponent
+    component: EditorViewComponent
   },
   {
     path: 'team/:teamId/task/:taskId/edit',
     canActivate: [AuthorizedGuard],
-    component: SimpleCardEditorComponent
+    component: EditorViewComponent
   },
   {
     path: 'team/:teamId/task/:taskId',

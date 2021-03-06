@@ -44,6 +44,7 @@
 
     <mat-card-actions>
       <button mat-button color="accent"
+      (click)="submit()"
       [disabled]="!taskForm.valid">
       Zapisz
     </button>

@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { SimpleCard } from 'src/app/classes/task'
 
 @Component({
   selector: 'app-simple-card-dialog',
@@ -16,7 +15,7 @@ export class SimpleCardDialogComponent implements OnInit {
 
   public constructor(
     private readonly formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private readonly card: SimpleCard) { }
+    @Inject(MAT_DIALOG_DATA) private readonly card: any) { }
 
   public ngOnInit(): void { }
 }

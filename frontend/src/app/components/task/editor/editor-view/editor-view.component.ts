@@ -40,11 +40,11 @@ export class EditorViewComponent implements OnInit {
     }
   }
 
-  public submit(): void {
-    // const request = (this.taskId)
-    //   ? this.taskService.updateTask(this.teamId, this.taskId, this.taskForm.value)
-    //   : this.taskService.createTask(this.teamId, this.taskForm.value)
-    // request.subscribe(_ => this.navigateToTeam())
+  public submit(task: Task<Example>): void {
+    const request = (this.taskId)
+      ? this.taskService.updateTask(this.teamId, this.taskId, task)
+      : this.taskService.createTask(this.teamId, task)
+    request.subscribe(_ => this.navigateToTeam())
   }
 
   private resolveTaskTemplate(task: Task<Example>): void {
@@ -55,7 +55,9 @@ export class EditorViewComponent implements OnInit {
       const componentFactory = this.cfr.resolveComponentFactory(task.type.editor)
       const componentRef = viewContainerRef
         .createComponent<typeof task.type.editor>(componentFactory)
+
       componentRef.instance.taskForm.patchValue(task)
+      componentRef.instance.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
     }
   }
 
