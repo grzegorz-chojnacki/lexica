@@ -6,6 +6,7 @@ import { Location } from '@angular/common'
 import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
 import { SimpleCard } from 'src/app/classes/example'
 import { arrayNotEmpty } from 'src/app/classes/utils'
+import { SimpleCardTask } from 'src/app/classes/task-type'
 
 @Component({
   selector: 'app-simple-card-editor',
@@ -18,7 +19,7 @@ export class SimpleCardEditorComponent implements OnInit {
     name:        new FormControl('', [ Validators.required ]),
     description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
-    type:        ''
+    type:        SimpleCardTask
   })
 
   public constructor(

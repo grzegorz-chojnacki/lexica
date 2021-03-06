@@ -7,13 +7,19 @@ import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
-import { EmptyTask } from 'src/app/classes/task-type'
-import { Example, SimpleCard } from 'src/app/classes/example'
+import { ChoiceTestTask, NullTask, SimpleCardTask } from 'src/app/classes/task-type'
+import { Example } from 'src/app/classes/example'
+import { SimpleCardViewComponent } from './simple-card-view/simple-card-view.component'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
   public constructor(public viewContainerRef: ViewContainerRef) { }
 }
+
+const taskTypeViewMap = new Map([
+  [ SimpleCardTask, SimpleCardViewComponent ],
+  [ ChoiceTestTask, null ]
+])
 
 @Component({
   selector: 'app-task-view',
@@ -53,13 +59,14 @@ export class TaskViewComponent implements OnInit {
   }
 
   private resolveTaskTemplate(task: Task<Example>): void {
-    if (task.type !== EmptyTask) {
+    if (task.type !== NullTask) {
       const viewContainerRef = this.taskHost.viewContainerRef
       viewContainerRef.clear()
 
-      const componentFactory = this.cfr.resolveComponentFactory(task.type.view)
+      const component = taskTypeViewMap.get(task.type) as any
+      const componentFactory = this.cfr.resolveComponentFactory(component)
       const componentRef = viewContainerRef
-        .createComponent<typeof task.type.view>(componentFactory)
+        .createComponent<typeof component>(componentFactory)
       componentRef.instance.task = task as Task<typeof task.type>
     }
   }

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators'
 import { Task } from 'src/app/classes/task'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
-import { TaskType, EmptyTask } from '../classes/task-type'
+import { TaskType, NullTask } from '../classes/task-type'
 import { Team } from '../classes/team'
 import { UserService } from './user.service'
 import { Example } from '../classes/example'
@@ -23,7 +23,7 @@ export interface TaskForm {
   providedIn: 'root'
 })
 export class TaskService {
-  public  readonly emptyTask = new Task('', '', [], EmptyTask)
+  public  readonly emptyTask = new Task('', '', [], NullTask)
   private taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
   public constructor(
     private readonly userService: UserService,
