@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { Task, Example, TaskAndUsersWithProgress } from 'src/app/classes/task'
+import { Task, TaskAndUsersWithProgress } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { Subscription } from 'rxjs'
 import { DataService } from 'src/app/services/data.service'
+import { Example } from 'src/app/classes/example'
 
 
 

@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
-import { Task, Example } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 import { TeamService } from 'src/app/services/team.service'
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { Example } from 'src/app/classes/example'
 
 @Component({
   selector: 'app-task-menu',
@@ -55,5 +56,3 @@ export class TaskMenuComponent implements OnInit {
     })
   }
 }
-
-

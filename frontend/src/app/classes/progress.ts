@@ -1,4 +1,5 @@
-import { Example, Task } from './task'
+import { Example } from './example'
+import { Task } from './task'
 
 export class Progress {
   public static sum(acc: number, progress: Progress): number {

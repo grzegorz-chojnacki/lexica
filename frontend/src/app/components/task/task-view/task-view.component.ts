@@ -1,13 +1,14 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Directive, ViewContainerRef } from '@angular/core'
-import { Example, SimpleCard, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { EmptyTask } from 'src/app/classes/task-type'
+import { Example, SimpleCard } from 'src/app/classes/example'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
@@ -45,7 +46,7 @@ export class TaskViewComponent implements OnInit {
     this.taskService
       .getTask(teamId, taskId)
       .subscribe(task => {
-        this.task = task as Task<SimpleCard>
+        this.task = task
         this.resolveTaskTemplate(task)
         this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
       }, _ => this.router.navigate(['/']))

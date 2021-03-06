@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { Example, SimpleCard, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from '../lexica.properties'
 import { TaskType, EmptyTask } from '../classes/task-type'
 import { Team } from '../classes/team'
 import { UserService } from './user.service'
+import { Example } from '../classes/example'
 
 export interface TaskForm {
   readonly team: Team
   readonly name: string
   readonly description?: string
-  readonly examples: SimpleCard[]
+  readonly examples: Example[]
   readonly image?: string
   readonly type: TaskType
 }

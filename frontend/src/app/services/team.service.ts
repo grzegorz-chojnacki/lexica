@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http'
 import { lexicaURL } from 'src/app/lexica.properties'
 import { Team } from 'src/app/classes/team'
 import { UserService } from './user.service'
-import { Example, Task } from '../classes/task'
+import { Task } from '../classes/task'
+import { Example } from '../classes/example'
 
 export interface TeamForm {
   readonly name: string

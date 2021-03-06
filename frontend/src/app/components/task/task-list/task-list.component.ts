@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Task, Example } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { MatDialog } from '@angular/material/dialog'
 import { TaskDialogComponent } from 'src/app/components/task/task-dialog/task-dialog.component'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
+import { Example } from 'src/app/classes/example'
 
 @Component({
   selector: 'app-task-list',

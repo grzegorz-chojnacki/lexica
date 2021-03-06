@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Location } from '@angular/common'
 import { MatDialog } from '@angular/material/dialog'
-import { SimpleCard, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { UserService } from 'src/app/services/user.service'
 import { TaskSummaryComponent } from '../../task-summary/task-summary.component'
 import { DataService } from 'src/app/services/data.service'
+import { SimpleCard } from 'src/app/classes/example'
 
 @Component({
   selector: 'app-simple-card-view',

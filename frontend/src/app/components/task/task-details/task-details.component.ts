@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Example } from 'src/app/classes/example'
 import { Progress } from 'src/app/classes/progress'
-import { Task, Example, TaskAndUsersWithProgress } from 'src/app/classes/task'
+import { Task, TaskAndUsersWithProgress } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 
 @Component({

@@ -1,6 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Example, Task } from 'src/app/classes/task'
+import { Example } from 'src/app/classes/example'
+import { Task } from 'src/app/classes/task'
 import { EmptyTask } from 'src/app/classes/task-type'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { TaskService } from 'src/app/services/task.service'

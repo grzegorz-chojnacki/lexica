@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { SimpleCard } from 'src/app/classes/example'
 import { Progress } from 'src/app/classes/progress'
-import { SimpleCard, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 
 type AttemptSummary = { knewList: SimpleCard[], task: Task<SimpleCard> }
 

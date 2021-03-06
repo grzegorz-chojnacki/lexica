@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { SimpleCard } from 'src/app/classes/task'
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
+import { SimpleCard } from 'src/app/classes/example'
 
 type arrayNotEmptyResult = { arrayNotEmpty: { valid: boolean }} | null
 
@@ -56,7 +56,7 @@ export class SimpleCardEditorComponent implements OnInit {
   public addCard(): void {
     this.dialog
       .open(SimpleCardDialogComponent,
-        { data: { nativeWord: '', foreignWord: '' }, hasBackdrop: false })
+        { data: new SimpleCard('', ''), hasBackdrop: false })
       .afterClosed()
       .subscribe(result => {
         if (result) {
