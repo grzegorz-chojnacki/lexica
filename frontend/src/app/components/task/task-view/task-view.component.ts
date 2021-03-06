@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Location } from '@angular/common'
-
+import { Directive, ViewContainerRef } from '@angular/core'
 import { Example, SimpleCard, Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
-import { TaskSummaryComponent } from '../task-summary/task-summary.component'
-import { MatDialog } from '@angular/material/dialog'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
-import { DataService } from 'src/app/services/data.service'
-import { Subscription } from 'rxjs'
+import { SimpleCardViewComponent } from './simple-card-view/simple-card-view.component';
 
-
+@Directive({ selector: '[taskHost]' })
+export class TaskDirective {
+  public constructor(public viewContainerRef: ViewContainerRef) { }
+}
 
 @Component({
   selector: 'app-task-view',
@@ -23,26 +22,21 @@ import { Subscription } from 'rxjs'
 export class TaskViewComponent implements OnInit {
   public team!: Team
   public user!: User
-  public task!: Task<SimpleCard>
-  public message!: string | null
-  public subscription!: Subscription
+  public task!: Task<Example>
 
-  public counter = 0
-  public readonly knewList = new Array<Example>()
+  @ViewChild(TaskDirective, { static: true })
+  public taskHost!: TaskDirective
 
   public constructor(
-    private data: DataService,
-    public readonly location: Location,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly breadCrumbService: BreadCrumbService,
     private readonly taskService: TaskService,
     private readonly userService: UserService,
-    private readonly dialog: MatDialog) { }
+    private readonly cfr: ComponentFactoryResolver
+    ) { }
 
   public ngOnInit(): void {
-    this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
-
     this.userService.user.subscribe(user => this.user = user)
 
     const teamId = this.route.snapshot.paramMap.get('teamId')
@@ -51,33 +45,20 @@ export class TaskViewComponent implements OnInit {
     this.taskService
       .getTask(teamId, taskId)
       .subscribe(task => {
-        this.task = task
+        this.task = task as Task<SimpleCard>
+        this.resolveTaskTemplate(task)
         this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
       }, _ => this.router.navigate(['/']))
   }
 
-  public nextCard(knew: boolean): void {
-    if (knew) { this.knewList.push(this.task.examples[this.counter]) }
+  private resolveTaskTemplate(task: Task<Example>): void {
+    const viewContainerRef = this.taskHost.viewContainerRef
+    viewContainerRef.clear()
 
-    if (this.counter < this.task.examples.length - 1) {
-      this.counter++
-    } else {
-      this.dialog.open(TaskSummaryComponent, {
-        disableClose: true,
-        data: {
-          knewList: this.knewList,
-          task: this.task
-        },
-        width: '500px'
-      }).afterClosed().subscribe(progress => {
-        if (progress) {
-          this.userService
-            .addProgress(progress)
-            .subscribe(_ => this.location.back())
-        } else {
-          window.location.reload()
-        }
-      })
-    }
+    if (task.type.id === 1) {
+      const componentFactory = this.cfr.resolveComponentFactory(SimpleCardViewComponent)
+      const componentRef = viewContainerRef.createComponent<SimpleCardViewComponent>(componentFactory)
+      componentRef.instance.task = task as Task<SimpleCard>
+    } else { console.log('Other') }
   }
 }

@@ -33,7 +33,7 @@ import { NewTeamComponent } from './components/team/new-team-dialog/new-team.com
 import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
-import { TaskViewComponent } from './components/task/task-view/task-view.component'
+import { TaskDirective, TaskViewComponent } from './components/task/task-view/task-view.component'
 import { TaskListComponent } from './components/task/task-list/task-list.component'
 import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
@@ -61,7 +61,8 @@ import { SortMembersPipe } from './pipes/sort-members.pipe';
 import { AvatarComponent } from './components/account/avatar/avatar.component';
 import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component';
 import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { SimpleCardViewComponent } from './components/task/task-view/simple-card-view/simple-card-view.component'
 
 @NgModule({
   declarations: [
@@ -98,6 +99,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     ColorDialogComponent,
     ChoiceTestComponent,
     ConfirmationDialogComponent,
+    SimpleCardViewComponent,
+    TaskDirective
   ],
   imports: [
     BrowserModule,
