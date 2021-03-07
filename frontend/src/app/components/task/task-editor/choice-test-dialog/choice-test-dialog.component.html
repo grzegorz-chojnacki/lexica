@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Nowy test</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="simpleCard">
+    <mat-form-field appearance="fill">
+      <mat-label>Pytanie</mat-label>
+      <input matInput placeholder="Np. Co oznacza słowo Winter?" formControlName="foreignWord" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Prawidłowa odpowiedź</mat-label>
+      <input matInput placeholder="Np. Zima" formControlName="nativeWord" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+    <ng-container *ngIf="newAnswer===true">
+    <button mat-button color="accent"
+    (click)="createNewAnswer()">add</button>
+    <mat-form-field appearance="fill">
+      <mat-label>Inne odpowiedzi</mat-label>
+      <input matInput placeholder="Np. Wiosna" formControlName="decoys" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+  </ng-container>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="accent"
+      [disabled]="!simpleCard.valid"
+      [mat-dialog-close]="simpleCard.value">
+    Zapisz
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>
