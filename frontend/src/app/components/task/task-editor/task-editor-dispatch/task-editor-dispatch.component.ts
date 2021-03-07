@@ -2,20 +2,21 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
-import { ChoiceTestTask, NullTask, SimpleCardTask } from 'src/app/classes/task-type'
+import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { TaskService } from 'src/app/services/task.service'
 import { TaskDirective } from '../../task-view/task-view-dispatch/task-view-dispatch.component'
 import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-editor.component'
+import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-editor.component'
 
-const taskTypeEditorMap = new Map([
+const taskTypeEditorMap = new Map<TaskType, object>([
   [ SimpleCardTask, SimpleCardEditorComponent ],
-  [ ChoiceTestTask, null ]
+  [ ChoiceTestTask, ChoiceTestEditorComponent ]
 ])
 
-const newTaskEditorMap = new Map([
+const newTaskEditorMap = new Map<string, object>([
   [ 'simplecard', SimpleCardEditorComponent ],
-  [ 'choiceTest', null ]
+  [ 'choicetest', ChoiceTestEditorComponent ]
 ])
 
 @Component({
@@ -74,6 +75,7 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   private resolveNewTaskTemplate(type: string): void {
     const component = newTaskEditorMap.get(type)
+    console.log(component)
     const editor = this.setEditor(component).instance
     editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }

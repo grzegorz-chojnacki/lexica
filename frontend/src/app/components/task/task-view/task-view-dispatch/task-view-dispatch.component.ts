@@ -7,18 +7,19 @@ import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
 import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
-import { ChoiceTestTask, NullTask, SimpleCardTask } from 'src/app/classes/task-type'
+import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
 import { Example } from 'src/app/classes/example'
 import { SimpleCardViewComponent } from '../simple-card-view/simple-card-view.component'
+import { ChoiceTestViewComponent } from '../choice-test-view/choice-test-view.component'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
   public constructor(public viewContainerRef: ViewContainerRef) { }
 }
 
-const taskTypeViewMap = new Map([
+const taskTypeViewMap = new Map<TaskType, object>([
   [ SimpleCardTask, SimpleCardViewComponent ],
-  [ ChoiceTestTask, null ]
+  [ ChoiceTestTask, ChoiceTestViewComponent ]
 ])
 
 @Component({
