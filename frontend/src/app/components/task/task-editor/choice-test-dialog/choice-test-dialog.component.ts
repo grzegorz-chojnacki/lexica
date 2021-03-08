@@ -9,13 +9,16 @@ import { ChoiceTest } from 'src/app/classes/example'
   styleUrls: ['./choice-test-dialog.component.scss']
 })
 export class ChoiceTestDialogComponent implements OnInit {
-  public newAnswer = true
-  public readonly simpleCard = this.formBuilder.group({
-    foreignWord: new FormControl(this.card.question, [ Validators.required ]),
-    nativeWord:  new FormControl(this.card.answer,  [ Validators.required ]),
-    decoys: new FormControl(this.card.decoys, [Validators.required ])
+  public readonly choiceTest = this.formBuilder.group({
+    question: new FormControl(this.card.question, [ Validators.required ]),
+    answer:  new FormControl(this.card.answer,  [ Validators.required ]),
+    decoys:  new FormArray([new FormControl(this.card.decoys)])
+   // decoys: this.formBuilder.array([this.card.decoys])
   })
 
+  get decoys(): FormArray {
+    return this.choiceTest.get('decoys') as FormArray
+  }
   public constructor(
     private readonly formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private readonly card: ChoiceTest) { }
@@ -23,6 +26,6 @@ export class ChoiceTestDialogComponent implements OnInit {
   public ngOnInit(): void { }
 
   public createNewAnswer(): void {
-    this.newAnswer = true
+    this.decoys.push(this.formBuilder.control(''))
   }
 }
