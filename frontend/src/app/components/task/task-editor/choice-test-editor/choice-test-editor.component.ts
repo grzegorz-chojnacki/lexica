@@ -45,8 +45,9 @@ export class ChoiceTestEditorComponent implements OnInit {
       .afterClosed()
       .subscribe(result => {
         if (result) {
-          card.question  = result.nativeWord
-          card.answer = result.foreignWord
+          card.question  = result.question
+          card.answer = result.answer
+          card.decoys = result.decoys
         }
       })
   }
@@ -54,7 +55,7 @@ export class ChoiceTestEditorComponent implements OnInit {
   public addCard(): void {
     this.dialog
       .open(ChoiceTestDialogComponent,
-        { data: new ChoiceTest('', '', []), hasBackdrop: false })
+        { data: new ChoiceTest('', '', []), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
