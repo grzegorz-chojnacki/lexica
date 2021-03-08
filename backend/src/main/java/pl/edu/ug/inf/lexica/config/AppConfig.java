@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType simpleCardType = new TaskType(1,"Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType choiceTestType = new TaskType( 2,"Test jednokrotnego wyboru", "Test polega na wybraniu jednej prawidłowej odpowiedzi.");
     private final UserService userService;
     private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
@@ -27,7 +28,7 @@ public class AppConfig {
         this.teamService = teamService;
     }
 
-   List<ChoiceTest> generateChoiceTest =
+   Supplier<List<ChoiceTest>> generateChoiceTest = () ->
           List.of(new ChoiceTest("Pies po angielsku to:", "Dog", Set.of("Cat","Duck")),
                   new ChoiceTest("Co to jest jajko?", "Egg", Set.of("Eye")),
                   new ChoiceTest("Co oznacza 'nail'", "Jedno i drugie", Set.of("Gwóźdź","Paznokieć")));
@@ -85,7 +86,7 @@ public class AppConfig {
             List.of("Zadanie nieambitne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1), simpleCardType))
+            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1),choiceTestType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
@@ -136,6 +137,7 @@ public class AppConfig {
 
     public void initDataBase() {
         taskTypeRepository.save(simpleCardType);
+        taskTypeRepository.save(choiceTestType);
         userService.registerAll(testUsers);
 
         setTasks(testTeams, generateTasks);
