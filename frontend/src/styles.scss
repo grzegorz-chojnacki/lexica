@@ -14,3 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spacer { flex-grow: 1 }
 
 .color-shader { filter: hue-rotate(-180deg) sepia(0.2) hue-rotate(180deg) }
+
+.mat-dialog-container {
+  max-width: 100vh !important;
+}
