@@ -14,7 +14,4 @@ export class ChoiceTest extends Example {
     public decoys: string[],
   ) { super() }
 
-  public addCorrectAnswerToDecoys(): void {
-    this.decoys.push(this.answer)
-  }
 }
