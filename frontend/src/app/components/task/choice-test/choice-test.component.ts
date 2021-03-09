@@ -16,7 +16,7 @@ export class ChoiceTestComponent implements OnInit {
   public constructor() { }
 
   public ngOnInit(): void {
-    this.ex1.forEach(example => example.addCorrectAnswerToDecoys())
+    // this.ex1.forEach(example => example.addCorrectAnswerToDecoys())
   }
-
+// delete this component
 }
