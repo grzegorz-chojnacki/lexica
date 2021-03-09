@@ -28,7 +28,7 @@ public class AppConfig {
         this.teamService = teamService;
     }
 
-   Supplier<List<ChoiceTest>> generateChoiceTest = () ->
+   Supplier<List<Example>> generateChoiceTest = () ->
           List.of(new ChoiceTest("Pies po angielsku to:", "Dog", Set.of("Cat","Duck")),
                   new ChoiceTest("Co to jest jajko?", "Egg", Set.of("Eye")),
                   new ChoiceTest("Co oznacza 'nail'", "Jedno i drugie", Set.of("Gwóźdź","Paznokieć")));
@@ -43,7 +43,7 @@ public class AppConfig {
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
-    Supplier<List<SimpleCard>> generateCards1 = () -> Map.ofEntries(
+    Supplier<List<Example>> generateCards1 = () -> Map.ofEntries(
             Map.entry("liczba", "number"),
             Map.entry("cyfra", "digit"),
             Map.entry("liczba pierwsza", "prime number"),
@@ -60,7 +60,7 @@ public class AppConfig {
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
-    Supplier<List<SimpleCard>> generateCards2 = () -> Map.ofEntries(
+    Supplier<List<Example>> generateCards2 = () -> Map.ofEntries(
             Map.entry("wąskie gardło", "bottleneck"),
             Map.entry("przeglądarka", "browser"),
             Map.entry("znaczna część", "chunk"),
@@ -86,7 +86,7 @@ public class AppConfig {
             List.of("Zadanie nieambitne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1),choiceTestType))
+            .map(list -> new Task(list.get(0),generateCards1.get() , true, list.get(1),simpleCardType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
@@ -96,6 +96,15 @@ public class AppConfig {
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
             .map(list -> new Task(list.get(0),generateCards2.get()  , true, list.get(1), simpleCardType))
+            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .peek(task -> testTasks.add(task))
+            .collect(Collectors.toList());
+
+    Supplier<List<Task>> generateTasks3 = () -> List.of(
+            List.of("Seasons", "Naucz się pór roku."),
+            List.of("Inne",
+                    "Zadanie z trochę trudniejszymi przykładami. Przetestuj swoją wiedzę.")).stream()
+            .map(list -> new Task(list.get(0),generateChoiceTest.get()  , true, list.get(1), choiceTestType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
@@ -141,7 +150,8 @@ public class AppConfig {
         userService.registerAll(testUsers);
 
         setTasks(testTeams, generateTasks);
-        setTasks(testTeams2, generateTasks2);
+        setTasks(testTeams2, generateTasks3);
+
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);
