@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { Task } from 'src/app/classes/task'
 import { ChoiceTestTask } from 'src/app/classes/task-type'
 import { ChoiceTest } from 'src/app/classes/example'
@@ -9,15 +9,16 @@ import { ChoiceTest } from 'src/app/classes/example'
   styleUrls: ['./choice-test-view.component.scss']
 })
 export class ChoiceTestViewComponent implements OnInit {
-
-  public ex1: ChoiceTest[] = [new ChoiceTest('Co oznacza słowo Winter?', 'Zima', ['Lato', 'Wiosna', 'Jesień'])]
-  public task: Task<ChoiceTest> = new Task('1', 'Pory roku', this.ex1, ChoiceTestTask, true)
+  @Input() public task!: Task<ChoiceTest>
 
   public counter = 0
   public constructor() { }
 
   public ngOnInit(): void {
-    this.ex1.forEach(example => example.addCorrectAnswerToDecoys())
+    // correct answer added
+    this.task.examples.filter(example => example.decoys.push(example.answer))
+    // random order of answers
+    this.task.examples.filter(ex => ex.decoys.sort((a, b) => 0.5 - Math.random()))
   }
 
 
