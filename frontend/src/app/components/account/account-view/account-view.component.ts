@@ -31,7 +31,7 @@ export class AccountViewComponent implements OnInit {
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
   public changeUsername = () => this.openDialogAndUpdateUser(UsernameDialogComponent, true)
   public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent, true)
-  public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
+  public changeColor = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
   public removeAccount(): void {
     this.userService.removeAccount()
@@ -52,22 +52,14 @@ export class AccountViewComponent implements OnInit {
       })
   }
 
-
-  openDialog() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data:{
-        message: 'Czy na pewno usunąć?',
-        buttonText: {
-          ok: 'Usuń',
-          cancel: 'Nie'
-        }
+  public openDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Czy na pewno usunąć swoje konto?',
+        buttonText: { ok: 'Usuń', cancel: 'Nie' }
       }
-    });
-
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.removeAccount()
-      }
-    });
+    })
+      .afterClosed()
+      .subscribe(confirmed => confirmed ? this.removeAccount() : null)
   }
 }
