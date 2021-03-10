@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { Task } from 'src/app/classes/task'
-import { ChoiceTestTask } from 'src/app/classes/task-type'
 import { ChoiceTest } from 'src/app/classes/example'
 
 @Component({
@@ -10,6 +9,7 @@ import { ChoiceTest } from 'src/app/classes/example'
 })
 export class ChoiceTestViewComponent implements OnInit {
   @Input() public task!: Task<ChoiceTest>
+  @Output() public onSubmit = new EventEmitter()
 
   public counter = 0
   public constructor() { }
