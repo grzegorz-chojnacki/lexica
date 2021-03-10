@@ -10,6 +10,8 @@ import { PasswordDialogComponent } from '../password-dialog/password-dialog.comp
 import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
 import { Router } from '@angular/router'
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { snackBarDuration } from 'src/app/lexica.properties'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 
 @Component({
@@ -22,6 +24,7 @@ export class AccountViewComponent implements OnInit {
 
   public constructor(
     public  readonly location: Location,
+    private readonly snackbarService: MatSnackBar,
     private readonly router: Router,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
@@ -36,6 +39,8 @@ export class AccountViewComponent implements OnInit {
   public removeAccount(): void {
     this.userService.removeAccount()
     this.router.navigate([''])
+    this.snackbarService
+      .open('Usunięto konto!', undefined, { duration: snackBarDuration })
   }
 
   private openDialogAndUpdateUser<T>(component: ComponentType<T>, logout = false): void {
@@ -48,6 +53,8 @@ export class AccountViewComponent implements OnInit {
             this.userService.logout()
             this.router.navigate([''])
           }
+          this.snackbarService
+            .open('Zapisano zmiany!', undefined, { duration: snackBarDuration })
         }
       })
   }
