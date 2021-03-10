@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Example } from 'src/app/classes/example'
 import { Progress } from 'src/app/classes/progress'
 import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
+import { snackBarDuration } from 'src/app/lexica.properties'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
@@ -26,6 +28,7 @@ export class MemberListComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService,
     private readonly userService: UserService) { }
 
@@ -51,7 +54,11 @@ export class MemberListComponent implements OnInit {
     })
       .afterClosed()
       .subscribe(confirmed => {
-        if (confirmed) { this.teamService.leaveTeam(this.team, member) }
+        if (confirmed) {
+          this.teamService.leaveTeam(this.team, member)
+          this.snackbarService
+            .open('Usunięto członka!', undefined, { duration: snackBarDuration })
+        }
       })
   }
 }
