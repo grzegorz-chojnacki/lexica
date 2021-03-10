@@ -8,6 +8,8 @@ import { TaskService } from 'src/app/services/task.service'
 import { TaskDirective } from '../../task-view/task-view-dispatch/task-view-dispatch.component'
 import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-editor.component'
 import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-editor.component'
+import { snackBarDuration } from 'src/app/lexica.properties'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 const taskTypeEditorMap = new Map<TaskType, object>([
   [ SimpleCardTask, SimpleCardEditorComponent ],
@@ -33,6 +35,7 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   public constructor(
     private readonly breadCrumbService: BreadCrumbService,
+    private readonly snackbarService: MatSnackBar,
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -60,7 +63,12 @@ export class TaskEditorDispatchComponent implements OnInit {
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
-      request.subscribe(_ => this.navigateToTeam())
+
+      request.subscribe(_ => {
+        this.navigateToTeam()
+        this.snackbarService
+          .open('Zapisano zadanie!', undefined, { duration: snackBarDuration })
+      })
     } else { this.navigateToTeam() }
   }
 
@@ -75,7 +83,6 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   private resolveNewTaskTemplate(type: string): void {
     const component = newTaskEditorMap.get(type)
-    console.log(component)
     const editor = this.setEditor(component).instance
     editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }

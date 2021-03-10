@@ -7,6 +7,8 @@ import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-
 import { TeamService } from 'src/app/services/team.service'
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
 import { Example } from 'src/app/classes/example'
+import { snackBarDuration } from 'src/app/lexica.properties'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-task-menu',
@@ -21,6 +23,7 @@ export class TaskMenuComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService
   ) { }
 
@@ -35,24 +38,18 @@ export class TaskMenuComponent implements OnInit {
 
   public removeItself(): void {
     this.teamService.removeTask(this.task, this.team)
+    this.snackbarService
+      .open('Usunięto zadanie!', undefined, { duration: snackBarDuration })
   }
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: 'Czy na pewno usunąć?',
-        buttonText: {
-          ok: 'Usuń',
-          cancel: 'Nie'
-        }
+        message: 'Czy na pewno usunąć zadanie?',
+        buttonText: { ok: 'Usuń', cancel: 'Nie' }
       }
     })
-
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.removeItself()
-
-      }
-    })
+      .afterClosed()
+      .subscribe((confirmed: boolean) => confirmed ? this.removeItself() : null)
   }
 }
