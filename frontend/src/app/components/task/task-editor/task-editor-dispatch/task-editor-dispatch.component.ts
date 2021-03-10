@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
+import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
@@ -10,13 +10,14 @@ import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-edi
 import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-editor.component'
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { TaskEditorComponent } from '../task-editor'
 
-const taskTypeEditorMap = new Map<TaskType, object>([
+const taskTypeEditorMap = new Map<TaskType, any>([
   [ SimpleCardTask, SimpleCardEditorComponent ],
   [ ChoiceTestTask, ChoiceTestEditorComponent ]
 ])
 
-const newTaskEditorMap = new Map<string, object>([
+const newTaskEditorMap = new Map<string, any>([
   [ 'simplecard', SimpleCardEditorComponent ],
   [ 'choicetest', ChoiceTestEditorComponent ]
 ])
@@ -87,11 +88,11 @@ export class TaskEditorDispatchComponent implements OnInit {
     editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }
 
-  private setEditor(editor: any): any {
+  private setEditor(editor: any): ComponentRef<TaskEditorComponent> {
     const viewContainerRef = this.taskHost.viewContainerRef
     viewContainerRef.clear()
-    const componentFactory = this.cfr.resolveComponentFactory(editor)
-    return viewContainerRef.createComponent<typeof editor>(componentFactory)
+    const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(editor)
+    return viewContainerRef.createComponent<TaskEditorComponent>(componentFactory)
   }
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])

@@ -1,21 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
-import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
-import { ChoiceTest, SimpleCard } from 'src/app/classes/example'
+import { ChoiceTest } from 'src/app/classes/example'
 import { arrayNotEmpty } from 'src/app/classes/utils'
-import { ChoiceTestTask, SimpleCardTask } from 'src/app/classes/task-type'
+import { ChoiceTestTask } from 'src/app/classes/task-type'
 import { ChoiceTestDialogComponent } from '../choice-test-dialog/choice-test-dialog.component'
+import { TaskEditorComponent } from '../task-editor'
 
 @Component({
   selector: 'app-choice-test-editor',
   templateUrl: './choice-test-editor.component.html',
   styleUrls: ['./choice-test-editor.component.scss']
 })
-export class ChoiceTestEditorComponent implements OnInit {
-  @Output() public onSubmit = new EventEmitter()
+export class ChoiceTestEditorComponent extends TaskEditorComponent implements OnInit {
   public taskForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
     description: new FormControl('', [ Validators.maxLength(50) ]),
@@ -27,7 +26,7 @@ export class ChoiceTestEditorComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly formBuilder: FormBuilder,
     public  readonly router: Router,
-    public  readonly location: Location) { }
+    public  readonly location: Location) { super() }
 
   public ngOnInit(): void { }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
@@ -7,15 +7,15 @@ import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dia
 import { SimpleCard } from 'src/app/classes/example'
 import { arrayNotEmpty } from 'src/app/classes/utils'
 import { SimpleCardTask } from 'src/app/classes/task-type'
+import { TaskEditorComponent } from '../task-editor'
 
 @Component({
   selector: 'app-simple-card-editor',
   templateUrl: './simple-card-editor.component.html',
   styleUrls: ['./simple-card-editor.component.scss']
 })
-export class SimpleCardEditorComponent implements OnInit {
-  @Output() public onSubmit = new EventEmitter()
-  public taskForm = this.formBuilder.group({
+export class SimpleCardEditorComponent extends TaskEditorComponent implements OnInit {
+  public readonly taskForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
     description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
@@ -26,7 +26,7 @@ export class SimpleCardEditorComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly formBuilder: FormBuilder,
     public  readonly router: Router,
-    public  readonly location: Location) { }
+    public  readonly location: Location) { super() }
 
   public ngOnInit(): void { }
 

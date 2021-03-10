@@ -15,13 +15,14 @@ import { Progress } from 'src/app/classes/progress'
 import { Location } from '@angular/common'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { snackBarDuration } from 'src/app/lexica.properties'
+import { TaskViewComponent } from '../task-view'
 
 @Directive({ selector: '[taskHost]' })
 export class TaskDirective {
   public constructor(public viewContainerRef: ViewContainerRef) { }
 }
 
-const taskTypeViewMap = new Map<TaskType, object>([
+const taskTypeViewMap = new Map<TaskType, any>([
   [ SimpleCardTask, SimpleCardViewComponent ],
   [ ChoiceTestTask, ChoiceTestViewComponent ]
 ])
@@ -70,17 +71,16 @@ export class TaskViewDispatchComponent implements OnInit {
       const viewContainerRef = this.taskHost.viewContainerRef
       viewContainerRef.clear()
 
-      const component = taskTypeViewMap.get(task.type) as any
-      const componentFactory = this.cfr.resolveComponentFactory(component)
-      const taskView = viewContainerRef
-        .createComponent<typeof component>(componentFactory).instance
+      const component = taskTypeViewMap.get(task.type)
+      const componentFactory = this.cfr.resolveComponentFactory<TaskViewComponent>(component)
+      const taskView = viewContainerRef.createComponent<TaskViewComponent>(componentFactory).instance
+
       taskView.task = task as Task<typeof task.type>
       taskView.onSubmit.subscribe((p: Progress) => this.addProgress(p))
     }
   }
 
   public addProgress(progress: Progress) {
-    console.log(progress)
     if (progress) {
       this.userService
         .addProgress(progress)
