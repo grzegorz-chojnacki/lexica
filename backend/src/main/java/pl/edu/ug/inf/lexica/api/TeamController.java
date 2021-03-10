@@ -38,6 +38,7 @@ public class TeamController {
     public void addTeam(@RequestBody Team team, Principal principal) {
         userService.get(principal).ifPresent(user -> {
             team.setLeader(user);
+            team.getMembers().add(user);
             teamService.add(team);
         });
     }
