@@ -6,7 +6,8 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { TaskAddingComponent } from '../../task/task-adding/task-adding.component'
 import { TeamSettingsComponent } from '../team-settings/team-settings.component'
-import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { ConfirmationData, ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -21,13 +22,11 @@ export class TeamCardComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly router: Router,
     private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
-
-  public removeTeam(): void { this.teamService.remove(this.team) }
-  public leaveTeam(): void  { this.teamService.leaveTeam(this.team) }
 
   public teamSettings(): void {
     this.dialog.closeAll()
@@ -44,39 +43,34 @@ export class TeamCardComponent implements OnInit {
     this.dialog.open(TaskAddingComponent, { width: '500px' })
   }
 
-  public openDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        message: 'Czy na pewno usunąć?',
-        buttonText: {
-          ok: 'Usuń',
-          cancel: 'Nie'
-        }
-      }
-    })
-
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.removeTeam()
-      }
+  public openDeleteDialog(): void {
+    this.handleActionDialog(() => this.removeTeam(), {
+      message: 'Czy na pewno usunąć?',
+      buttonText: { ok: 'Usuń', cancel: 'Nie' }
     })
   }
 
-  public openDialogToLeaveTeam(): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data: {
-        message: 'Czy na pewno opuścić zespół?',
-        buttonText: {
-          ok: 'Opuść',
-          cancel: 'Nie'
-        }
-      }
-    })
+  private leaveTeam(): void  {
+    this.teamService.leaveTeam(this.team)
+    this.router.navigate(['/workspace'])
+  }
 
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.leaveTeam()
-      }
+  public openLeaveDialog(): void {
+    this.handleActionDialog(() => this.leaveTeam(), {
+      message: 'Czy na pewno opuścić zespół?',
+      buttonText: { ok: 'Opuść', cancel: 'Nie' }
     })
+  }
+
+  private removeTeam(): void {
+    this.teamService.remove(this.team)
+    this.router.navigate(['/workspace'])
+  }
+
+  private handleActionDialog(action: () => void, data: ConfirmationData): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, { data })
+      .afterClosed()
+      .subscribe(confirmed => confirmed ? action() : null)
   }
 }
