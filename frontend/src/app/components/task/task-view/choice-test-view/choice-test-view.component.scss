@@ -1,8 +1,9 @@
 .example-radio-group {
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
+    margin: 15px 0 30px;
   }
+  #example-radio-group-label { font-size: 16px; font-weight: 500;}
 
   .example-radio-button {
     margin: 5px;
