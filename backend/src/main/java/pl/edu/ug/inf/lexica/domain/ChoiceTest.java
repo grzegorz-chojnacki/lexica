@@ -1,6 +1,8 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @RequiredArgsConstructor
+@JsonDeserialize(as=ChoiceTest.class)
 public class ChoiceTest extends Example {
     @JsonIgnore
     @Id

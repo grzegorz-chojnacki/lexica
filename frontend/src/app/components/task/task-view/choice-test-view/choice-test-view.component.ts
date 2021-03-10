@@ -20,4 +20,6 @@ export class ChoiceTestViewComponent extends TaskViewComponent implements OnInit
     // random order of answers
     this.task.examples.filter(ex => ex.decoys.sort((a, b) => 0.5 - Math.random()))
   }
+
+  public sum(): void { }
 }
