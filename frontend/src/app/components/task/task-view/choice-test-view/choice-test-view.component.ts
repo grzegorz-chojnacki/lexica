@@ -3,6 +3,8 @@ import { Task } from 'src/app/classes/task'
 import { ChoiceTest } from 'src/app/classes/example'
 import { newArray } from '@angular/compiler/src/util'
 import { TaskViewComponent } from '../task-view'
+import { MatDialog } from '@angular/material/dialog'
+import { TaskSummaryComponent } from '../../task-summary/task-summary.component'
 
 
 @Component({
@@ -13,9 +15,9 @@ import { TaskViewComponent } from '../task-view'
 export class ChoiceTestViewComponent extends TaskViewComponent implements OnInit {
   @Input() public task!: Task<ChoiceTest>
 
-  public counter = 0
   public correctAnswer!: Array<string>
-  public constructor() { super() }
+  public readonly knewList = new Array<ChoiceTest>()
+  public constructor(private readonly dialog: MatDialog) { super() }
 
   public ngOnInit(): void {
     // correct answer added
@@ -29,9 +31,17 @@ public sum(): void {
   if (this.correctAnswer[i] === this.task.examples[i].answer)
   {
     console.log('dobrze' + this.correctAnswer[i] )
-    this.counter++
+    this.knewList.push(this.task.examples[i])
   }
 }
- console.log('razem:'+this.counter)
+ // console.log('razem:' + this.counter)
+  this.dialog.open(TaskSummaryComponent, {
+    disableClose: true,
+    data: {
+      knewList: this.knewList,
+      task: this.task
+    },
+    width: '500px'
+  }).afterClosed().subscribe(progress => this.onSubmit.emit(progress))
 }
 }

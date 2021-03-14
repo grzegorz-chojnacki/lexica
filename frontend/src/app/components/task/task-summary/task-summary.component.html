@@ -14,8 +14,10 @@
       <mat-list-item *ngFor="let example of notKnownWords; last as last">
         <div class="flex-container">
           <span>{{ example.foreignWord }}</span>
+          <span>{{ example.question }}</span>
           <span class="spacer"></span>
           <span>{{ example.nativeWord }}</span>
+          <span>{{ example.answer}}</span>
         </div>
         <mat-divider *ngIf="!last"></mat-divider>
       </mat-list-item>
