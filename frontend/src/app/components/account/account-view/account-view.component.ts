@@ -10,6 +10,8 @@ import { PasswordDialogComponent } from '../password-dialog/password-dialog.comp
 import { ColorDialogComponent } from '../color-dialog/color-dialog.component'
 import { Router } from '@angular/router'
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { snackBarDuration } from 'src/app/lexica.properties'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 
 @Component({
@@ -22,6 +24,7 @@ export class AccountViewComponent implements OnInit {
 
   public constructor(
     public  readonly location: Location,
+    private readonly snackbarService: MatSnackBar,
     private readonly router: Router,
     private readonly userService: UserService,
     private readonly dialog: MatDialog) { }
@@ -31,11 +34,13 @@ export class AccountViewComponent implements OnInit {
   public changeFullName = () => this.openDialogAndUpdateUser(FullNameDialogComponent)
   public changeUsername = () => this.openDialogAndUpdateUser(UsernameDialogComponent, true)
   public changePassword = () => this.openDialogAndUpdateUser(PasswordDialogComponent, true)
-  public changeColor    = () => this.openDialogAndUpdateUser(ColorDialogComponent)
+  public changeColor = () => this.openDialogAndUpdateUser(ColorDialogComponent)
 
   public removeAccount(): void {
     this.userService.removeAccount()
     this.router.navigate([''])
+    this.snackbarService
+      .open('Usunięto konto!', undefined, { duration: snackBarDuration })
   }
 
   private openDialogAndUpdateUser<T>(component: ComponentType<T>, logout = false): void {
@@ -48,26 +53,20 @@ export class AccountViewComponent implements OnInit {
             this.userService.logout()
             this.router.navigate([''])
           }
+          this.snackbarService
+            .open('Zapisano zmiany!', undefined, { duration: snackBarDuration })
         }
       })
   }
 
-
-  openDialog() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
-      data:{
-        message: 'Czy na pewno usunąć?',
-        buttonText: {
-          ok: 'Usuń',
-          cancel: 'Nie'
-        }
+  public openDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Czy na pewno usunąć swoje konto?',
+        buttonText: { ok: 'Usuń', cancel: 'Nie' }
       }
-    });
-
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.removeAccount()
-      }
-    });
+    })
+      .afterClosed()
+      .subscribe(confirmed => confirmed ? this.removeAccount() : null)
   }
 }

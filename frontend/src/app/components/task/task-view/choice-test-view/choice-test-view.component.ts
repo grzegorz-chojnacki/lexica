@@ -1,20 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { Task } from 'src/app/classes/task'
-import { ChoiceTestTask } from 'src/app/classes/task-type'
 import { ChoiceTest } from 'src/app/classes/example'
 import { newArray } from '@angular/compiler/src/util'
+import { TaskViewComponent } from '../task-view'
+
 
 @Component({
   selector: 'app-choice-test-view',
   templateUrl: './choice-test-view.component.html',
   styleUrls: ['./choice-test-view.component.scss']
 })
-export class ChoiceTestViewComponent implements OnInit {
+export class ChoiceTestViewComponent extends TaskViewComponent implements OnInit {
   @Input() public task!: Task<ChoiceTest>
 
   public counter = 0
- public correctAnswer!: Array<string>
-  public constructor() { }
+  public correctAnswer!: Array<string>
+  public constructor() { super() }
 
   public ngOnInit(): void {
     // correct answer added
@@ -33,5 +34,4 @@ public sum(): void {
 }
  console.log('razem:'+this.counter)
 }
-
 }

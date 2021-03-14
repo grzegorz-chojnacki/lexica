@@ -2,7 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSlideToggleChange } from '@angular/material/slide-toggle'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Team } from 'src/app/classes/team'
+import { snackBarDuration } from 'src/app/lexica.properties'
 import { TeamService } from 'src/app/services/team.service'
 
 @Component({
@@ -18,6 +20,7 @@ export class TeamSettingsComponent implements OnInit {
   })
 
   public constructor(
+    private readonly snackbarService: MatSnackBar,
     private readonly formBuilder: FormBuilder,
     private readonly teamService: TeamService,
     @Inject(MAT_DIALOG_DATA) private team: Team) { }
@@ -38,5 +41,7 @@ export class TeamSettingsComponent implements OnInit {
 
   public submit(): void {
     this.teamService.updateTeam(this.team.id, this.teamForm.value)
+    this.snackbarService
+      .open('Zapisano zmiany!', undefined, { duration: snackBarDuration })
   }
 }

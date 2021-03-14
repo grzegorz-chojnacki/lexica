@@ -1,18 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Location } from '@angular/common'
 import { MatDialog } from '@angular/material/dialog'
 import { Task } from 'src/app/classes/task'
-import { UserService } from 'src/app/services/user.service'
 import { TaskSummaryComponent } from '../../task-summary/task-summary.component'
 import { DataService } from 'src/app/services/data.service'
 import { SimpleCard } from 'src/app/classes/example'
+import { TaskViewComponent } from '../task-view'
 
 @Component({
   selector: 'app-simple-card-view',
   templateUrl: './simple-card-view.component.html',
   styleUrls: ['./simple-card-view.component.scss']
 })
-export class SimpleCardViewComponent implements OnInit {
+export class SimpleCardViewComponent extends TaskViewComponent implements OnInit {
   @Input() public task!: Task<SimpleCard>
 
   public readonly knewList = new Array<SimpleCard>()
@@ -21,10 +20,8 @@ export class SimpleCardViewComponent implements OnInit {
 
   public constructor(
     private readonly data: DataService,
-    private readonly dialog: MatDialog,
-    private readonly location: Location,
-    private readonly userService: UserService
-  ) { }
+    private readonly dialog: MatDialog
+  ) { super() }
 
   public ngOnInit(): void {
     this.data.currentMessage.subscribe(message => this.message = message)
@@ -43,15 +40,7 @@ export class SimpleCardViewComponent implements OnInit {
           task: this.task
         },
         width: '500px'
-      }).afterClosed().subscribe(progress => {
-        if (progress) {
-          this.userService
-            .addProgress(progress)
-            .subscribe(_ => this.location.back())
-        } else {
-          window.location.reload()
-        }
-      })
+      }).afterClosed().subscribe(progress => this.onSubmit.emit(progress))
     }
   }
 }

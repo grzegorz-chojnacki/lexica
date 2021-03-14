@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
-    private final TaskType simpleCardType = new TaskType(1,"Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
-    private final TaskType choiceTestType = new TaskType( 2,"Test jednokrotnego wyboru", "Test polega na wybraniu jednej prawidłowej odpowiedzi.");
+    private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType choiceTestType = new TaskType(2, "Test jednokrotnego wyboru", "Test polega na wybraniu jednej prawidłowej odpowiedzi.");
     private final UserService userService;
     private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
@@ -78,7 +78,7 @@ public class AppConfig {
 
     List<Task> testTasks = new ArrayList<>();
 
-    Supplier<List<Task>> generateTasks = () -> List.of(
+    Supplier<List<Task>> generateTasks1 = () -> List.of(
             List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
             List.of("House", ""),
             List.of("Music", "Bardzo przyswajalny temat :)."),
@@ -127,7 +127,7 @@ public class AppConfig {
             new User("Damgmara", "Fryc", "dfryc", "JYtQnNdtNJBaR", "#588DEE"),
             new User("Patrycja", "Gajda", "pgajda", "WyAq1CjwM", "#9F865C"));
 
-    List<Team> testTeams = List.of(
+    List<Team> testTeams1 = List.of(
             new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),
             new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej.", "#395E66"),
             new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!", "#CFB9A5"),
@@ -149,21 +149,17 @@ public class AppConfig {
         taskTypeRepository.save(choiceTestType);
         userService.registerAll(testUsers);
 
-        setTasks(testTeams, generateTasks);
-        setTasks(testTeams2, generateTasks3);
-
+        initTeams(testTeams1, generateTasks1);
+        initTeams(testTeams2, generateTasks3);
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);
     }
 
-    private void setTasks(List<Team> testTeams2, Supplier<List<Task>> generateTasks2) {
-        testTeams2.stream().peek(team -> {
-            team.setTasks(generateTasks2.get());
-            userService.get(team.getLeader().getId()).ifPresent(leader -> {
-                Set<User> members = testUserGroup(leader);
-                team.setMembers(members);
-            });
+    private void initTeams(List<Team> teams, Supplier<List<Task>> taskSupplier) {
+        teams.stream().peek(team -> {
+            team.setTasks(taskSupplier.get());
+            team.setMembers(new HashSet<>(testUsers));
         }).forEach(teamService::add);
     }
 }

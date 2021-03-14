@@ -26,14 +26,12 @@
         <span>Kod zespołu</span>
       </button>
       <button *ngIf="leaderView" mat-menu-item
-          routerLink="/workspace"
-          (click)="openDialog()">
+          (click)="openDeleteDialog()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
       </button>
       <button *ngIf="!leaderView" mat-menu-item
-          routerLink="/workspace"
-          (click)="openDialogToLeaveTeam()">
+          (click)="openLeaveDialog()">
         <mat-icon>logout</mat-icon>
         <span>Opuść</span>
       </button>
