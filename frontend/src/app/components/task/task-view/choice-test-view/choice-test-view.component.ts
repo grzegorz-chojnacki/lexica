@@ -30,7 +30,6 @@ public sum(): void {
   for (let i = 0; i < this.task.examples.length; i++) {
   if (this.correctAnswer[i] === this.task.examples[i].answer)
   {
-    console.log('dobrze' + this.correctAnswer[i] )
     this.knewList.push(this.task.examples[i])
   }
 }
