@@ -7,19 +7,19 @@
     </mat-card-header>
 
       <mat-card-content class="examples">
-        <ng-container *ngFor="let item of task?.examples">
+        <ng-container *ngFor="let item of task.examples;let index=index;">
         <label id="example-radio-group-label">{{item.question}}</label>
         <mat-radio-group
           aria-labelledby="example-radio-group-label"
-          class="example-radio-group">
+          class="example-radio-group"
+          [(ngModel)]="correctAnswer[index]">
 
           <mat-radio-button class="example-radio-button" *ngFor="let ans of item.decoys" [value]="ans">
 
                 {{ans}}
 
-
           </mat-radio-button>
-
+          <div>Twoja odpowiedź: {{correctAnswer[index]}}</div>
         </mat-radio-group>
       </ng-container>
       </mat-card-content>
