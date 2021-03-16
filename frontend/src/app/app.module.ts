@@ -66,7 +66,8 @@ import { SimpleCardDialogComponent } from './components/task/task-editor/simple-
 import { TaskDirective, TaskViewDispatchComponent } from './components/task/task-view/task-view-dispatch/task-view-dispatch.component';
 import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-test-dialog/choice-test-dialog.component';
 import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component';
-import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component'
+import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component';
+import { TeamFormComponent } from './components/team/team-form/team-form.component'
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { ChoiceTestViewComponent } from './components/task/task-view/choice-test
     SimpleCardDialogComponent,
     ChoiceTestDialogComponent,
     ChoiceTestEditorComponent,
-    ChoiceTestViewComponent
+    ChoiceTestViewComponent,
+    TeamFormComponent
   ],
   imports: [
     BrowserModule,

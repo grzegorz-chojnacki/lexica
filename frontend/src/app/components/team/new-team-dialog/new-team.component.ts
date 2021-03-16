@@ -21,8 +21,9 @@ export class NewTeamComponent implements OnInit {
       Validators.pattern(this.uuidRegex)
     ])
   })
+
   public readonly teamForm = this.formBuilder.group({
-    name: new FormControl('', [ Validators.required ]),
+    name: new FormControl('', [Validators.required]),
     description: '',
     color: randomColor()
   })
@@ -35,8 +36,8 @@ export class NewTeamComponent implements OnInit {
   public ngOnInit(): void { }
 
   public isInvalidTab = () => (this.tabGroup?.selectedIndex === 0)
-     ? this.idForm.invalid
-     : this.teamForm.invalid
+    ? this.idForm.invalid
+    : this.teamForm.invalid
 
   public submit(): void {
     if (this.tabGroup.selectedIndex === 0) {
