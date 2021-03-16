@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTabGroup } from '@angular/material/tabs'
-import { randomColor } from 'src/app/classes/utils'
+import { teamFormInitializer } from 'src/app/classes/utils'
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { TeamService } from 'src/app/services/team.service'
 
@@ -22,11 +22,7 @@ export class NewTeamComponent implements OnInit {
     ])
   })
 
-  public readonly teamForm = this.formBuilder.group({
-    name: new FormControl('', [Validators.required]),
-    description: '',
-    color: randomColor()
-  })
+  public readonly teamForm = teamFormInitializer(this.formBuilder)
 
   public constructor(
     private readonly snackbarService: MatSnackBar,

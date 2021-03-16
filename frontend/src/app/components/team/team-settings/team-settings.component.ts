@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSlideToggleChange } from '@angular/material/slide-toggle'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Team } from 'src/app/classes/team'
+import { teamFormInitializer } from 'src/app/classes/utils'
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { TeamService } from 'src/app/services/team.service'
 
@@ -13,11 +14,7 @@ import { TeamService } from 'src/app/services/team.service'
   styleUrls: ['./team-settings.component.scss']
 })
 export class TeamSettingsComponent implements OnInit {
-  public readonly teamForm = this.formBuilder.group({
-    name: new FormControl(this.team.name, [ Validators.required ]),
-    description: this.team.description,
-    color: this.team.color
-  })
+  public readonly teamForm = teamFormInitializer(this.formBuilder, this.team)
 
   public constructor(
     private readonly snackbarService: MatSnackBar,
