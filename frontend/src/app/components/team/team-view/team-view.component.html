@@ -1,6 +1,7 @@
 <main class="limited-width" *ngIf="team">
   <header>
-    <app-team-card [team]="team" [leaderView]="leaderView" context="Team"></app-team-card>
+    <app-team-card [team]="team" [leaderView]="leaderView" context="Team">
+    </app-team-card>
   </header>
 
   <section *ngIf="leaderHasProgressView && team.hasTasks()">
@@ -11,24 +12,38 @@
   <section>
     <mat-card>
       <mat-tab-group mat-stretch-tabs mat-align-tabs="center" color="accent"
-          animationDuration="0">
+        animationDuration="0">
         <mat-tab label="Zadania">
-          <section *ngIf="!team.hasTasks()" class="hint">
-            <h3>Nie ma jeszcze żadnych zadań</h3>
-          </section>
-          <app-task-list *ngIf="team.hasTasks()"
-            [user]="loggedUserWithProgress" [team]="team" [leaderView]="leaderView">
-          </app-task-list>
+          <div *ngIf="team.hasTasks() then tasks else tasksPlaceholder">
+          </div>
         </mat-tab>
         <mat-tab label="Uczestnicy">
-          <section class="hint" *ngIf="!team.hasMembers()">
-            <h3>Zaproś nowych członków, wysyłając im kod zespołu</h3>
-          </section>
-          <app-member-list *ngIf="team.hasMembers()"
-            [team]="team" [leaderView]="leaderView">
-          </app-member-list>
+          <div *ngIf="team.hasMembers() then members else membersPlaceholder">
+          </div>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
   </section>
 </main>
+
+<ng-template #tasks>
+  <app-task-list [user]="loggedUserWithProgress" [team]="team"
+    [leaderView]="leaderView">
+  </app-task-list>
+</ng-template>
+
+<ng-template #tasksPlaceholder>
+  <section class="placeholder-text">
+    <h3>Nie ma jeszcze żadnych zadań</h3>
+  </section>
+</ng-template>
+
+<ng-template #members>
+  <app-member-list [team]="team" [leaderView]="leaderView"></app-member-list>
+</ng-template>
+
+<ng-template #membersPlaceholder>
+  <section class="placeholder-text">
+    <h3>Zaproś nowych członków, wysyłając im kod zespołu</h3>
+  </section>
+</ng-template>

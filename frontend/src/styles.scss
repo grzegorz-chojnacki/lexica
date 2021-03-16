@@ -18,3 +18,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-dialog-container {
   max-width: 100vh !important;
 }
+
+.placeholder-text {
+  text-align: center;
+  margin: 1em 0;
+  opacity: 0.75;
+}
