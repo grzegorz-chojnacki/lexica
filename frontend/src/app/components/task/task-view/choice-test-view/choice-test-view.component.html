@@ -1,32 +1,28 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        <span class="overline above">{{task?.type?.name}}</span>
-        {{task.name}}
-      </mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>
+      <span class="overline above">{{task?.type?.name}}</span>
+      {{task.name}}
+    </mat-card-title>
+  </mat-card-header>
 
-      <mat-card-content class="examples">
-        <ng-container *ngFor="let item of task.examples;let index=index;">
-        <label id="example-radio-group-label">{{item.question}}</label>
-        <mat-radio-group
-          aria-labelledby="example-radio-group-label"
-          class="example-radio-group"
-          [(ngModel)]="correctAnswer[index]">
+  <mat-card-content class="examples">
+    <ng-container *ngFor="let item of task.examples;let index=index;">
+      <label id="example-radio-group-label">{{item.question}}</label>
+      <mat-radio-group aria-labelledby="example-radio-group-label"
+        class="example-radio-group" [(ngModel)]="correctAnswer[index]">
+        <mat-radio-button class="example-radio-button"
+          *ngFor="let ans of item.decoys" [value]="ans">
+          {{ans}}
+        </mat-radio-button>
+        <div>Twoja odpowiedź: {{correctAnswer[index]}}</div>
+      </mat-radio-group>
+    </ng-container>
+  </mat-card-content>
 
-          <mat-radio-button class="example-radio-button" *ngFor="let ans of item.decoys" [value]="ans">
-
-                {{ans}}
-
-          </mat-radio-button>
-          <div>Twoja odpowiedź: {{correctAnswer[index]}}</div>
-        </mat-radio-group>
-      </ng-container>
-      </mat-card-content>
-
-    <mat-card-actions>
-      <button mat-button color="accent" (click)="sum()">
-       Gotowe
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-actions>
+    <button mat-button color="accent" (click)="sum()">
+      Gotowe
+    </button>
+  </mat-card-actions>
+</mat-card>
