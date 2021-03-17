@@ -12,8 +12,7 @@ export class ChoiceTestDialogComponent implements OnInit {
   public readonly choiceTest = this.formBuilder.group({
     question: new FormControl(this.card.question, [ Validators.required ]),
     answer:  new FormControl(this.card.answer,  [ Validators.required ]),
-    decoys:  new FormArray([new FormControl(this.card.decoys)])
-   // decoys: this.formBuilder.array([this.card.decoys])
+    decoys:  new FormArray(this.card.decoys.map(d => new FormControl(d)))
   })
 
   get decoys(): FormArray {

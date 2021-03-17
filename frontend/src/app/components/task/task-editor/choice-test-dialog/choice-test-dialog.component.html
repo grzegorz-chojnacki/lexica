@@ -13,8 +13,8 @@
       <mat-error>To pole jest wymagane</mat-error>
     </mat-form-field>
 
-    <ng-container formArrayName="decoys" *ngFor="let decoy of decoys.controls; let i=index">
-    <mat-form-field appearance="fill">
+    <ng-container formArrayName="decoys" >
+    <mat-form-field appearance="fill" *ngFor="let decoy of decoys.controls; let i=index">
       <mat-label>Inna odpowiedź</mat-label>
       <input matInput placeholder="Np. Wiosna" [formControlName]="i" required/>
       <mat-error>To pole jest wymagane</mat-error>
