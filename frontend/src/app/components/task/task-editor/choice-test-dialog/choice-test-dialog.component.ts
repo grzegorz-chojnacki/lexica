@@ -27,4 +27,7 @@ export class ChoiceTestDialogComponent implements OnInit {
   public createNewAnswer(): void {
     this.decoys.push(this.formBuilder.control(''))
   }
+  public deleteDecoy(decoyIndex: number): void {
+    this.decoys.removeAt(decoyIndex)
+  }
 }

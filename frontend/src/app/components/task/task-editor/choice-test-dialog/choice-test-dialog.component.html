@@ -18,6 +18,9 @@
       <mat-label>Inna odpowiedź</mat-label>
       <input matInput placeholder="Np. Wiosna" [formControlName]="i" required/>
       <mat-error>To pole jest wymagane</mat-error>
+      <button mat-icon-button class="action">
+        <mat-icon (click)="deleteDecoy(i)">delete</mat-icon>
+      </button>
     </mat-form-field>
   </ng-container>
   <button mat-button color="accent"
