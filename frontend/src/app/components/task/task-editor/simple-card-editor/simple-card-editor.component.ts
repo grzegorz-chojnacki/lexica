@@ -60,7 +60,4 @@ export class SimpleCardEditorComponent extends TaskEditorComponent implements On
         }
       })
   }
-
-  public submit(): void { this.onSubmit.emit(this.taskForm.value) }
-  public cancel(): void { this.onSubmit.emit(null) }
 }

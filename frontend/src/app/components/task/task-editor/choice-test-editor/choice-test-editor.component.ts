@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { ChoiceTest } from 'src/app/classes/example'
@@ -61,7 +61,4 @@ export class ChoiceTestEditorComponent extends TaskEditorComponent implements On
         }
       })
   }
-
-  public submit(): void { this.onSubmit.emit(this.taskForm.value) }
-  public cancel(): void { this.onSubmit.emit(null) }
 }
