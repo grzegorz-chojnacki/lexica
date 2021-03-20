@@ -14,13 +14,13 @@ import { TaskEditorComponent } from '../task-editor'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
-  [ SimpleCardTask, SimpleCardEditorComponent ],
-  [ ChoiceTestTask, ChoiceTestEditorComponent ]
+  [SimpleCardTask, SimpleCardEditorComponent],
+  [ChoiceTestTask, ChoiceTestEditorComponent]
 ])
 
 const newTaskEditorMap = new Map<string, any>([
-  [ 'simplecard', SimpleCardEditorComponent ],
-  [ 'choicetest', ChoiceTestEditorComponent ]
+  ['simplecard', SimpleCardEditorComponent],
+  ['choicetest', ChoiceTestEditorComponent]
 ])
 
 @Component({
@@ -29,13 +29,13 @@ const newTaskEditorMap = new Map<string, any>([
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
-  public  teamId!: string
-  public  taskId!: string
+  public teamId!: string
+  public taskId!: string
   private editor!: TaskEditorComponent
 
   public readonly taskHeaderForm = this.formBuilder.group({
-    name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.maxLength(50) ])
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.maxLength(50)])
   })
 
   @ViewChild(TaskDirective, { static: true })
@@ -49,7 +49,7 @@ export class TaskEditorDispatchComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly cfr: ComponentFactoryResolver,
-    ) { }
+  ) { }
 
   public ngOnInit(): void {
     this.teamId = this.route.snapshot.paramMap.get('teamId') as string
@@ -69,7 +69,7 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   public submit(partialTask: { type: TaskType, examples: Example[] }): void {
     if (partialTask) {
-      const task = {...this.taskHeaderForm.value, ...partialTask }
+      const task = { ...this.taskHeaderForm.value, ...partialTask }
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
@@ -112,10 +112,14 @@ export class TaskEditorDispatchComponent implements OnInit {
     if (file) {
       const reader = new FileReader()
       reader.addEventListener('load', event => {
-        const content = event.target?.result as string
-        if (content) {
-          const examples = JSON.parse(content)
+        try {
+          const content = event.target?.result as string
+          const [examples, type] = Example.parse(content)
+          const task = { ...this.taskHeaderForm.value, examples, type } as Task<Example>
+          this.resolveTaskTemplate(task)
           this.editor.taskForm.patchValue({ examples })
+        } catch (e) {
+          this.snackbarService.open('Niepoprawny format przykładów')
         }
       })
       reader.readAsText(file)
