@@ -3,6 +3,7 @@ export class TaskType {
     switch (taskType.id) {
       case SimpleCardTask.id: return SimpleCardTask
       case ChoiceTestTask.id: return ChoiceTestTask
+      case MultiTestTask.id: return MultiTestTask
       default: throw new Error(`Not known task type id: ${taskType.id}`)
     }
   }
@@ -17,3 +18,4 @@ export class TaskType {
 export const NullTask       = new TaskType(0, '')
 export const SimpleCardTask = new TaskType(1, 'Fiszka')
 export const ChoiceTestTask = new TaskType(2, 'Test')
+export const MultiTestTask = new TaskType(3, 'Test')

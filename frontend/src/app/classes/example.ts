@@ -13,5 +13,11 @@ export class ChoiceTest extends Example {
     public answer: string,
     public decoys: string[],
   ) { super() }
-
+}
+export class MultiTest extends Example {
+  public constructor(
+    public question: string,
+    public answers: string[],
+    public decoys: string[],
+  ) { super() }
 }

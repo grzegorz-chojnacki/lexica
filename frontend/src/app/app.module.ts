@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatRadioModule } from '@angular/material/radio'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 // Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
@@ -57,7 +58,6 @@ import { PasswordDialogComponent } from './components/account/password-dialog/pa
 import { SortMembersPipe } from './pipes/sort-members.pipe'
 import { AvatarComponent } from './components/account/avatar/avatar.component'
 import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component'
-import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 import { SimpleCardViewComponent } from './components/task/task-view/simple-card-view/simple-card-view.component'
 import { SimpleCardEditorComponent } from './components/task/task-editor/simple-card-editor/simple-card-editor.component'
@@ -67,7 +67,8 @@ import { TaskDirective, TaskViewDispatchComponent } from './components/task/task
 import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-test-dialog/choice-test-dialog.component';
 import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component';
 import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component';
-import { TeamFormComponent } from './components/team/team-form/team-form.component'
+import { TeamFormComponent } from './components/team/team-form/team-form.component';
+import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component'
 
 @NgModule({
   declarations: [
@@ -101,7 +102,6 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     SortMembersPipe,
     AvatarComponent,
     ColorDialogComponent,
-    ChoiceTestComponent,
     ConfirmationDialogComponent,
     SimpleCardViewComponent,
     TaskDirective,
@@ -110,7 +110,8 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     ChoiceTestDialogComponent,
     ChoiceTestEditorComponent,
     ChoiceTestViewComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    MultiTestViewComponent
   ],
   imports: [
     BrowserModule,
@@ -138,6 +139,7 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
