@@ -56,7 +56,6 @@ import { PasswordDialogComponent } from './components/account/password-dialog/pa
 import { SortMembersPipe } from './pipes/sort-members.pipe'
 import { AvatarComponent } from './components/account/avatar/avatar.component'
 import { ColorDialogComponent } from './components/account/color-dialog/color-dialog.component'
-import { ChoiceTestComponent } from './components/task/choice-test/choice-test.component'
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component'
 import { SimpleCardViewComponent } from './components/task/task-view/simple-card-view/simple-card-view.component'
 import { SimpleCardEditorComponent } from './components/task/task-editor/simple-card-editor/simple-card-editor.component'
@@ -99,7 +98,6 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     SortMembersPipe,
     AvatarComponent,
     ColorDialogComponent,
-    ChoiceTestComponent,
     ConfirmationDialogComponent,
     SimpleCardViewComponent,
     TaskDirective,
