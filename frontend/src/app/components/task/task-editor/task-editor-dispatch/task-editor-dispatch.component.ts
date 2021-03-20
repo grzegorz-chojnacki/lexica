@@ -18,24 +18,22 @@ const taskTypeEditorMap = new Map<TaskType, any>([
   [ChoiceTestTask, ChoiceTestEditorComponent]
 ])
 
-const newTaskEditorMap = new Map<string, any>([
-  ['simplecard', SimpleCardEditorComponent],
-  ['choicetest', ChoiceTestEditorComponent]
-])
-
 @Component({
   selector: 'app-task-editor-dispatch',
   templateUrl: './task-editor-dispatch.component.html',
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
+  public readonly taskTypes = [SimpleCardTask, ChoiceTestTask]
+
   public teamId!: string
   public taskId!: string
   private editor!: TaskEditorComponent
 
   public readonly taskHeaderForm = this.formBuilder.group({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.maxLength(50)])
+    description: new FormControl('', [Validators.maxLength(50)]),
+    type: new FormControl(this.taskTypes[0])
   })
 
   @ViewChild(TaskDirective, { static: true })
@@ -59,10 +57,12 @@ export class TaskEditorDispatchComponent implements OnInit {
       this.taskService.getTask(this.teamId, this.taskId).subscribe(task => {
         this.breadCrumbService.setTeamTaskEditor(this.teamId, this.taskId)
         this.resolveTaskTemplate(task)
+        this.taskHeaderForm.controls.type.disable()
       }, _ => this.navigateToTeam())
     } else {
-      const type = this.route.snapshot.queryParams.type as string
-      this.resolveNewTaskTemplate(type)
+      this.taskHeaderForm.controls.type.valueChanges
+        .subscribe(type => this.resolveNewTaskTemplate(type))
+      this.taskHeaderForm.controls.type.updateValueAndValidity()
       this.breadCrumbService.setTeamNewTask(this.teamId)
     }
   }
@@ -92,8 +92,8 @@ export class TaskEditorDispatchComponent implements OnInit {
     }
   }
 
-  private resolveNewTaskTemplate(type: string): void {
-    const component = newTaskEditorMap.get(type)
+  private resolveNewTaskTemplate(type: TaskType): void {
+    const component = taskTypeEditorMap.get(type)
     this.setEditor(component)
     this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }
