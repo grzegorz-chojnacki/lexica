@@ -107,13 +107,19 @@ export class TaskEditorDispatchComponent implements OnInit {
       .instance
   }
 
-  public import(): void {
-    this.editor.taskForm.patchValue({
-      type: SimpleCardTask,
-      examples: [
-        { nativeWord: 'Jabłko',  foreignWord: 'Apple' },
-        { nativeWord: 'Gruszka', foreignWord: 'Pear'  }
-      ]})
+  public import(event: any): void {
+    const file = event.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.addEventListener('load', event => {
+        const content = event.target?.result as string
+        if (content) {
+          const examples = JSON.parse(content)
+          this.editor.taskForm.patchValue({ examples })
+        }
+      })
+      reader.readAsText(file)
+    }
   }
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])

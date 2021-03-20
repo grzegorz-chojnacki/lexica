@@ -1,5 +1,5 @@
 <mat-card>
-    <form [formGroup]="taskHeaderForm">
+  <form [formGroup]="taskHeaderForm">
     <mat-card-title>Tytuł i opis</mat-card-title>
     <mat-card-content>
       <mat-form-field appearance="fill">
@@ -13,7 +13,11 @@
       </mat-form-field>
     </mat-card-content>
   </form>
-  <button mat-button (click)="import()">Importuj przykłady</button>
+
+  <input type="file" #fileInput (change)="import($event)" hidden accept=".json">
+  <button mat-button (click)="fileInput.click()">
+    Importuj<mat-icon>attach_file</mat-icon>
+  </button>
 </mat-card>
 
 <mat-card>
