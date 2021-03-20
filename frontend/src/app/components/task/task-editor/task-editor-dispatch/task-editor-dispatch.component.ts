@@ -32,7 +32,7 @@ export class TaskEditorDispatchComponent implements OnInit {
   public teamId!: string
   public taskId!: string
 
-  public readonly taskForm = this.formBuilder.group({
+  public readonly taskHeaderForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
     description: new FormControl('', [ Validators.maxLength(50) ])
   })
@@ -66,9 +66,9 @@ export class TaskEditorDispatchComponent implements OnInit {
     }
   }
 
-  public submit(task: Task<Example>): void {
-    if (task) {
-      task = {...this.taskForm.value, ...task }
+  public submit(partialTask: { type: TaskType, examples: Example[] }): void {
+    if (partialTask) {
+      const task = {...this.taskHeaderForm.value, ...partialTask }
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
@@ -85,7 +85,7 @@ export class TaskEditorDispatchComponent implements OnInit {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
       const editor = this.setEditor(component).instance
-      this.taskForm.patchValue(task)
+      this.taskHeaderForm.patchValue(task)
       editor.taskForm.patchValue(task)
       editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
     }
