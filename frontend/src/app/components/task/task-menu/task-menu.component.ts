@@ -1,10 +1,14 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
-import { Task, Example } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { TaskDetailsComponent } from 'src/app/components/task/task-details/task-details.component'
 import { TeamService } from 'src/app/services/team.service'
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { Example } from 'src/app/classes/example'
+import { snackBarDuration } from 'src/app/lexica.properties'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-task-menu',
@@ -19,6 +23,7 @@ export class TaskMenuComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService
   ) { }
 
@@ -33,5 +38,18 @@ export class TaskMenuComponent implements OnInit {
 
   public removeItself(): void {
     this.teamService.removeTask(this.task, this.team)
+    this.snackbarService
+      .open('Usunięto zadanie!', undefined, { duration: snackBarDuration })
+  }
+
+  public openDialog(): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Czy na pewno usunąć zadanie?',
+        buttonText: { ok: 'Usuń', cancel: 'Nie' }
+      }
+    })
+      .afterClosed()
+      .subscribe((confirmed: boolean) => confirmed ? this.removeItself() : null)
   }
 }

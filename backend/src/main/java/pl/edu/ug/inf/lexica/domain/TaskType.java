@@ -2,8 +2,7 @@ package pl.edu.ug.inf.lexica.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @RequiredArgsConstructor

@@ -6,6 +6,10 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { TaskAddingComponent } from '../../task/task-adding/task-adding.component'
 import { TeamSettingsComponent } from '../team-settings/team-settings.component'
+import { ConfirmationData, ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component'
+import { Router } from '@angular/router'
+import { snackBarDuration } from 'src/app/lexica.properties'
+
 
 @Component({
   selector: 'app-team-card',
@@ -19,13 +23,11 @@ export class TeamCardComponent implements OnInit {
 
   public constructor(
     private readonly dialog: MatDialog,
+    private readonly router: Router,
     private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
-
-  public removeTeam(): void { this.teamService.remove(this.team) }
-  public leaveTeam(): void  { this.teamService.leaveTeam(this.team) }
 
   public teamSettings(): void {
     this.dialog.closeAll()
@@ -35,10 +37,46 @@ export class TeamCardComponent implements OnInit {
   public copyToClipboard(): void {
     navigator.clipboard.writeText(this.team.id)
     this.snackbarService
-      .open('Skopiowano do schowka!', undefined, { duration: 2000 })
+      .open('Skopiowano do schowka!', undefined, { duration: snackBarDuration })
   }
 
   public newTaskDialog(): void {
     this.dialog.open(TaskAddingComponent, { width: '500px' })
+  }
+
+  public openDeleteDialog(): void {
+    this.handleActionDialog(() => this.removeTeam(), {
+      message: 'Czy na pewno usunąć?',
+      buttonText: { ok: 'Usuń', cancel: 'Nie' }
+    }, 'Usunięto zespół!')
+  }
+
+  private leaveTeam(): void  {
+    this.teamService.leaveTeam(this.team)
+    this.router.navigate(['/workspace'])
+  }
+
+  public openLeaveDialog(): void {
+    this.handleActionDialog(() => this.leaveTeam(), {
+      message: 'Czy na pewno opuścić zespół?',
+      buttonText: { ok: 'Opuść', cancel: 'Nie' }
+    }, 'Opuszczono zespół!')
+  }
+
+  private removeTeam(): void {
+    this.teamService.remove(this.team)
+    this.router.navigate(['/workspace'])
+  }
+
+  private handleActionDialog(action: () => void, data: ConfirmationData, text: string): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, { data })
+      .afterClosed()
+      .subscribe(confirmed => {
+        if (confirmed) {
+          this.snackbarService.open(text, undefined, { duration: snackBarDuration })
+          action()
+        }
+      })
   }
 }

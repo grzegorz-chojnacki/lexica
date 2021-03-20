@@ -1,6 +1,8 @@
 package pl.edu.ug.inf.lexica.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,7 +16,9 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @RequiredArgsConstructor
+@JsonDeserialize(as=SimpleCard.class)
 public class SimpleCard extends Example {
+
     @JsonIgnore
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,4 +30,5 @@ public class SimpleCard extends Example {
 
     @NonNull
     private String foreignWord;
+
 }

@@ -11,12 +11,19 @@ export class TaskAddingComponent implements OnInit {
   public readonly taskForm = this.formBuilder.group({
     name: '',
     description: '',
+    type: 'simplecard',
     image: new FormControl({ value: '', disabled: true })
   })
 
   public constructor(
     private readonly formBuilder: FormBuilder,
-    public router: Router) { }
+    private readonly router: Router,
+    ) { }
 
   public ngOnInit(): void { }
+
+  public redirect(): any {
+    const type = this.taskForm.value.type
+    this.router.navigate([this.router.url, 'task', 'new'], { queryParams: { type }})
+  }
 }

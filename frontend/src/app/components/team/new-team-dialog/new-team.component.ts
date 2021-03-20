@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatTabGroup } from '@angular/material/tabs'
-import { randomColor } from 'src/app/classes/utils'
+import { teamFormInitializer } from 'src/app/classes/utils'
+import { snackBarDuration } from 'src/app/lexica.properties'
 import { TeamService } from 'src/app/services/team.service'
 
 @Component({
@@ -19,21 +21,19 @@ export class NewTeamComponent implements OnInit {
       Validators.pattern(this.uuidRegex)
     ])
   })
-  public readonly teamForm = this.formBuilder.group({
-    name: new FormControl('', [ Validators.required ]),
-    description: '',
-    color: randomColor()
-  })
+
+  public readonly teamForm = teamFormInitializer(this.formBuilder)
 
   public constructor(
+    private readonly snackbarService: MatSnackBar,
     private readonly formBuilder: FormBuilder,
     private readonly teamService: TeamService) { }
 
   public ngOnInit(): void { }
 
   public isInvalidTab = () => (this.tabGroup?.selectedIndex === 0)
-     ? this.idForm.invalid
-     : this.teamForm.invalid
+    ? this.idForm.invalid
+    : this.teamForm.invalid
 
   public submit(): void {
     if (this.tabGroup.selectedIndex === 0) {
@@ -41,5 +41,8 @@ export class NewTeamComponent implements OnInit {
     } else {
       this.teamService.createTeam(this.teamForm.value)
     }
+
+    this.snackbarService
+      .open('Dodano zespół!', undefined, { duration: snackBarDuration })
   }
 }

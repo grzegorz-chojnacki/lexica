@@ -1,6 +1,7 @@
 import { User } from 'src/app/classes/user'
-import { Example, Task } from 'src/app/classes/task'
+import { Task } from 'src/app/classes/task'
 import { Progress } from './progress'
+import { Example } from './example'
 
 export class Team {
   public readonly users = [this.leader, ...this.members]

@@ -1,0 +1,11 @@
+<mat-dialog-content>
+	<p>{{ message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<button mat-button color="accent" [mat-dialog-close]="true">
+		{{ confirmText }}
+	</button>
+	<button mat-button mat-dialog-close>
+		{{ cancelText }}
+	</button>
+</mat-dialog-actions>

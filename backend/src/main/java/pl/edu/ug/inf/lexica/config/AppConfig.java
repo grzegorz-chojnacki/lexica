@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @EnableJpaRepositories("pl.edu.ug.inf.lexica.repository")
 public class AppConfig {
     private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
+    private final TaskType choiceTestType = new TaskType(2, "Test jednokrotnego wyboru", "Test polega na wybraniu jednej prawidłowej odpowiedzi.");
     private final UserService userService;
     private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
@@ -27,6 +28,11 @@ public class AppConfig {
         this.teamService = teamService;
     }
 
+   Supplier<List<Example>> generateChoiceTest = () ->
+          List.of(new ChoiceTest("Pies po angielsku to:", "Dog", Set.of("Cat","Duck")),
+                  new ChoiceTest("Co to jest jajko?", "Egg", Set.of("Eye")),
+                  new ChoiceTest("Co oznacza 'nail'", "Jedno i drugie", Set.of("Gwóźdź","Paznokieć")));
+
 
     Supplier<List<SimpleCard>> generateCards = () -> Map.ofEntries(
             Map.entry("Jabłko", "Apple"),
@@ -37,7 +43,7 @@ public class AppConfig {
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
-    Supplier<List<SimpleCard>> generateCards1 = () -> Map.ofEntries(
+    Supplier<List<Example>> generateCards1 = () -> Map.ofEntries(
             Map.entry("liczba", "number"),
             Map.entry("cyfra", "digit"),
             Map.entry("liczba pierwsza", "prime number"),
@@ -54,7 +60,7 @@ public class AppConfig {
             .map(entry -> new SimpleCard(entry.getKey(), entry.getValue()))
             .collect(Collectors.toList());
 
-    Supplier<List<SimpleCard>> generateCards2 = () -> Map.ofEntries(
+    Supplier<List<Example>> generateCards2 = () -> Map.ofEntries(
             Map.entry("wąskie gardło", "bottleneck"),
             Map.entry("przeglądarka", "browser"),
             Map.entry("znaczna część", "chunk"),
@@ -72,7 +78,7 @@ public class AppConfig {
 
     List<Task> testTasks = new ArrayList<>();
 
-    Supplier<List<Task>> generateTasks = () -> List.of(
+    Supplier<List<Task>> generateTasks1 = () -> List.of(
             List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
             List.of("House", ""),
             List.of("Music", "Bardzo przyswajalny temat :)."),
@@ -80,7 +86,7 @@ public class AppConfig {
             List.of("Zadanie nieambitne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards1.get()  , true, list.get(1), simpleCardType))
+            .map(list -> new Task(list.get(0),generateCards1.get() , true, list.get(1),simpleCardType))
             .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
@@ -94,6 +100,14 @@ public class AppConfig {
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
+    Supplier<List<Task>> generateTasks3 = () -> List.of(
+            List.of("Seasons", "Naucz się pór roku."),
+            List.of("Inne",
+                    "Zadanie z trochę trudniejszymi przykładami. Przetestuj swoją wiedzę.")).stream()
+            .map(list -> new Task(list.get(0),generateChoiceTest.get()  , true, list.get(1), choiceTestType))
+            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .peek(task -> testTasks.add(task))
+            .collect(Collectors.toList());
 
 
     private Set<Progress> generateProgress(List<Task> tasks) {
@@ -113,7 +127,7 @@ public class AppConfig {
             new User("Damgmara", "Fryc", "dfryc", "JYtQnNdtNJBaR", "#588DEE"),
             new User("Patrycja", "Gajda", "pgajda", "WyAq1CjwM", "#9F865C"));
 
-    List<Team> testTeams = List.of(
+    List<Team> testTeams1 = List.of(
             new Team("MusicLovers", testUsers.get(0), "Grupa, w której ceni się angielską muzykę.", "#96BDC6"),
             new Team("Angielski UG 2020 gr.2", testUsers.get(1), "Studenci drugiego roku filologii angielskiej.", "#395E66"),
             new Team("TeamUG2008", testUsers.get(2), "Witamy osoby z rocznika 2008!", "#CFB9A5"),
@@ -132,22 +146,20 @@ public class AppConfig {
 
     public void initDataBase() {
         taskTypeRepository.save(simpleCardType);
+        taskTypeRepository.save(choiceTestType);
         userService.registerAll(testUsers);
 
-        setTasks(testTeams, generateTasks);
-        setTasks(testTeams2, generateTasks2);
+        initTeams(testTeams1, generateTasks1);
+        initTeams(testTeams2, generateTasks3);
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);
     }
 
-    private void setTasks(List<Team> testTeams2, Supplier<List<Task>> generateTasks2) {
-        testTeams2.stream().peek(team -> {
-            team.setTasks(generateTasks2.get());
-            userService.get(team.getLeader().getId()).ifPresent(leader -> {
-                Set<User> members = testUserGroup(leader);
-                team.setMembers(members);
-            });
+    private void initTeams(List<Team> teams, Supplier<List<Task>> taskSupplier) {
+        teams.stream().peek(team -> {
+            team.setTasks(taskSupplier.get());
+            team.setMembers(new HashSet<>(testUsers));
         }).forEach(teamService::add);
     }
 }

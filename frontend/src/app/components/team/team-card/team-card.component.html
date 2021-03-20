@@ -1,6 +1,6 @@
 <mat-card>
   <div class="team-image color-shader" [style.background-color]="team.color">
-    <span>{{ team.name[0] }}</span>
+    <span>{{ team.name[0]?.toUpperCase() }}</span>
   </div>
 
   <header>
@@ -26,14 +26,12 @@
         <span>Kod zespołu</span>
       </button>
       <button *ngIf="leaderView" mat-menu-item
-          routerLink="/workspace"
-          (click)="removeTeam()">
+          (click)="openDeleteDialog()">
         <mat-icon>delete</mat-icon>
         <span>Usuń</span>
       </button>
       <button *ngIf="!leaderView" mat-menu-item
-          routerLink="/workspace"
-          (click)="leaveTeam()">
+          (click)="openLeaveDialog()">
         <mat-icon>logout</mat-icon>
         <span>Opuść</span>
       </button>

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Nowy test</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="choiceTest">
+    <mat-form-field appearance="fill">
+      <mat-label>Pytanie</mat-label>
+      <input matInput placeholder="Np. Co oznacza słowo Winter?" formControlName="question" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Prawidłowa odpowiedź</mat-label>
+      <input matInput placeholder="Np. Zima" formControlName="answer" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+
+    <ng-container formArrayName="decoys" >
+    <mat-form-field appearance="fill" *ngFor="let decoy of decoys.controls; let i=index">
+      <mat-label>Inna odpowiedź</mat-label>
+      <input matInput placeholder="Np. Wiosna" [formControlName]="i" required/>
+      <mat-error>To pole jest wymagane</mat-error>
+      <button mat-icon-button class="action">
+        <mat-icon (click)="deleteDecoy(i)">delete</mat-icon>
+      </button>
+    </mat-form-field>
+  </ng-container>
+  <button mat-button color="accent"
+  (click)="createNewAnswer()">Dodaj inną odpowiedź</button>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="accent"
+      [disabled]="!choiceTest.valid"
+      [mat-dialog-close]="choiceTest.value">
+    Zapisz
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>

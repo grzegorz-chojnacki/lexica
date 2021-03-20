@@ -5,8 +5,9 @@
   <form [formGroup]="taskForm">
     <mat-form-field appearance="fill">
       <mat-label>Wybierz typ zadania</mat-label>
-      <mat-select placeholder="Placeholder" value="option1" disabled="true">
-        <mat-option value="option1" >Fiszka prosta</mat-option>
+      <mat-select formControlName="type">
+        <mat-option value="simplecard">Fiszka prosta</mat-option>
+        <mat-option value="choicetest">Test jednokrotnego wyboru</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -19,8 +20,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close color="accent"
-      routerLink="{{ this.router.url }}/task/new">
+  <button mat-button mat-dialog-close color="accent" (click)="redirect()">
     Utwórz
   </button>
   <button mat-button mat-dialog-close>Anuluj</button>

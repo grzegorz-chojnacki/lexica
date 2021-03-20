@@ -1,9 +1,12 @@
-<mat-expansion-panel class="mat-elevation-z0"
-    [expanded]="(teams?.length || 0) > 0">
+<mat-expansion-panel class="mat-elevation-z0" expanded="true">
   <mat-expansion-panel-header class="centered">
     <h2 class="heading-fix">{{ title }}</h2>
   </mat-expansion-panel-header>
 
+  <div *ngIf="(teams?.length || 0) > 0 then content else placeholder"></div>
+</mat-expansion-panel>
+
+<ng-template #content>
   <div class="grid-container">
     <app-team-card *ngFor="let team of teams"
       [team]="team"
@@ -11,4 +14,10 @@
       context="TeamContainer">
     </app-team-card>
   </div>
-</mat-expansion-panel>
+</ng-template>
+
+<ng-template #placeholder>
+  <div class="placeholder-text">
+    <p>Brak zespołów</p>
+  </div>
+</ng-template>

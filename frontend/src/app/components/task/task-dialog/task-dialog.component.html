@@ -24,6 +24,7 @@
     Rozpocznij
   </a>
   <button mat-button mat-dialog-close>Anuluj</button>
+  <ng-container *ngIf="task.type.name==='Fiszka'">
   <div class="spacer"></div>
   <mat-label>Słówka:</mat-label>
   <mat-radio-group>
@@ -32,4 +33,5 @@
     <mat-radio-button value="nativeWord" (click)="isForeignVersion(false)">
       tłumaczenie</mat-radio-button>
   </mat-radio-group>
+</ng-container>
 </mat-dialog-actions>

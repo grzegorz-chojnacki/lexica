@@ -4,17 +4,17 @@
   <mat-card-content>
     <form [formGroup]="registerForm">
       <mat-form-field appearance="fill">
-        <mat-label>Nazwa użytkownika</mat-label>
-        <input matInput type="text" formControlName="username"/>
-        <mat-error>Podana nazwa jest już zajęta</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
         <mat-label>Imię</mat-label>
         <input matInput type="text" formControlName="firstname"/>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Nazwisko</mat-label>
         <input matInput type="text" formControlName="surname"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nazwa użytkownika</mat-label>
+        <input matInput type="text" formControlName="username"/>
+        <mat-error>Podana nazwa jest już zajęta</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Hasło</mat-label>
