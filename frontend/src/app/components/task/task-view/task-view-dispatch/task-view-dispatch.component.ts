@@ -54,15 +54,15 @@ export class TaskViewDispatchComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.user.subscribe(user => this.user = user)
 
-    const teamId = this.route.snapshot.paramMap.get('teamId')
-    const taskId = this.route.snapshot.paramMap.get('taskId')
+    const teamId = this.route.snapshot.paramMap.get('teamId') as string
+    const taskId = this.route.snapshot.paramMap.get('taskId') as string
 
     this.taskService
       .getTask(teamId, taskId)
       .subscribe(task => {
         this.task = task
         this.resolveTaskTemplate(task)
-        this.breadCrumbService.setTeamTask(teamId as string, taskId as string)
+        this.breadCrumbService.setTeamTask(teamId, taskId)
       }, _ => this.router.navigate(['/']))
   }
 

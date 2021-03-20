@@ -44,6 +44,10 @@ export class TeamService {
   }
 
   private refreshTeamSource(id: string): void {
+    if (this.teamSource.value.id !== id) {
+      this.teamSource.next(this.emptyTeam)
+    }
+
     this.http.get<Team>(`${lexicaURL}/team/${id}`, this.userService.authHeader())
       .pipe(map(Team.deserialize))
       .subscribe(
