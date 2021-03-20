@@ -1,1 +1,20 @@
-<section taskHost></section>
+<mat-card>
+    <form [formGroup]="taskForm">
+    <mat-card-title>Tytuł i opis</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Tytuł</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error>To pole jest wymagane</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Krótki opis (do 50 znaków)</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </form>
+</mat-card>
+
+<mat-card>
+  <section taskHost></section>
+</mat-card>

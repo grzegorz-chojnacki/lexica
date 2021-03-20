@@ -11,6 +11,7 @@ import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-edi
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskEditorComponent } from '../task-editor'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
   [ SimpleCardTask, SimpleCardEditorComponent ],
@@ -31,12 +32,18 @@ export class TaskEditorDispatchComponent implements OnInit {
   public teamId!: string
   public taskId!: string
 
+  public readonly taskForm = this.formBuilder.group({
+    name:        new FormControl('', [ Validators.required ]),
+    description: new FormControl('', [ Validators.maxLength(50) ])
+  })
+
   @ViewChild(TaskDirective, { static: true })
   public taskHost!: TaskDirective
 
   public constructor(
     private readonly breadCrumbService: BreadCrumbService,
     private readonly snackbarService: MatSnackBar,
+    private readonly formBuilder: FormBuilder,
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -61,6 +68,7 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   public submit(task: Task<Example>): void {
     if (task) {
+      task = {...this.taskForm.value, ...task }
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
@@ -77,6 +85,7 @@ export class TaskEditorDispatchComponent implements OnInit {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
       const editor = this.setEditor(component).instance
+      this.taskForm.patchValue(task)
       editor.taskForm.patchValue(task)
       editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
@@ -16,8 +16,6 @@ import { TaskEditorComponent } from '../task-editor'
 })
 export class SimpleCardEditorComponent extends TaskEditorComponent implements OnInit {
   public readonly taskForm = this.formBuilder.group({
-    name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        SimpleCardTask
   })

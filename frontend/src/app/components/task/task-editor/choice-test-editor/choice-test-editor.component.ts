@@ -16,8 +16,6 @@ import { TaskEditorComponent } from '../task-editor'
 })
 export class ChoiceTestEditorComponent extends TaskEditorComponent implements OnInit {
   public taskForm = this.formBuilder.group({
-    name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        ChoiceTestTask
   })
