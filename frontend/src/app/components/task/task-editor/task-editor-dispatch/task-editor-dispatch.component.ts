@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild } from '@angular/core'
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
@@ -29,8 +29,9 @@ const newTaskEditorMap = new Map<string, any>([
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
-  public teamId!: string
-  public taskId!: string
+  public  teamId!: string
+  public  taskId!: string
+  private editor!: TaskEditorComponent
 
   public readonly taskHeaderForm = this.formBuilder.group({
     name:        new FormControl('', [ Validators.required ]),
@@ -84,24 +85,35 @@ export class TaskEditorDispatchComponent implements OnInit {
   private resolveTaskTemplate(task: Task<Example>): void {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
-      const editor = this.setEditor(component).instance
       this.taskHeaderForm.patchValue(task)
-      editor.taskForm.patchValue(task)
-      editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+      this.setEditor(component)
+      this.editor.taskForm.patchValue(task)
+      this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
     }
   }
 
   private resolveNewTaskTemplate(type: string): void {
     const component = newTaskEditorMap.get(type)
-    const editor = this.setEditor(component).instance
-    editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+    this.setEditor(component)
+    this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }
 
-  private setEditor(editor: any): ComponentRef<TaskEditorComponent> {
+  private setEditor(component: any): void {
     const viewContainerRef = this.taskHost.viewContainerRef
     viewContainerRef.clear()
-    const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(editor)
-    return viewContainerRef.createComponent<TaskEditorComponent>(componentFactory)
+    const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(component)
+    this.editor = viewContainerRef
+      .createComponent<TaskEditorComponent>(componentFactory)
+      .instance
+  }
+
+  public import(): void {
+    this.editor.taskForm.patchValue({
+      type: SimpleCardTask,
+      examples: [
+        { nativeWord: 'Jabłko',  foreignWord: 'Apple' },
+        { nativeWord: 'Gruszka', foreignWord: 'Pear'  }
+      ]})
   }
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
