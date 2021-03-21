@@ -31,6 +31,7 @@ export class MultiTestViewComponent extends TaskViewComponent implements OnInit 
   @Input() public task!: Task<MultiTest>
 
   public controls: MultiTestControl[] = []
+  public readonly knewList = new Array<MultiTest>()
 
   public constructor(private readonly dialog: MatDialog) { super() }
 
@@ -50,12 +51,14 @@ export class MultiTestViewComponent extends TaskViewComponent implements OnInit 
     const counter = this.controls
       .reduce((acc, control) => acc + (isCorrect(control) ? 1 : 0), 0)
     console.log(`Dobre odpowiedzi: ${counter}`)
+    this.controls.forEach(control => isCorrect(control) ? this.knewList.push(control.example) : this.knewList)
   }
 
   public sum(): void {
+    this.count()
     this.dialog.open(TaskSummaryComponent, {
       disableClose: true,
-      data: { knewList: null, task: this.task },
+      data: { knewList: this.knewList, task: this.task },
       width: '500px'
     }).afterClosed()
       .subscribe(progress => this.onSubmit.emit(progress))
