@@ -4,8 +4,23 @@ import { MultiTest } from 'src/app/classes/example'
 import { TaskViewComponent } from '../task-view'
 import { MatDialog } from '@angular/material/dialog'
 import { TaskSummaryComponent } from '../../task-summary/task-summary.component'
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 
+type MultiTestControl = {
+  example: MultiTest
+  checkboxes: { option: string, value: boolean }[]
+}
+
+const hasElements    = (a: any[], b: any[]) => a.every(x => b.includes(x))
+const areEqualLenght = (a: any[], b: any[]) => a.length === b.length
+
+const isCorrect = (control: MultiTestControl) => {
+  const answers = control.example.answers
+  const checked = control.checkboxes
+    .filter(c => c.value)
+    .map(c => c.option)
+
+  return (hasElements(checked, answers) && areEqualLenght(checked, answers))
+}
 
 @Component({
   selector: 'app-multi-test-view',
@@ -14,82 +29,35 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 })
 export class MultiTestViewComponent extends TaskViewComponent implements OnInit {
   @Input() public task!: Task<MultiTest>
-  public correctAnswer!: Array<string>
-  public correctAnswers!: Array<string[]>
-  public fruits: Array<string> = []
-  public fruitsA: Array<string> = []
-  public selectedFruitsValue!: Array<string>
-   public nestedForm!: FormGroup
-  public readonly knewList = new Array<MultiTest>()
-  public constructor(private readonly dialog: MatDialog,
-                     private readonly formBuilder: FormBuilder) { super() }
 
+  public controls: MultiTestControl[] = []
+
+  public constructor(private readonly dialog: MatDialog) { super() }
 
   public ngOnInit(): void {
-    // correct answers added
-    this.task.examples.filter(example => example.answers.forEach(a => example.decoys.push(a)))
-    // random order of answers
-    this.task.examples.filter(ex => ex.decoys.sort((a, b) => 0.5 - Math.random()))
-
-    this.task.examples[0].decoys.forEach(e => this.fruits.push(e))
-    this.task.examples[0].answers.forEach(e => this.fruitsA.push(e))
-    this.nestedForm = this.formBuilder.group({
-      favFruits: this.addFruitsControls()
-    })
-  }
-  public addFruitsControls(): FormArray {
-   const arr = this.fruits.map(element => {
-    return this.formBuilder.control(false)
-  })
-   return this.formBuilder.array(arr)
+    this.controls = this.buildMultiTestControls()
   }
 
-  get fruitsArray(): FormArray {
-    return this.nestedForm.get('favFruits') as FormArray
-  }
-
-  public getSelectedFruitsValue(): void  {
-    this.selectedFruitsValue = []
-    this.fruitsArray.controls.forEach((control, i) => {
-      if (control.value) {
-        this.selectedFruitsValue.push(this.fruits[i])
-      }
+  private buildMultiTestControls(): MultiTestControl[] {
+    return this.task.examples.map(example => {
+      const options = [...example.answers, ...example.decoys]
+      const checkboxes = options.map(option => ({ option, value: false }))
+      return { example, checkboxes }
     })
   }
 
-  public licz(): void {
-    let licznik = 0
-    this.selectedFruitsValue.forEach(element => {
-      if (this.fruitsA.includes(element)) { licznik++ }
-      else { licznik = 0 }
-
-    })
-    if (licznik === this.fruitsA.length){
-      console.log("wybrales poprawne"+ licznik)}else console.log("wybrales zle")
+  public count(): void {
+    const counter = this.controls
+      .reduce((acc, control) => acc + (isCorrect(control) ? 1 : 0), 0)
+    console.log(`Dobre odpowiedzi: ${counter}`)
   }
-    public sum(): void {
-      for (let i = 0; i < this.task.examples.length; i++) {
-        for (let x = 0; x < this.task.examples[i].answers.length; x++) {
-      //   this.correctAnswer[i].forEach(
-      //     x => {
-      //       console.log(x)
-      //     if (this.task.examples[i].answers.includes(x))
-      //     {
-      //     this.knewList.push(this.task.examples[i])
-      //   }
-      // })
-      console.log(this.correctAnswers[i][x])
-      if (this.task.examples[i].answers.includes(this.correctAnswers[i][x])) {
-        this.knewList.push(this.task.examples[i])
-      }
-        }
-    }
 
-      this.dialog.open(TaskSummaryComponent, {
-        disableClose: true,
-        data: { knewList: this.knewList, task: this.task },
-        width: '500px'
-      }).afterClosed().subscribe(progress => this.onSubmit.emit(progress))
-    }
-
+  public sum(): void {
+    this.dialog.open(TaskSummaryComponent, {
+      disableClose: true,
+      data: { knewList: null, task: this.task },
+      width: '500px'
+    }).afterClosed()
+      .subscribe(progress => this.onSubmit.emit(progress))
+  }
 }
