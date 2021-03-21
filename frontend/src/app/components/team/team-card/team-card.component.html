@@ -43,7 +43,8 @@
     </button>
 
     <div *ngIf="context === 'Team'">
-      <button *ngIf="leaderView" mat-raised-button color="accent" (click)="newTaskDialog()">
+      <button *ngIf="leaderView" mat-raised-button color="accent"
+        routerLink="/team/{{ team?.id }}/task/new">
         Nowe zadanie
       </button>
       <button mat-button color="accent" (click)="copyToClipboard()">

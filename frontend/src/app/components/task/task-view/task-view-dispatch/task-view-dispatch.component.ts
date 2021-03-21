@@ -79,7 +79,7 @@ export class TaskViewDispatchComponent implements OnInit {
       .createComponent<TaskViewComponent>(componentFactory)
       .instance
 
-      taskView.task = task as Task<typeof task.type>
+      taskView.task = task
       taskView.onSubmit.subscribe((p: Progress) => this.addProgress(p))
     }
   }

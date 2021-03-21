@@ -35,7 +35,6 @@ import { TeamSearchPipe } from './pipes/team-search.pipe'
 
 // Task
 import { TaskListComponent } from './components/task/task-list/task-list.component'
-import { TaskAddingComponent } from './components/task/task-adding/task-adding.component'
 import { TaskSummaryComponent } from './components/task/task-summary/task-summary.component'
 import { TaskDialogComponent } from './components/task/task-dialog/task-dialog.component'
 import { TaskMenuComponent } from './components/task/task-menu/task-menu.component'
@@ -83,7 +82,6 @@ import { MultiTestViewComponent } from './components/task/task-view/multi-test-v
     SimpleCardEditorComponent,
     TaskListComponent,
     MemberListComponent,
-    TaskAddingComponent,
     TeamSearchPipe,
     NewTeamComponent,
     TaskSummaryComponent,

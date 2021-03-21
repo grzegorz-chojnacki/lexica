@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild } from '@angular/core'
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
@@ -11,15 +11,11 @@ import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-edi
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskEditorComponent } from '../task-editor'
+import { FormBuilder, FormControl, Validators } from '@angular/forms'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
-  [ SimpleCardTask, SimpleCardEditorComponent ],
-  [ ChoiceTestTask, ChoiceTestEditorComponent ]
-])
-
-const newTaskEditorMap = new Map<string, any>([
-  [ 'simplecard', SimpleCardEditorComponent ],
-  [ 'choicetest', ChoiceTestEditorComponent ]
+  [SimpleCardTask, SimpleCardEditorComponent],
+  [ChoiceTestTask, ChoiceTestEditorComponent]
 ])
 
 @Component({
@@ -28,8 +24,17 @@ const newTaskEditorMap = new Map<string, any>([
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
+  public readonly taskTypes = [SimpleCardTask, ChoiceTestTask]
+
   public teamId!: string
   public taskId!: string
+  private editor!: TaskEditorComponent
+
+  public readonly taskHeaderForm = this.formBuilder.group({
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.maxLength(50)]),
+    type: new FormControl(this.taskTypes[0])
+  })
 
   @ViewChild(TaskDirective, { static: true })
   public taskHost!: TaskDirective
@@ -37,11 +42,12 @@ export class TaskEditorDispatchComponent implements OnInit {
   public constructor(
     private readonly breadCrumbService: BreadCrumbService,
     private readonly snackbarService: MatSnackBar,
+    private readonly formBuilder: FormBuilder,
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly cfr: ComponentFactoryResolver,
-    ) { }
+  ) { }
 
   public ngOnInit(): void {
     this.teamId = this.route.snapshot.paramMap.get('teamId') as string
@@ -51,16 +57,19 @@ export class TaskEditorDispatchComponent implements OnInit {
       this.taskService.getTask(this.teamId, this.taskId).subscribe(task => {
         this.breadCrumbService.setTeamTaskEditor(this.teamId, this.taskId)
         this.resolveTaskTemplate(task)
+        this.taskHeaderForm.controls.type.disable()
       }, _ => this.navigateToTeam())
     } else {
-      const type = this.route.snapshot.queryParams.type as string
-      this.resolveNewTaskTemplate(type)
+      this.taskHeaderForm.controls.type.valueChanges
+        .subscribe(type => this.resolveNewTaskTemplate(type))
+      this.taskHeaderForm.controls.type.updateValueAndValidity()
       this.breadCrumbService.setTeamNewTask(this.teamId)
     }
   }
 
-  public submit(task: Task<Example>): void {
-    if (task) {
+  public submit(partialTask: { type: TaskType, examples: Example[] }): void {
+    if (partialTask) {
+      const task = { ...this.taskHeaderForm.value, ...partialTask }
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
@@ -76,23 +85,45 @@ export class TaskEditorDispatchComponent implements OnInit {
   private resolveTaskTemplate(task: Task<Example>): void {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
-      const editor = this.setEditor(component).instance
-      editor.taskForm.patchValue(task)
-      editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+      this.taskHeaderForm.patchValue(task)
+      this.setEditor(component)
+      this.editor.taskForm.patchValue(task)
+      this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
     }
   }
 
-  private resolveNewTaskTemplate(type: string): void {
-    const component = newTaskEditorMap.get(type)
-    const editor = this.setEditor(component).instance
-    editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+  private resolveNewTaskTemplate(type: TaskType): void {
+    const component = taskTypeEditorMap.get(type)
+    this.setEditor(component)
+    this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
   }
 
-  private setEditor(editor: any): ComponentRef<TaskEditorComponent> {
+  private setEditor(component: any): void {
     const viewContainerRef = this.taskHost.viewContainerRef
     viewContainerRef.clear()
-    const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(editor)
-    return viewContainerRef.createComponent<TaskEditorComponent>(componentFactory)
+    const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(component)
+    this.editor = viewContainerRef
+      .createComponent<TaskEditorComponent>(componentFactory)
+      .instance
+  }
+
+  public import(event: any): void {
+    const file = event.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.addEventListener('load', event => {
+        try {
+          const content = event.target?.result as string
+          const [examples, type] = Example.parse(content)
+          const task = { ...this.taskHeaderForm.value, examples, type } as Task<Example>
+          this.resolveTaskTemplate(task)
+          this.editor.taskForm.patchValue({ examples })
+        } catch (e) {
+          this.snackbarService.open('Niepoprawny format przykładów')
+        }
+      })
+      reader.readAsText(file)
+    }
   }
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])

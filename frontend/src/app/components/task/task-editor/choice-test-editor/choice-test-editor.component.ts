@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { ChoiceTest } from 'src/app/classes/example'
@@ -16,8 +16,6 @@ import { TaskEditorComponent } from '../task-editor'
 })
 export class ChoiceTestEditorComponent extends TaskEditorComponent implements OnInit {
   public taskForm = this.formBuilder.group({
-    name:        new FormControl('', [ Validators.required ]),
-    description: new FormControl('', [ Validators.maxLength(50) ]),
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        ChoiceTestTask
   })
@@ -63,7 +61,4 @@ export class ChoiceTestEditorComponent extends TaskEditorComponent implements On
         }
       })
   }
-
-  public submit(): void { this.onSubmit.emit(this.taskForm.value) }
-  public cancel(): void { this.onSubmit.emit(null) }
 }

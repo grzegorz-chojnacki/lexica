@@ -9,6 +9,8 @@ import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dia
 import { Example } from 'src/app/classes/example'
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { TaskService } from 'src/app/services/task.service'
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-task-menu',
@@ -24,7 +26,8 @@ export class TaskMenuComponent implements OnInit {
   public constructor(
     private readonly dialog: MatDialog,
     private readonly snackbarService: MatSnackBar,
-    private readonly teamService: TeamService
+    private readonly teamService: TeamService,
+    private readonly taskService: TaskService
   ) { }
 
   public ngOnInit(): void { }
@@ -34,6 +37,19 @@ export class TaskMenuComponent implements OnInit {
       width: '700px',
       data: { task: this.task, team: this.team }
     })
+  }
+
+  public export(): void {
+    this.taskService.getTask(this.team.id, this.task.id)
+      .subscribe(task => {
+        if (task !== this.taskService.emptyTask) {
+          const blob = new Blob(
+            [ JSON.stringify(task.examples, null, '  ') ],
+            { type: 'text/plain;charset=utf-8' })
+          saveAs(blob, `${task.name}.json`)
+        }
+      })
+
   }
 
   public removeItself(): void {
