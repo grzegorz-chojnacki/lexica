@@ -18,7 +18,7 @@ public class InstanceDeserializer extends JsonDeserializer<Example> {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         ObjectNode root = (ObjectNode) mapper.readTree(jp);
         Class<? extends Example> instanceClass = null;
-
+        System.out.println(root.fieldNames().next());
         if (root.has("foreignWord")) {
             instanceClass = SimpleCard.class;
         } else {
