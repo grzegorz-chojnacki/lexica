@@ -17,5 +17,5 @@ export class TaskType {
 
 export const NullTask       = new TaskType(0, '')
 export const SimpleCardTask = new TaskType(1, 'Fiszka')
-export const ChoiceTestTask = new TaskType(2, 'Test')
-export const MultiTestTask = new TaskType(3, 'Test')
+export const ChoiceTestTask = new TaskType(2, 'Test jednokrotnego wyboru')
+export const MultiTestTask = new TaskType(3, 'Test wielokrotnego wyboru')

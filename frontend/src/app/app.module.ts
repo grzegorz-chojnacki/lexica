@@ -67,7 +67,8 @@ import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-
 import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component';
 import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component';
 import { TeamFormComponent } from './components/team/team-form/team-form.component';
-import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component'
+import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component';
+import { MultiTestEditorComponent } from './components/task/task-editor/multi-test-editor/multi-test-editor.component'
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { MultiTestViewComponent } from './components/task/task-view/multi-test-v
     ChoiceTestEditorComponent,
     ChoiceTestViewComponent,
     TeamFormComponent,
-    MultiTestViewComponent
+    MultiTestViewComponent,
+    MultiTestEditorComponent
   ],
   imports: [
     BrowserModule,
