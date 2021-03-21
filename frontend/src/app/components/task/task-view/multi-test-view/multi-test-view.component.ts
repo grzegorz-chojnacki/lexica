@@ -48,9 +48,6 @@ export class MultiTestViewComponent extends TaskViewComponent implements OnInit 
   }
 
   public count(): void {
-    const counter = this.controls
-      .reduce((acc, control) => acc + (isCorrect(control) ? 1 : 0), 0)
-    console.log(`Dobre odpowiedzi: ${counter}`)
     this.controls.forEach(control => isCorrect(control) ? this.knewList.push(control.example) : this.knewList)
   }
 
