@@ -33,6 +33,9 @@ export class ChoiceTest extends Example {
   ) { super() }
 }
 export class MultiTest extends Example {
+  public static validate = (example: any) => example.question && Array.isArray(example.answers)
+    && Array.isArray(example.decoys)
+
   public constructor(
     public question: string,
     public answers: string[],
