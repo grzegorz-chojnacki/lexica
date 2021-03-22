@@ -1,1 +1,50 @@
-<p>multi-test-dialog works!</p>
+<h1 mat-dialog-title>Nowy test</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="multiTest">
+    <mat-form-field appearance="fill">
+      <mat-label>Pytanie</mat-label>
+      <input matInput placeholder="Np. Co oznacza słowo 'sink'?" formControlName="question" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+    <ng-container formArrayName="answers" >
+        <mat-form-field appearance="fill" *ngFor="let answer of answers.controls; let i=index">
+          <mat-label>Prawidłowa odpowiedź</mat-label>
+          <input matInput placeholder="Np. zlew" [formControlName]="i" required/>
+          <mat-error>To pole jest wymagane</mat-error>
+          <button mat-icon-button class="action">
+            <mat-icon (click)="deleteAnswer(i)">delete</mat-icon>
+          </button>
+        </mat-form-field>
+      </ng-container>
+      <button mat-button color="accent"
+  (click)="createNewAnswer()">Dodaj prawidłową odpowiedź</button>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Prawidłowa odpowiedź</mat-label>
+      <input matInput placeholder="Np. zlew" formControlName="answer" />
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field> -->
+
+    <ng-container formArrayName="decoys" >
+    <mat-form-field appearance="fill" *ngFor="let decoy of decoys.controls; let i=index">
+      <mat-label>Inna odpowiedź</mat-label>
+      <input matInput placeholder="Np. śpiewać" [formControlName]="i" required/>
+      <mat-error>To pole jest wymagane</mat-error>
+      <button mat-icon-button class="action">
+        <mat-icon (click)="deleteDecoy(i)">delete</mat-icon>
+      </button>
+    </mat-form-field>
+  </ng-container>
+  <button mat-button color="accent"
+  (click)="createNewDecoy()">Dodaj inną odpowiedź</button>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="accent"
+      [disabled]="!multiTest.valid"
+      [mat-dialog-close]="multiTest.value">
+    Zapisz
+  </button>
+  <button mat-button mat-dialog-close>Anuluj</button>
+</mat-dialog-actions>
