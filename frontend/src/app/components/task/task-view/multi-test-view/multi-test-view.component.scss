@@ -1,13 +1,23 @@
-ul { list-style-type: none }
-
 mat-card {
-  max-width: 400px;
+  max-width: 800px;
   margin: 100px auto;
 }
 
+mat-card-title { margin-bottom: 1.5em }
+
 span.above { display: block }
 
-.examples {
-  justify-content: center;
-  display: grid;
+section { margin: 2.5em 0 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0.5em 0;
 }
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+mat-checkbox { margin: 0.3em 0 }
