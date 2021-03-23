@@ -19,19 +19,14 @@
       </ng-container>
       <button mat-button color="accent"
   (click)="createNewAnswer()">Dodaj prawidłową odpowiedź</button>
-    <!-- <mat-form-field appearance="fill">
-      <mat-label>Prawidłowa odpowiedź</mat-label>
-      <input matInput placeholder="Np. zlew" formControlName="answer" />
-      <mat-error>To pole jest wymagane</mat-error>
-    </mat-form-field> -->
 
     <ng-container formArrayName="decoys" >
-    <mat-form-field appearance="fill" *ngFor="let decoy of decoys.controls; let i=index">
+    <mat-form-field appearance="fill" *ngFor="let decoy of decoys.controls; let index=index">
       <mat-label>Inna odpowiedź</mat-label>
-      <input matInput placeholder="Np. śpiewać" [formControlName]="i" required/>
+      <input matInput placeholder="Np. śpiewać" [formControlName]="index" required/>
       <mat-error>To pole jest wymagane</mat-error>
       <button mat-icon-button class="action">
-        <mat-icon (click)="deleteDecoy(i)">delete</mat-icon>
+        <mat-icon (click)="deleteDecoy(index)">delete</mat-icon>
       </button>
     </mat-form-field>
   </ng-container>
