@@ -12,7 +12,7 @@
           <mat-label>Prawidłowa odpowiedź</mat-label>
           <input matInput placeholder="Np. zlew" [formControlName]="i" required/>
           <mat-error>To pole jest wymagane</mat-error>
-          <button mat-icon-button class="action">
+          <button mat-icon-button class="lighter-icon">
             <mat-icon (click)="deleteAnswer(i)">delete</mat-icon>
           </button>
         </mat-form-field>
@@ -25,7 +25,7 @@
       <mat-label>Inna odpowiedź</mat-label>
       <input matInput placeholder="Np. śpiewać" [formControlName]="index" required/>
       <mat-error>To pole jest wymagane</mat-error>
-      <button mat-icon-button class="action">
+      <button mat-icon-button class="lighter-icon">
         <mat-icon (click)="deleteDecoy(index)">delete</mat-icon>
       </button>
     </mat-form-field>
