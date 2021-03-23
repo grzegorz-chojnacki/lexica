@@ -53,7 +53,7 @@ export class ChoiceTestEditorComponent extends TaskEditorComponent implements On
     this.dialog
       .open(ChoiceTestDialogComponent,
         { width: '500px',
-        data: new ChoiceTest('', '', ['']), hasBackdrop: false})
+        data: new ChoiceTest('', '', []), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {

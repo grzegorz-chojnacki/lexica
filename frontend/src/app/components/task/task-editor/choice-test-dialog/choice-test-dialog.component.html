@@ -1,45 +1,43 @@
 <h1 mat-dialog-title>Nowy test</h1>
 
 <mat-dialog-content>
-  <form [formGroup]="choiceTest">
+  <form>
     <mat-form-field appearance="fill">
       <mat-label>Pytanie</mat-label>
-      <input matInput placeholder="Np. Co oznacza słowo Winter?"
-        formControlName="question" />
+      <input matInput placeholder="Np. Co oznacza słowo Winter?" name="question"
+        [(ngModel)]="question" required />
       <mat-error>To pole jest wymagane</mat-error>
     </mat-form-field>
-
-    <p>Lista odpowiedzi</p>
 
     <mat-form-field appearance="fill">
-      <mat-label>Prawidłowa odpowiedź</mat-label>
-      <input matInput placeholder="Np. Zima" formControlName="answer" />
-      <mat-error>To pole jest wymagane</mat-error>
+      <mat-label>Dodaj kolejną odpowiedź</mat-label>
+      <input matInput placeholder="Np. Zima" [(ngModel)]="next" name="next" />
+      <button matSuffix mat-icon-button [disabled]="!isValidNext()"
+        (click)="addOption(next)">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-form-field>
 
-    <ng-container formArrayName="decoys">
-      <mat-form-field *ngFor="let decoy of decoys.controls; let i = index"
-        appearance="fill">
-        <mat-label>Inna odpowiedź</mat-label>
-        <input matInput placeholder="Np. Wiosna" [formControlName]="i"
-          required />
-        <mat-error>To pole jest wymagane</mat-error>
-        <button matSuffix mat-icon-button *ngIf="i > 0" class="lighter-icon"
-          (click)="deleteDecoy(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-form-field>
-    </ng-container>
-
-    <button mat-icon-button (click)="createNewAnswer()">
-      <mat-icon>add</mat-icon>
-    </button>
+    <mat-radio-group [(ngModel)]="answer" name="answer">
+      <ul>
+        <li *ngFor="let option of options">
+          <mat-radio-button [value]="option">
+            {{ option }}
+          </mat-radio-button>
+          <div class="spacer"></div>
+          <button mat-icon-button (click)="deleteOption(option)"
+            class="lighter-icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </mat-radio-group>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button color="accent" [disabled]="!choiceTest.valid"
-    [mat-dialog-close]="choiceTest.value">
+  <button mat-button color="accent" [disabled]="!isValid()"
+    [mat-dialog-close]="submit()">
     Zapisz
   </button>
   <button mat-button mat-dialog-close>Anuluj</button>
