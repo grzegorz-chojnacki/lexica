@@ -37,7 +37,7 @@
 
 <mat-dialog-actions>
   <button mat-button color="accent"
-      [disabled]="!multiTest.valid"
+      [disabled]="!multiTest.valid || !valid"
       [mat-dialog-close]="multiTest.value">
     Zapisz
   </button>

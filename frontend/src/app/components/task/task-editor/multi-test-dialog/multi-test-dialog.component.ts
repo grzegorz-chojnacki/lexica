@@ -16,6 +16,7 @@ export class MultiTestDialogComponent implements OnInit {
     decoys:  new FormArray(this.card.decoys.map(d => new FormControl(d)))
   })
 
+  public valid = false
   get decoys(): FormArray {
     return this.multiTest.get('decoys') as FormArray
   }
@@ -36,9 +37,11 @@ export class MultiTestDialogComponent implements OnInit {
     this.decoys.removeAt(decoyIndex)
   }
   public createNewAnswer(): void {
+    this.valid = true
     this.answers.push(this.formBuilder.control(''))
   }
   public deleteAnswer(answerIndex: number): void {
+    if (this.answers.length===1) this.valid=false
     this.answers.removeAt(answerIndex)
   }
 }
