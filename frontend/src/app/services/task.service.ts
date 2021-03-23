@@ -35,6 +35,10 @@ export class TaskService {
   }
 
   private refreshTaskSource(teamId: string, taskId: string): void {
+    if (this.taskSource.value.id !== taskId) {
+      this.taskSource.next(this.emptyTask)
+    }
+
     this.http.get<Task<Example>>(
         `${lexicaURL}/team/${teamId}/task/${taskId}`,
         this.userService.authHeader())
@@ -47,18 +51,15 @@ export class TaskService {
         })
   }
 
-  // Returns subscription that indicates when you can safely redirect to team page
-  public createTask(teamId: string, task: Task<Example>): Observable<object> {
-    return this.http.post(
-      `${lexicaURL}/team/${teamId}/task`,
-      task,
-      this.userService.authHeader())
+  public createTask(teamId: string, task: Task<Example>): Observable<Object> {
+    const header = this.userService.authHeader()
+    return this.http
+      .post(`${lexicaURL}/team/${teamId}/task`, task, header)
   }
 
-  public updateTask(teamId: string, taskId: string, task: Task<Example>): Observable<object> {
-    return this.http.put(
-      `${lexicaURL}/team/${teamId}/task/${taskId}`,
-      task,
-      this.userService.authHeader())
+  public updateTask(teamId: string, taskId: string, task: Task<Example>): Observable<Object> {
+    const header = this.userService.authHeader()
+    return this.http
+      .put(`${lexicaURL}/team/${teamId}/task/${taskId}`, task, header)
   }
 }
