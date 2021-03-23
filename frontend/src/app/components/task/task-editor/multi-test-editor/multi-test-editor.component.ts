@@ -25,8 +25,7 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
     public  readonly router: Router,
     public  readonly location: Location) { super() }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public deleteCard(card: MultiTest): void {
     this.taskForm.patchValue({
@@ -53,7 +52,7 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
     this.dialog
       .open(MultiTestDialogComponent,
         { width: '500px',
-        data: new MultiTest('', [''], ['']), hasBackdrop: false})
+        data: new MultiTest('', [], []), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
