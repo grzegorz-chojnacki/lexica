@@ -52,7 +52,8 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
   public addCard(): void {
     this.dialog
       .open(MultiTestDialogComponent,
-        { data: new MultiTest('', [], []), hasBackdrop: false})
+        { width: '500px',
+        data: new MultiTest('', [], []), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
