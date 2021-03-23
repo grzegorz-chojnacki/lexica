@@ -53,7 +53,7 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
     this.dialog
       .open(MultiTestDialogComponent,
         { width: '500px',
-        data: new MultiTest('', [], []), hasBackdrop: false})
+        data: new MultiTest('', [''], ['']), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
