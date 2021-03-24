@@ -8,6 +8,7 @@ import { Team } from 'src/app/classes/team'
 import { UserService } from './user.service'
 import { Task } from '../classes/task'
 import { Example } from '../classes/example'
+import { TeamHistoryService } from './team-history.service'
 
 export interface TeamForm {
   readonly name: string
@@ -25,6 +26,7 @@ export class TeamService {
   private teamSource = new BehaviorSubject<Team>(this.emptyTeam)
 
   public constructor(
+      private readonly teamHistory: TeamHistoryService,
       private readonly userService: UserService,
       private readonly http: HttpClient) {
     this.userService.user.subscribe(user => this.loggedUser = user)
@@ -39,7 +41,10 @@ export class TeamService {
     if (this.loggedUser.id) {
       this.http.get<Team[]>(`${lexicaURL}/user/team`, this.userService.authHeader())
         .pipe(map(teams => teams.map(Team.deserialize)))
-        .subscribe(teams => this.teamListSource.next(teams))
+        .subscribe(teams => {
+          this.teamListSource.next(teams)
+          this.teamHistory.refreshAll(teams)
+        })
     }
   }
 
@@ -51,7 +56,10 @@ export class TeamService {
     this.http.get<Team>(`${lexicaURL}/team/${id}`, this.userService.authHeader())
       .pipe(map(Team.deserialize))
       .subscribe(
-        team => this.teamSource.next(team),
+        team => {
+          this.teamSource.next(team)
+          this.teamHistory.push(team)
+        },
         err => {
           this.teamSource.error(err) // Reset teamSource after error
           this.teamSource = new BehaviorSubject<Team>(this.emptyTeam)
