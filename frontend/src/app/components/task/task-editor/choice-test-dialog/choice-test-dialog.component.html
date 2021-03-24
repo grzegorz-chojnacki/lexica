@@ -10,8 +10,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Dodaj kolejną odpowiedź</mat-label>
+      <mat-label>Dodaj odpowiedź</mat-label>
       <input matInput placeholder="Np. Zima" [(ngModel)]="next" name="next" />
+      <mat-hint>{{ displayHint() }}</mat-hint>
       <button matSuffix mat-icon-button [disabled]="!isValidNext()"
         (click)="addOption(next)">
         <mat-icon>add</mat-icon>

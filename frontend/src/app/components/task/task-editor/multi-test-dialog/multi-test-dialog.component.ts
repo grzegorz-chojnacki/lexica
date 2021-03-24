@@ -50,6 +50,16 @@ export class MultiTestDialogComponent implements OnInit {
     return !!this.next && !this.options.find(o => o.text === this.next)
   }
 
+  public displayHint(): string {
+    if (this.options.length < 2) {
+      return 'Wymagane są przynajmniej dwie odpowiedzi'
+    } else if (this.options.filter(o => o.checked).length === 0) {
+      return 'Przynajmniej jedna odpowiedź musi być zaznaczona'
+    } else {
+      return ''
+    }
+  }
+
   public submit(): MultiTest {
     return {
       question: this.question,

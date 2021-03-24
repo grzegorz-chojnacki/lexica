@@ -40,6 +40,16 @@ export class ChoiceTestDialogComponent implements OnInit {
     return !!this.next && !this.options.includes(this.next)
   }
 
+  public displayHint(): string {
+    if (this.options.length < 2) {
+      return 'Wymagane są przynajmniej dwie odpowiedzi'
+    } else if (this.answer === '') {
+      return 'Jedna odpowiedź musi być zaznaczona'
+    } else {
+      return ''
+    }
+  }
+
   public submit(): ChoiceTest {
     return {
       answer: this.answer,
