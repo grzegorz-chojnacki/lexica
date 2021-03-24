@@ -1,12 +1,24 @@
-mat-card {
-  max-width: 400px;
+.container {
   margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card {
+  max-width: 800px;
+  min-width: 400px;
+  flex-basis: content;
 }
 
 span.above { display: block }
 
 mat-card-content { margin: 4em 0 }
-h1 { text-align: center }
+
+h1 {
+  text-align: center;
+  word-wrap: break-word;
+}
 
 mat-card-actions {
   display: flex;

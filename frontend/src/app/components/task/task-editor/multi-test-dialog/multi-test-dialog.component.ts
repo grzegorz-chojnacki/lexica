@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MultiTest } from 'src/app/classes/example'
 
+type Checkbox = { text: string, checked: boolean }
+
+const pack = (s: string, b: boolean): Checkbox => ({ text: s, checked: b })
 
 @Component({
   selector: 'app-multi-test-dialog',
@@ -10,38 +12,59 @@ import { MultiTest } from 'src/app/classes/example'
   styleUrls: ['./multi-test-dialog.component.scss']
 })
 export class MultiTestDialogComponent implements OnInit {
-  public readonly multiTest = this.formBuilder.group({
-    question: new FormControl(this.card.question, [ Validators.required ]),
-    answers:  new FormArray(this.card.answers.map(a => new FormControl(a))),
-    decoys:  new FormArray(this.card.decoys.map(d => new FormControl(d)))
-  })
+  public question = this.example.question
+  public options = this.initializeOptions()
+  public next = ''
 
-  public valid = false
-  get decoys(): FormArray {
-    return this.multiTest.get('decoys') as FormArray
-  }
-  get answers(): FormArray {
-    return this.multiTest.get('answers') as FormArray
-  }
-  public constructor(
-    private readonly formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private readonly card: MultiTest) { }
+  public constructor(@Inject(MAT_DIALOG_DATA) private readonly example: MultiTest) { }
 
+  public ngOnInit(): void { }
 
-  ngOnInit(): void {
+  private initializeOptions(): Checkbox[] {
+    return [
+      ...this.example.answers.map(a => pack(a, true)),
+      ...this.example.decoys.map(a => pack(a, false))
+    ]
   }
-  public createNewDecoy(): void {
-    this.decoys.push(this.formBuilder.control(''))
+
+  public addOption(option: string): void {
+    let isFirstCheckbox = this.options.length === 0
+    this.options = [pack(option, isFirstCheckbox), ...this.options]
+    this.next = ''
   }
-  public deleteDecoy(decoyIndex: number): void {
-    this.decoys.removeAt(decoyIndex)
+
+  public deleteOption(option: Checkbox): void {
+    this.options = this.options.filter(o => o !== option)
   }
-  public createNewAnswer(): void {
-    this.valid = true
-    this.answers.push(this.formBuilder.control(''))
+
+  public toggle(option: Checkbox): void {
+    option.checked = !option.checked
   }
-  public deleteAnswer(answerIndex: number): void {
-    if (this.answers.length===1) this.valid=false
-    this.answers.removeAt(answerIndex)
+
+  public isValid(): boolean {
+    const answers = this.options.filter(o => o.checked)
+    return !!this.question && answers.length > 0 && this.options.length > 1
+  }
+
+  public isValidNext(): boolean {
+    return !!this.next && !this.options.find(o => o.text === this.next)
+  }
+
+  public displayHint(): string {
+    if (this.options.length < 2) {
+      return 'Wymagane są przynajmniej dwie odpowiedzi'
+    } else if (this.options.filter(o => o.checked).length === 0) {
+      return 'Przynajmniej jedna odpowiedź musi być zaznaczona'
+    } else {
+      return ''
+    }
+  }
+
+  public submit(): MultiTest {
+    return {
+      question: this.question,
+      answers: this.options.filter(o => o.checked).map(o => o.text),
+      decoys: this.options.filter(o => !o.checked).map(o => o.text)
+    }
   }
 }

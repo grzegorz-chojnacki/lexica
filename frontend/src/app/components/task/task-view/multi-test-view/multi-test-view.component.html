@@ -1,14 +1,12 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <span class="overline above">{{task?.type?.name}}</span>
-      {{task.name}}
-    </mat-card-title>
-  </mat-card-header>
+  <mat-card-title>
+    <span class="overline above">{{task?.type?.name}}</span>
+    {{task.name}}
+  </mat-card-title>
 
-  <mat-card-content class="examples">
+  <mat-card-content>
     <section *ngFor="let control of controls">
-      <p>{{ control.example.question }}</p>
+      <label>{{ control.example.question }}</label>
       <ul>
         <li *ngFor="let checkbox of control.checkboxes">
           <mat-checkbox [(ngModel)]="checkbox.value">

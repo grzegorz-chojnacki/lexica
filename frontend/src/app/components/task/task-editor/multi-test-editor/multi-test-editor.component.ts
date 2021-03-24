@@ -25,8 +25,7 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
     public  readonly router: Router,
     public  readonly location: Location) { super() }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public deleteCard(card: MultiTest): void {
     this.taskForm.patchValue({
