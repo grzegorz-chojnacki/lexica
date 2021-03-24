@@ -29,14 +29,18 @@ export class TeamHistoryService {
       teams = teams.slice(0, 9) // Limit history to 9 teams + new one
     }
 
-    this.teamSource.next([team, ...teams])
+    this.teamSource.next([this.trimData(team), ...teams])
     this.saveTeams()
+  }
+
+  private trimData(team: Team): Team {
+    return { id: team.id, name: team.name } as Team
   }
 
   public refreshAll(teams: Team[]) {
     const refreshedTeams = this.teamSource.value.reduce((acc: Team[], team) => {
       const found = teams.find(t => t.id === team.id)
-      return found ? [...acc, found] : acc
+      return found ? [...acc, this.trimData(found)] : acc
     }, [])
 
     this.teamSource.next(refreshedTeams)
