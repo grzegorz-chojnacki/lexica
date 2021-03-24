@@ -5,7 +5,6 @@ import { Team } from 'src/app/classes/team'
 import { TeamService } from 'src/app/services/team.service'
 import { UserService } from 'src/app/services/user.service'
 import { User } from 'src/app/classes/user'
-import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { combineLatest } from 'rxjs'
 
 @Component({
@@ -24,8 +23,8 @@ export class TeamViewComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly teamService: TeamService,
-    private readonly userService: UserService,
-    private readonly breadCrumbService: BreadCrumbService) { }
+    private readonly userService: UserService
+  ) { }
 
   public ngOnInit(): void {
     const isLeader = () => this.team?.leader?.id === this.user?.id
@@ -36,10 +35,8 @@ export class TeamViewComponent implements OnInit {
         this.user = user
         this.team = team
         this.leaderView = isLeader()
-        this.breadCrumbService.setTeam(team.id)
-        this.leaderHasProgressView  = team.hasMember(this.user)
+        this.leaderHasProgressView = team.hasMember(this.user)
         this.loggedUserWithProgress = this.getLoggedUserFromTeam(team)
-        // console.log(team, this.user, this.leaderHasProgressView, team.isMember(this.user))
       }, _ => this.router.navigate(['/workspace']))
   }
 
