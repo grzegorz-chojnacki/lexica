@@ -114,6 +114,11 @@ export class TaskEditorDispatchComponent implements OnInit {
           const content = event.target?.result as string
           const [examples, type] = Example.parse(content)
           const task = { ...this.taskHeaderForm.value, examples, type } as Task<Example>
+
+          if (!this.taskTypeIsValid(type)) {
+            throw new Error('Task type mismatch with existing task')
+          }
+
           this.resolveTaskTemplate(task)
           this.editor.taskForm.patchValue({ examples })
         } catch (e) {
@@ -122,6 +127,11 @@ export class TaskEditorDispatchComponent implements OnInit {
       })
       reader.readAsText(file)
     }
+  }
+
+  private taskTypeIsValid(type: TaskType): boolean {
+    const typeControl = this.taskHeaderForm.get('type')
+    return (typeControl?.enabled) || typeControl?.value === type
   }
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
