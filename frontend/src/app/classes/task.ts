@@ -14,7 +14,6 @@ export class Task<T extends Example> {
       task.name,
       task.examples,
       TaskType.deserialize(task.type),
-      task.isActive,
       task.description)
   }
 
@@ -23,7 +22,6 @@ export class Task<T extends Example> {
     public readonly name: string,
     public readonly examples: T[],
     public readonly type: TaskType,
-    public readonly isActive: boolean = true,
     public readonly description?: string,
   ) { }
 }
