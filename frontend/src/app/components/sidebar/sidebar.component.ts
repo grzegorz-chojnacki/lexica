@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
     private readonly router: Router
   ) { }
 
-  public redirectTo(team: Team) {
+  public redirectTo(team: Team): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['team', team.id])
     })

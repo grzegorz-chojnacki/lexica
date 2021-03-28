@@ -6,10 +6,11 @@ import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
-import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
+import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType, MultiTestTask } from 'src/app/classes/task-type'
 import { Example } from 'src/app/classes/example'
 import { SimpleCardViewComponent } from '../simple-card-view/simple-card-view.component'
 import { ChoiceTestViewComponent } from '../choice-test-view/choice-test-view.component'
+import { MultiTestViewComponent } from '../multi-test-view/multi-test-view.component'
 import { Progress } from 'src/app/classes/progress'
 import { Location } from '@angular/common'
 import { MatSnackBar } from '@angular/material/snack-bar'
@@ -23,7 +24,8 @@ export class TaskDirective {
 
 const taskTypeViewMap = new Map<TaskType, any>([
   [ SimpleCardTask, SimpleCardViewComponent ],
-  [ ChoiceTestTask, ChoiceTestViewComponent ]
+  [ ChoiceTestTask, ChoiceTestViewComponent ],
+  [ MultiTestTask, MultiTestViewComponent ]
 ])
 
 @Component({
@@ -70,7 +72,9 @@ export class TaskViewDispatchComponent implements OnInit {
 
       const component = taskTypeViewMap.get(task.type)
       const componentFactory = this.cfr.resolveComponentFactory<TaskViewComponent>(component)
-      const taskView = viewContainerRef.createComponent<TaskViewComponent>(componentFactory).instance
+      const taskView = viewContainerRef
+      .createComponent<TaskViewComponent>(componentFactory)
+      .instance
 
       taskView.task = task
       taskView.onSubmit.subscribe((p: Progress) => this.addProgress(p))

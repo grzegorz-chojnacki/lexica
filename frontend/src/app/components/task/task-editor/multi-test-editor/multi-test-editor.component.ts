@@ -3,47 +3,46 @@ import { MatDialog } from '@angular/material/dialog'
 import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
-import { ChoiceTest } from 'src/app/classes/example'
+import { MultiTest } from 'src/app/classes/example'
 import { arrayNotEmpty } from 'src/app/classes/utils'
-import { ChoiceTestTask } from 'src/app/classes/task-type'
-import { ChoiceTestDialogComponent } from '../choice-test-dialog/choice-test-dialog.component'
+import { MultiTestTask } from 'src/app/classes/task-type'
+import { MultiTestDialogComponent } from '../multi-test-dialog/multi-test-dialog.component'
 import { TaskEditorComponent } from '../task-editor'
 
+
 @Component({
-  selector: 'app-choice-test-editor',
-  templateUrl: './choice-test-editor.component.html',
-  styleUrls: ['./choice-test-editor.component.scss']
+  selector: 'app-multi-test-editor',
+  templateUrl: './multi-test-editor.component.html',
+  styleUrls: ['./multi-test-editor.component.scss']
 })
-export class ChoiceTestEditorComponent extends TaskEditorComponent implements OnInit {
+export class MultiTestEditorComponent extends TaskEditorComponent implements OnInit {
   public taskForm = this.formBuilder.group({
     examples:    new FormControl([], [ arrayNotEmpty ]),
-    type:        ChoiceTestTask
+    type:        MultiTestTask
   })
-
-  public constructor(
-    private readonly dialog: MatDialog,
+  constructor(private readonly dialog: MatDialog,
     private readonly formBuilder: FormBuilder,
     public  readonly router: Router,
     public  readonly location: Location) { super() }
 
-  public ngOnInit(): void { }
+  ngOnInit(): void { }
 
-  public deleteCard(card: ChoiceTest): void {
+  public deleteCard(card: MultiTest): void {
     this.taskForm.patchValue({
-      examples: this.taskForm.value.examples.filter((c: ChoiceTest) => c !== card)
+      examples: this.taskForm.value.examples.filter((m: MultiTest) => m !== card)
     })
     this.taskForm.controls.examples.updateValueAndValidity()
   }
 
-  public editCard(card: ChoiceTest): void {
+  public editCard(card: MultiTest): void {
     this.dialog
-      .open(ChoiceTestDialogComponent,
+      .open(MultiTestDialogComponent,
         { data: card, hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
           card.question  = result.question
-          card.answer = result.answer
+          card.answers = result.answers
           card.decoys = result.decoys
         }
       })
@@ -51,9 +50,9 @@ export class ChoiceTestEditorComponent extends TaskEditorComponent implements On
 
   public addCard(): void {
     this.dialog
-      .open(ChoiceTestDialogComponent,
+      .open(MultiTestDialogComponent,
         { width: '500px',
-        data: new ChoiceTest('', '', []), hasBackdrop: false})
+        data: new MultiTest('', [], []), hasBackdrop: false})
       .afterClosed()
       .subscribe(result => {
         if (result) {
@@ -62,4 +61,5 @@ export class ChoiceTestEditorComponent extends TaskEditorComponent implements On
         }
       })
   }
+
 }

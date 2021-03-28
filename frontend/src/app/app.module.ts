@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatRadioModule } from '@angular/material/radio'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 // Team
 import { TeamViewComponent } from './components/team/team-view/team-view.component'
@@ -65,7 +66,10 @@ import { TaskDirective, TaskViewDispatchComponent } from './components/task/task
 import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-test-dialog/choice-test-dialog.component';
 import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component';
 import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component';
-import { TeamFormComponent } from './components/team/team-form/team-form.component'
+import { TeamFormComponent } from './components/team/team-form/team-form.component';
+import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component';
+import { MultiTestEditorComponent } from './components/task/task-editor/multi-test-editor/multi-test-editor.component';
+import { MultiTestDialogComponent } from './components/task/task-editor/multi-test-dialog/multi-test-dialog.component'
 
 @NgModule({
   declarations: [
@@ -106,7 +110,10 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     ChoiceTestDialogComponent,
     ChoiceTestEditorComponent,
     ChoiceTestViewComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    MultiTestViewComponent,
+    MultiTestEditorComponent,
+    MultiTestDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -134,6 +141,7 @@ import { TeamFormComponent } from './components/team/team-form/team-form.compone
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

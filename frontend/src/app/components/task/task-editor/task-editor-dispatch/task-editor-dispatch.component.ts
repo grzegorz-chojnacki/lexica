@@ -2,11 +2,12 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
-import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
+import { ChoiceTestTask, MultiTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
 import { TaskService } from 'src/app/services/task.service'
 import { TaskDirective } from '../../task-view/task-view-dispatch/task-view-dispatch.component'
 import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-editor.component'
 import { ChoiceTestEditorComponent } from '../choice-test-editor/choice-test-editor.component'
+import { MultiTestEditorComponent } from '../multi-test-editor/multi-test-editor.component'
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskEditorComponent } from '../task-editor'
@@ -14,7 +15,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
   [SimpleCardTask, SimpleCardEditorComponent],
-  [ChoiceTestTask, ChoiceTestEditorComponent]
+  [ChoiceTestTask, ChoiceTestEditorComponent],
+  [MultiTestTask, MultiTestEditorComponent]
 ])
 
 @Component({
@@ -23,7 +25,7 @@ const taskTypeEditorMap = new Map<TaskType, any>([
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
-  public readonly taskTypes = [SimpleCardTask, ChoiceTestTask]
+  public readonly taskTypes = [SimpleCardTask, ChoiceTestTask, MultiTestTask]
 
   public teamId!: string
   public taskId!: string

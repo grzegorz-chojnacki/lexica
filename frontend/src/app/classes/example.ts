@@ -1,4 +1,4 @@
-import { SimpleCardTask, ChoiceTestTask, TaskType } from "./task-type"
+import { SimpleCardTask, ChoiceTestTask, TaskType, MultiTestTask } from "./task-type"
 
 export abstract class Example {
   public static parse(text: string): [Example[], TaskType] {
@@ -7,6 +7,8 @@ export abstract class Example {
       return [examples, SimpleCardTask]
     } else if (examples.every(ChoiceTest.validate)) {
       return [examples, ChoiceTestTask]
+    }else if (examples.every(MultiTest.validate)) {
+        return [examples, MultiTestTask]
     } else {
       throw new Error('Examples did not match any type of Example')
     }
@@ -29,6 +31,16 @@ export class ChoiceTest extends Example {
   public constructor(
     public question: string,
     public answer: string,
+    public decoys: string[],
+  ) { super() }
+}
+export class MultiTest extends Example {
+  public static validate = (example: any) => example.question && Array.isArray(example.answers)
+    && Array.isArray(example.decoys)
+
+  public constructor(
+    public question: string,
+    public answers: string[],
     public decoys: string[],
   ) { super() }
 }

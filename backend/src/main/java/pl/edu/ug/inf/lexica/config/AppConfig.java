@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class AppConfig {
     private final TaskType simpleCardType = new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź.");
     private final TaskType choiceTestType = new TaskType(2, "Test jednokrotnego wyboru", "Test polega na wybraniu jednej prawidłowej odpowiedzi.");
+    private final TaskType multiTestType = new TaskType(3, "Test wielokrotnego wyboru", "Test polega na wybraniu wszystkich prawidłowych odpowiedzi.");
     private final UserService userService;
     private final TaskTypeRepository taskTypeRepository;
     private final TeamService teamService;
@@ -27,6 +28,12 @@ public class AppConfig {
         this.taskTypeRepository = taskTypeRepository;
         this.teamService = teamService;
     }
+
+
+    Supplier<List<Example>> generateMultiTest = () ->
+            List.of(new MultiTest("Choose native English speaking country/ies.", Set.of("USA","United Kingdom","Australia"), Set.of("Poland")),
+                    new MultiTest("Co to jest jajko?", Set.of("Egg"), Set.of("Eye","Ear")),
+                    new MultiTest("Co oznacza 'nail'", Set.of("Gwóźdź","Paznokieć"), Set.of("Ślimak","Uśmiech")));
 
    Supplier<List<Example>> generateChoiceTest = () ->
           List.of(new ChoiceTest("Pies po angielsku to:", "Dog", Set.of("Cat","Duck")),
@@ -109,6 +116,15 @@ public class AppConfig {
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
+    Supplier<List<Task>> generateTasks4 = () -> List.of(
+            List.of("Różne", "Naucz się pór roku."),
+            List.of("Inne",
+                    "Zadanie z trochę trudniejszymi przykładami. Przetestuj swoją wiedzę.")).stream()
+            .map(list -> new Task(list.get(0),generateMultiTest.get()  , true, list.get(1), multiTestType))
+            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .peek(task -> testTasks.add(task))
+            .collect(Collectors.toList());
+
 
     private Set<Progress> generateProgress(List<Task> tasks) {
         return tasks.stream()
@@ -135,7 +151,9 @@ public class AppConfig {
 
     List<Team> testTeams2 = List.of(
             new Team("angielski gr.1", testUsers.get(5), "", "#846267"),
-            new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo.", "#133C55"),
+            new Team("niemiecki gr.1a", testUsers.get(6), "Przygotowania do matury z j. niemieckigo.", "#133C55"));
+
+    List<Team> testTeams3 = List.of(
             new Team("TDW", testUsers.get(4), "", "#723D46"));
 
     Set<User> testUserGroup(User leader) {
@@ -147,10 +165,12 @@ public class AppConfig {
     public void initDataBase() {
         taskTypeRepository.save(simpleCardType);
         taskTypeRepository.save(choiceTestType);
+        taskTypeRepository.save(multiTestType);
         userService.registerAll(testUsers);
 
         initTeams(testTeams1, generateTasks1);
         initTeams(testTeams2, generateTasks3);
+        initTeams(testTeams3, generateTasks4);
 
         testUsers.forEach(user -> user.setProgress(generateProgress(testTasks)));
         userService.addAll(testUsers);

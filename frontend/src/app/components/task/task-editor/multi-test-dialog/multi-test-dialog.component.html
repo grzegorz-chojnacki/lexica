@@ -4,7 +4,7 @@
   <form>
     <mat-form-field appearance="fill">
       <mat-label>Pytanie</mat-label>
-      <input matInput placeholder="Np. Co oznacza słowo Winter?" name="question"
+      <input matInput placeholder="Np. Co oznacza słowo 'sink'?" name="question"
         [(ngModel)]="question" required />
       <mat-error>To pole jest wymagane</mat-error>
     </mat-form-field>
@@ -19,12 +19,13 @@
       </button>
     </mat-form-field>
 
-    <mat-radio-group [(ngModel)]="answer" name="answer">
+    <section>
       <ul>
         <li *ngFor="let option of options">
-          <mat-radio-button [value]="option">
-            {{ option }}
-          </mat-radio-button>
+          <mat-checkbox [checked]="option.checked" (change)="toggle(option)"
+            name="option">
+            {{ option.text }}
+          </mat-checkbox>
           <div class="spacer"></div>
           <button mat-icon-button (click)="deleteOption(option)"
             class="lighter-icon">
@@ -32,7 +33,7 @@
           </button>
         </li>
       </ul>
-    </mat-radio-group>
+    </section>
   </form>
 </mat-dialog-content>
 
