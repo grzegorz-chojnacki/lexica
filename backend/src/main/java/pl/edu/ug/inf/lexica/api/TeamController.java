@@ -106,7 +106,6 @@ public class TeamController {
             if (task.getType().getId().equals(updated.getType().getId())) {
                 task.setName(updated.getName());
                 task.setDescription(updated.getDescription());
-                task.setActive(updated.isActive());
                 task.setExamples(updated.getExamples());
                 taskService.update(task);
             }
