@@ -29,7 +29,6 @@ public class AppConfig {
         this.teamService = teamService;
     }
 
-
     Supplier<List<Example>> generateMultiTest = () ->
             List.of(new MultiTest("Choose native English speaking country/ies.", Set.of("USA","United Kingdom","Australia"), Set.of("Poland")),
                     new MultiTest("Co to jest jajko?", Set.of("Egg"), Set.of("Eye","Ear")),
@@ -93,8 +92,7 @@ public class AppConfig {
             List.of("Zadanie nieambitne", ""),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards1.get() , true, list.get(1),simpleCardType))
-            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .map(list -> new Task(list.get(0),generateCards1.get(), list.get(1),simpleCardType))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
@@ -102,8 +100,7 @@ public class AppConfig {
             List.of("Fruit", "Naucz się podstawowych słówek z kategorii owoce."),
             List.of("The Internet and WWW",
                     "Zadanie z trochę trudniejszymi przykładami. Poszerza  bardziej szczegółową wiedzę z zakresu świata informatycznego.")).stream()
-            .map(list -> new Task(list.get(0),generateCards2.get()  , true, list.get(1), simpleCardType))
-            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .map(list -> new Task(list.get(0),generateCards2.get(), list.get(1), simpleCardType))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
@@ -111,8 +108,7 @@ public class AppConfig {
             List.of("Seasons", "Naucz się pór roku."),
             List.of("Inne",
                     "Zadanie z trochę trudniejszymi przykładami. Przetestuj swoją wiedzę.")).stream()
-            .map(list -> new Task(list.get(0),generateChoiceTest.get()  , true, list.get(1), choiceTestType))
-            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .map(list -> new Task(list.get(0),generateChoiceTest.get(), list.get(1), choiceTestType))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
@@ -120,8 +116,7 @@ public class AppConfig {
             List.of("Różne", "Naucz się pór roku."),
             List.of("Inne",
                     "Zadanie z trochę trudniejszymi przykładami. Przetestuj swoją wiedzę.")).stream()
-            .map(list -> new Task(list.get(0),generateMultiTest.get()  , true, list.get(1), multiTestType))
-            .peek(task -> task.setActive(!task.getName().equals("Zadanie nieaktywne")))
+            .map(list -> new Task(list.get(0),generateMultiTest.get(), list.get(1), multiTestType))
             .peek(task -> testTasks.add(task))
             .collect(Collectors.toList());
 
