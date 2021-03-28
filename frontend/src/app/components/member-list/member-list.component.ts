@@ -34,7 +34,6 @@ export class MemberListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.userService.user.subscribe(u => this.user = u)
-    this.team.members.sort((u1, u2) => this.getCompletion(u2) - this.getCompletion(u1))
   }
 
   public getCompletion(user: User): number {

@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let member of team.members | sortMembers: user; last as last; first as first">
+  <mat-list-item *ngFor="let member of team | sortMembers: user; last as last; first as first">
     <app-avatar *ngIf="first"  [user]="member" matListAvatar></app-avatar>
     <app-avatar *ngIf="!first" [user]="member" matListAvatar></app-avatar>
     <h4 matLine>{{ member | fullNamePipe }}</h4>
