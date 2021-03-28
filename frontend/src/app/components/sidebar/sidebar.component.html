@@ -1,15 +1,14 @@
-<div class="sidebar">
-  <header class="row">
-    <div class="avatar color-shader">
-    <a href="/account" id="nazwaUzytkownika">
-      {{ user | fullNamePipe }}
-      <mat-icon>account_circle</mat-icon>
-    </a>
-  </div>
-  </header>
-  <mat-accordion multi>
-    <app-team-container title="Ostatnio odwiedzane"
-      [teams]="otherTeams"></app-team-container>
-  </mat-accordion>
-
-</div>
+<mat-nav-list>
+  <div mat-subheader>Konto</div>
+  <a routerLink="/account" mat-list-item>
+    <mat-icon>account_circle</mat-icon>
+    {{ user | fullNamePipe }}
+  </a>
+  <div mat-subheader>Ostatnio odwiedzone zespoły</div>
+  <a mat-list-item *ngFor="let team of teams; let last = last"
+    (click)="redirectTo(team)" >
+    <mat-icon>group</mat-icon>
+    {{ team.name }}
+    <mat-divider *ngIf="!last"></mat-divider>
+  </a>
+</mat-nav-list>

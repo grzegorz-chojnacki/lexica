@@ -6,7 +6,6 @@ import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
 import { User } from 'src/app/classes/user'
-import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
 import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType, MultiTestTask } from 'src/app/classes/task-type'
 import { Example } from 'src/app/classes/example'
 import { SimpleCardViewComponent } from '../simple-card-view/simple-card-view.component'
@@ -46,12 +45,11 @@ export class TaskViewDispatchComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly snackbarService: MatSnackBar,
-    private readonly breadCrumbService: BreadCrumbService,
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private readonly location: Location,
     private readonly cfr: ComponentFactoryResolver
-    ) { }
+  ) { }
 
   public ngOnInit(): void {
     this.userService.user.subscribe(user => this.user = user)
@@ -64,7 +62,6 @@ export class TaskViewDispatchComponent implements OnInit {
       .subscribe(task => {
         this.task = task
         this.resolveTaskTemplate(task)
-        this.breadCrumbService.setTeamTask(teamId, taskId)
       }, _ => this.router.navigate(['/']))
   }
 

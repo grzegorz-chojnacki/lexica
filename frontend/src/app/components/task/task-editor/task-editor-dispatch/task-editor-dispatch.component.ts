@@ -2,8 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
-import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType, MultiTestTask } from 'src/app/classes/task-type'
-import { BreadCrumbService } from 'src/app/services/bread-crumb.service'
+import { ChoiceTestTask, MultiTestTask, NullTask, SimpleCardTask, TaskType } from 'src/app/classes/task-type'
 import { TaskService } from 'src/app/services/task.service'
 import { TaskDirective } from '../../task-view/task-view-dispatch/task-view-dispatch.component'
 import { SimpleCardEditorComponent } from '../simple-card-editor/simple-card-editor.component'
@@ -42,7 +41,6 @@ export class TaskEditorDispatchComponent implements OnInit {
   public taskHost!: TaskDirective
 
   public constructor(
-    private readonly breadCrumbService: BreadCrumbService,
     private readonly snackbarService: MatSnackBar,
     private readonly formBuilder: FormBuilder,
     private readonly taskService: TaskService,
@@ -57,7 +55,6 @@ export class TaskEditorDispatchComponent implements OnInit {
 
     if (this.taskId) {
       this.taskService.getTask(this.teamId, this.taskId).subscribe(task => {
-        this.breadCrumbService.setTeamTaskEditor(this.teamId, this.taskId)
         this.resolveTaskTemplate(task)
         this.taskHeaderForm.controls.type.disable()
       }, _ => this.navigateToTeam())
@@ -65,7 +62,6 @@ export class TaskEditorDispatchComponent implements OnInit {
       this.taskHeaderForm.controls.type.valueChanges
         .subscribe(type => this.resolveNewTaskTemplate(type))
       this.taskHeaderForm.controls.type.updateValueAndValidity()
-      this.breadCrumbService.setTeamNewTask(this.teamId)
     }
   }
 
