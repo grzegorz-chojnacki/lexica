@@ -12,6 +12,7 @@ import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskEditorComponent } from '../task-editor'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { saveAsFile } from 'src/app/classes/utils'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
   [SimpleCardTask, SimpleCardEditorComponent],
@@ -127,6 +128,14 @@ export class TaskEditorDispatchComponent implements OnInit {
       })
       reader.readAsText(file)
     }
+  }
+
+  public export(): void {
+    const task = {
+      name: this.taskHeaderForm.get('name')?.value || 'Zadanie',
+      examples: this.editor.taskForm.get('examples')?.value
+    }
+    saveAsFile(task as Task<Example>)
   }
 
   private taskTypeIsValid(type: TaskType): boolean {

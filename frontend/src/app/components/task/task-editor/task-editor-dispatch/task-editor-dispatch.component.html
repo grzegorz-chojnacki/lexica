@@ -28,9 +28,8 @@
   <input type="file" #fileInput (change)="import($event)" hidden accept=".json">
 
   <mat-card-actions>
-    <button mat-button (click)="fileInput.click()">
-      Importuj<mat-icon>attach_file</mat-icon>
-    </button>
+    <button mat-button (click)="fileInput.click()">Importuj</button>
+    <button mat-button (click)="export()">Eksportuj</button>
   </mat-card-actions>
 </mat-card>
 
