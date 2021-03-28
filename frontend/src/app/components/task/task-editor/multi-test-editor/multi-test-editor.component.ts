@@ -20,12 +20,14 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
     examples:    new FormControl([], [ arrayNotEmpty ]),
     type:        MultiTestTask
   })
-  constructor(private readonly dialog: MatDialog,
+  public constructor(
+    private readonly dialog: MatDialog,
     private readonly formBuilder: FormBuilder,
     public  readonly router: Router,
-    public  readonly location: Location) { super() }
+    public  readonly location: Location
+  ) { super() }
 
-  ngOnInit(): void { }
+  public ngOnInit(): void { }
 
   public deleteCard(card: MultiTest): void {
     this.taskForm.patchValue({
@@ -61,5 +63,4 @@ export class MultiTestEditorComponent extends TaskEditorComponent implements OnI
         }
       })
   }
-
 }

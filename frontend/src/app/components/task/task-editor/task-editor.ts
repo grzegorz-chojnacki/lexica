@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from "@angular/core"
-import { FormGroup } from "@angular/forms"
+import { Component, EventEmitter, Output } from '@angular/core'
+import { FormGroup } from '@angular/forms'
 
 @Component({ template: '' })
 export abstract class TaskEditorComponent {

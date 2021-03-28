@@ -6,7 +6,7 @@ describe('AuthorizationGuardGuard', () => {
   let guard: AuthorizedGuard
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({ })
     guard = TestBed.inject(AuthorizedGuard)
   })
 

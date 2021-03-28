@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class LoginComponent implements OnInit {
   public loginForm = this.formBuilder.group({
-    username: new FormControl('', [ Validators.required,]),
+    username: new FormControl('', [ Validators.required ]),
     password: new FormControl('', [ Validators.required ]),
   })
 
