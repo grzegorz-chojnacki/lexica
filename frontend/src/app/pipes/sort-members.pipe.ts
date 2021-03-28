@@ -11,13 +11,13 @@ export class SortMembersPipe implements PipeTransform {
   public transform(team: Team, loggedUser: User): User[] {
 
     function completion(user: User): number {
-     const progress = team.tasks.map(task => user.getTaskProgress(task))
-     return Math.round(progress.reduce(Progress.sum, 0) / progress.length)
+      const progress = team.tasks.map(task => user.getTaskProgress(task))
+      return Math.round(progress.reduce(Progress.sum, 0) / progress.length)
     }
 
     if (team.tasks.length > 0) {
-    team.members.sort((u1, u2) => completion(u2) - completion(u1))
-  }
+      team.members.sort((u1, u2) => completion(u2) - completion(u1))
+    }
     const loggedUserInside = team.members.find(u => u.id === loggedUser.id)
     const members2 = team.members.filter(u => u.id !== loggedUser.id)
     if (loggedUserInside === undefined) { return team.members }
