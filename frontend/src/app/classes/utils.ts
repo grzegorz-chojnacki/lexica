@@ -1,5 +1,9 @@
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms'
+import { Example } from './example'
+import { Task } from './task'
 import { Team } from './team'
+import { saveAs } from 'file-saver'
+
 
 export const randomColor = () => {
   const randomHex = () => '0123456789ACBDEF'[Math.floor(Math.random() * 16)]
@@ -20,3 +24,10 @@ export const teamFormInitializer =
     description: team.description,
     color: team.color
   })
+
+export const saveAsFile = (task: Task<Example>) => {
+  const blob = new Blob(
+    [ JSON.stringify(task.examples, null, '  ') ],
+    { type: 'text/plain;charset=utf-8' })
+  saveAs(blob, `${task.name}.json`)
+}
