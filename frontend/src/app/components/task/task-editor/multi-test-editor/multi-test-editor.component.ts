@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { MultiTest } from 'src/app/classes/example'
-import { arrayNotEmpty } from 'src/app/classes/utils'
-import { MultiTestTask } from 'src/app/classes/task-type'
 import { MultiTestDialogComponent } from '../multi-test-dialog/multi-test-dialog.component'
 import { TaskEditorComponent } from '../task-editor'
+import { FormGroup } from '@angular/forms'
 
 
 @Component({
@@ -16,50 +14,22 @@ import { TaskEditorComponent } from '../task-editor'
   styleUrls: ['./multi-test-editor.component.scss']
 })
 export class MultiTestEditorComponent extends TaskEditorComponent implements OnInit {
-  public taskForm = this.formBuilder.group({
-    examples:    new FormControl([], [ arrayNotEmpty ]),
-    type:        MultiTestTask
-  })
-  constructor(private readonly dialog: MatDialog,
-    private readonly formBuilder: FormBuilder,
-    public  readonly router: Router,
-    public  readonly location: Location) { super() }
+  protected readonly dialogComponent = MultiTestDialogComponent
 
-  ngOnInit(): void { }
+  public constructor(
+    public readonly taskForm: FormGroup,
+    public readonly router: Router,
+    public readonly location: Location,
+    dialog: MatDialog,
+  ) { super(dialog) }
 
-  public deleteCard(card: MultiTest): void {
-    this.taskForm.patchValue({
-      examples: this.taskForm.value.examples.filter((m: MultiTest) => m !== card)
-    })
-    this.taskForm.controls.examples.updateValueAndValidity()
+  protected patchExample(example: MultiTest, result: MultiTest): void {
+    example.question = result.question
+    example.answers = result.answers
+    example.decoys = result.decoys
   }
 
-  public editCard(card: MultiTest): void {
-    this.dialog
-      .open(MultiTestDialogComponent,
-        { data: card, hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          card.question  = result.question
-          card.answers = result.answers
-          card.decoys = result.decoys
-        }
-      })
-  }
+  protected emptyExample(): MultiTest { return new MultiTest('', [], []) }
 
-  public addCard(): void {
-    this.dialog
-      .open(MultiTestDialogComponent,
-        { width: '500px',
-        data: new MultiTest('', [], []), hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          this.taskForm.value.examples.push(result)
-          this.taskForm.controls.examples.updateValueAndValidity()
-        }
-      })
-  }
-
+  public ngOnInit(): void { }
 }

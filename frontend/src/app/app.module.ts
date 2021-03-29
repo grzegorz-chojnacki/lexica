@@ -62,13 +62,13 @@ import { SimpleCardViewComponent } from './components/task/task-view/simple-card
 import { SimpleCardEditorComponent } from './components/task/task-editor/simple-card-editor/simple-card-editor.component'
 import { TaskEditorDispatchComponent } from './components/task/task-editor/task-editor-dispatch/task-editor-dispatch.component'
 import { SimpleCardDialogComponent } from './components/task/task-editor/simple-card-dialog/simple-card-dialog.component'
-import { TaskDirective, TaskViewDispatchComponent } from './components/task/task-view/task-view-dispatch/task-view-dispatch.component';
-import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-test-dialog/choice-test-dialog.component';
-import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component';
-import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component';
-import { TeamFormComponent } from './components/team/team-form/team-form.component';
-import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component';
-import { MultiTestEditorComponent } from './components/task/task-editor/multi-test-editor/multi-test-editor.component';
+import { TaskDirective, TaskViewDispatchComponent } from './components/task/task-view/task-view-dispatch/task-view-dispatch.component'
+import { ChoiceTestDialogComponent } from './components/task/task-editor/choice-test-dialog/choice-test-dialog.component'
+import { ChoiceTestEditorComponent } from './components/task/task-editor/choice-test-editor/choice-test-editor.component'
+import { ChoiceTestViewComponent } from './components/task/task-view/choice-test-view/choice-test-view.component'
+import { TeamFormComponent } from './components/team/team-form/team-form.component'
+import { MultiTestViewComponent } from './components/task/task-view/multi-test-view/multi-test-view.component'
+import { MultiTestEditorComponent } from './components/task/task-editor/multi-test-editor/multi-test-editor.component'
 import { MultiTestDialogComponent } from './components/task/task-editor/multi-test-dialog/multi-test-dialog.component'
 
 @NgModule({

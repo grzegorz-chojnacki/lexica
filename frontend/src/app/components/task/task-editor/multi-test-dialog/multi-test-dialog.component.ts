@@ -28,7 +28,7 @@ export class MultiTestDialogComponent implements OnInit {
   }
 
   public addOption(option: string): void {
-    let isFirstCheckbox = this.options.length === 0
+    const isFirstCheckbox = this.options.length === 0
     this.options = [pack(option, isFirstCheckbox), ...this.options]
     this.next = ''
   }

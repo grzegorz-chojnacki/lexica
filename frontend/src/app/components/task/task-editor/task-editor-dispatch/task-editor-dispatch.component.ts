@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core'
+import { Component, ComponentFactoryResolver, Injector, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Example } from 'src/app/classes/example'
 import { Task } from 'src/app/classes/task'
@@ -11,12 +11,13 @@ import { MultiTestEditorComponent } from '../multi-test-editor/multi-test-editor
 import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskEditorComponent } from '../task-editor'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { arrayNotEmpty, saveAsFile } from 'src/app/classes/utils'
 
 const taskTypeEditorMap = new Map<TaskType, any>([
   [SimpleCardTask, SimpleCardEditorComponent],
   [ChoiceTestTask, ChoiceTestEditorComponent],
-  [MultiTestTask, MultiTestEditorComponent]
+  [MultiTestTask,  MultiTestEditorComponent]
 ])
 
 @Component({
@@ -27,14 +28,14 @@ const taskTypeEditorMap = new Map<TaskType, any>([
 export class TaskEditorDispatchComponent implements OnInit {
   public readonly taskTypes = [SimpleCardTask, ChoiceTestTask, MultiTestTask]
 
-  public teamId!: string
-  public taskId!: string
-  private editor!: TaskEditorComponent
+  private teamId?: string
+  private taskId?: string
 
-  public readonly taskHeaderForm = this.formBuilder.group({
-    name: new FormControl('', [Validators.required]),
+  public readonly taskForm = this.formBuilder.group({
+    name:        new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.maxLength(50)]),
-    type: new FormControl(this.taskTypes[0])
+    examples:    new FormControl([], [arrayNotEmpty]),
+    type:        new FormControl(this.taskTypes[0])
   })
 
   @ViewChild(TaskDirective, { static: true })
@@ -56,18 +57,18 @@ export class TaskEditorDispatchComponent implements OnInit {
     if (this.taskId) {
       this.taskService.getTask(this.teamId, this.taskId).subscribe(task => {
         this.resolveTaskTemplate(task)
-        this.taskHeaderForm.controls.type.disable()
+        this.taskForm.controls.type.disable()
       }, _ => this.navigateToTeam())
     } else {
-      this.taskHeaderForm.controls.type.valueChanges
+      this.taskForm.controls.type.valueChanges
         .subscribe(type => this.resolveNewTaskTemplate(type))
-      this.taskHeaderForm.controls.type.updateValueAndValidity()
+      this.taskForm.controls.type.updateValueAndValidity()
     }
   }
 
-  public submit(partialTask: { type: TaskType, examples: Example[] }): void {
-    if (partialTask) {
-      const task = { ...this.taskHeaderForm.value, ...partialTask }
+  public submit(saveTask: boolean): void {
+    if (saveTask && this.teamId) {
+      const task = this.taskForm.value
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
@@ -83,26 +84,30 @@ export class TaskEditorDispatchComponent implements OnInit {
   private resolveTaskTemplate(task: Task<Example>): void {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
-      this.taskHeaderForm.patchValue(task)
-      this.setEditor(component)
-      this.editor.taskForm.patchValue(task)
-      this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+      this.taskForm.patchValue(task)
+      const editor = this.createEditor(component)
+      editor.onSubmit.subscribe((save: boolean) => this.submit(save))
     }
   }
 
   private resolveNewTaskTemplate(type: TaskType): void {
+    this.taskForm.patchValue({ type, examples: [] }, { emitEvent: false })
     const component = taskTypeEditorMap.get(type)
-    this.setEditor(component)
-    this.editor.onSubmit.subscribe((t: Task<Example>) => this.submit(t))
+    const editor = this.createEditor(component)
+    editor.onSubmit.subscribe((save: boolean) => this.submit(save))
   }
 
-  private setEditor(component: any): void {
+  private createEditor(component: any): TaskEditorComponent {
+    const injector = Injector.create({
+      providers: [{ provide: FormGroup, useValue: this.taskForm }]
+    })
+
     const viewContainerRef = this.taskHost.viewContainerRef
     viewContainerRef.clear()
     const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(component)
-    this.editor = viewContainerRef
-      .createComponent<TaskEditorComponent>(componentFactory)
-      .instance
+    const editor = viewContainerRef
+      .createComponent<TaskEditorComponent>(componentFactory, 0, injector)
+    return editor.instance
   }
 
   public import(event: any): void {
@@ -113,9 +118,14 @@ export class TaskEditorDispatchComponent implements OnInit {
         try {
           const content = event.target?.result as string
           const [examples, type] = Example.parse(content)
-          const task = { ...this.taskHeaderForm.value, examples, type } as Task<Example>
+          const task = { ...this.taskForm.value, examples, type } as Task<Example>
+
+          if (!this.taskTypeIsValid(type)) {
+            throw new Error('Task type mismatch with existing task')
+          }
+
           this.resolveTaskTemplate(task)
-          this.editor.taskForm.patchValue({ examples })
+          this.taskForm.patchValue({ examples })
         } catch (e) {
           this.snackbarService.open('Niepoprawny format przykładów')
         }
@@ -123,6 +133,13 @@ export class TaskEditorDispatchComponent implements OnInit {
       reader.readAsText(file)
     }
   }
+
+  private taskTypeIsValid(type: TaskType): boolean {
+    const typeControl = this.taskForm.get('type')
+    return (typeControl?.enabled) || typeControl?.value === type
+  }
+
+  public export = () => saveAsFile(this.taskForm.value)
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
 }

@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class RegisterComponent implements OnInit {
   public registerForm = this.formBuilder.group({
-    username:  new FormControl('', [ Validators.required,]),
+    username:  new FormControl('', [ Validators.required ]),
     firstname: new FormControl('', [ Validators.required ]),
     surname:   new FormControl('', [ Validators.required ]),
     password:  new FormControl('', [ Validators.required ]),

@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { MultiTestDialogComponent } from './multi-test-dialog.component';
+import { MultiTestDialogComponent } from './multi-test-dialog.component'
 
 describe('MultiTestDialogComponent', () => {
-  let component: MultiTestDialogComponent;
-  let fixture: ComponentFixture<MultiTestDialogComponent>;
+  let component: MultiTestDialogComponent
+  let fixture: ComponentFixture<MultiTestDialogComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MultiTestDialogComponent ]
     })
-    .compileComponents();
-  });
+    .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MultiTestDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MultiTestDialogComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

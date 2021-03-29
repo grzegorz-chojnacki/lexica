@@ -6,7 +6,7 @@ describe('TeamHistoryService', () => {
   let service: TeamHistoryService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({ })
     service = TestBed.inject(TeamHistoryService)
   })
 
