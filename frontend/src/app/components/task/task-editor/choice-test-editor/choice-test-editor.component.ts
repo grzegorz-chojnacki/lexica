@@ -13,47 +13,22 @@ import { FormGroup } from '@angular/forms'
   styleUrls: ['./choice-test-editor.component.scss']
 })
 export class ChoiceTestEditorComponent extends TaskEditorComponent implements OnInit {
+  protected readonly dialogComponent = ChoiceTestDialogComponent
 
   public constructor(
-    private readonly dialog: MatDialog,
-    public  readonly taskForm: FormGroup,
-    public  readonly router: Router,
-    public  readonly location: Location) { super() }
+    public readonly taskForm: FormGroup,
+    public readonly router: Router,
+    public readonly location: Location,
+    dialog: MatDialog,
+  ) { super(dialog) }
+
+  protected patchExample(example: ChoiceTest, result: ChoiceTest): void {
+    example.question = result.question
+    example.answer = result.answer
+    example.decoys = result.decoys
+  }
+
+  protected emptyExample(): ChoiceTest { return new ChoiceTest('', '', []) }
 
   public ngOnInit(): void { }
-
-  public deleteCard(card: ChoiceTest): void {
-    this.taskForm.patchValue({
-      examples: this.taskForm.value.examples.filter((c: ChoiceTest) => c !== card)
-    })
-    this.taskForm.controls.examples.updateValueAndValidity()
-  }
-
-  public editCard(card: ChoiceTest): void {
-    this.dialog
-      .open(ChoiceTestDialogComponent,
-        { data: card, hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          card.question  = result.question
-          card.answer = result.answer
-          card.decoys = result.decoys
-        }
-      })
-  }
-
-  public addCard(): void {
-    this.dialog
-      .open(ChoiceTestDialogComponent,
-        { width: '500px',
-        data: new ChoiceTest('', '', []), hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          this.taskForm.value.examples.push(result)
-          this.taskForm.controls.examples.updateValueAndValidity()
-        }
-      })
-  }
 }

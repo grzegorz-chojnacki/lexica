@@ -14,48 +14,22 @@ import { FormGroup } from '@angular/forms'
   styleUrls: ['./multi-test-editor.component.scss']
 })
 export class MultiTestEditorComponent extends TaskEditorComponent implements OnInit {
+  protected readonly dialogComponent = MultiTestDialogComponent
 
   public constructor(
-    private readonly dialog: MatDialog,
-    public  readonly taskForm: FormGroup,
-    public  readonly router: Router,
-    public  readonly location: Location
-  ) { super() }
+    public readonly taskForm: FormGroup,
+    public readonly router: Router,
+    public readonly location: Location,
+    dialog: MatDialog,
+  ) { super(dialog) }
+
+  protected patchExample(example: MultiTest, result: MultiTest): void {
+    example.question = result.question
+    example.answers = result.answers
+    example.decoys = result.decoys
+  }
+
+  protected emptyExample(): MultiTest { return new MultiTest('', [], []) }
 
   public ngOnInit(): void { }
-
-  public deleteCard(card: MultiTest): void {
-    this.taskForm.patchValue({
-      examples: this.taskForm.value.examples.filter((m: MultiTest) => m !== card)
-    })
-    this.taskForm.controls.examples.updateValueAndValidity()
-  }
-
-  public editCard(card: MultiTest): void {
-    this.dialog
-      .open(MultiTestDialogComponent,
-        { data: card, hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          card.question  = result.question
-          card.answers = result.answers
-          card.decoys = result.decoys
-        }
-      })
-  }
-
-  public addCard(): void {
-    this.dialog
-      .open(MultiTestDialogComponent,
-        { width: '500px',
-        data: new MultiTest('', [], []), hasBackdrop: false})
-      .afterClosed()
-      .subscribe(result => {
-        if (result) {
-          this.taskForm.value.examples.push(result)
-          this.taskForm.controls.examples.updateValueAndValidity()
-        }
-      })
-  }
 }
