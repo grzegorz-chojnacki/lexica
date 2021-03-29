@@ -17,7 +17,7 @@ import { arrayNotEmpty, saveAsFile } from 'src/app/classes/utils'
 const taskTypeEditorMap = new Map<TaskType, any>([
   [SimpleCardTask, SimpleCardEditorComponent],
   [ChoiceTestTask, ChoiceTestEditorComponent],
-  [MultiTestTask, MultiTestEditorComponent]
+  [MultiTestTask,  MultiTestEditorComponent]
 ])
 
 @Component({
@@ -28,9 +28,8 @@ const taskTypeEditorMap = new Map<TaskType, any>([
 export class TaskEditorDispatchComponent implements OnInit {
   public readonly taskTypes = [SimpleCardTask, ChoiceTestTask, MultiTestTask]
 
-  public teamId!: string
-  public taskId!: string
-  private editor!: TaskEditorComponent
+  private teamId?: string
+  private taskId?: string
 
   public readonly taskForm = this.formBuilder.group({
     name:        new FormControl('', [Validators.required]),
@@ -68,7 +67,7 @@ export class TaskEditorDispatchComponent implements OnInit {
   }
 
   public submit(saveTask: boolean): void {
-    if (saveTask) {
+    if (saveTask && this.teamId) {
       const task = this.taskForm.value
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
@@ -86,19 +85,19 @@ export class TaskEditorDispatchComponent implements OnInit {
     if (task.type !== NullTask) {
       const component = taskTypeEditorMap.get(task.type)
       this.taskForm.patchValue(task)
-      this.setEditor(component)
-      this.editor.onSubmit.subscribe((save: boolean) => this.submit(save))
+      const editor = this.createEditor(component)
+      editor.onSubmit.subscribe((save: boolean) => this.submit(save))
     }
   }
 
   private resolveNewTaskTemplate(type: TaskType): void {
-    this.taskForm.patchValue({ type }, { emitEvent: false })
+    this.taskForm.patchValue({ type, examples: [] }, { emitEvent: false })
     const component = taskTypeEditorMap.get(type)
-    this.setEditor(component)
-    this.editor.onSubmit.subscribe((save: boolean) => this.submit(save))
+    const editor = this.createEditor(component)
+    editor.onSubmit.subscribe((save: boolean) => this.submit(save))
   }
 
-  private setEditor(component: any): void {
+  private createEditor(component: any): TaskEditorComponent {
     const injector = Injector.create({
       providers: [{ provide: FormGroup, useValue: this.taskForm }]
     })
@@ -106,9 +105,9 @@ export class TaskEditorDispatchComponent implements OnInit {
     const viewContainerRef = this.taskHost.viewContainerRef
     viewContainerRef.clear()
     const componentFactory = this.cfr.resolveComponentFactory<TaskEditorComponent>(component)
-    this.editor = viewContainerRef
+    const editor = viewContainerRef
       .createComponent<TaskEditorComponent>(componentFactory, 0, injector)
-      .instance
+    return editor.instance
   }
 
   public import(event: any): void {
@@ -135,18 +134,12 @@ export class TaskEditorDispatchComponent implements OnInit {
     }
   }
 
-  public export(): void {
-    const task = {
-      name: this.taskForm.get('name')?.value || 'Zadanie',
-      examples: this.editor.taskForm.get('examples')?.value
-    }
-    saveAsFile(task as Task<Example>)
-  }
-
   private taskTypeIsValid(type: TaskType): boolean {
     const typeControl = this.taskForm.get('type')
     return (typeControl?.enabled) || typeControl?.value === type
   }
+
+  public export = () => saveAsFile(this.taskForm.value)
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
 }
