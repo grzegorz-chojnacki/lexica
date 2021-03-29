@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { MultiTest } from 'src/app/classes/example'
-import { arrayNotEmpty } from 'src/app/classes/utils'
-import { MultiTestTask } from 'src/app/classes/task-type'
 import { MultiTestDialogComponent } from '../multi-test-dialog/multi-test-dialog.component'
 import { TaskEditorComponent } from '../task-editor'
+import { FormGroup } from '@angular/forms'
 
 
 @Component({
@@ -16,13 +14,10 @@ import { TaskEditorComponent } from '../task-editor'
   styleUrls: ['./multi-test-editor.component.scss']
 })
 export class MultiTestEditorComponent extends TaskEditorComponent implements OnInit {
-  public taskForm = this.formBuilder.group({
-    examples:    new FormControl([], [ arrayNotEmpty ]),
-    type:        MultiTestTask
-  })
+
   public constructor(
     private readonly dialog: MatDialog,
-    private readonly formBuilder: FormBuilder,
+    public  readonly taskForm: FormGroup,
     public  readonly router: Router,
     public  readonly location: Location
   ) { super() }

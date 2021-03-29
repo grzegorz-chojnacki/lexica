@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { SimpleCardDialogComponent } from '../simple-card-dialog/simple-card-dialog.component'
 import { SimpleCard } from 'src/app/classes/example'
-import { arrayNotEmpty } from 'src/app/classes/utils'
-import { SimpleCardTask } from 'src/app/classes/task-type'
 import { TaskEditorComponent } from '../task-editor'
+import { FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-simple-card-editor',
@@ -15,16 +13,13 @@ import { TaskEditorComponent } from '../task-editor'
   styleUrls: ['./simple-card-editor.component.scss']
 })
 export class SimpleCardEditorComponent extends TaskEditorComponent implements OnInit {
-  public readonly taskForm = this.formBuilder.group({
-    examples:    new FormControl([], [ arrayNotEmpty ]),
-    type:        SimpleCardTask
-  })
 
   public constructor(
     private readonly dialog: MatDialog,
-    private readonly formBuilder: FormBuilder,
+    public  readonly taskForm: FormGroup,
     public  readonly router: Router,
-    public  readonly location: Location) { super() }
+    public  readonly location: Location
+  ) { super() }
 
   public ngOnInit(): void { }
 
