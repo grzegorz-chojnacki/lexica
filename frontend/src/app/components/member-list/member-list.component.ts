@@ -21,6 +21,7 @@ const fullname = new FullNamePipe()
 })
 export class MemberListComponent implements OnInit {
   public user!: User
+  public bestMember!: User
   @Input() public team!: Team
   @Input() public leaderView = false
   // When set, progress is calculated only for this task, or else for every task
@@ -35,6 +36,7 @@ export class MemberListComponent implements OnInit {
   public ngOnInit(): void {
     this.userService.user.subscribe(u => this.user = u)
     this.team.members.sort((u1, u2) => this.getCompletion(u2) - this.getCompletion(u1))
+    this.bestMember = this.team.members[0]
   }
 
   public getCompletion(user: User): number {
