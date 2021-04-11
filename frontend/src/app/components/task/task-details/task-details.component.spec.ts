@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { team } from 'src/app/test-data'
 import { TaskDetailsComponent } from './task-details.component'
 
 describe('TaskDetailsComponent', () => {
@@ -8,9 +9,12 @@ describe('TaskDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskDetailsComponent ]
-    })
-    .compileComponents()
+      imports: [MatDialogModule],
+      declarations: [TaskDetailsComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: { team, task: team.tasks[0] } }
+      ]
+    }).compileComponents()
   })
 
   beforeEach(() => {

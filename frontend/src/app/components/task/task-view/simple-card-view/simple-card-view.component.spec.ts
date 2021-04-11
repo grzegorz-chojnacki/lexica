@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { MatCardModule } from '@angular/material/card'
+import { MatDialogModule } from '@angular/material/dialog'
+import { simpleCardTask } from 'src/app/test-data'
 import { SimpleCardViewComponent } from './simple-card-view.component'
 
 describe('SimpleCardViewComponent', () => {
@@ -8,14 +10,18 @@ describe('SimpleCardViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SimpleCardViewComponent ]
-    })
-    .compileComponents()
+      imports: [
+        MatDialogModule,
+        MatCardModule
+      ],
+      declarations: [SimpleCardViewComponent],
+    }).compileComponents()
   })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SimpleCardViewComponent)
     component = fixture.componentInstance
+    component.task = simpleCardTask
     fixture.detectChanges()
   })
 

@@ -2,7 +2,7 @@ import { Team } from '../classes/team'
 import { User } from '../classes/user'
 import { TeamSearchPipe } from './team-search.pipe'
 
-const testUser = new User('', '', '')
+const testUser = new User('', '', '', '', '')
 const makeTeams = (...names: string[]) => names
   .map(name => new Team(name, '', testUser))
 

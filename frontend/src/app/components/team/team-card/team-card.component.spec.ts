@@ -3,6 +3,10 @@ import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
+import { MatDialogModule } from '@angular/material/dialog'
+import { RouterTestingModule } from '@angular/router/testing'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { HttpClientModule } from '@angular/common/http'
 
 import { TeamCardComponent } from './team-card.component'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
@@ -18,7 +22,11 @@ describe('TeamCardComponent', () => {
         MatCardModule,
         MatButtonModule,
         MatIconModule,
-        MatMenuModule
+        HttpClientModule,
+        MatMenuModule,
+        MatDialogModule,
+        RouterTestingModule.withRoutes([]),
+        MatSnackBarModule,
       ],
       declarations: [
         TeamCardComponent,

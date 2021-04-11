@@ -1,5 +1,11 @@
+import { HttpClientModule } from '@angular/common/http'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { MatCardModule } from '@angular/material/card'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatListModule } from '@angular/material/list'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { RouterTestingModule } from '@angular/router/testing'
+import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 import { AccountViewComponent } from './account-view.component'
 
 describe('AccountViewComponent', () => {
@@ -8,9 +14,16 @@ describe('AccountViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountViewComponent ]
-    })
-    .compileComponents()
+      imports: [
+        MatSnackBarModule,
+        RouterTestingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatListModule,
+        MatCardModule,
+      ],
+      declarations: [AccountViewComponent, FullNamePipe]
+    }).compileComponents()
   })
 
   beforeEach(() => {
