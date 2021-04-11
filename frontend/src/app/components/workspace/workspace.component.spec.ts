@@ -11,9 +11,6 @@ import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 
 import { WorkspaceComponent } from './workspace.component'
-import { TeamComponent } from 'src/app/components/team/team.component'
-import { TeamContainerComponent } from 'src/app/components/team-container/team-container.component'
-import { TeamCardComponent } from 'src/app/components/team-card/team-card.component'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 
 
@@ -37,9 +34,6 @@ describe('WorkspaceComponent', () => {
       ],
       declarations: [
         WorkspaceComponent,
-        TeamComponent,
-        TeamContainerComponent,
-        TeamCardComponent,
         FullNamePipe
       ]
     }).compileComponents()
