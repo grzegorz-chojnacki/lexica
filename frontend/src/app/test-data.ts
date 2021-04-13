@@ -5,19 +5,19 @@ import { Task } from "./classes/task"
 import { Team } from "./classes/team"
 import { User } from "./classes/user"
 
-const simpleCards = [
+export const simpleCards = [
   new SimpleCard('Apple', 'Jabłko'),
   new SimpleCard('Berry', 'Jagoda'),
   new SimpleCard('Grape', 'Winogorono'),
 ]
 
-const choiceTests = [
+export const choiceTests = [
   new ChoiceTest('Q1', 'Answer 1', ['A1', 'A2', 'A3']),
   new ChoiceTest('Q2', 'Answer 2', ['A1', 'A2', 'A3']),
   new ChoiceTest('Q3', 'Answer 3', ['A1', 'A2', 'A3']),
 ]
 
-const multiTests = [
+export const multiTests = [
   new MultiTest('Q1', ['A1'], ['A2', 'A3']),
   new MultiTest('Q2', ['A1', 'A2'], ['A3']),
   new MultiTest('Q3', ['A1', 'A2', 'A3'], []),
