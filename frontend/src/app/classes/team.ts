@@ -30,19 +30,15 @@ export class Team {
     return this.members.length > 0
   }
 
+  public hasMember(user: User): boolean {
+    return this.members.find(member => member.id === user.id) !== undefined
+  }
+
   public hasTasks(): boolean {
     return this.tasks.length > 0
   }
 
   public getUserProgress(user: User): Progress[] {
     return this.tasks.map(task => user.getTaskProgress(task))
-  }
-
-  public getTaskProgress(task: Task<Example>): Progress[] {
-    return this.users.map(user => user.getTaskProgress(task))
-  }
-
-  public hasMember(user: User): boolean {
-    return this.members.find(member => member.id === user.id) !== undefined
   }
 }
