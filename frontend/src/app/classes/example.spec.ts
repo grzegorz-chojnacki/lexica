@@ -2,7 +2,7 @@ import { ChoiceTest, Example, MultiTest, SimpleCard } from './example'
 import { ChoiceTestTask, MultiTestTask, SimpleCardTask } from './task-type'
 import { simpleCards, choiceTests, multiTests } from 'src/app/test-data'
 
-fdescribe('Example', () => {
+describe('Example', () => {
   it('should parse SimpleCard examples', () => {
     const input = JSON.stringify(simpleCards)
     const [output, taskType] = Example.parse(input)
@@ -35,23 +35,62 @@ fdescribe('Example', () => {
   })
 
   describe('SimpleCard', () => {
-    it('should create', () => {
-      const example = new SimpleCard('A', 'B')
-      expect(example).toBeTruthy()
+    it('should validate SimpleCard example', () => {
+      expect(SimpleCard.validate(simpleCards[0])).toBeTrue()
+    })
+
+    it('should validate invalid SimpleCard examples', () => {
+      const examples = [
+        { },
+        { nativeWord: '' },
+        { foreignWord: '' },
+        new SimpleCard('', ''),
+        new SimpleCard('A', ''),
+        new SimpleCard('', 'B'),
+      ]
+      expect(examples.find(SimpleCard.validate)).toBeFalsy()
     })
   })
 
   describe('ChoiceTest', () => {
-    it('should create', () => {
-      const example = new ChoiceTest('Q', 'A', ['D1', 'D2'])
-      expect(example).toBeTruthy()
+    it('should validate ChoiceTest example', () => {
+      expect(ChoiceTest.validate(choiceTests[0])).toBeTrue()
+    })
+
+    it('should validate invalid ChoiceTest examples', () => {
+      const examples = [
+        { },
+        { question: '' },
+        { answer: '' },
+        { decoys: [] },
+        { question: 'Q', answer: 'A', decoys: 'D' },
+        new ChoiceTest('', '', []),
+        new ChoiceTest('Q', '', []),
+        new ChoiceTest('', 'B', []),
+        new ChoiceTest('', 'B', []),
+      ]
+      expect(examples.find(ChoiceTest.validate)).toBeFalsy()
     })
   })
 
   describe('MultiTest', () => {
-    it('should create', () => {
-      const example = new MultiTest('Q', ['A1', 'A2'], ['D1', 'D2'])
-      expect(example).toBeTruthy()
+    it('should validate MultiTest example', () => {
+      expect(MultiTest.validate(multiTests[0])).toBeTrue()
+    })
+
+    it('should validate invalid MultiTest examples', () => {
+      const examples = [
+        { },
+        { question: 'Q' },
+        { answer: ['A'] },
+        { decoys: ['D'] },
+        { question: 'Q', answer: 'A', decoys: 'D' },
+        new MultiTest('', [], []),
+        new MultiTest('Q', [], []),
+        new MultiTest('', ['B'], []),
+        new MultiTest('', ['B'], []),
+      ]
+      expect(examples.find(MultiTest.validate)).toBeFalsy()
     })
   })
 })
