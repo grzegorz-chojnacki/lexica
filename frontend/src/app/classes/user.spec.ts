@@ -4,12 +4,10 @@ import { Task } from "./task"
 import { SimpleCardTask } from "./task-type"
 import { User } from "./user"
 
- describe('User', () => {
+describe('User', () => {
   it('should deserialize JSON data', () => {
-    const input = JSON.parse(JSON.stringify(users[0]))
-    const output = User.deserialize(input)
-    expect(typeof output.getTaskProgress).toBe('function')
-    expect(typeof output.asUUID).toBe('function')
+    const output = User.deserialize(JSON.parse(JSON.stringify(users[0])))
+    expect(output).toBeInstanceOf(User)
   })
 
   it('should return task progress', () => {
