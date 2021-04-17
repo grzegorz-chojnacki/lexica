@@ -1,8 +1,11 @@
+import { HttpClientModule } from '@angular/common/http'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { MatIconModule } from '@angular/material/icon'
+import { MatNavList } from '@angular/material/list'
+import { RouterTestingModule } from '@angular/router/testing'
+import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 
 import { SidebarComponent } from './sidebar.component'
-import { AccountComponent } from 'src/app/components/account/account.component'
-import { TeamComponent } from 'src/app/components/team/team.component'
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent
@@ -10,13 +13,17 @@ describe('SidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        RouterTestingModule,
+        MatIconModule,
+      ],
       declarations: [
+        MatNavList,
+        FullNamePipe,
         SidebarComponent,
-        AccountComponent,
-        TeamComponent
       ]
-    })
-    .compileComponents()
+    }).compileComponents()
   })
 
   beforeEach(() => {

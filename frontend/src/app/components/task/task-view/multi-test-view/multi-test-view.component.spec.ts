@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { FormsModule } from '@angular/forms'
+import { MatCardModule } from '@angular/material/card'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatDialogModule } from '@angular/material/dialog'
+import { multiTestTask } from 'src/app/test-data'
 import { MultiTestViewComponent } from './multi-test-view.component'
 
 describe('MultiChoiceTestViewComponent', () => {
@@ -8,14 +12,20 @@ describe('MultiChoiceTestViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MultiTestViewComponent ]
-    })
-    .compileComponents()
+      imports: [
+        MatDialogModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatCardModule,
+      ],
+      declarations: [MultiTestViewComponent]
+    }).compileComponents()
   })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MultiTestViewComponent)
     component = fixture.componentInstance
+    component.task = multiTestTask
     fixture.detectChanges()
   })
 

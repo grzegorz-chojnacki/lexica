@@ -1,4 +1,11 @@
+import { HttpClientModule } from '@angular/common/http'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatCardModule } from '@angular/material/card'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatTabsModule } from '@angular/material/tabs'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing'
 
 import { TeamViewComponent } from './team-view.component'
 
@@ -8,9 +15,17 @@ describe('TeamComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamViewComponent ]
-    })
-    .compileComponents()
+      imports: [
+        HttpClientModule,
+        RouterTestingModule.withRoutes([]),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatTabsModule,
+        MatCardModule,
+      ],
+      declarations: [TeamViewComponent],
+    }).compileComponents()
   })
 
   beforeEach(() => {

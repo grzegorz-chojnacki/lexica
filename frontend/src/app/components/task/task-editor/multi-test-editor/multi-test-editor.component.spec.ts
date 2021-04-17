@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatCardModule } from '@angular/material/card'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatIconModule } from '@angular/material/icon'
+import { MatListModule } from '@angular/material/list'
+import { RouterTestingModule } from '@angular/router/testing'
 import { MultiTestEditorComponent } from './multi-test-editor.component'
 
 describe('MultiTestEditorComponent', () => {
@@ -8,9 +13,17 @@ describe('MultiTestEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MultiTestEditorComponent ]
-    })
-    .compileComponents()
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        MatDialogModule,
+        MatIconModule,
+        MatCardModule,
+        MatListModule,
+      ],
+      declarations: [MultiTestEditorComponent],
+      providers: [{ provide: FormGroup, useValue: new FormGroup({}) }]
+    }).compileComponents()
   })
 
   beforeEach(() => {

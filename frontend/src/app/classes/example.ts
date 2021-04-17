@@ -16,7 +16,7 @@ export abstract class Example {
 }
 
 export class SimpleCard extends Example {
-  public static validate = (example: any) => example.foreignWord && example.nativeWord
+  public static validate = (example: any) => !!(example.foreignWord && example.nativeWord)
 
   public constructor(
     public foreignWord: string,
@@ -25,8 +25,9 @@ export class SimpleCard extends Example {
 }
 
 export class ChoiceTest extends Example {
-  public static validate = (example: any) => example.question && example.answer
-    && Array.isArray(example.decoys)
+  public static validate = (example: any) => !!(example.question
+    && example.answer
+    && Array.isArray(example.decoys))
 
   public constructor(
     public question: string,
@@ -36,8 +37,10 @@ export class ChoiceTest extends Example {
 }
 
 export class MultiTest extends Example {
-  public static validate = (example: any) => example.question
-    && Array.isArray(example.answers) && Array.isArray(example.decoys)
+  public static validate = (example: any) => !!(example.question
+    && Array.isArray(example.answers)
+    && example.answers[0]
+    && Array.isArray(example.decoys))
 
   public constructor(
     public question: string,

@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { users } from 'src/app/test-data'
 import { ColorDialogComponent } from './color-dialog.component'
 
 describe('ColorDialogComponent', () => {
@@ -8,9 +12,15 @@ describe('ColorDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColorDialogComponent ]
-    })
-    .compileComponents()
+      imports: [
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatInputModule,
+      ],
+      declarations: [ ColorDialogComponent ],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: users[0] }]
+    }).compileComponents()
   })
 
   beforeEach(() => {

@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { users } from 'src/app/test-data'
 import { PasswordDialogComponent } from './password-dialog.component'
 
 describe('PasswordDialogComponent', () => {
@@ -8,9 +12,15 @@ describe('PasswordDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PasswordDialogComponent ]
-    })
-    .compileComponents()
+      imports: [
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        BrowserAnimationsModule
+      ],
+      declarations: [PasswordDialogComponent],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: users[0] }]
+    }).compileComponents()
   })
 
   beforeEach(() => {
