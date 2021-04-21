@@ -22,7 +22,7 @@ export class TeamHistoryService {
   }
 
   private loadTeams(): void {
-    if (this.user && this.user !== this.userService.emptyUser) {
+    if (this.user && this.user !== User.empty) {
       const teams = this.storage.getItem(this.getTeamsKey())
       this.teamSource.next(teams ? JSON.parse(teams) : [])
     }
@@ -60,7 +60,7 @@ export class TeamHistoryService {
   }
 
   private saveTeams(): void {
-    if (this.user && this.user !== this.userService.emptyUser) {
+    if (this.user && this.user !== User.empty) {
       const teams = JSON.stringify(this.teamSource.value)
       this.storage.setItem(this.getTeamsKey(), teams)
     }

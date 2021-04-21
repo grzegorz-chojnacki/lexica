@@ -9,6 +9,7 @@ import { UserService } from './user.service'
 import { Task } from '../classes/task'
 import { Example } from '../classes/example'
 import { TeamHistoryService } from './team-history.service'
+import { User } from '../classes/user'
 
 export interface TeamForm {
   readonly name: string
@@ -20,8 +21,8 @@ export interface TeamForm {
   providedIn: 'root'
 })
 export class TeamService {
-  public  readonly emptyTeam = new Team('', '', this.userService.emptyUser)
-  private loggedUser = this.userService.emptyUser
+  public  readonly emptyTeam = new Team('', '', User.empty)
+  private loggedUser = User.empty
   private readonly teamListSource = new BehaviorSubject<Team[]>([])
   private teamSource = new BehaviorSubject<Team>(this.emptyTeam)
 

@@ -7,7 +7,7 @@ import { tasks, users } from '../test-data'
 import { lexicaURL } from '../lexica.properties'
 import { Progress } from '../classes/progress'
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let service: UserService
   let httpMock: HttpTestingController
 
@@ -109,7 +109,7 @@ fdescribe('UserService', () => {
     const user = users[0]
 
     service.user.subscribe(u => {
-      if (u !== service.emptyUser) {
+      if (u !== User.empty) {
         expect(user).toEqual(user)
       }
     })
@@ -127,7 +127,7 @@ fdescribe('UserService', () => {
       .subscribe(_ => {
         service.removeAccount()
         expect(service.logged).toBeFalse()
-        service.user.subscribe(u => expect(u).toBe(service.emptyUser))
+        service.user.subscribe(u => expect(u).toBe(User.empty))
       })
 
     httpMock.expectOne(`${lexicaURL}/user/login`).flush(user)

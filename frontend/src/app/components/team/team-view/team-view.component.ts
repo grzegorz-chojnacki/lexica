@@ -17,7 +17,7 @@ export class TeamViewComponent implements OnInit {
   public user!: User
   public leaderView = false
   public leaderHasProgressView = false
-  public loggedUserWithProgress = this.userService.emptyUser
+  public loggedUserWithProgress = User.empty
 
   public constructor(
     private readonly router: Router,

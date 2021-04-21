@@ -3,6 +3,7 @@ import { Progress } from './progress'
 import { Task } from './task'
 
 export class User {
+  public static readonly empty = new User('', '', '', '', '')
 
   public static deserialize(user: User): User {
     return new User(
@@ -22,7 +23,7 @@ export class User {
     public username: string,
     public password: string,
     public readonly progress: Progress[] = [],
-    public readonly color?: string) { }
+    public readonly color = '#000000') { }
 
   public getTaskProgress(task: Task<Example>): Progress {
     return this.progress.find(progress => progress.task.id === task.id)

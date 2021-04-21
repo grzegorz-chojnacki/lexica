@@ -10,7 +10,6 @@ import { tap } from 'rxjs/operators'
   providedIn: 'root',
 })
 export class UserService {
-  public readonly emptyUser = new User('', '', '', '', '')
   private readonly storage = sessionStorage
   private userSource = new BehaviorSubject(this.loadSessionUser())
 
@@ -18,7 +17,7 @@ export class UserService {
 
   private loadSessionUser(): User {
     const sessionUser = this.storage.getItem('user')
-    return sessionUser ? JSON.parse(sessionUser) : this.emptyUser
+    return sessionUser ? JSON.parse(sessionUser) : User.empty
   }
 
   public authHeader(): { headers: HttpHeaders } {
@@ -31,9 +30,9 @@ export class UserService {
   }
 
   private refreshUserSource(user: User): void {
-    if (user !== this.emptyUser) {
+    if (user !== User.empty) {
       if (this.userSource.value.id !== user.id) {
-        this.userSource.next(this.emptyUser)
+        this.userSource.next(User.empty)
       }
 
       this.http.get<User>(`${lexicaURL}/user`, this.authHeader())
@@ -42,7 +41,7 @@ export class UserService {
           err => {
             this.storage.removeItem('user')
             this.userSource.error(err) // Reset userSource after error
-            this.userSource = new BehaviorSubject<User>(this.emptyUser)
+            this.userSource = new BehaviorSubject<User>(User.empty)
           })
     } else { return }
   }
@@ -71,7 +70,7 @@ export class UserService {
 
   public logout(): void {
     this.storage.removeItem('user')
-    this.userSource.next(this.emptyUser)
+    this.userSource.next(User.empty)
   }
 
   public updateUser(user: User): void {
@@ -95,5 +94,5 @@ export class UserService {
     this.logout()
   }
 
-  public get logged(): boolean { return this.userSource.value !== this.emptyUser }
+  public get logged(): boolean { return this.userSource.value !== User.empty }
 }
