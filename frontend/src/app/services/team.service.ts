@@ -21,10 +21,9 @@ export interface TeamForm {
   providedIn: 'root'
 })
 export class TeamService {
-  public  readonly emptyTeam = new Team('', '', User.empty)
   private loggedUser = User.empty
   private readonly teamListSource = new BehaviorSubject<Team[]>([])
-  private teamSource = new BehaviorSubject<Team>(this.emptyTeam)
+  private teamSource = new BehaviorSubject<Team>(Team.empty)
 
   public constructor(
       private readonly teamHistory: TeamHistoryService,
@@ -51,7 +50,7 @@ export class TeamService {
 
   private refreshTeamSource(id: string): void {
     if (this.teamSource.value.id !== id) {
-      this.teamSource.next(this.emptyTeam)
+      this.teamSource.next(Team.empty)
     }
 
     this.http.get<Team>(`${lexicaURL}/team/${id}`, this.userService.authHeader())
@@ -63,7 +62,7 @@ export class TeamService {
         },
         err => {
           this.teamSource.error(err) // Reset teamSource after error
-          this.teamSource = new BehaviorSubject<Team>(this.emptyTeam)
+          this.teamSource = new BehaviorSubject<Team>(Team.empty)
         })
   }
 
