@@ -8,7 +8,10 @@ import { User } from '../classes/user'
 export class FullNamePipe implements PipeTransform {
 
   public transform(user: User): string {
-    return `${user?.firstname} ${user?.surname}`
+    if (user?.firstname && user?.surname) {
+      return `${user.firstname} ${user.surname}`
+    } else {
+      return ''
+    }
   }
-
 }
