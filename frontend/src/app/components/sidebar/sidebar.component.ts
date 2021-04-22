@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { Team } from 'src/app/classes/team'
 import { User } from 'src/app/classes/user'
-import { TeamHistoryService } from 'src/app/services/team-history.service'
+import { TeamHistoryService, TeamHistoryEntry } from 'src/app/services/team-history.service'
 import { UserService } from 'src/app/services/user.service'
 
 @Component({
@@ -12,7 +11,7 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class SidebarComponent implements OnInit {
   public user!: User
-  public teams!: Team[]
+  public teams!: TeamHistoryEntry[]
 
   public constructor(
     private readonly userService: UserService,
@@ -20,7 +19,7 @@ export class SidebarComponent implements OnInit {
     private readonly router: Router
   ) { }
 
-  public redirectTo(team: Team): void {
+  public redirectTo(team: TeamHistoryEntry): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['team', team.id])
     })
