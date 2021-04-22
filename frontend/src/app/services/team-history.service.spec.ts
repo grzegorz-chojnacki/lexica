@@ -11,12 +11,12 @@ const fakeUserService = () => ({
   user: new BehaviorSubject(User.empty),
   logged: false,
   login() {
-    this.user.next(users[0])
     this.logged = true
+    this.user.next(users[0])
   },
   logout() {
-    this.user.next(User.empty)
     this.logged = false
+    this.user.next(User.empty)
   }
 })
 

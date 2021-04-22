@@ -14,13 +14,13 @@ const fakeUserService = () => ({
   authHeader() { return {} },
   logged: false,
   login() {
-    this.user.next(users[0])
     this.logged = true
+    this.user.next(users[0])
     return of()
   },
   logout() {
-    this.user.next(User.empty)
     this.logged = false
+    this.user.next(User.empty)
   }
 })
 
