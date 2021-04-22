@@ -14,7 +14,7 @@ import { User } from '../classes/user'
 export interface TeamForm {
   readonly name: string
   readonly description: string
-  readonly image?: string
+  readonly color: string
 }
 
 @Injectable({
