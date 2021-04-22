@@ -8,11 +8,34 @@ export interface BreadCrumb {
   readonly route: string
 }
 
+const mainPage = (): BreadCrumb  =>
+  ({ label: 'Lexica',  route: '/' })
+
+const workspace = (): BreadCrumb =>
+  ({ label: 'Zespoły', route: '/workspace' })
+
+const teamView = (teamId: string): BreadCrumb =>
+  ({ label: 'Zespół', route: `/team/${teamId}` })
+
+const taskNew = (teamId: string): BreadCrumb =>
+  ({ label: 'Nowe zadanie', route: `/team/${teamId}/task/new` })
+
+const taskEditor = (teamId: string, taskId: string): BreadCrumb =>
+  ({ label: 'Edytor', route: `/team/${teamId}/task/${taskId}/edit` })
+
+const taskView = (teamId: string, taskId: string): BreadCrumb =>
+  ({ label: 'Zadanie', route: `/team/${teamId}/task/${taskId}` })
+
+export const breadCrumbTemplates = {
+  mainPage, workspace, teamView,
+  taskNew, taskEditor, taskView,
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class BreadCrumbService {
-  private default = [this.mainPage()]
+  private default = [mainPage()]
   private breadCrumbSource = new BehaviorSubject<BreadCrumb[]>(this.default)
 
   public get breadCrumbs(): Observable<BreadCrumb[]> {
@@ -24,8 +47,10 @@ export class BreadCrumbService {
     private readonly router: Router) {
     this.userService.user.subscribe(_ => {
       this.default = (this.userService.logged)
-        ? [this.mainPage(), this.workspace()]
-        : [this.mainPage()]
+        ? [mainPage(), workspace()]
+        : [mainPage()]
+
+      this.breadCrumbSource.next(this.default)
     })
 
     this.router.events.subscribe(event => {
@@ -45,37 +70,18 @@ export class BreadCrumbService {
 
   private parseTeamRoute([teamId, route, ...rest]: string[]): BreadCrumb[] {
     return (route === 'task')
-      ? [this.teamView(teamId), this.parseTaskRoute(teamId, rest)]
-      : [this.teamView(teamId)]
+      ? [teamView(teamId), this.parseTaskRoute(teamId, rest)]
+      : [teamView(teamId)]
   }
 
   private parseTaskRoute(teamId: string, [taskId, route]: string[]): BreadCrumb {
     switch (route) {
       case 'new':
-        return this.taskNew(teamId)
+        return taskNew(teamId)
       case 'edit':
-        return this.taskEditor(teamId, taskId)
+        return taskEditor(teamId, taskId)
       default:
-        return this.taskView(teamId, taskId)
+        return taskView(teamId, taskId)
     }
-  }
-
-  private mainPage(): BreadCrumb  { return { label: 'Lexica',  route: '/' }}
-  private workspace(): BreadCrumb { return { label: 'Zespoły', route: '/workspace' }}
-
-  private teamView(teamId: string): BreadCrumb {
-    return { label: 'Zespół', route: `/team/${teamId}` }
-  }
-
-  private taskNew(teamId: string): BreadCrumb {
-    return { label: 'Nowe zadanie', route: `/team/${teamId}/task/new`}
-  }
-
-  private taskEditor(teamId: string, taskId: string): BreadCrumb {
-    return { label: 'Edytor', route: `/team/${teamId}/task/${taskId}/edit`}
-  }
-
-  private taskView(teamId: string, taskId: string): BreadCrumb {
-    return { label: 'Zadanie', route: `/team/${teamId}/task/${taskId}`}
   }
 }
