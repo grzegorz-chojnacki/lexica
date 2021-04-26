@@ -4,15 +4,21 @@ import { Team } from '../classes/team'
 import { User } from '../classes/user'
 import { UserService } from './user.service'
 
+export interface TeamHistoryEntry {
+  readonly id: string,
+  readonly name: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class TeamHistoryService {
-  private user?: User
+  public static readonly maxHistoryLength = 10
+  private  user = User.empty
   private readonly storage = localStorage
-  private readonly teamSource = new BehaviorSubject<Team[]>([])
+  private readonly teamSource = new BehaviorSubject<TeamHistoryEntry[]>([])
 
-  private getTeamsKey(): string { return `${this.user?.id}-teams`}
+  private getTeamsKey(): string { return `${this.user.id}-teams`}
 
   public constructor(private readonly userService: UserService) {
     this.userService.user.subscribe(user => {
@@ -22,13 +28,13 @@ export class TeamHistoryService {
   }
 
   private loadTeams(): void {
-    if (this.user && this.user !== this.userService.emptyUser) {
+    if (this.user !== User.empty) {
       const teams = this.storage.getItem(this.getTeamsKey())
       this.teamSource.next(teams ? JSON.parse(teams) : [])
     }
   }
 
-  public get teams(): Observable<Team[]> {
+  public get teams(): Observable<TeamHistoryEntry[]> {
     return this.teamSource.asObservable()
   }
 
@@ -36,10 +42,9 @@ export class TeamHistoryService {
     let teams = [...this.teamSource.value]
     const foundIndex = teams.findIndex(t => t.id === team.id)
 
-    if (foundIndex >= 0) {
-      teams.splice(foundIndex, 1)
-      teams = teams.slice(0, 9) // Limit history to 9 teams + new one
-    }
+    if (foundIndex >= 0) { teams.splice(foundIndex, 1) }
+
+    teams = teams.slice(0, 9) // Limit history to 9 teams + new one
 
     this.teamSource.next([this.trimData(team), ...teams])
     this.saveTeams()
@@ -60,7 +65,7 @@ export class TeamHistoryService {
   }
 
   private saveTeams(): void {
-    if (this.user && this.user !== this.userService.emptyUser) {
+    if (this.user && this.user !== User.empty) {
       const teams = JSON.stringify(this.teamSource.value)
       this.storage.setItem(this.getTeamsKey(), teams)
     }

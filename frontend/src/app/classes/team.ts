@@ -4,6 +4,7 @@ import { Progress } from './progress'
 import { Example } from './example'
 
 export class Team {
+  public static readonly empty = new Team('', '', User.empty)
   public readonly users = [this.leader, ...this.members]
 
   public static deserialize(team: Team): Team {
