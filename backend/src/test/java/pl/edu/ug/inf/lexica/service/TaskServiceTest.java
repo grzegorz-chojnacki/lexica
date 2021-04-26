@@ -25,7 +25,7 @@ class TaskServiceTest {
     private TaskService service;
 
     /**
-     * Create a mock implementation of the WidgetRepository
+     * Create a mock implementation of the TaskRepository
      */
     @MockBean
     private TaskRepository repository;
@@ -43,7 +43,7 @@ class TaskServiceTest {
         Task returnedWidget = service.add(widget).get();
 
         // Assert the response
-        Assertions.assertNotNull(returnedWidget, "The saved widget should not be null");
+        Assertions.assertNotNull(returnedWidget, "The saved task should not be null");
        // Assertions.assertEquals(2, returnedWidget.getVersion(), "The version should be incremented");
     }
 
@@ -77,7 +77,7 @@ class TaskServiceTest {
         Optional<Task> returnedTask = service.get(id);
 
         // Assert the response
-        Assertions.assertFalse(returnedTask.isPresent(), "Widget should not be found");
+        Assertions.assertFalse(returnedTask.isPresent(), "Task should not be found");
     }
     @Test
     void update() {
