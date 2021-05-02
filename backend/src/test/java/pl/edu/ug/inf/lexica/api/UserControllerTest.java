@@ -27,7 +27,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
     @MockBean
     private UserService service;
@@ -58,9 +58,10 @@ class UserControllerTest {
          mockMvc.perform(MockMvcRequestBuilders.get("/user")
                 .principal(principal))
                 // Validate the response code
-                .andExpect(status().is(401));
+                .andExpect(status().isOk());
 
     }
+
 
 //    @Test
 //    void login() {
@@ -70,15 +71,16 @@ public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.AP
     @Test
     void register() throws Exception {
         Map<String, String> registration = new HashMap<>();
-        registration.put("username","xd");
-        registration.put("password","xd");
-        registration.put("surname","xd");
-        registration.put("firstname","xd");
-        registration.put("color","xd");
+        registration.put("username","janK");
+        registration.put("password","xyz123");
+        registration.put("surname","Kowalski");
+        registration.put("firstname","Jan");
+        registration.put("color","#9F865C");
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow =  mapper.writer().withDefaultPrettyPrinter();
         String requestJson= ow.writeValueAsString(registration);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
