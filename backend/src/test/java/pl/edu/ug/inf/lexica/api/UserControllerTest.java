@@ -1,7 +1,6 @@
 package pl.edu.ug.inf.lexica.api;
 
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -45,9 +44,10 @@ class UserControllerTest {
     private Principal principal;
 
 
-//    @Test
+    //    @Test
 //    void getTeams() {
 //    }
+    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
     @Test
     void getUser() throws Exception {
@@ -55,7 +55,7 @@ class UserControllerTest {
         doReturn(Optional.empty()).when(service).get(principal);
 
         // Execute the GET request
-         mockMvc.perform(MockMvcRequestBuilders.get("/user")
+        mockMvc.perform(MockMvcRequestBuilders.get("/user")
                 .principal(principal))
                 // Validate the response code
                 .andExpect(status().isOk());
@@ -63,23 +63,35 @@ class UserControllerTest {
     }
 
 
-//    @Test
-//    void login() {
-//    }
-//
-public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+    @Test
+    void login() throws Exception {
+        Map<String, String> user = new HashMap<>();
+        user.put("username", "janK");
+        user.put("password", "xyz123");
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(user);
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/login")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().isOk());
+    }
+
     @Test
     void register() throws Exception {
         Map<String, String> registration = new HashMap<>();
-        registration.put("username","janK");
-        registration.put("password","xyz123");
-        registration.put("surname","Kowalski");
-        registration.put("firstname","Jan");
-        registration.put("color","#9F865C");
+        registration.put("username", "janK");
+        registration.put("password", "xyz123");
+        registration.put("surname", "Kowalski");
+        registration.put("firstname", "Jan");
+        registration.put("color", "#9F865C");
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow =  mapper.writer().withDefaultPrettyPrinter();
-        String requestJson= ow.writeValueAsString(registration);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(registration);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                 .contentType(APPLICATION_JSON_UTF8)
