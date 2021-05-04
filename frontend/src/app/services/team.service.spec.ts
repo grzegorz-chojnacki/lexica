@@ -57,9 +57,7 @@ describe('TeamService', () => {
     const userTeams = [team]
     userService.login('', '')
 
-    service
-      .getTeams()
-      .subscribe(teams => (teams.length > 0)
+    service.getTeams().subscribe(teams => (teams.length > 0)
         && expect(JSON.stringify(teams)).toEqual(JSON.stringify(userTeams)))
 
     httpMock.expectOne(`${lexicaURL}/user/team`).flush(userTeams)
@@ -71,9 +69,7 @@ describe('TeamService', () => {
     spyOn(handler, 'err')
     userService.login('', '')
 
-    service
-      .getTeams()
-      .subscribe(handler.teams, handler.err)
+    service.getTeams().subscribe(handler.teams, handler.err)
 
     httpMock.expectOne(`${lexicaURL}/user/team`).error(new ErrorEvent(''))
     expect(handler.teams).toHaveBeenCalledWith([])
