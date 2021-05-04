@@ -63,6 +63,10 @@ export const team = new Team(
   'Test team', '9ad753e4-58a4-4121-96f6-dad350f38867',
   leader, members, tasks, 'Test team description', '#555555')
 
+export const otherTeam = new Team(
+  'Test team 2', '5655fae3-4b1e-4ba3-afbf-b14ccd631891',
+  users[1], users, tasks, 'Test team 2 description', '#666666')
+
 export const fakeUserService = () => ({
   user: new BehaviorSubject(User.empty),
   authHeader() { return {} },
@@ -75,4 +79,9 @@ export const fakeUserService = () => ({
     this.logged = false
     this.user.next(User.empty)
   }
+})
+
+export const fakeTeamService = () => ({
+  teams: new BehaviorSubject([team, otherTeam]),
+  getTeams() { return this.teams.asObservable() }
 })
