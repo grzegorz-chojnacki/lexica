@@ -22,6 +22,7 @@ describe('TeamService', () => {
     service = TestBed.inject(TeamService)
     httpMock = TestBed.inject(HttpTestingController)
     userService = TestBed.inject(UserService)
+    userService.login('', '')
   })
 
   afterEach(() => { httpMock.verify() })
@@ -50,12 +51,13 @@ describe('TeamService', () => {
     const handler = { teams: (t: Team[]) => {}, err: () => {} }
     spyOn(handler, 'teams')
     spyOn(handler, 'err')
-    userService.login('', '')
 
     service.getTeams().subscribe(handler.teams, handler.err)
 
     httpMock.expectOne(`${lexicaURL}/user/team`).error(new ErrorEvent(''))
-    expect(handler.teams).toHaveBeenCalledWith([])
+
+    expect(handler.teams).toHaveBeenCalled()
+    expect(handler.err).toHaveBeenCalled()
   })
 
   it('should fetch team', () => {
@@ -77,7 +79,7 @@ describe('TeamService', () => {
       .subscribe(handler.team, handler.err)
 
     httpMock.expectOne(`${lexicaURL}/team/${team.id}`).error(new ErrorEvent(''))
-    expect(handler.team).toHaveBeenCalledWith(Team.empty)
+    expect(handler.team).toHaveBeenCalledOnceWith(Team.empty)
     expect(handler.err).toHaveBeenCalled()
   })
 
@@ -115,7 +117,6 @@ describe('TeamService', () => {
   })
 
   it('should make leave-team request for logged user', () => {
-    userService.login('','')
     userService.user.subscribe(u => {
       service.leaveTeam(team)
       const req = httpMock

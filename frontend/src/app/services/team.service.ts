@@ -22,7 +22,7 @@ export interface TeamForm {
 })
 export class TeamService {
   private loggedUser = User.empty
-  private readonly teamListSource = new BehaviorSubject<Team[]>([])
+  private teamListSource = new BehaviorSubject<Team[]>([])
   private teamSource = new BehaviorSubject<Team>(Team.empty)
 
   public constructor(
@@ -44,6 +44,9 @@ export class TeamService {
         .subscribe(teams => {
           this.teamListSource.next(teams)
           this.teamHistory.refreshAll(teams)
+        }, err => {
+          this.teamListSource.error(err) // Reset teamSource after error
+          this.teamListSource = new BehaviorSubject<Team[]>([])
         })
     }
   }
