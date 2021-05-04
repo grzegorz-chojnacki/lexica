@@ -5,14 +5,9 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { StartViewComponent } from '../components/start-view/start-view.component'
 import { WorkspaceComponent } from '../components/workspace/workspace.component'
 import { UserService } from '../services/user.service'
+import { fakeUserService } from '../test-data'
 
 import { AuthorizedGuard, UnauthorizedGuard } from './authorization.guard'
-
-const fakeUserService = () => ({
-  logged: false,
-  login() { this.logged = true },
-  logout() { this.logged = false }
-})
 
 const routerTestingModule = RouterTestingModule.withRoutes([
   { path: '', component: StartViewComponent },

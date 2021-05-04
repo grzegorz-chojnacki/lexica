@@ -1,28 +1,11 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
-import { BehaviorSubject, of } from 'rxjs'
 import { Team } from '../classes/team'
-import { User } from '../classes/user'
 import { lexicaURL } from '../lexica.properties'
-import { team, users } from '../test-data'
+import { fakeUserService, team, users } from '../test-data'
 
 import { TeamService } from './team.service'
 import { UserService } from './user.service'
-
-const fakeUserService = () => ({
-  user: new BehaviorSubject(User.empty),
-  authHeader() { return {} },
-  logged: false,
-  login() {
-    this.logged = true
-    this.user.next(users[0])
-    return of()
-  },
-  logout() {
-    this.logged = false
-    this.user.next(User.empty)
-  }
-})
 
 describe('TeamService', () => {
   let service: TeamService

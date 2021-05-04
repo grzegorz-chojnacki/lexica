@@ -4,6 +4,7 @@ import { Progress } from "./classes/progress"
 import { Task } from "./classes/task"
 import { Team } from "./classes/team"
 import { User } from "./classes/user"
+import { BehaviorSubject } from "rxjs"
 
 export const simpleCards = [
   new SimpleCard('Apple', 'Jabłko'),
@@ -61,3 +62,17 @@ const [leader, ...members] = users
 export const team = new Team(
   'Test team', '9ad753e4-58a4-4121-96f6-dad350f38867',
   leader, members, tasks, 'Test team description', '#555555')
+
+export const fakeUserService = () => ({
+  user: new BehaviorSubject(User.empty),
+  authHeader() { return {} },
+  logged: false,
+  login() {
+    this.logged = true
+    this.user.next(users[0])
+  },
+  logout() {
+    this.logged = false
+    this.user.next(User.empty)
+  }
+})

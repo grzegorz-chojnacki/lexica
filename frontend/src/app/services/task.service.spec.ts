@@ -1,28 +1,12 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
-import { BehaviorSubject, of } from 'rxjs'
 import { Example } from '../classes/example'
 import { Task } from '../classes/task'
-import { User } from '../classes/user'
 import { lexicaURL } from '../lexica.properties'
-import { tasks, users } from '../test-data'
+import { fakeUserService, tasks } from '../test-data'
 import { TaskService } from './task.service'
 import { UserService } from './user.service'
 
-const fakeUserService = () => ({
-  user: new BehaviorSubject(User.empty),
-  authHeader() { return {} },
-  logged: false,
-  login() {
-    this.logged = true
-    this.user.next(users[0])
-    return of()
-  },
-  logout() {
-    this.logged = false
-    this.user.next(User.empty)
-  }
-})
 
 describe('TaskService', () => {
   let service: TaskService
