@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
 import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -21,7 +21,7 @@ describe('AuthorizedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         routerTestingModule
       ],
       providers: [{ provide: UserService, useValue: fakeUserService() }]
@@ -71,7 +71,7 @@ describe('UnauthorizedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         routerTestingModule
       ],
       providers: [{ provide: UserService, useValue: fakeUserService() }]

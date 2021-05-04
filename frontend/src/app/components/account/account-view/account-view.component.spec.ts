@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { MatCardModule } from '@angular/material/card'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -17,7 +17,7 @@ describe('AccountViewComponent', () => {
       imports: [
         MatSnackBarModule,
         RouterTestingModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         MatDialogModule,
         MatListModule,
         MatCardModule,

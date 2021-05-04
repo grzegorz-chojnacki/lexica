@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatCardModule } from '@angular/material/card'
@@ -27,7 +27,7 @@ describe('EditorViewComponent', () => {
         MatSnackBarModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         MatCardModule,
         MatInputModule,
         BrowserAnimationsModule,
