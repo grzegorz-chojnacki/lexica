@@ -1,5 +1,5 @@
 import { Example } from './example'
-import { TaskType } from './task-type'
+import { NullTask, TaskType } from './task-type'
 import { Team } from './team'
 
 export type TaskAndUsersWithProgress = {
@@ -8,6 +8,7 @@ export type TaskAndUsersWithProgress = {
 }
 
 export class Task<T extends Example> {
+  public static readonly empty = new Task('', '', [], NullTask)
   public static deserialize(task: Task<Example>): Task<Example> {
     return new Task(
       task.id,

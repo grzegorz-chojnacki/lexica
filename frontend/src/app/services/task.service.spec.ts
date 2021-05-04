@@ -33,7 +33,7 @@ describe('TaskService', () => {
 
   it('should initialize and not fetch data when user not logged', () => {
     userService.logout()
-    service.getTask('1', '2').subscribe(task => expect(task).toBe(service.emptyTask))
+    service.getTask('1', '2').subscribe(task => expect(task).toBe(Task.empty))
     httpMock.expectNone(`${lexicaURL}/team/1/task/2`)
   })
 
@@ -43,7 +43,7 @@ describe('TaskService', () => {
 
     service
       .getTask('1', '2')
-      .subscribe(t => (t !== service.emptyTask) && expect(t).toEqual(task))
+      .subscribe(t => (t !== Task.empty) && expect(t).toEqual(task))
     httpMock.expectOne(`${lexicaURL}/team/1/task/2`).flush(task)
   })
 
@@ -83,7 +83,7 @@ describe('TaskService', () => {
 
     service
       .getTask('1', '2')
-      .subscribe(t => (t !== service.emptyTask) && expect(t).toEqual(task))
+      .subscribe(t => (t !== Task.empty) && expect(t).toEqual(task))
 
     httpMock.expectOne(`${lexicaURL}/team/1/task/2`).flush(task)
     expect(Task.deserialize).toHaveBeenCalled()
@@ -118,7 +118,7 @@ describe('TaskService', () => {
       let isFirst = true
       const s = service.getTask('1', task.id).subscribe(t => {
         if (isFirst) {
-          expect(t).toBe(service.emptyTask)
+          expect(t).toBe(Task.empty)
           isFirst = !isFirst
         } else {
           expect(t).toEqual(task)
