@@ -25,12 +25,15 @@ export interface TaskForm {
 export class TaskService {
   public  readonly emptyTask = new Task('', '', [], NullTask)
   private taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
+
   public constructor(
     private readonly userService: UserService,
     private readonly http: HttpClient) { }
 
   public getTask(teamId: string | null, taskId: string | null): Observable<Task<Example>> {
-    if (teamId && taskId) { this.refreshTaskSource(teamId, taskId) }
+    if (teamId && taskId && this.userService.logged) {
+      this.refreshTaskSource(teamId, taskId)
+    }
     return this.taskSource.asObservable()
   }
 
