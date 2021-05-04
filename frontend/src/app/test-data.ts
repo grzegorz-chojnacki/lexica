@@ -83,5 +83,7 @@ export const fakeUserService = () => ({
 
 export const fakeTeamService = () => ({
   teams: new BehaviorSubject([team, otherTeam]),
-  getTeams() { return this.teams.asObservable() }
+  team: new BehaviorSubject(team),
+  getTeams() { return this.teams.asObservable() },
+  getTeam(id: string) { return this.team.asObservable() }
 })
