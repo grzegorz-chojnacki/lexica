@@ -5,7 +5,6 @@ import { Task } from 'src/app/classes/task'
 import { Team } from 'src/app/classes/team'
 import { UserService } from 'src/app/services/user.service'
 import { TaskService } from 'src/app/services/task.service'
-import { User } from 'src/app/classes/user'
 import { ChoiceTestTask, NullTask, SimpleCardTask, TaskType, MultiTestTask } from 'src/app/classes/task-type'
 import { Example } from 'src/app/classes/example'
 import { SimpleCardViewComponent } from '../simple-card-view/simple-card-view.component'
@@ -35,7 +34,6 @@ const taskTypeViewMap = new Map<TaskType, any>([
 })
 export class TaskViewDispatchComponent implements OnInit {
   public team!: Team
-  public user!: User
   public task!: Task<Example>
 
   @ViewChild(TaskDirective, { static: true })
@@ -52,8 +50,6 @@ export class TaskViewDispatchComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.userService.user.subscribe(user => this.user = user)
-
     const teamId = this.route.snapshot.paramMap.get('teamId') as string
     const taskId = this.route.snapshot.paramMap.get('taskId') as string
 
