@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import pl.edu.ug.inf.lexica.domain.Progress;
+import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.repository.UserRepository;
 import pl.edu.ug.inf.lexica.service.TeamService;
@@ -25,11 +27,11 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -53,8 +55,6 @@ class UserControllerTest {
     private UserRepository userRepository;
 
     private User user1;
-
-
     //    @Test
 //    void getTeams() {
 //    }
@@ -82,7 +82,6 @@ class UserControllerTest {
                 // Validate the response code
                 .andExpect(status().isOk())
                 .andDo(print());
-
     }
 
     @Test
@@ -106,12 +105,9 @@ class UserControllerTest {
 
     @Test
     void login() throws Exception {
-
-        //userRepository.findByUsername("janK").get();
         Map<String, String> user = new HashMap<>();
-        user.put("username", "janKc");
+        user.put("username", "janK");
         user.put("password", "xyz123c");
-
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -126,34 +122,85 @@ class UserControllerTest {
 
     @Test
     void register() throws Exception {
+
+
         Map<String, String> registration = new HashMap<>();
-        registration.put("username", "janK");
-        registration.put("password", "xyz123");
-        registration.put("surname", "Kowalski");
-        registration.put("firstname", "Jan");
+        registration.put("username", "username");
+        registration.put("password", "password");
+        registration.put("surname", "surname");
+        registration.put("firstname", "firstname");
         registration.put("color", "#9F865C");
+
+        User user = new User();
+        user.setUsername(registration.get("username"));
+        user.setPassword(registration.get("password"));
+        user.setFirstname(registration.get("firstname"));
+        user.setSurname(registration.get("surname"));
+        user.setColor(registration.get("color"));
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(registration);
+
+        doReturn(Optional.of(user)).when(service).add(user);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                 .content(requestJson)
                 .contentType(APPLICATION_JSON_UTF8))
                 // Validate the response code
                 .andExpect(status().is(200))
+                .andExpect(jsonPath("$.username").value("username"))
+                .andExpect(jsonPath("$.color").value("#9F865C"))
                 .andDo(print());
-
-
     }
-//
+
 //    @Test
-//    void addProgress() {
-//    }
+//    void addProgress() throws Exception {
+//        Task task = new Task();
+//        Progress progress = new Progress(task,80);
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+//        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+//        String requestJson = ow.writeValueAsString(progress);
+//        user1.setProgress(Set.of(progress));
 //
-//    @Test
-//    void getProgress() {
+//        service.update(user1);
+//        doReturn(Optional.of(user1)).when(service).get(principal);
+//
+//
+//        mockMvc.perform(MockMvcRequestBuilders.put("/user/progress")
+//                .content(requestJson)
+//                .principal(principal)
+//                .contentType(APPLICATION_JSON_UTF8))
+//                // Validate the response code
+//                .andExpect(status().is(200))
+//                .andDo(print());
 //    }
+
+    @Test
+    void getProgress() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/progress")
+                .principal(principal))
+                // Validate the response code
+                .andExpect(status().is(200))
+                .andExpect(content().string("[]"))
+                .andDo(print());
+    }
+
+    @Test
+    void getProgressl() throws Exception {
+        Task task = new Task();
+        Progress progress = new Progress(task, 80);
+        user1.setProgress(Set.of(progress));
+        doReturn(Optional.of(user1)).when(service).get(principal);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/progress")
+                .principal(principal))
+                // Validate the response code
+                .andExpect(status().is(200))
+                .andExpect(content().string("[{\"task\":{\"id\":null},\"completion\":80}]"))
+                .andDo(print());
+    }
 //
 //    @Test
 //    void updateUser() {
