@@ -1,24 +1,10 @@
 import { TestBed } from '@angular/core/testing'
-import { BehaviorSubject } from 'rxjs'
 import { Team } from '../classes/team'
 import { User } from '../classes/user'
-import { team, users } from '../test-data'
+import { fakeUserService, team, users } from '../test-data'
 
 import { TeamHistoryService } from './team-history.service'
 import { UserService } from './user.service'
-
-const fakeUserService = () => ({
-  user: new BehaviorSubject(User.empty),
-  logged: false,
-  login() {
-    this.logged = true
-    this.user.next(users[0])
-  },
-  logout() {
-    this.logged = false
-    this.user.next(User.empty)
-  }
-})
 
 const maxLength = TeamHistoryService.maxHistoryLength
 

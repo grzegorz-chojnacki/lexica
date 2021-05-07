@@ -14,7 +14,7 @@ export interface TeamHistoryEntry {
 })
 export class TeamHistoryService {
   public static readonly maxHistoryLength = 10
-  private  user = User.empty
+  private user = User.empty
   private readonly storage = localStorage
   private readonly teamSource = new BehaviorSubject<TeamHistoryEntry[]>([])
 

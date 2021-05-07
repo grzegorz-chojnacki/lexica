@@ -1,18 +1,13 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
 import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
 import { StartViewComponent } from '../components/start-view/start-view.component'
 import { WorkspaceComponent } from '../components/workspace/workspace.component'
 import { UserService } from '../services/user.service'
+import { fakeUserService } from '../test-data'
 
 import { AuthorizedGuard, UnauthorizedGuard } from './authorization.guard'
-
-const fakeUserService = () => ({
-  logged: false,
-  login() { this.logged = true },
-  logout() { this.logged = false }
-})
 
 const routerTestingModule = RouterTestingModule.withRoutes([
   { path: '', component: StartViewComponent },
@@ -26,7 +21,7 @@ describe('AuthorizedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         routerTestingModule
       ],
       providers: [{ provide: UserService, useValue: fakeUserService() }]
@@ -76,7 +71,7 @@ describe('UnauthorizedGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         routerTestingModule
       ],
       providers: [{ provide: UserService, useValue: fakeUserService() }]

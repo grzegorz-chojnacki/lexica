@@ -2,24 +2,9 @@ import { Component } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
 import { Router, Routes } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
-import { BehaviorSubject } from 'rxjs'
-import { User } from '../classes/user'
-import { users } from '../test-data'
+import { fakeUserService } from '../test-data'
 import { BreadCrumbService, breadCrumbTemplates } from './bread-crumb.service'
 import { UserService } from './user.service'
-
-const fakeUserService = () => ({
-  user: new BehaviorSubject(User.empty),
-  logged: false,
-  login() {
-    this.logged = true
-    this.user.next(users[0])
-  },
-  logout() {
-    this.logged = false
-    this.user.next(User.empty)
-  }
-})
 
 @Component({ selector: 'app-blank', template: '' })
 export class BlankComponent { }

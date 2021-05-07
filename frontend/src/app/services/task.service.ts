@@ -23,20 +23,22 @@ export interface TaskForm {
   providedIn: 'root'
 })
 export class TaskService {
-  public  readonly emptyTask = new Task('', '', [], NullTask)
-  private taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
+  private taskSource = new BehaviorSubject<Task<Example>>(Task.empty)
+
   public constructor(
     private readonly userService: UserService,
     private readonly http: HttpClient) { }
 
   public getTask(teamId: string | null, taskId: string | null): Observable<Task<Example>> {
-    if (teamId && taskId) { this.refreshTaskSource(teamId, taskId) }
+    if (teamId && taskId && this.userService.logged) {
+      this.refreshTaskSource(teamId, taskId)
+    }
     return this.taskSource.asObservable()
   }
 
   private refreshTaskSource(teamId: string, taskId: string): void {
     if (this.taskSource.value.id !== taskId) {
-      this.taskSource.next(this.emptyTask)
+      this.taskSource.next(Task.empty)
     }
 
     this.http.get<Task<Example>>(
@@ -47,7 +49,7 @@ export class TaskService {
         task => this.taskSource.next(task),
         err => {
           this.taskSource.error(err) // Reset taskSource after error
-          this.taskSource = new BehaviorSubject<Task<Example>>(this.emptyTask)
+          this.taskSource = new BehaviorSubject<Task<Example>>(Task.empty)
         })
   }
 

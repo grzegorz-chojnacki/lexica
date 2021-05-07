@@ -16,7 +16,7 @@ export class TeamViewComponent implements OnInit {
   public team!: Team
   public user!: User
   public leaderView = false
-  public leaderHasProgressView = false
+  public hasProgressView = false
   public loggedUserWithProgress = User.empty
 
   public constructor(
@@ -27,15 +27,14 @@ export class TeamViewComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    const isLeader = () => this.team?.leader?.id === this.user?.id
     const teamId = this.route.snapshot.paramMap.get('teamId')
 
     combineLatest([this.userService.user, this.teamService.getTeam(teamId)])
       .subscribe(([user, team]) => {
         this.user = user
         this.team = team
-        this.leaderView = isLeader()
-        this.leaderHasProgressView = team.hasMember(this.user)
+        this.leaderView = this.team?.leader?.id === this.user?.id
+        this.hasProgressView = team.hasMember(this.user) && team.hasTasks()
         this.loggedUserWithProgress = this.getLoggedUserFromTeam(team)
       }, _ => this.router.navigate(['/workspace']))
   }

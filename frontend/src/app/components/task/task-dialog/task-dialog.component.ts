@@ -6,8 +6,6 @@ import { Subscription } from 'rxjs'
 import { DataService } from 'src/app/services/data.service'
 import { Example } from 'src/app/classes/example'
 
-
-
 @Component({
   selector: 'app-task-dialog',
   templateUrl: './task-dialog.component.html',

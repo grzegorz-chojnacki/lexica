@@ -14,8 +14,8 @@ import { combineLatest } from 'rxjs'
 })
 export class WorkspaceComponent implements OnInit {
   public search = ''
-  public ownedTeams!: Team[]
-  public otherTeams!: Team[]
+  public ownedTeams: Team[] = []
+  public otherTeams: Team[] = []
 
   public constructor(
     private readonly dialog: MatDialog,

@@ -42,7 +42,7 @@ export class TaskMenuComponent implements OnInit {
   public export(): void {
     const subscription = this.taskService.getTask(this.team.id, this.task.id)
       .subscribe(task => {
-        if (task !== this.taskService.emptyTask) {
+        if (task !== Task.empty) {
           subscription.unsubscribe() // Cancel subscription after first payload
           saveAsFile(task)
         }

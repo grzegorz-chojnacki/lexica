@@ -1,28 +1,11 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
-import { BehaviorSubject, of } from 'rxjs'
 import { Team } from '../classes/team'
-import { User } from '../classes/user'
 import { lexicaURL } from '../lexica.properties'
-import { team, users } from '../test-data'
+import { fakeUserService, team, users } from '../test-data'
 
 import { TeamService } from './team.service'
 import { UserService } from './user.service'
-
-const fakeUserService = () => ({
-  user: new BehaviorSubject(User.empty),
-  authHeader() { return {} },
-  logged: false,
-  login() {
-    this.logged = true
-    this.user.next(users[0])
-    return of()
-  },
-  logout() {
-    this.logged = false
-    this.user.next(User.empty)
-  }
-})
 
 describe('TeamService', () => {
   let service: TeamService
@@ -39,6 +22,7 @@ describe('TeamService', () => {
     service = TestBed.inject(TeamService)
     httpMock = TestBed.inject(HttpTestingController)
     userService = TestBed.inject(UserService)
+    userService.login('', '')
   })
 
   afterEach(() => { httpMock.verify() })
@@ -57,9 +41,7 @@ describe('TeamService', () => {
     const userTeams = [team]
     userService.login('', '')
 
-    service
-      .getTeams()
-      .subscribe(teams => (teams.length > 0)
+    service.getTeams().subscribe(teams => (teams.length > 0)
         && expect(JSON.stringify(teams)).toEqual(JSON.stringify(userTeams)))
 
     httpMock.expectOne(`${lexicaURL}/user/team`).flush(userTeams)
@@ -69,14 +51,13 @@ describe('TeamService', () => {
     const handler = { teams: (t: Team[]) => {}, err: () => {} }
     spyOn(handler, 'teams')
     spyOn(handler, 'err')
-    userService.login('', '')
 
-    service
-      .getTeams()
-      .subscribe(handler.teams, handler.err)
+    service.getTeams().subscribe(handler.teams, handler.err)
 
     httpMock.expectOne(`${lexicaURL}/user/team`).error(new ErrorEvent(''))
-    expect(handler.teams).toHaveBeenCalledWith([])
+
+    expect(handler.teams).toHaveBeenCalled()
+    expect(handler.err).toHaveBeenCalled()
   })
 
   it('should fetch team', () => {
@@ -98,7 +79,7 @@ describe('TeamService', () => {
       .subscribe(handler.team, handler.err)
 
     httpMock.expectOne(`${lexicaURL}/team/${team.id}`).error(new ErrorEvent(''))
-    expect(handler.team).toHaveBeenCalledWith(Team.empty)
+    expect(handler.team).toHaveBeenCalledOnceWith(Team.empty)
     expect(handler.err).toHaveBeenCalled()
   })
 
@@ -136,7 +117,6 @@ describe('TeamService', () => {
   })
 
   it('should make leave-team request for logged user', () => {
-    userService.login('','')
     userService.user.subscribe(u => {
       service.leaveTeam(team)
       const req = httpMock

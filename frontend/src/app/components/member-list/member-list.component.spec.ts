@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatDividerModule } from '@angular/material/divider'
@@ -20,7 +20,7 @@ describe('MemberListComponent', () => {
       imports: [
         MatDialogModule,
         MatSnackBarModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         MatProgressSpinnerModule,
         MatDividerModule,
         MatIconModule,
