@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
