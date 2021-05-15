@@ -1,6 +1,5 @@
 package pl.edu.ug.inf.lexica.api;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -99,7 +98,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.username").value("janK"))
                 .andExpect(jsonPath("$.color").value("#D2326A"))
                 .andDo(print());
-
     }
 
 
@@ -178,7 +176,7 @@ class UserControllerTest {
 //    }
 
     @Test
-    void getProgress() throws Exception {
+    void getEmptyProgress() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/progress")
                 .principal(principal))
                 // Validate the response code
@@ -188,7 +186,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getProgressl() throws Exception {
+    void getProgress() throws Exception {
         Task task = new Task();
         Progress progress = new Progress(task, 80);
         user1.setProgress(Set.of(progress));
@@ -201,12 +199,39 @@ class UserControllerTest {
                 .andExpect(content().string("[{\"task\":{\"id\":null},\"completion\":80}]"))
                 .andDo(print());
     }
-//
-//    @Test
-//    void updateUser() {
-//    }
-//
-//    @Test
-//    void deleteUser() {
-//    }
+
+    @Test
+    void updateUser() throws Exception {
+        Map<String, String> user = new HashMap<>();
+        user.put("username", "newName");
+        user.put("password", "newPassword");
+        user.put("firstname", "newFirstname");
+        user.put("surname", "newSurname");
+        user.put("color", "newColor");
+
+        user1.setPassword(user.get("password"));
+        user1.setUsername(user.get("username"));
+        user1.setFirstname(user.get("firstname"));
+        service.updateWithPassword(user1);
+
+        doReturn(Optional.of(user1)).when(service).get(principal);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(user);
+        mockMvc.perform(MockMvcRequestBuilders.put("/user")
+                .contentType(APPLICATION_JSON_UTF8)
+                .principal(principal)
+                .content(requestJson))
+                .andExpect(status().is(200));
+    }
+
+    @Test
+    void deleteUser() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/user")
+                .contentType(APPLICATION_JSON_UTF8)
+                .principal(principal))
+                .andExpect(status().is(200));
+    }
 }
