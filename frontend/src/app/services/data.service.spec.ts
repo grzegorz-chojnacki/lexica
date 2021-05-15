@@ -6,7 +6,7 @@ describe('DataService', () => {
 
   beforeEach(() => {
     sessionStorage.clear()
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({ })
     service = TestBed.inject(DataService)
   })
 

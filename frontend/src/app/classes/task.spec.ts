@@ -1,7 +1,7 @@
-import { simpleCardTask } from "../test-data"
-import { SimpleCard } from "./example"
-import { Task } from "./task"
-import { TaskType } from "./task-type"
+import { simpleCardTask } from '../test-data'
+import { SimpleCard } from './example'
+import { Task } from './task'
+import { TaskType } from './task-type'
 
 describe('Task', () => {
   it('should deserialize tasks with taskTypes', () => {

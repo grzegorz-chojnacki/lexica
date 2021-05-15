@@ -49,7 +49,7 @@ describe('TaskService', () => {
 
   it('should not fetch data when teamId or taskId is empty', () => {
     userService.login('', '')
-    const handler = { task: (t: Task<Example>) => {}, err: () => {} }
+    const handler = { task: (t: Task<Example>) => { }, err: () => { } }
     spyOn(handler, 'task')
     spyOn(handler, 'err')
 
@@ -67,7 +67,7 @@ describe('TaskService', () => {
 
   it('should handle task errors', () => {
     userService.login('', '')
-    const handler = { task: (t: Task<Example>) => {}, err: () => {} }
+    const handler = { task: (t: Task<Example>) => { }, err: () => { } }
     spyOn(handler, 'err')
 
     service.getTask('0', '0').subscribe(handler.task, handler.err)

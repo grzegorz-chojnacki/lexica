@@ -54,7 +54,7 @@ describe('UserService', () => {
 
   it('should handle login error', () => {
     const user = users[0]
-    const handler = { user: () => {}, err: () => {} }
+    const handler = { user: () => { }, err: () => { } }
     spyOn(handler, 'user')
     spyOn(handler, 'err')
 
@@ -92,7 +92,7 @@ describe('UserService', () => {
 
   it('should handle register error', () => {
     const user = users[0]
-    const handler = { user: () => {}, err: () => {} }
+    const handler = { user: () => { }, err: () => { } }
     spyOn(handler, 'user')
     spyOn(handler, 'err')
 

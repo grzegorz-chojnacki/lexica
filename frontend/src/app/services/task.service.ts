@@ -53,13 +53,13 @@ export class TaskService {
         })
   }
 
-  public createTask(teamId: string, task: Task<Example>): Observable<Object> {
+  public createTask(teamId: string, task: Task<Example>): Observable<object> {
     const header = this.userService.authHeader()
     return this.http
       .post(`${lexicaURL}/team/${teamId}/task`, task, header)
   }
 
-  public updateTask(teamId: string, taskId: string, task: Task<Example>): Observable<Object> {
+  public updateTask(teamId: string, taskId: string, task: Task<Example>): Observable<object> {
     const header = this.userService.authHeader()
     return this.http
       .put(`${lexicaURL}/team/${teamId}/task/${taskId}`, task, header)

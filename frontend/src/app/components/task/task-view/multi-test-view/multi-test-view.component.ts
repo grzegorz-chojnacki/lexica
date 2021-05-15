@@ -48,7 +48,9 @@ export class MultiTestViewComponent extends TaskViewComponent implements OnInit 
   }
 
   public count(): void {
-    this.controls.forEach(control => isCorrect(control) ? this.knewList.push(control.example) : this.knewList)
+    this.controls.forEach(control => isCorrect(control)
+      ? this.knewList.push(control.example)
+      : this.knewList)
   }
 
   public sum(): void {

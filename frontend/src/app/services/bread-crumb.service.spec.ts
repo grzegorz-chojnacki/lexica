@@ -59,7 +59,7 @@ describe('BreadCrumbService', () => {
   })
 
   it('should react to router navigation events', async () => {
-    const handler = { bcs: () => {} }
+    const handler = { bcs: () => { } }
     spyOn(handler, 'bcs').and.callThrough()
 
     service.breadCrumbs.subscribe(handler.bcs)

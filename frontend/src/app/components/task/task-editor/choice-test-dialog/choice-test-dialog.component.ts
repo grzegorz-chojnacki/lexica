@@ -29,7 +29,7 @@ export class ChoiceTestDialogComponent implements OnInit {
 
   public deleteOption(option: string): void {
     if (option === this.answer) { this.answer = '' }
-    this.options = this.options.filter(o => o != option)
+    this.options = this.options.filter(o => o !== option)
   }
 
   public isValid(): boolean {
@@ -54,7 +54,7 @@ export class ChoiceTestDialogComponent implements OnInit {
     return {
       answer: this.answer,
       question: this.question,
-      decoys: this.options.filter(o => o != this.answer)
+      decoys: this.options.filter(o => o !== this.answer)
     }
   }
 }

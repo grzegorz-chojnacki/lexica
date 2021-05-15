@@ -1,5 +1,5 @@
-import { tasks } from "../test-data"
-import { Progress } from "./progress"
+import { tasks } from '../test-data'
+import { Progress } from './progress'
 
 describe('Progress', () => {
   it('should sum progress', () => {

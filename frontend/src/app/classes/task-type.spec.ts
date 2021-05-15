@@ -1,4 +1,4 @@
-import { ChoiceTestTask, MultiTestTask, NullTask, SimpleCardTask, TaskType } from "./task-type"
+import { ChoiceTestTask, MultiTestTask, NullTask, SimpleCardTask, TaskType } from './task-type'
 
 const taskTypes = [SimpleCardTask, ChoiceTestTask, MultiTestTask]
 

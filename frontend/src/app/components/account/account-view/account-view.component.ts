@@ -59,7 +59,7 @@ export class AccountViewComponent implements OnInit {
       })
   }
 
-  public openDialog() {
+  public openDialog(): void {
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: 'Czy na pewno usunąć swoje konto?',

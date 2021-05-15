@@ -48,7 +48,7 @@ export class MemberListComponent implements OnInit {
     } else { return 0 }
   }
 
-  public removeMember(member: User) {
+  public removeMember(member: User): void {
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: `Czy na pewno usunąć użytkownika ${fullname.transform(member)}?`,

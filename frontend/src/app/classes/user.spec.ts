@@ -1,8 +1,8 @@
-import { users } from "../test-data"
-import { Example } from "./example"
-import { Task } from "./task"
-import { SimpleCardTask } from "./task-type"
-import { User } from "./user"
+import { users } from '../test-data'
+import { Example } from './example'
+import { Task } from './task'
+import { SimpleCardTask } from './task-type'
+import { User } from './user'
 
 describe('User', () => {
   it('should deserialize JSON data', () => {

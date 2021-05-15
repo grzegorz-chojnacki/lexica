@@ -48,7 +48,7 @@ describe('TeamService', () => {
   })
 
   it('should handle fetch user team list error', () => {
-    const handler = { teams: (t: Team[]) => {}, err: () => {} }
+    const handler = { teams: (t: Team[]) => { }, err: () => { } }
     spyOn(handler, 'teams')
     spyOn(handler, 'err')
 
@@ -70,7 +70,7 @@ describe('TeamService', () => {
   })
 
   it('should handle fetch team error', () => {
-    const handler = { team: (t: Team) => {}, err: () => {} }
+    const handler = { team: (t: Team) => { }, err: () => { } }
     spyOn(handler, 'team')
     spyOn(handler, 'err')
 

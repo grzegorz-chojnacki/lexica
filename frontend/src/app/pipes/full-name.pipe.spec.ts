@@ -22,7 +22,7 @@ describe('FullNamePipe', () => {
     const pipe = new FullNamePipe()
     let fullName = ''
 
-    expect(() => { fullName = pipe.transform({} as User)}).not.toThrowError()
+    expect(() => { fullName = pipe.transform({ } as User)}).not.toThrowError()
     expect(fullName).toBe('')
   })
 })

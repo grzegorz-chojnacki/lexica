@@ -51,7 +51,7 @@ describe('WorkspaceComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WorkspaceComponent)
     component = fixture.componentInstance
-    TestBed.inject(UserService).login('','')
+    TestBed.inject(UserService).login('', '')
     fixture.detectChanges()
   })
 
@@ -66,7 +66,7 @@ describe('WorkspaceComponent', () => {
   })
 
   it('should open dialog', () => {
-    let dialog = TestBed.inject(MatDialog)
+    const dialog = TestBed.inject(MatDialog)
     spyOn(dialog, 'open')
     component.openDialog()
     expect(dialog.open).toHaveBeenCalled()

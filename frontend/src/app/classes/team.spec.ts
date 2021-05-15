@@ -1,9 +1,9 @@
-import { tasks, team as testTeam, users } from "../test-data"
-import { Progress } from "./progress"
-import { Task } from "./task"
-import { NullTask } from "./task-type"
-import { Team } from "./team"
-import { User } from "./user"
+import { tasks, team as testTeam, users } from '../test-data'
+import { Progress } from './progress'
+import { Task } from './task'
+import { NullTask } from './task-type'
+import { Team } from './team'
+import { User } from './user'
 
 describe('Team', () => {
   it('should deserialize JSON data', () => {

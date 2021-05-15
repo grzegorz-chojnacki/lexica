@@ -22,7 +22,7 @@ describe('ChoiceTestEditorComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [ChoiceTestEditorComponent],
-      providers: [{ provide: FormGroup, useValue: new FormGroup({}) }]
+      providers: [{ provide: FormGroup, useValue: new FormGroup({ }) }]
     }).compileComponents()
   })
 

@@ -77,7 +77,7 @@ export class TaskViewDispatchComponent implements OnInit {
     }
   }
 
-  public addProgress(progress: Progress) {
+  public addProgress(progress: Progress): void {
     if (progress) {
       this.userService
         .addProgress(progress)

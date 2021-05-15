@@ -1,10 +1,10 @@
-import { ChoiceTest, Example, MultiTest, SimpleCard } from "./classes/example"
-import { ChoiceTestTask, SimpleCardTask } from "./classes/task-type"
-import { Progress } from "./classes/progress"
-import { Task } from "./classes/task"
-import { Team } from "./classes/team"
-import { User } from "./classes/user"
-import { BehaviorSubject } from "rxjs"
+import { ChoiceTest, Example, MultiTest, SimpleCard } from './classes/example'
+import { ChoiceTestTask, SimpleCardTask } from './classes/task-type'
+import { Progress } from './classes/progress'
+import { Task } from './classes/task'
+import { Team } from './classes/team'
+import { User } from './classes/user'
+import { BehaviorSubject } from 'rxjs'
 
 export const simpleCards = [
   new SimpleCard('Apple', 'Jabłko'),
@@ -69,7 +69,7 @@ export const otherTeam = new Team(
 
 export const fakeUserService = () => ({
   user: new BehaviorSubject(User.empty),
-  authHeader() { return {} },
+  authHeader() { return { } },
   logged: false,
   login() {
     this.logged = true

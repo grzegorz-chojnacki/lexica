@@ -22,7 +22,7 @@ describe('MultiTestEditorComponent', () => {
         MatListModule,
       ],
       declarations: [MultiTestEditorComponent],
-      providers: [{ provide: FormGroup, useValue: new FormGroup({}) }]
+      providers: [{ provide: FormGroup, useValue: new FormGroup({ }) }]
     }).compileComponents()
   })
 

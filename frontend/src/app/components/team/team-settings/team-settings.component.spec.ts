@@ -46,8 +46,8 @@ describe('TeamSettingsComponent', () => {
   it('should toggle leader membership', () => {
     spyOn(teamService, 'joinTeam')
     spyOn(teamService, 'leaveTeam')
-    const checked = new MatSlideToggleChange({} as any, true)
-    const unchecked = new MatSlideToggleChange({} as any, false)
+    const checked = new MatSlideToggleChange({ } as any, true)
+    const unchecked = new MatSlideToggleChange({ } as any, false)
 
     component.toggleLeaderProgressActivation(checked)
     expect(teamService.joinTeam).toHaveBeenCalled()

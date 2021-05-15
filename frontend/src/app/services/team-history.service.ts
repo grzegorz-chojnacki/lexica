@@ -38,7 +38,7 @@ export class TeamHistoryService {
     return this.teamSource.asObservable()
   }
 
-  public push(team: Team) {
+  public push(team: Team): void {
     let teams = [...this.teamSource.value]
     const foundIndex = teams.findIndex(t => t.id === team.id)
 
@@ -54,7 +54,7 @@ export class TeamHistoryService {
     return { id: team.id, name: team.name } as Team
   }
 
-  public refreshAll(teams: Team[]) {
+  public refreshAll(teams: Team[]): void {
     const refreshedTeams = this.teamSource.value.reduce((acc: Team[], team) => {
       const found = teams.find(t => t.id === team.id)
       return found ? [...acc, this.trimData(found)] : acc
