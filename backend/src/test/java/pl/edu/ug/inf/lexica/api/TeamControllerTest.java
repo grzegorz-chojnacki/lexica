@@ -77,7 +77,7 @@ class TeamControllerTest {
     void getTeam() throws Exception {
         doReturn(Optional.empty()).when(service).get(principal);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/team/{id}", id)
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/team/{id}", id)
                 .principal(principal))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -91,7 +91,7 @@ class TeamControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(team);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/team")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/team")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson)
                 .principal(principal))
@@ -108,7 +108,7 @@ class TeamControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(updateTeam);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/team/{id}", id)
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/team/{id}", id)
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson)
                 .principal(principal))
@@ -128,7 +128,7 @@ class TeamControllerTest {
         team.setTasks(List.of(task));
         // doReturn(team).when(team).getTasks().add(task);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/team/{id}/task", id)
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/team/{id}/task", id)
                 .content(requestJson)
                 .contentType(APPLICATION_JSON_UTF8)
                 .principal(principal))

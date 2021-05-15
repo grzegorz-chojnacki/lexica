@@ -76,7 +76,7 @@ class UserControllerTest {
         doReturn(Optional.empty()).when(service).get(principal);
 
         // Execute the GET request
-        mockMvc.perform(MockMvcRequestBuilders.get("/user")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user")
                 .principal(principal))
                 // Validate the response code
                 .andExpect(status().isOk())
@@ -89,7 +89,7 @@ class UserControllerTest {
         doReturn(Optional.of(user1)).when(service).get(principal);
 
         // Execute the GET request
-        mockMvc.perform(MockMvcRequestBuilders.get("/user")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user")
                 .principal(principal))
                 // Validate the response code
                 .andExpect(status().isOk())
@@ -111,7 +111,7 @@ class UserControllerTest {
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(user);
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/login")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
                 .andExpect(status().isOk())
@@ -142,7 +142,7 @@ class UserControllerTest {
 
         doReturn(Optional.of(user)).when(service).add(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
                 .content(requestJson)
                 .contentType(APPLICATION_JSON_UTF8))
                 // Validate the response code
@@ -166,7 +166,7 @@ class UserControllerTest {
 //        doReturn(Optional.of(user1)).when(service).get(principal);
 //
 //
-//        mockMvc.perform(MockMvcRequestBuilders.put("/user/progress")
+//        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/progress")
 //                .content(requestJson)
 //                .principal(principal)
 //                .contentType(APPLICATION_JSON_UTF8))
@@ -177,7 +177,7 @@ class UserControllerTest {
 
     @Test
     void getEmptyProgress() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/progress")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/progress")
                 .principal(principal))
                 // Validate the response code
                 .andExpect(status().is(200))
@@ -192,7 +192,7 @@ class UserControllerTest {
         user1.setProgress(Set.of(progress));
         doReturn(Optional.of(user1)).when(service).get(principal);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/progress")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/progress")
                 .principal(principal))
                 // Validate the response code
                 .andExpect(status().is(200))
@@ -220,7 +220,7 @@ class UserControllerTest {
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(user);
-        mockMvc.perform(MockMvcRequestBuilders.put("/user")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/user")
                 .contentType(APPLICATION_JSON_UTF8)
                 .principal(principal)
                 .content(requestJson))
@@ -229,7 +229,7 @@ class UserControllerTest {
 
     @Test
     void deleteUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/user")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/user")
                 .contentType(APPLICATION_JSON_UTF8)
                 .principal(principal))
                 .andExpect(status().is(200));
