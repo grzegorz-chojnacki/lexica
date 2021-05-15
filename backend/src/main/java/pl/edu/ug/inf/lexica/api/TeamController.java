@@ -15,8 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/team")
+@RequestMapping("/api/team")
 public class TeamController {
     private final TeamService teamService;
     private final UserService userService;
