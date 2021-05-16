@@ -18,6 +18,7 @@ import pl.edu.ug.inf.lexica.domain.Progress;
 import pl.edu.ug.inf.lexica.domain.Task;
 import pl.edu.ug.inf.lexica.domain.User;
 import pl.edu.ug.inf.lexica.repository.UserRepository;
+import pl.edu.ug.inf.lexica.service.TaskService;
 import pl.edu.ug.inf.lexica.service.TeamService;
 import pl.edu.ug.inf.lexica.service.UserService;
 
@@ -50,8 +51,11 @@ class UserControllerTest {
     @MockBean
     private Principal principal;
 
-    @Autowired
+    @MockBean
     private UserRepository userRepository;
+
+    @MockBean
+    private TaskService taskService;
 
     private User user1;
     //    @Test
