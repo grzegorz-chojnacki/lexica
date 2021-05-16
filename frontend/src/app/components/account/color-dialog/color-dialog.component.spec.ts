@@ -32,4 +32,8 @@ describe('ColorDialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  it('make new user instance', () => {
+    expect(component.getValue()).not.toBe(users[0])
+  })
 })
