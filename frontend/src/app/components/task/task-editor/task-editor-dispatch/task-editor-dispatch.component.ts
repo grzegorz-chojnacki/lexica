@@ -26,6 +26,7 @@ const taskTypeEditorMap = new Map<TaskType, any>([
   styleUrls: ['./task-editor-dispatch.component.scss']
 })
 export class TaskEditorDispatchComponent implements OnInit {
+  public readonly saveAsFile = saveAsFile
   public readonly taskTypes = [SimpleCardTask, ChoiceTestTask, MultiTestTask]
 
   private teamId?: string
@@ -139,7 +140,7 @@ export class TaskEditorDispatchComponent implements OnInit {
     return (typeControl?.enabled) || typeControl?.value === type
   }
 
-  public export = () => saveAsFile(this.taskForm.value)
+  public export = () => this.saveAsFile(this.taskForm.value)
 
   public navigateToTeam = () => this.router.navigate([`/team/${this.teamId}`])
 }
