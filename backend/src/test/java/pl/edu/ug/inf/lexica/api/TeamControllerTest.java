@@ -31,6 +31,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -60,6 +61,7 @@ class TeamControllerTest {
     UUID id3 = UUID.fromString("00112233-4455-6677-8899-aabbccddeeff");
     private Team team;
     private User user1;
+    //  private Task task;
     public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
 
@@ -72,12 +74,14 @@ class TeamControllerTest {
         team = new Team("team", user1, "description of team", "#D2326A");
         team.setId(id);
         teamRepository.saveAndFlush(team);
+
     }
 
     @AfterEach
     void del() {
         teamRepository.deleteAll();
         userRepository.deleteAll();
+        // taskRepository.deleteAll();
     }
 
     @Test
@@ -176,16 +180,52 @@ class TeamControllerTest {
                 .principal(principal))
                 .andExpect(status().isOk());
     }
-//
-//    @Test
-//    void removeTeam() {
-//    }
-//
-//    @Test
-//    void getTask() {
-//    }
-//
-//    @Test
-//    void updateTask() {
-//    }
+
+    @Test
+    void removeTeam() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/team/{id}", id)
+                .contentType(APPLICATION_JSON_UTF8)
+                .principal(principal))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void getTask() throws Exception {
+        SimpleCard simpleCard = new SimpleCard("liczba", "number");
+        simpleCard.setId(id3);
+        Task task = new Task("task", List.of(simpleCard), "task description", new TaskType(1, "Fiszka", "Fiszka to karteczka."));
+        task.setId(id2);
+        taskRepository.save(task);
+        team.setTasks(List.of(task));
+
+
+        when(teamService.getIfMember(id, id2, principal)).thenReturn(Optional.of(task));
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/team/{teamId}/task/{taskId}", id, id2)
+                .contentType(APPLICATION_JSON_UTF8)
+                .principal(principal))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'id':'123e4567-e89b-12d3-a456-426614174000','name':'task','examples':[{'nativeWord':'liczba','foreignWord':'number'}],'description':'task description','type':{'id':1,'name':'Fiszka','description':'Fiszka to karteczka.'}}"))
+                .andDo(print());
+    }
+
+
+    @Test
+    void updateTask() throws Exception {
+        Task task = new Task("task", List.of(new SimpleCard("liczba", "number")), "task description", new TaskType(1, "Fiszka", "Fiszka to karteczka, która zawiera słówko w języku obcym, a na odwrocie jego tłumaczenie. Służy do nauki w oparciu o prosty mechanizm pytanie-odpowiedź."));
+        task.setId(id2);
+        taskRepository.saveAndFlush(task);
+        team.setTasks(List.of(task));
+        task.setDescription("new");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(task);
+        when(teamService.getIfLeader(id, id2, principal)).thenReturn(Optional.of(task));
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/team/{teamId}/task/{taskId}", id, id2)
+                .contentType(APPLICATION_JSON_UTF8)
+                .principal(principal)
+                .content(requestJson))
+                .andExpect(status().isOk());
+    }
+
 }
