@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { choiceTestTask } from 'src/app/test-data'
 import { ChoiceTestDialogComponent } from './choice-test-dialog.component'
 
-
 describe('ChoiceTestDialogComponent', () => {
   let component: ChoiceTestDialogComponent
   let fixture: ComponentFixture<ChoiceTestDialogComponent>
