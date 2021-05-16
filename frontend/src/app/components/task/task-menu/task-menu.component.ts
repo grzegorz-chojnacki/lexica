@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatMenu } from '@angular/material/menu'
 import { Task } from 'src/app/classes/task'
@@ -11,6 +11,7 @@ import { snackBarDuration } from 'src/app/lexica.properties'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { TaskService } from 'src/app/services/task.service'
 import { saveAsFile } from 'src/app/classes/utils'
+import { filter, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-task-menu',
@@ -18,6 +19,7 @@ import { saveAsFile } from 'src/app/classes/utils'
   styleUrls: ['./task-menu.component.scss']
 })
 export class TaskMenuComponent implements OnInit {
+  public readonly saveAsFile = saveAsFile
   @Input() public task!: Task<Example>
   @Input() public team!: Team
   @Input() public leaderView = false
@@ -27,8 +29,7 @@ export class TaskMenuComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly snackbarService: MatSnackBar,
     private readonly teamService: TeamService,
-    private readonly taskService: TaskService
-  ) { }
+    private readonly taskService: TaskService) { }
 
   public ngOnInit(): void { }
 
@@ -40,13 +41,9 @@ export class TaskMenuComponent implements OnInit {
   }
 
   public export(): void {
-    const subscription = this.taskService.getTask(this.team.id, this.task.id)
-      .subscribe(task => {
-        if (task !== Task.empty) {
-          subscription.unsubscribe() // Cancel subscription after first payload
-          saveAsFile(task)
-        }
-      })
+    this.taskService.getTask(this.team.id, this.task.id)
+      .pipe(filter(task => task !== Task.empty), take(1))
+      .subscribe(task => this.saveAsFile(task))
   }
 
   public removeItself(): void {
