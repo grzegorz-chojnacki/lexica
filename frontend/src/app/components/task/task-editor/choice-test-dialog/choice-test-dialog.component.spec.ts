@@ -103,12 +103,6 @@ describe('ChoiceTestDialogComponent', () => {
     expect(component.isValidNext()).toBeFalse()
   })
 
-  it('should create new ChoiceTest object', () => {
-    const output = component.submit()
-    expect({...output}).toEqual({...choiceTestTask.examples[0]})
-    expect(output).not.toBe(choiceTestTask.examples[0])
-  })
-
   it('should display different error messages', () => {
     component.options.forEach(o => component.deleteOption(o))
     // No options
