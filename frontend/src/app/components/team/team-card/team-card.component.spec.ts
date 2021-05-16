@@ -3,14 +3,15 @@ import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu'
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'
 import { RouterTestingModule } from '@angular/router/testing'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-
 import { TeamCardComponent } from './team-card.component'
 import { FullNamePipe } from 'src/app/pipes/full-name.pipe'
 import { team } from 'src/app/test-data'
+import { TeamService } from 'src/app/services/team.service'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 describe('TeamCardComponent', () => {
   let component: TeamCardComponent
@@ -21,17 +22,20 @@ describe('TeamCardComponent', () => {
       imports: [
         MatCardModule,
         MatButtonModule,
+        NoopAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
         MatIconModule,
-        HttpClientTestingModule,
         MatMenuModule,
         MatDialogModule,
         RouterTestingModule.withRoutes([]),
         MatSnackBarModule,
       ],
-      declarations: [
-        TeamCardComponent,
-        FullNamePipe
-      ]
+      declarations: [ TeamCardComponent, FullNamePipe ],
+      providers: [{
+        provide: TeamService,
+        useValue: { leaveTeam() { }, remove() { }}
+      }]
     })
     .compileComponents()
   })
@@ -45,5 +49,40 @@ describe('TeamCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should open team settings dialog', () => {
+    const dialog = TestBed.inject(MatDialog)
+    spyOn(dialog, 'open').and.callThrough()
+
+    component.teamSettings()
+
+    expect(dialog.open).toHaveBeenCalled()
+  })
+
+  it('should open leave team dialog', () => {
+    const dialog = TestBed.inject(MatDialog)
+    spyOn(dialog, 'open').and.callThrough()
+
+    component.openLeaveDialog()
+
+    expect(dialog.open).toHaveBeenCalled()
+  })
+
+  it('should open delete team dialog', () => {
+    const dialog = TestBed.inject(MatDialog)
+    spyOn(dialog, 'open').and.callThrough()
+
+    component.openDeleteDialog()
+
+    expect(dialog.open).toHaveBeenCalled()
+  })
+
+  it('should copy team code to clipboard when available', () => {
+    spyOn(navigator.clipboard, 'writeText').and.callFake(() => Promise.resolve())
+    component.copyToClipboard()
+
+    expect(navigator.clipboard.writeText)
+      .toHaveBeenCalledWith(component.team.id)
   })
 })

@@ -78,7 +78,8 @@ export const fakeUserService = () => ({
   logout() {
     this.logged = false
     this.user.next(User.empty)
-  }
+  },
+  removeAccount() { }
 })
 
 export const fakeTeamService = () => ({
