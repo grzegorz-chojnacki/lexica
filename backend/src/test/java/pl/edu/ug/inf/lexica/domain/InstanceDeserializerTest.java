@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InstanceDeserializerTest {
 
-    @Test
-    void deserialize() {
-    }
+//    @Test
+//    void deserialize() {
+//    }
 }
