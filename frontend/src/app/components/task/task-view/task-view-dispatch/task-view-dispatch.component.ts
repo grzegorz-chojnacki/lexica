@@ -33,6 +33,7 @@ const taskTypeViewMap = new Map<TaskType, any>([
   styleUrls: ['./task-view-dispatch.component.scss']
 })
 export class TaskViewDispatchComponent implements OnInit {
+  public readonly reloadFn = window.location.reload
   public team!: Team
   public task!: Task<Example>
 
@@ -87,7 +88,7 @@ export class TaskViewDispatchComponent implements OnInit {
             .open('Zapisano wynik!', undefined, { duration: snackBarDuration })
         })
     } else {
-      window.location.reload()
+      this.reloadFn()
     }
   }
 }
