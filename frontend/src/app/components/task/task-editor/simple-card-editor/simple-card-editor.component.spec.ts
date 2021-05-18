@@ -4,12 +4,13 @@ import { MatCardModule } from '@angular/material/card'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MultiTestEditorComponent } from './multi-test-editor.component'
+import { SimpleCardEditorComponent } from './simple-card-editor.component'
 
-describe('MultiTestEditorComponent', () => {
-  let component: MultiTestEditorComponent
-  let fixture: ComponentFixture<MultiTestEditorComponent>
+describe('SimpleCardEditorComponent', () => {
+  let component: SimpleCardEditorComponent
+  let fixture: ComponentFixture<SimpleCardEditorComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,13 +22,13 @@ describe('MultiTestEditorComponent', () => {
         MatCardModule,
         MatListModule,
       ],
-      declarations: [MultiTestEditorComponent],
+      declarations: [SimpleCardEditorComponent],
       providers: [{ provide: FormGroup, useValue: new FormGroup({ }) }]
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MultiTestEditorComponent)
+    fixture = TestBed.createComponent(SimpleCardEditorComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
