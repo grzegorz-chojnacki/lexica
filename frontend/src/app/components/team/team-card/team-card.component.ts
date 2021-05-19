@@ -34,7 +34,7 @@ export class TeamCardComponent implements OnInit {
   }
 
   public copyToClipboard(): void {
-    if (navigator.clipboard) {
+    if (navigator.clipboard.writeText) {
       navigator.clipboard.writeText(this.team.id)
       this.snackbarService
         .open('Skopiowano do schowka!', undefined, { duration: snackBarDuration })
