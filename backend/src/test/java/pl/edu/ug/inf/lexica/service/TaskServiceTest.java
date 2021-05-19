@@ -126,7 +126,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void sholudNotUpdate() {
+    void shouldNotUpdate() {
         List<Example> list = new ArrayList<>();
         TaskType taskType = new TaskType();
         Task task = new Task("task", list, "description", taskType);
