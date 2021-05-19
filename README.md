@@ -1,86 +1,53 @@
-# Lexika
+# [Lexica](http://153.19.8.161/start)
 
 Aplikacja webowa umożliwiająca tworzenie i wypełnianie krótkich i przystępnych
-zadań, pomagających przy nauce obcych języków.
+zadań, pomagających przy nauce języków obcych.
 
-<br>
+## Instalacja
 
-### Skład grupy:
-- Grzegorz Chojnacki
-- Natalia Wojtania
+Aplikacja wymaga serwera z odblokowanym portem `:80`,
+po pobraniu repozytorium należy zainstalować następujące zależności:
 
-*Wyrażamy chęci na udział w programie mentoringowym.*
+- [Java](https://adoptopenjdk.net/) (wersja ≥11)
+- [Maven](https://maven.apache.org/download.cgi)
+- [Node.js](https://nodejs.org/en/download/)
+- [AngularCLI](https://angular.io/cli/)
 
-<br>
+## Uruchomienie
+Przed kompilacją backendu należy dodać plik
 
-## Role użytkowników:
-- **Gość** - niezalogowany użytkownik, który może korzystać z podstawowych funkcji
-  aplikacji i zapisywać postęp lokalnie.
-- **Uczeń** - zalogowany członek jednego lub więcej zespołów, ma dostęp do zleconych
-  zadań.
-- **Prowadzący** - zalogowany zarządca jednego lub więcej zespołów, posiada
-  przywileje administratorskie w obrębie danego zespołu.
+`backend/src/main/resources/application.properties`
 
+Korzystając z następującego szablonu:
+```properties
+spring.jpa.database=POSTGRESQL
+spring.datasource.platform=postgres
+spring.datasource.url=jdbc:postgresql://localhost:5432/lexicadb
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
 
-## Zakres funkcjonalności:
+Maven powinien sam pobrać swoje zależności i zbudować backend, natomiast dla Node trzeba to zrobić ręcznie i  zaserwować frontend za pomocą AngularCLI.
 
-### **Gość**:
-- Panel do kreatora/edytora lokalnych zadań
-- Możliwość eksportu/importu lokalnych zadań z/do pliku
-- Panel postępu dla lokalnych zadań
+```console
+$ cd backend
+$ mvn spring-boot:run
+$ cd ../frontend
+$ npm install && ng serve
+```
 
-### ***Użytkownik zalogowany***:
-- *(To samo co **Gość**)*
-- Panel wyboru zespołów
-- Panel postępu dla wszystkich zadań
-- Panel ustawień konta
+## Deploy
 
-### **Uczeń**:
-- *(To samo co **Użytkownik zalogowany**)*
-- Panel główny zespołu z informacjami i skrótami
-- Panel postępu w przynależnych zespołach
-- Panel aktywnych zadań
+Do wystawienia aplikacji służy załączony skrypt `./deploy.sh`
 
-### **Prowadzący**:
-- *(To samo co **Uczeń**)*
-- Panel główny zespołu z informacjami i skrótami
-- Panel kreatora/edytora zadań zespołu
-- Możliwość eksportu/importu zdalnych zadań z/do pliku
-- Panel aktywowania zadań
-- Panel zarządzania zespołem i jego członkami
-- Panel postępu dla całego zespołu
-- Panel postępu dla danego członka
+```console
+$ ./deploy.sh
+$ cd backend
+$ mvn spring-boot:run
+```
 
-
-## Wymagania funkcjonalne:
-- Bezpieczne przechowywanie danych zarejestrowanych użytkowników na serwerze.
-- Szybka, atomowa i bezproblemowa synchronizacja zespołów i postępów.
-- Absolutne respektowanie ustawionych uprawnień różnych ról użytkowników.
-- Przejrzysty i łatwy w obsłudze interfejs użytkownika, pozwalający na sprawne
-  zarządzanie zadaniami, zespołami i swoim kontem.
-- Podstawowy typ zadań - tłumaczenie słówek między ojczystym i obcym językiem.
-- Prosty i semantyczny format zapisu zadań w plikach tekstowych.
-
-
-## Technologie:
-
-### Frontend:
-- Angular
-- Material components
-
-### Backend:
-- Java + Spring
-- PostgreSQL
-
-<!--
-
-## Dodatkowe funkcje:
-- Generowanie kodu dołączającego do zespołu, który pozwoli na automatyczne
-  przypisanie dużej liczby członków (za zatwierdzeniem przez prowdzącego).
-- Praca samodzielna i możliwość zdalnego zapisu postępu, dzięki jednoosobowemu
-  zespołowi, gdzie prowadzący jest również uczniem (specjalna opcja widniejąca
-  przy tworzeniu zespołu).
-- Wypełnianie luk w przygotowanych zdaniach.
-- Możliwość dołączania plików graficznych jako url, lub string base64.
-
--->
+**(Uwaga)** Adres IP docelowego serwera należy skonfigurować w pliku
+`frontend/src/app/lexica.properties.ts`
