@@ -1,5 +1,7 @@
 package pl.edu.ug.inf.lexica.service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import static org.mockito.Mockito.doReturn;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 
 @SpringBootTest
 class TaskServiceTest {
@@ -35,21 +36,32 @@ class TaskServiceTest {
         // Setup our mock repository
         List<Example> list = new ArrayList<>();
         TaskType taskType = new TaskType();
-        Task widget = new Task("task", list, "description", taskType);
-        doReturn(widget).when(repository).save(any());
+        Task task = new Task("task", list, "description", taskType);
+        doReturn(task).when(repository).save(any());
 
         // Execute the service call
-        Task returnedWidget = service.add(widget).get();
+        Task returnedWidget = service.add(task).get();
 
         // Assert the response
         Assertions.assertNotNull(returnedWidget, "The saved task should not be null");
-       // Assertions.assertEquals(2, returnedWidget.getVersion(), "The version should be incremented");
+        // Assertions.assertEquals(2, returnedWidget.getVersion(), "The version should be incremented");
     }
 
+    @Test
+    void remove() {
+        // Setup our mock repository
+        List<Example> list = new ArrayList<>();
+        TaskType taskType = new TaskType();
+        Task task = new Task("task", list, "description", taskType);
+        doReturn(null).when(repository).findById(task.getId());
 
-//    @Test
-//    void remove() {
-//    }
+        // Execute the service call
+        service.remove(task.getId());
+        Optional<Task> returnedtask = service.get(task.getId());
+
+        // Assert the response
+        Assertions.assertNull(returnedtask, "The removed task should be null");
+    }
 
     @Test
     @DisplayName("Test get success")
@@ -58,14 +70,31 @@ class TaskServiceTest {
         List<Example> list = new ArrayList<>();
         TaskType taskType = new TaskType();
         Task task = new Task("task", list, "description", taskType);
-  //      when(repository.findById(id)).thenReturn(Optional.of(task));
+        //      when(repository.findById(id)).thenReturn(Optional.of(task));
         doReturn(Optional.of(task)).when(repository).findById(id);
 
         Optional<Task> optionalTask = service.get(id);
-        Assertions.assertTrue(optionalTask.isPresent(), "Task was not found");
-        Assertions.assertSame(optionalTask.get(), task, "The task returned was not the same as the mock");
+        Assertions.assertTrue(optionalTask.isPresent(), "Task was found");
+        Assertions.assertSame(optionalTask.get(), task, "The task returned was the same as the mock");
 
     }
+
+    @Test
+    @DisplayName("Test get success find by id")
+    void getById() {
+
+        List<Example> list = new ArrayList<>();
+        TaskType taskType = new TaskType();
+        Task task = new Task("task", list, "description", taskType);
+
+        doReturn(Optional.of(task)).when(repository).findById(id);
+
+        Optional<Task> optionalTask = service.get(id);
+        Assertions.assertEquals("description", optionalTask.get().getDescription());
+        Assertions.assertEquals("task", optionalTask.get().getName());
+
+    }
+
     @Test
     @DisplayName("Test get Not Found")
     void getNotFound() {
@@ -78,7 +107,37 @@ class TaskServiceTest {
         // Assert the response
         Assertions.assertFalse(returnedTask.isPresent(), "Task should not be found");
     }
-//    @Test
-//    void update() {
-//    }
+
+    @Test
+    @DisplayName("Test get success find by id")
+    void update() {
+        List<Example> list = new ArrayList<>();
+        TaskType taskType = new TaskType();
+        Task task = new Task("task", list, "description", taskType);
+        repository.saveAndFlush(task);
+
+        task.setDescription("new description");
+        repository.save(task);
+        doReturn(Optional.of(task)).when(repository).findById(id);
+
+        Optional<Task> optionalTask = service.get(id);
+        Assertions.assertEquals("new description", optionalTask.get().getDescription());
+        Assertions.assertEquals("task", optionalTask.get().getName());
+    }
+
+    @Test
+    void sholudNotUpdate() {
+        List<Example> list = new ArrayList<>();
+        TaskType taskType = new TaskType();
+        Task task = new Task("task", list, "description", taskType);
+        repository.saveAndFlush(task);
+
+        doReturn(Optional.of(task)).when(repository).findById(id);
+        Task taskUpdate = new Task();
+        taskUpdate.setDescription("new description");
+
+        Optional<Task> optionalTask = service.get(id);
+        Assertions.assertNotEquals(taskUpdate.getDescription(), optionalTask.get().getDescription());
+    }
+
 }
