@@ -79,4 +79,17 @@ class UserServiceTest {
         // Assert the response
         Assertions.assertFalse(returnedUser.isPresent(), "User should not be found");
     }
+    @Test
+    void remove() {
+        User user = new User("Patrycja", "Gajda", "pgajda", "WyAq1CjwM", "#9F865C");
+
+        doReturn(null).when(repository).findById(user.getId());
+
+        // Execute the service call
+        service.remove(user.getId());
+        Optional<User> returnedUser = service.get(user.getId());
+
+        // Assert the response
+        Assertions.assertNull(returnedUser, "The removed task should be null");
+    }
 }
