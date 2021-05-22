@@ -67,7 +67,7 @@ class ChoiceTestTest {
     }
 
     @Test
-    void shouldNetNullDecoys() {
+    void shouldSetNullDecoys() {
 
         assertThrows(NullPointerException.class, () -> choiceTest.setDecoys(null));
     }
