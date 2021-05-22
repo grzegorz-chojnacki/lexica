@@ -25,7 +25,6 @@ class TaskTypeTest {
     void getName() {
         TaskType savedTaskType = taskTypeRepository.saveAndFlush(taskType);
         assertThat(savedTaskType.getName()).isEqualTo("Simple Card");
-
     }
     @Test
     void getId() {
@@ -59,20 +58,5 @@ class TaskTypeTest {
         TaskType savedTaskType = taskTypeRepository.saveAndFlush(taskType);
         assertThat(savedTaskType.getDescription()).isEqualTo("Easy task2");
     }
-//
-//    @Test
-//    void testEquals() {
-//    }
-//
-//    @Test
-//    void canEqual() {
-//    }
-//
-//    @Test
-//    void testHashCode() {
-//    }
-//
-//    @Test
-//    void testToString() {
-//    }
+
 }
