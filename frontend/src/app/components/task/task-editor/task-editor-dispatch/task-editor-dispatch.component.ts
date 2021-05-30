@@ -68,7 +68,7 @@ export class TaskEditorDispatchComponent implements OnInit {
 
   public submit(saveTask: boolean): void {
     if (saveTask && this.teamId) {
-      const task = this.taskForm.value
+      const task = this.taskForm.getRawValue()
       const request = (this.taskId)
         ? this.taskService.updateTask(this.teamId, this.taskId, task)
         : this.taskService.createTask(this.teamId, task)
