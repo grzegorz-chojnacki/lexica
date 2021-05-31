@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Do not track properties ###
+src/main/resources/application.properties
+
 ### Frontend copy ###
 **/src/main/resources/public
 

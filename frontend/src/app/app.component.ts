@@ -25,14 +25,6 @@ export class AppComponent implements OnInit {
       .subscribe(next => setTimeout(() => this.breadCrumbs = next))
   }
 
-  @HostListener('window:keydown', ['$event'])
-  public hack(event: KeyboardEvent): void {
-    if (event.key === 'Insert') {
-      this.userService.login('jkowalski', 'opBUs')
-        .subscribe(() => this.router.navigate(['/workspace']))
-    }
-  }
-
   public get userIsLogged(): boolean { return this.userService.logged }
 
   public logout(): void {

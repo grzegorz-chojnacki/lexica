@@ -34,12 +34,14 @@ export class TeamCardComponent implements OnInit {
   }
 
   public copyToClipboard(): void {
-    navigator.clipboard.writeText(this.team.id)
-    this.snackbarService
-      .open('Skopiowano do schowka!', undefined, { duration: snackBarDuration })
-  }
-
-  public newTaskDialog(): void {
+    if (navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(this.team.id)
+      this.snackbarService
+        .open('Skopiowano do schowka!', undefined, { duration: snackBarDuration })
+    } else {
+      this.snackbarService
+        .open(`Kod zespołu: ${this.team.id}`, 'Ok')
+    }
   }
 
   public openDeleteDialog(): void {
