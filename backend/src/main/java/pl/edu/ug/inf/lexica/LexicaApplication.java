@@ -15,9 +15,9 @@ public class LexicaApplication {
 		SpringApplication.run(LexicaApplication.class, args);
 	}
 
-	@Bean
-	@Autowired
-	CommandLineRunner init(AppConfig appConfig) {
-		return (args) -> appConfig.initDataBase();
-	}
+	//@Bean
+	//@Autowired
+	//CommandLineRunner init(AppConfig appConfig) {
+	//	return (args) -> appConfig.initDataBase();
+	//}
 }
